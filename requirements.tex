@@ -1,0 +1,103 @@
+\documentclass[a4paper]{article}
+
+
+\title{Robocup Junior Registration}
+\author{Monika Buchalová, Filip Kotoč, Oliver Sidor, Filip Sršeň}
+\usepackage{hyperref}
+
+\begin{document}
+	\maketitle
+	
+	\tableofcontents
+	\newpage
+	\section{Introduction}
+	\label{sec:Intro}
+	\subsection{Purpose of requirements document}
+	\label{sub:purpose}
+	Created as a requirements catalog for Information Systems Development project Robocup Junior Slovakia registration in academic year 2023/24. Its purpose is to provide a set of requirements of the information system. 
+	\subsection{Scope of the product}
+	\label{sub:scope}
+ 	The project is a web application that provides registration service for Robocup competition, results and documents sharing. 
+	\subsection{Definitions, acronyms and abbreviations}
+	\label{sub:definitios}
+	\subsection{References}
+	\label{sub:references}
+	\begin{itemize}
+		\item 	\href{https://github.com/TIS2023-FMFI/robocup}{GitHub repository of the project }
+		\item \href{https://www.skse.sk/}{Current robocup website}
+	\end{itemize}
+	\subsection{Overview of the remainder of the document}
+	\label{sub:overview}
+	In the following chapters, the reader will learn about the various functionalities, detailed requirements and will get an idea of how users can work with the web application.
+	
+	
+	\newpage
+	
+	\section{General description}
+	\label{sec:general-desc}
+	\subsection{Product perspective}
+	\label{sub:perspective}
+	Web application will be used for registration of individual competitors, assembling teams and registering them to different categories. From point of view of an organizer there will be a check-in functionality, categories management and event administration.
+	\subsection{Product functions}
+	\label{sub:functions}
+	\subsubsection{Team leader registration}
+	Creation of team leader account where user can managed individuals and teams. 
+	\subsubsection{Individual registration}
+	Team leader can add individuals under their registration. Then are prompted to fill out a form with the personal details.
+	\subsubsection{Team assembly}
+	Team leader can create and assemble teams out of registered individuals.
+	\subsubsection{Category assignment}
+	Team leader can assign team to different categories.
+	\subsubsection{Organizer registration}
+	Organizer fills out a default registration form with password and gets send email to confirm their email address.
+	\subsubsection{Check-in}
+	On site check-in for teams and individuals done by organizer.
+	\subsubsection{Results}
+	Creating results pages for each category.
+	\subsubsection{Diploma generation}
+	Generating diplomas from template with current details.
+	\subsubsection{Posting documents}
+	Posting rules, propositions etc.
+	\subsection{User characteristics}
+	\label{sub:users}
+	\subsubsection{Team leader}
+	Team leader is user who registers a team or multiple teams. Core functionalities for team leaders are:
+	\begin{itemize}
+		\item Creating a registration.
+		\item Registering individual competitors.
+		\item Assembling teams from registered individuals.
+		\item Registering teams to categories. 
+	\end{itemize} 
+
+	\subsubsection{Organizer}
+	Organizer is user that can do all the actions necessary for running the event. These are:
+	\begin{itemize}
+		\item Teams check-in on site
+		\item Accessing detailed team information
+		\item Updating final scores
+		\item Creating diplomas
+	\end{itemize}
+
+	\subsubsection{Administrator}
+	Administrator is an all powerful user. They can create organizer accounts, setup events and edit event details.
+	\begin{itemize}
+		\item Create events
+		\item Edit event details
+		\item Create organizer accounts
+	\end{itemize}
+
+	\subsubsection{Viewer}
+	This is any user that views the website publicly. They can see list of participants, categories and results. 
+
+	\subsection{General constraints and dependencies}
+	\label{sub:constraints}
+	The project is an web applications. Users will need only a web browser and internet connection in order to access the application.
+	
+	\newpage
+	
+	\section{Specific requirements}
+	\label{sec:specific}
+	
+	User vyplni formular obsahujuci formular, kde vyplni meno, email. Potom dostane na mailom unikatny link/kod registracie, pod ktorym bude vediet upravovat svoju registraciu.
+\end{document}
+
