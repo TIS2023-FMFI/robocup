@@ -1,6 +1,6 @@
-__pycache__
-.idea
-node_modules
+/web/__pycache__/
+node_modules/
+.idea/
 .env
 db.*
 /uploads/
