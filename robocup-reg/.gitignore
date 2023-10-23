@@ -2,5 +2,6 @@ __pycache__
 .idea
 node_modules
 .env
+db.*
 /uploads/
 /static/
