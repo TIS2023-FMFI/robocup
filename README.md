@@ -4,6 +4,7 @@ Prihlasovanie účastníkov na RoboCup Junior Slovensko
 
 
 ## Django structure
+```
 robocup/web/  (env files, docker, etc)  
 └── web/  (django app main settings, urls, etc)
     ├── registration/   (folder of a module)
@@ -18,3 +19,4 @@ robocup/web/  (env files, docker, etc)
     │   └── views.py
     ├── settings.py
     └── urls.py
+```
