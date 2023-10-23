@@ -22,14 +22,19 @@ robocup/robocup-reg/  (env files, docker, etc)
 ```
 
 ### What do you need to contribute to the codebase
-Run pipenv (https://www.jetbrains.com/help/pycharm/pipenv.html#pipenv-existing-project)
-#### Setup pre-commit
+#### Set-up pipenv
+Open project in pycharm and create a proper pipenv interpreter (https://www.jetbrains.com/help/pycharm/pipenv.html#pipenv-existing-project)
+#### Set-up pre-commit
 `pip install pre-commit`
+
 `cd robocup-reg`
+
 `pre-commit install`
 
 and then
+
 `git add . [or particular files]`
+
 `git commit -m "your message"`
 
 and repeat :) 
