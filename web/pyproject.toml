@@ -1,0 +1,6 @@
+[tool.ruff]
+select = ["E", "F", "I"]
+line-length = 121
+
+[tool.black]
+line-length = 120
