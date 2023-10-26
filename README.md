@@ -2,7 +2,6 @@
 Prihlasovanie účastníkov na RoboCup Junior Slovensko
 
 
-
 ## Django structure
 ```
 robocup/robocup-reg/  (env files, docker, etc)  
@@ -38,3 +37,4 @@ and then
 `git commit -m "your message"`
 
 and repeat :) 
+
