@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-11-07T15:37:42.436Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="x0U8RTxanNsGe1Z40XL_" version="22.0.8" type="github" pages="7">
+<mxfile host="app.diagrams.net" modified="2023-11-07T14:43:45.995Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" etag="wFY8tlAVX2s9VTdEhJ0a" version="22.0.8" type="github" pages="7">
   <diagram name="home page" id="6dIstmfd6pNJ9pUzLQoF">
     <mxGraphModel dx="1731" dy="1124" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
       <root>
@@ -695,7 +695,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="VSNd7je4Sk6sbQp4We17" name="Vytvorenie timu">
-    <mxGraphModel dx="1434" dy="955" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1750" dy="943" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -799,7 +799,7 @@
           <mxGeometry x="687.6315789473684" y="311.66666666666663" width="215.5263157894737" height="42.5" as="geometry" />
         </mxCell>
         <mxCell id="iMwFXoSyfwK0KNxFttwT-9" value="" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;fillColor=#ffffff;strokeColor=#999999;fontSize=16;" parent="jj9ap3eD3-MK9xfz-GGN-1" vertex="1">
-          <mxGeometry x="554.2105263157895" y="368.3333333333333" width="348.94736842105266" height="151.58333333333331" as="geometry" />
+          <mxGeometry x="554.2105263157895" y="368.4133333333333" width="348.94736842105266" height="151.58333333333331" as="geometry" />
         </mxCell>
         <mxCell id="iMwFXoSyfwK0KNxFttwT-10" value="Kategória1" style="fillColor=none;strokeColor=none;align=left;spacing=20;fontSize=14;" parent="iMwFXoSyfwK0KNxFttwT-9" vertex="1">
           <mxGeometry width="140" height="30" relative="1" as="geometry">
@@ -821,11 +821,11 @@
             <mxPoint y="142" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="ZqdhdMkUdLafVUG7duvb-112" value="" style="points=[[0.145,0.145,0],[0.5,0,0],[0.855,0.145,0],[1,0.5,0],[0.855,0.855,0],[0.5,1,0],[0.145,0.855,0],[0,0.5,0]];shape=mxgraph.bpmn.event;html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;align=center;perimeter=ellipsePerimeter;outlineConnect=0;aspect=fixed;outline=end;symbol=cancel;" vertex="1" parent="iMwFXoSyfwK0KNxFttwT-9">
-          <mxGeometry x="105.78999999999999" y="1.67" width="28.33" height="28.33" as="geometry" />
+        <mxCell id="jk0lWQ68BZl5tuZjmqJ5-1" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;Odstrániť&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;strokeColor=none;strokeWidth=1;fillColor=#DB2843;fontColor=#FFFFFF;whiteSpace=wrap;align=left;verticalAlign=middle;spacingLeft=0;fontStyle=1;fontSize=14;spacing=10;" vertex="1" parent="iMwFXoSyfwK0KNxFttwT-9">
+          <mxGeometry x="105.79" y="41.67" width="74.21" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="ZqdhdMkUdLafVUG7duvb-113" value="&lt;font style=&quot;font-size: 11px;&quot;&gt;Odstranit&lt;/font&gt;" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;strokeColor=none;strokeWidth=1;fillColor=#DB2843;fontColor=#FFFFFF;whiteSpace=wrap;align=center;verticalAlign=middle;spacingLeft=0;fontStyle=0;fontSize=16;spacing=5;" vertex="1" parent="iMwFXoSyfwK0KNxFttwT-9">
-          <mxGeometry x="95.79" y="41.67" width="54.21" height="23.33" as="geometry" />
+        <mxCell id="jk0lWQ68BZl5tuZjmqJ5-38" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;Odstrániť&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;strokeColor=none;strokeWidth=1;fillColor=#DB2843;fontColor=#FFFFFF;whiteSpace=wrap;align=left;verticalAlign=middle;spacingLeft=0;fontStyle=1;fontSize=14;spacing=10;" vertex="1" parent="iMwFXoSyfwK0KNxFttwT-9">
+          <mxGeometry x="105.79" y="11.590000000000003" width="74.21" height="20" as="geometry" />
         </mxCell>
         <mxCell id="iMwFXoSyfwK0KNxFttwT-16" value="Meno člena" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;strokeColor=none;strokeWidth=1;fillColor=#6C767D;fontColor=#ffffff;whiteSpace=wrap;align=left;verticalAlign=middle;fontStyle=0;fontSize=16;spacingLeft=10;" parent="jj9ap3eD3-MK9xfz-GGN-1" vertex="1">
           <mxGeometry x="980.0031578947369" y="170" width="112.89473684210527" height="42.5" as="geometry" />
@@ -856,10 +856,19 @@
             <mxPoint y="283" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="ZqdhdMkUdLafVUG7duvb-2" value="" style="html=1;verticalLabelPosition=bottom;align=center;labelBackgroundColor=#ffffff;verticalAlign=top;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.looking_glass;" vertex="1" parent="jj9ap3eD3-MK9xfz-GGN-1">
+        <mxCell id="jk0lWQ68BZl5tuZjmqJ5-76" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;Odstrániť&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;strokeColor=none;strokeWidth=1;fillColor=#DB2843;fontColor=#FFFFFF;whiteSpace=wrap;align=left;verticalAlign=middle;spacingLeft=0;fontStyle=1;fontSize=14;spacing=10;" vertex="1" parent="iMwFXoSyfwK0KNxFttwT-19">
+          <mxGeometry x="146.00052631578944" y="13.333333333333343" width="74.21" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="jk0lWQ68BZl5tuZjmqJ5-77" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;Odstrániť&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;strokeColor=none;strokeWidth=1;fillColor=#DB2843;fontColor=#FFFFFF;whiteSpace=wrap;align=left;verticalAlign=middle;spacingLeft=0;fontStyle=1;fontSize=14;spacing=10;" vertex="1" parent="iMwFXoSyfwK0KNxFttwT-19">
+          <mxGeometry x="146.00052631578944" y="43.33333333333334" width="74.21" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="jk0lWQ68BZl5tuZjmqJ5-78" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;Odstrániť&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;strokeColor=none;strokeWidth=1;fillColor=#DB2843;fontColor=#FFFFFF;whiteSpace=wrap;align=left;verticalAlign=middle;spacingLeft=0;fontStyle=1;fontSize=14;spacing=10;" vertex="1" parent="iMwFXoSyfwK0KNxFttwT-19">
+          <mxGeometry x="146.00052631578944" y="73.33333333333334" width="74.21" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="ZqdhdMkUdLafVUG7duvb-2" value="" style="html=1;verticalLabelPosition=bottom;align=center;labelBackgroundColor=#ffffff;verticalAlign=top;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.looking_glass;" parent="jj9ap3eD3-MK9xfz-GGN-1" vertex="1">
           <mxGeometry x="870" y="317.92" width="30" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="ZqdhdMkUdLafVUG7duvb-111" value="" style="html=1;verticalLabelPosition=bottom;align=center;labelBackgroundColor=#ffffff;verticalAlign=top;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.looking_glass;" vertex="1" parent="jj9ap3eD3-MK9xfz-GGN-1">
+        <mxCell id="ZqdhdMkUdLafVUG7duvb-111" value="" style="html=1;verticalLabelPosition=bottom;align=center;labelBackgroundColor=#ffffff;verticalAlign=top;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.looking_glass;" parent="jj9ap3eD3-MK9xfz-GGN-1" vertex="1">
           <mxGeometry x="1400" y="175" width="30" height="30" as="geometry" />
         </mxCell>
       </root>
