@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-11-07T15:00:07.137Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="rvILu3Fgeu55suelY-o7" version="22.0.8" type="github" pages="6">
+<mxfile host="app.diagrams.net" modified="2023-11-07T15:01:11.548Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="3Znj7pSZ6K1v1wBRj4_e" version="22.0.8" type="github" pages="6">
   <diagram name="home page" id="6dIstmfd6pNJ9pUzLQoF">
     <mxGraphModel dx="1731" dy="1124" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
       <root>
@@ -145,11 +145,14 @@
         <mxCell id="Wiwgua0zzY7YHhFlCIxa-15" value="Prihlasanie organizatora/administratora" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;" vertex="1" parent="qvdwf1B8JikytzHCez1J-1">
           <mxGeometry x="840" y="110" width="720" height="30" as="geometry" />
         </mxCell>
+        <mxCell id="6Za53BnYQ_RbtjKV0wKB-0" value="Prihlasit" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;strokeColor=none;strokeWidth=1;fillColor=#0085FC;fontColor=#FFFFFF;whiteSpace=wrap;align=center;verticalAlign=middle;spacingLeft=0;fontStyle=0;fontSize=16;spacing=5;" vertex="1" parent="qvdwf1B8JikytzHCez1J-1">
+          <mxGeometry x="860" y="360" width="100" height="40" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram name="registriacia po prihlaseni" id="HuWTrHEM4JtQDHYfmB5y">
-    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+    <mxGraphModel dx="1471" dy="955" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
       <root>
         <mxCell id="UIAjBR1ifNLWuWGAX1TT-0" />
         <mxCell id="UIAjBR1ifNLWuWGAX1TT-1" parent="UIAjBR1ifNLWuWGAX1TT-0" />
@@ -342,7 +345,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="registracia dozoru" id="a4T6G9qPoGsAe_-4sLb0">
-    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+    <mxGraphModel dx="1471" dy="955" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
       <root>
         <mxCell id="jXa7HYMMRRm0Y1uIEFG5-0" />
         <mxCell id="jXa7HYMMRRm0Y1uIEFG5-1" parent="jXa7HYMMRRm0Y1uIEFG5-0" />
@@ -424,7 +427,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="Registracia sutaziaceho" id="9qRPaD-k4DnQHoQf3XRq">
-    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+    <mxGraphModel dx="1471" dy="955" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
       <root>
         <mxCell id="bqRm2ozjIhU6j-9kT0X1-0" />
         <mxCell id="bqRm2ozjIhU6j-9kT0X1-1" parent="bqRm2ozjIhU6j-9kT0X1-0" />
