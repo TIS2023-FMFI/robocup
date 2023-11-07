@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-11-07T13:53:18.700Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" etag="0ErWNm8iGJKqJIYJuXDJ" version="22.0.8" type="github" pages="5">
+<mxfile host="app.diagrams.net" modified="2023-11-07T15:00:07.137Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="rvILu3Fgeu55suelY-o7" version="22.0.8" type="github" pages="6">
   <diagram name="home page" id="6dIstmfd6pNJ9pUzLQoF">
-    <mxGraphModel dx="1909" dy="1029" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+    <mxGraphModel dx="1731" dy="1124" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -35,14 +35,14 @@
             <mxPoint x="280" y="10" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="KPzVE_yptRaDPMwC4Q8M-1" value="Prihlásenie" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;strokeColor=none;strokeWidth=1;fillColor=#F8F9FA;fontColor=#000000;whiteSpace=wrap;align=center;verticalAlign=middle;spacingLeft=0;fontStyle=0;fontSize=16;spacing=5;" parent="Ffs3aDKpPOgE3At83swk-1" vertex="1">
+        <mxCell id="KPzVE_yptRaDPMwC4Q8M-1" value="Prihlásenie" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;strokeColor=none;strokeWidth=1;fillColor=#F8F9FA;fontColor=#000000;whiteSpace=wrap;align=center;verticalAlign=middle;spacingLeft=0;fontStyle=0;fontSize=16;spacing=5;" vertex="1" parent="Ffs3aDKpPOgE3At83swk-1">
           <mxGeometry x="1460" y="10" width="100" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram id="JWwU4sj_MfvGUU2DjIW9" name="registracia">
-    <mxGraphModel dx="1050" dy="566" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+    <mxGraphModel dx="1731" dy="1124" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -83,14 +83,73 @@
             <mxPoint x="40" y="320" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="gC0QLRseB_eruDM8n_IN-1" value="Prihlásenie" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;strokeColor=none;strokeWidth=1;fillColor=#F8F9FA;fontColor=#000000;whiteSpace=wrap;align=center;verticalAlign=middle;spacingLeft=0;fontStyle=0;fontSize=16;spacing=5;" parent="1" vertex="1">
+        <mxCell id="gC0QLRseB_eruDM8n_IN-1" value="Prihlásenie" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;strokeColor=none;strokeWidth=1;fillColor=#F8F9FA;fontColor=#000000;whiteSpace=wrap;align=center;verticalAlign=middle;spacingLeft=0;fontStyle=0;fontSize=16;spacing=5;" vertex="1" parent="1">
           <mxGeometry x="1460" y="10" width="100" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
+  <diagram name="login page" id="Zk_DAJTt0AiWpw41P2yn">
+    <mxGraphModel dx="1731" dy="1124" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="qvdwf1B8JikytzHCez1J-0" />
+        <mxCell id="qvdwf1B8JikytzHCez1J-1" parent="qvdwf1B8JikytzHCez1J-0" />
+        <mxCell id="qvdwf1B8JikytzHCez1J-2" value="ROBOCUP" style="html=1;shadow=0;dashed=0;fillColor=#E3F3FD;strokeColor=none;fontSize=16;fontColor=#161819;align=left;spacing=15;" vertex="1" parent="qvdwf1B8JikytzHCez1J-1">
+          <mxGeometry width="1600" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qvdwf1B8JikytzHCez1J-3" value="Domov" style="fillColor=none;strokeColor=none;fontSize=14;fontColor=#71797E;align=center;" vertex="1" parent="qvdwf1B8JikytzHCez1J-2">
+          <mxGeometry width="70" height="40" relative="1" as="geometry">
+            <mxPoint x="120" y="10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qvdwf1B8JikytzHCez1J-4" value="Registracia" style="fillColor=none;strokeColor=none;fontSize=14;fontColor=#161819;align=center;" vertex="1" parent="qvdwf1B8JikytzHCez1J-2">
+          <mxGeometry width="70" height="40" relative="1" as="geometry">
+            <mxPoint x="200" y="10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qvdwf1B8JikytzHCez1J-5" value="Vysledky" style="fillColor=none;strokeColor=none;fontSize=14;fontColor=#71797E;align=center;spacingRight=0;" vertex="1" parent="qvdwf1B8JikytzHCez1J-2">
+          <mxGeometry width="80" height="40" relative="1" as="geometry">
+            <mxPoint x="280" y="10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qvdwf1B8JikytzHCez1J-6" value="Pozri si email." style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;strokeColor=#D2D3D4;html=1;whiteSpace=wrap;fillColor=#F8F9FA;fontColor=#212529;verticalAlign=bottom;align=left;spacing=20;spacingBottom=0;fontSize=14;" vertex="1" parent="qvdwf1B8JikytzHCez1J-1">
+          <mxGeometry x="40" y="120" width="710" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="qvdwf1B8JikytzHCez1J-7" value="Chete sa prihlasit a editovat svoju registraciu timu ?" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.topButton;rSize=5;perimeter=none;whiteSpace=wrap;fillColor=#F0F1F2;strokeColor=#D2D3D4;fontColor=#212529;resizeWidth=1;fontSize=18;align=left;spacing=20;" vertex="1" parent="qvdwf1B8JikytzHCez1J-6">
+          <mxGeometry width="710" height="50" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Wiwgua0zzY7YHhFlCIxa-13" value="" style="group" vertex="1" connectable="0" parent="qvdwf1B8JikytzHCez1J-6">
+          <mxGeometry x="820" y="60" width="260" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Wiwgua0zzY7YHhFlCIxa-9" value="Email&#xa;" style="fillColor=none;strokeColor=none;align=left;fontSize=14;fontColor=#212529;" vertex="1" parent="Wiwgua0zzY7YHhFlCIxa-13">
+          <mxGeometry width="260" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Wiwgua0zzY7YHhFlCIxa-10" value="Example input placeholder" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;fillColor=none;strokeColor=#999999;align=left;spacing=15;fontSize=14;fontColor=#6C767D;" vertex="1" parent="Wiwgua0zzY7YHhFlCIxa-13">
+          <mxGeometry width="700" height="30" relative="1" as="geometry">
+            <mxPoint y="50" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wiwgua0zzY7YHhFlCIxa-11" value="Heslo" style="fillColor=none;strokeColor=none;align=left;fontSize=14;fontColor=#212529;" vertex="1" parent="Wiwgua0zzY7YHhFlCIxa-13">
+          <mxGeometry width="260" height="40" relative="1" as="geometry">
+            <mxPoint y="80" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wiwgua0zzY7YHhFlCIxa-12" value="Another input placeholder" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;fillColor=none;strokeColor=#999999;align=left;spacing=15;fontSize=14;fontColor=#6C767D;" vertex="1" parent="Wiwgua0zzY7YHhFlCIxa-13">
+          <mxGeometry width="700" height="30" relative="1" as="geometry">
+            <mxPoint y="120" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qvdwf1B8JikytzHCez1J-11" value="Prihlásenie" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;strokeColor=none;strokeWidth=1;fillColor=#F8F9FA;fontColor=#000000;whiteSpace=wrap;align=center;verticalAlign=middle;spacingLeft=0;fontStyle=0;fontSize=16;spacing=5;" vertex="1" parent="qvdwf1B8JikytzHCez1J-1">
+          <mxGeometry x="1460" y="10" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Wiwgua0zzY7YHhFlCIxa-15" value="Prihlasanie organizatora/administratora" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;" vertex="1" parent="qvdwf1B8JikytzHCez1J-1">
+          <mxGeometry x="840" y="110" width="720" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
   <diagram name="registriacia po prihlaseni" id="HuWTrHEM4JtQDHYfmB5y">
-    <mxGraphModel dx="1050" dy="566" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
       <root>
         <mxCell id="UIAjBR1ifNLWuWGAX1TT-0" />
         <mxCell id="UIAjBR1ifNLWuWGAX1TT-1" parent="UIAjBR1ifNLWuWGAX1TT-0" />
@@ -283,7 +342,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="registracia dozoru" id="a4T6G9qPoGsAe_-4sLb0">
-    <mxGraphModel dx="1050" dy="566" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
       <root>
         <mxCell id="jXa7HYMMRRm0Y1uIEFG5-0" />
         <mxCell id="jXa7HYMMRRm0Y1uIEFG5-1" parent="jXa7HYMMRRm0Y1uIEFG5-0" />
@@ -365,7 +424,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="Registracia sutaziaceho" id="9qRPaD-k4DnQHoQf3XRq">
-    <mxGraphModel dx="1909" dy="1029" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
       <root>
         <mxCell id="bqRm2ozjIhU6j-9kT0X1-0" />
         <mxCell id="bqRm2ozjIhU6j-9kT0X1-1" parent="bqRm2ozjIhU6j-9kT0X1-0" />
