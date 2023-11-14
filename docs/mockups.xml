@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-11-14T13:38:36.850Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="PxQtQf49iejgXaSJuGLb" version="22.1.0" type="github" pages="12">
+<mxfile host="app.diagrams.net" modified="2023-11-14T14:08:17.136Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="IzsmCcw850Aoypvyap7L" version="22.1.0" type="github" pages="13">
   <diagram name="home page" id="6dIstmfd6pNJ9pUzLQoF">
     <mxGraphModel dx="2150" dy="943" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
       <root>
@@ -805,7 +805,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="VSNd7je4Sk6sbQp4We17" name="Vytvorenie timu">
-    <mxGraphModel dx="1343" dy="901" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1580" dy="1060" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -985,7 +985,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="admin panel" id="IeaTnuRu5babun1yvhVH">
-    <mxGraphModel dx="1580" dy="1060" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+    <mxGraphModel dx="2238" dy="1502" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
       <root>
         <mxCell id="d4r9dm7P_acplgZ0qkj2-0" />
         <mxCell id="d4r9dm7P_acplgZ0qkj2-1" parent="d4r9dm7P_acplgZ0qkj2-0" />
@@ -1104,7 +1104,7 @@
             <mxPoint x="120" y="10" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="iK3xB1yFIad1KEEZpy_m-4" value="Registracia" style="fillColor=none;strokeColor=none;fontSize=14;fontColor=#161819;align=center;" vertex="1" parent="iK3xB1yFIad1KEEZpy_m-2">
+        <mxCell id="iK3xB1yFIad1KEEZpy_m-4" value="Administracia" style="fillColor=none;strokeColor=none;fontSize=14;fontColor=#161819;align=center;" vertex="1" parent="iK3xB1yFIad1KEEZpy_m-2">
           <mxGeometry width="70" height="40" relative="1" as="geometry">
             <mxPoint x="200" y="10" as="offset" />
           </mxGeometry>
@@ -1139,6 +1139,112 @@
       </root>
     </mxGraphModel>
   </diagram>
+  <diagram name="vytvaranie katogrie" id="ogZgBdZf3ozETI2PMnt4">
+    <mxGraphModel dx="1580" dy="1060" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="Df5YbsuWkWUw9pvep-uK-0" />
+        <mxCell id="Df5YbsuWkWUw9pvep-uK-1" parent="Df5YbsuWkWUw9pvep-uK-0" />
+        <mxCell id="Df5YbsuWkWUw9pvep-uK-2" value="ROBOCUP" style="html=1;shadow=0;dashed=0;fillColor=#E3F3FD;strokeColor=none;fontSize=16;fontColor=#161819;align=left;spacing=15;" vertex="1" parent="Df5YbsuWkWUw9pvep-uK-1">
+          <mxGeometry width="1600" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Df5YbsuWkWUw9pvep-uK-3" value="Domov" style="fillColor=none;strokeColor=none;fontSize=14;fontColor=#71797E;align=center;" vertex="1" parent="Df5YbsuWkWUw9pvep-uK-2">
+          <mxGeometry width="70" height="40" relative="1" as="geometry">
+            <mxPoint x="120" y="10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Df5YbsuWkWUw9pvep-uK-4" value="Administracia" style="fillColor=none;strokeColor=none;fontSize=14;fontColor=#161819;align=center;" vertex="1" parent="Df5YbsuWkWUw9pvep-uK-2">
+          <mxGeometry width="70" height="40" relative="1" as="geometry">
+            <mxPoint x="200" y="10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Df5YbsuWkWUw9pvep-uK-5" value="Vysledky" style="fillColor=none;strokeColor=none;fontSize=14;fontColor=#71797E;align=center;spacingRight=0;" vertex="1" parent="Df5YbsuWkWUw9pvep-uK-2">
+          <mxGeometry width="80" height="40" relative="1" as="geometry">
+            <mxPoint x="290" y="10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Df5YbsuWkWUw9pvep-uK-6" value="   admin@email.com" style="fillColor=none;strokeColor=none;fontSize=14;fontColor=#161819;align=center;" vertex="1" parent="Df5YbsuWkWUw9pvep-uK-2">
+          <mxGeometry width="150" height="40" relative="1" as="geometry">
+            <mxPoint x="1310" y="10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Df5YbsuWkWUw9pvep-uK-7" value="Odhlásenie" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;strokeColor=none;strokeWidth=1;fillColor=#F8F9FA;fontColor=#000000;whiteSpace=wrap;align=center;verticalAlign=middle;spacingLeft=0;fontStyle=0;fontSize=16;spacing=5;" vertex="1" parent="Df5YbsuWkWUw9pvep-uK-2">
+          <mxGeometry x="1480" y="10" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Df5YbsuWkWUw9pvep-uK-8" value="" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;strokeColor=#D2D3D4;html=1;whiteSpace=wrap;fillColor=#F8F9FA;fontColor=#212529;verticalAlign=bottom;align=left;spacing=20;spacingBottom=0;fontSize=14;" vertex="1" parent="Df5YbsuWkWUw9pvep-uK-1">
+          <mxGeometry x="40" y="120" width="1520" height="380" as="geometry" />
+        </mxCell>
+        <mxCell id="Df5YbsuWkWUw9pvep-uK-9" value="Vytvorenie kategorie" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.topButton;rSize=5;perimeter=none;whiteSpace=wrap;fillColor=#F0F1F2;strokeColor=#D2D3D4;fontColor=#212529;resizeWidth=1;fontSize=18;align=left;spacing=20;" vertex="1" parent="Df5YbsuWkWUw9pvep-uK-8">
+          <mxGeometry width="1520" height="50" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2oG5tD1jZiZ9oZ4_VmKh-0" value="" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;fillColor=none;strokeColor=#999999;align=left;spacing=15;fontSize=14;fontColor=#6C767D;" vertex="1" parent="Df5YbsuWkWUw9pvep-uK-8">
+          <mxGeometry x="239.9994736842105" y="80" width="677.3684210526317" height="42.5" as="geometry" />
+        </mxCell>
+        <mxCell id="2oG5tD1jZiZ9oZ4_VmKh-1" value="Nazov kategorie" style="fillColor=none;strokeColor=none;align=left;fontSize=14;fontColor=#290101;" vertex="1" parent="Df5YbsuWkWUw9pvep-uK-8">
+          <mxGeometry x="40" y="80" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="2oG5tD1jZiZ9oZ4_VmKh-3" value="Zobrazenie vo vyslekdovke" style="fillColor=none;strokeColor=none;align=left;fontSize=14;fontColor=#290101;" vertex="1" parent="Df5YbsuWkWUw9pvep-uK-8">
+          <mxGeometry x="40" y="140" width="120" height="42.5" as="geometry" />
+        </mxCell>
+        <mxCell id="2oG5tD1jZiZ9oZ4_VmKh-5" value="spolocne" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.radioButton2;labelPosition=right;verticalLabelPosition=middle;align=left;verticalAlign=middle;gradientColor=#DEDEDE;fillColor=#EDEDED;checked=0;spacing=5;checkedFill=#0085FC;checkedStroke=#ffffff;" vertex="1" parent="Df5YbsuWkWUw9pvep-uK-8">
+          <mxGeometry x="240" y="156.25" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="2oG5tD1jZiZ9oZ4_VmKh-6" value="zvlast ZS/SS" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.radioButton2;labelPosition=right;verticalLabelPosition=middle;align=left;verticalAlign=middle;gradientColor=#DEDEDE;fillColor=#EDEDED;checked=0;spacing=5;checkedFill=#0085FC;checkedStroke=#ffffff;" vertex="1" parent="Df5YbsuWkWUw9pvep-uK-8">
+          <mxGeometry x="320" y="156.25" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="2oG5tD1jZiZ9oZ4_VmKh-9" value="oboje" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.radioButton2;labelPosition=right;verticalLabelPosition=middle;align=left;verticalAlign=middle;gradientColor=#DEDEDE;fillColor=#EDEDED;checked=0;spacing=5;checkedFill=#0085FC;checkedStroke=#ffffff;" vertex="1" parent="Df5YbsuWkWUw9pvep-uK-8">
+          <mxGeometry x="420" y="156.25" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="2oG5tD1jZiZ9oZ4_VmKh-10" value="Soccer?" style="fillColor=none;strokeColor=none;align=left;fontSize=14;fontColor=#290101;" vertex="1" parent="Df5YbsuWkWUw9pvep-uK-8">
+          <mxGeometry x="40" y="200" width="120" height="42.5" as="geometry" />
+        </mxCell>
+        <mxCell id="2oG5tD1jZiZ9oZ4_VmKh-11" value="" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.checkbox2;labelPosition=right;verticalLabelPosition=middle;align=left;verticalAlign=middle;gradientColor=#DEDEDE;fillColor=#EDEDED;checked=0;spacing=5;checkedFill=#0085FC;checkedStroke=#ffffff;sketch=0;" vertex="1" parent="Df5YbsuWkWUw9pvep-uK-8">
+          <mxGeometry x="120" y="211.25" width="19" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2oG5tD1jZiZ9oZ4_VmKh-13" value="Pocet skupin" style="fillColor=none;strokeColor=none;align=left;fontSize=14;fontColor=#290101;" vertex="1" parent="Df5YbsuWkWUw9pvep-uK-8">
+          <mxGeometry x="40" y="260" width="120" height="42.5" as="geometry" />
+        </mxCell>
+        <mxCell id="2oG5tD1jZiZ9oZ4_VmKh-14" value="" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;fillColor=none;strokeColor=#999999;align=left;spacing=15;fontSize=14;fontColor=#6C767D;" vertex="1" parent="Df5YbsuWkWUw9pvep-uK-8">
+          <mxGeometry x="240" y="260" width="120" height="42.5" as="geometry" />
+        </mxCell>
+        <mxCell id="2oG5tD1jZiZ9oZ4_VmKh-17" value="Pocet postupujucich" style="fillColor=none;strokeColor=none;align=left;fontSize=14;fontColor=#290101;" vertex="1" parent="Df5YbsuWkWUw9pvep-uK-8">
+          <mxGeometry x="40" y="320" width="120" height="42.5" as="geometry" />
+        </mxCell>
+        <mxCell id="2oG5tD1jZiZ9oZ4_VmKh-18" value="" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;fillColor=none;strokeColor=#999999;align=left;spacing=15;fontSize=14;fontColor=#6C767D;" vertex="1" parent="Df5YbsuWkWUw9pvep-uK-8">
+          <mxGeometry x="240" y="320" width="120" height="42.5" as="geometry" />
+        </mxCell>
+        <mxCell id="2oG5tD1jZiZ9oZ4_VmKh-19" value="" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;strokeColor=#DFDFDF;html=1;whiteSpace=wrap;fillColor=#FFFFFF;fontColor=#000000;" vertex="1" parent="Df5YbsuWkWUw9pvep-uK-8">
+          <mxGeometry x="640" y="270" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="2oG5tD1jZiZ9oZ4_VmKh-20" value="Pocet bodov" style="strokeColor=inherit;fillColor=inherit;gradientColor=inherit;fontColor=inherit;html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.topButton;rSize=5;perimeter=none;whiteSpace=wrap;resizeWidth=1;align=left;spacing=10;" vertex="1" parent="2oG5tD1jZiZ9oZ4_VmKh-19">
+          <mxGeometry width="200" height="30" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2oG5tD1jZiZ9oZ4_VmKh-21" value="Vzajomny zapas" style="strokeColor=inherit;fillColor=inherit;gradientColor=inherit;fontColor=inherit;html=1;shadow=0;dashed=0;perimeter=none;whiteSpace=wrap;resizeWidth=1;align=left;spacing=10;" vertex="1" parent="2oG5tD1jZiZ9oZ4_VmKh-19">
+          <mxGeometry width="200" height="30" relative="1" as="geometry">
+            <mxPoint y="30" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2oG5tD1jZiZ9oZ4_VmKh-22" value="Pocet golov" style="strokeColor=inherit;fillColor=inherit;gradientColor=inherit;fontColor=inherit;html=1;shadow=0;dashed=0;perimeter=none;whiteSpace=wrap;resizeWidth=1;align=left;spacing=10;" vertex="1" parent="2oG5tD1jZiZ9oZ4_VmKh-19">
+          <mxGeometry width="200" height="30" relative="1" as="geometry">
+            <mxPoint y="60" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2oG5tD1jZiZ9oZ4_VmKh-26" value="" style="shape=sortShape;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;" vertex="1" parent="2oG5tD1jZiZ9oZ4_VmKh-19">
+          <mxGeometry x="170" y="5" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2oG5tD1jZiZ9oZ4_VmKh-27" value="" style="shape=sortShape;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;" vertex="1" parent="2oG5tD1jZiZ9oZ4_VmKh-19">
+          <mxGeometry x="170" y="35" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2oG5tD1jZiZ9oZ4_VmKh-28" value="" style="shape=sortShape;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;" vertex="1" parent="2oG5tD1jZiZ9oZ4_VmKh-19">
+          <mxGeometry x="170" y="65" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2oG5tD1jZiZ9oZ4_VmKh-25" value="Poradie vyhodnocovania" style="fillColor=none;strokeColor=none;align=left;fontSize=14;fontColor=#290101;" vertex="1" parent="Df5YbsuWkWUw9pvep-uK-8">
+          <mxGeometry x="440" y="260" width="120" height="42.5" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
   <diagram name="vytvaranie/uprava eventu" id="lO7JTMCTTR1DKqpXjAbq">
     <mxGraphModel dx="1919" dy="1287" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
       <root>
@@ -1152,7 +1258,7 @@
             <mxPoint x="120" y="10" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="17esYK_dhbibGCF51_o6-4" value="Registracia" style="fillColor=none;strokeColor=none;fontSize=14;fontColor=#161819;align=center;" vertex="1" parent="17esYK_dhbibGCF51_o6-2">
+        <mxCell id="17esYK_dhbibGCF51_o6-4" value="Administracia" style="fillColor=none;strokeColor=none;fontSize=14;fontColor=#161819;align=center;" vertex="1" parent="17esYK_dhbibGCF51_o6-2">
           <mxGeometry width="70" height="40" relative="1" as="geometry">
             <mxPoint x="200" y="10" as="offset" />
           </mxGeometry>
@@ -1357,6 +1463,9 @@
         </mxCell>
         <mxCell id="8afjq0_CrU-FuLnKk-Ms-14" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn0.iconfinder.com/data/icons/evericons-24px-vol-1/24/pencil-create-128.png;imageBackground=none;imageBorder=none;" vertex="1" parent="3GhFli9ui-J3XmrbbPb5-19">
           <mxGeometry x="1113" y="272" width="44" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="x5mECJ2SNFL-xIbWLg4P-1" value="Pridaj kategoriu" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;strokeColor=none;strokeWidth=1;fillColor=#0085FC;fontColor=#FFFFFF;whiteSpace=wrap;align=center;verticalAlign=middle;spacingLeft=0;fontStyle=0;fontSize=16;spacing=5;" vertex="1" parent="3GhFli9ui-J3XmrbbPb5-19">
+          <mxGeometry x="1350" y="90" width="140" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
