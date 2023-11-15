@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-11-15T08:53:39.950Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="JTomgi_F2HpWTxj_ncto" version="22.1.1" type="github" pages="15">
+<mxfile host="app.diagrams.net" modified="2023-11-15T08:56:54.455Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="B1kxQKDZvY-yhgAzuU0f" version="22.1.1" type="github" pages="15">
   <diagram name="home page" id="6dIstmfd6pNJ9pUzLQoF">
     <mxGraphModel dx="1343" dy="901" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
       <root>
@@ -64,10 +64,10 @@
             <mxPoint x="280" y="10" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="80ULSnj1lPkYXFI-SU2O-5" value="Pri zadani vasho emailu vam nan bude zaslana sprava obsahujuca unikatny link pre registrovanie sutaziacich, timov a dozoru." style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;strokeColor=#D2D3D4;html=1;whiteSpace=wrap;fillColor=#F8F9FA;fontColor=#212529;verticalAlign=bottom;align=left;spacing=20;spacingBottom=0;fontSize=14;" parent="1" vertex="1">
+        <mxCell id="80ULSnj1lPkYXFI-SU2O-5" value="Pri zadani vasho emailu vam nan bude zaslana sprava obsahujuca unikatny link na vytvorenie konta pre registrovanie sutaziacich, timov a dozoru." style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;strokeColor=#D2D3D4;html=1;whiteSpace=wrap;fillColor=#F8F9FA;fontColor=#212529;verticalAlign=bottom;align=left;spacing=20;spacingBottom=0;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="40" y="120" width="1520" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="80ULSnj1lPkYXFI-SU2O-6" value="Registracia timoveho veduceho" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.topButton;rSize=5;perimeter=none;whiteSpace=wrap;fillColor=#F0F1F2;strokeColor=#D2D3D4;fontColor=#212529;resizeWidth=1;fontSize=18;align=left;spacing=20;" parent="80ULSnj1lPkYXFI-SU2O-5" vertex="1">
+        <mxCell id="80ULSnj1lPkYXFI-SU2O-6" value="Registracia veduceho vypravy" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.topButton;rSize=5;perimeter=none;whiteSpace=wrap;fillColor=#F0F1F2;strokeColor=#D2D3D4;fontColor=#212529;resizeWidth=1;fontSize=18;align=left;spacing=20;" parent="80ULSnj1lPkYXFI-SU2O-5" vertex="1">
           <mxGeometry width="1520" height="50" relative="1" as="geometry" />
         </mxCell>
         <mxCell id="80ULSnj1lPkYXFI-SU2O-7" value="Odoslat" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;strokeColor=none;strokeWidth=1;fillColor=#0085FC;fontColor=#FFFFFF;whiteSpace=wrap;align=center;verticalAlign=middle;spacingLeft=0;fontStyle=0;fontSize=16;spacing=5;" parent="1" vertex="1">
