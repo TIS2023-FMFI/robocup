@@ -36,7 +36,7 @@
         <div>
           <ul class="navbar-nav">
             {% if user.is_authenticated %}
-            <span class="navbar-text"> Prihlásený: {{user.username}} | </span>
+            <span class="navbar-text"> Prihlásený: {{user.email}} | </span>
             <li class="nav-item">
               <a class="nav-link" href="/logout">Odhlásiť sa</a>
               <a class="nav-link" href="/login">Prihlásiť sa</a>
