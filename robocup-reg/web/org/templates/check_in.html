@@ -5,8 +5,8 @@
 <body>
 <p></p>
     <div class="btn-group-horizontal" role="group" aria-label="Button group">
-        <button type="button" class="btn btn-info btn-fixed-width" >Check-in</button>
-        <button type="button" class="btn btn-info btn-fixed-width" >Kategórie</button>
+        <button id="check_in" type="button" class="btn btn-info btn-fixed-width" href="/check_in">Check-in</button>
+        <button id="categories" type="button" class="btn btn-info btn-fixed-width" href="/categories">Kategórie</button>
     </div>
 
 
@@ -21,6 +21,14 @@
                 $(this).addClass("fw-bold");
             });
         });
+    </script>
+    <script type="text/javascript">
+            document.getElementById("categories").onclick = function () {
+                location.href = "/categories";
+            };
+            document.getElementById("check_in").onclick = function () {
+                location.href = "/check_in";
+            };
     </script>
 
 
