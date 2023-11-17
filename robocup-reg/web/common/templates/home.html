@@ -1,5 +1,18 @@
 {% extends 'base.html' %} {% block title %}Robocup HOME{% endblock %}
 
 {% block content %}
-    <h1>Hello roboocup!</h1>
+    {% if user.is_authenticated %}
+        <div class="container-fluid">
+            <div class="container-fluid p-5 my-5 bg-light " style="text-align: center">
+              <p class="align-content-center"><strong>Registrácia na {{ event }} je otvorená!</strong></p>
+              <button class="button" href="leader-panel">Registruj svoj tím</button>
+            </div>
+        </div>
+    {% else %}
+        <div class="container-fluid">
+            <div class="container-fluid p-5 my-5 bg-light " style="text-align: center">
+              <p class="align-content-center"><strong>Na prístup k registrácií súťažiacich/tímov je potrebné sa prihlásiť.</strong></p>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

@@ -1,5 +1,37 @@
 {% extends 'base.html' %} {% block title %}Robocup HOME{% endblock %}
 
 {% block content %}
-    <h1>ORG PANEL</h1>
+
+<body>
+<p></p>
+    <div class="btn-group-horizontal" role="group" aria-label="Button group">
+{#        <button type="button" class="btn btn-link btn-info btn-fixed-width" href="/check-in">Check-in</button>#}
+        <button type="button" class="btn btn-link btn-info btn-fixed-width" data-href-template="/check_in" >Check-in</button>
+        <form type="button" method="post" action="{% url 'check_in' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-link btn-info btn-fixed-width">Check-in</button>
+        </form>
+
+        <form method="post" action="{% url 'categories' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-link btn-info btn-fixed-width">Kategórie</button>
+        </form>
+    </div>
+
+
+    <script>
+        // Custom JavaScript/jQuery to handle button clicks
+        $(document).ready(function(){
+            $(".btn-group-horizontal .btn").click(function(){
+                // Remove 'fw-bold' class from all buttons
+                $(".btn-group-horizontal .btn").removeClass("fw-bold");
+
+                // Add 'fw-bold' class to the clicked button
+                $(this).addClass("fw-bold");
+            });
+        });
+    </script>
+
+
+</body>
 {% endblock %}
