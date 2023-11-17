@@ -23,7 +23,7 @@ def login_view(request, *args, **kwargs):
     context = {}
     user = request.user
     if user.is_authenticated:
-        redirect("home")
+        return redirect("home")
 
     if request.POST:
         form = CustomLoginForm(request.POST)

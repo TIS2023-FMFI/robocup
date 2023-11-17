@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth import authenticate
 from django.contrib.auth.forms import BaseUserCreationForm
 
 from web.users.models import User
@@ -25,3 +26,12 @@ class CustomLoginForm(forms.ModelForm):
         # Customize form labels, if needed
         self.fields["email"].label = "Email"  # Change 'email' to 'username'
         self.fields["password"].label = "Password"
+
+    def clean(self):
+        if self.is_valid():
+            email = self.cleaned_data.get("email")
+            password = self.cleaned_data.get("password")
+            if not authenticate(email=email, password=password):
+                raise forms.ValidationError("Invalid Login")
+
+        return self.cleaned_data
