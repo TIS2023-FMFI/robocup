@@ -5,5 +5,3 @@ node_modules/
 db.*
 /uploads/
 /static/
-/web/.pg_service.conf
-/web/.pg_pass
