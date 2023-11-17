@@ -1,10 +1,10 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.db import models
 from django.utils import timezone
 
 
-class RobocupUserManager(BaseUserManager):
-    def create_user(self, email, password=None, **extra_fields):
+class RobocupUserManager(UserManager):
+    def _create_user(self, email, password=None, **extra_fields):
         if not email:
             raise ValueError("The Email field must be set")
         email = self.normalize_email(email)
@@ -12,6 +12,11 @@ class RobocupUserManager(BaseUserManager):
         user.set_password(password)
         user.save(using=self._db)
         return user
+
+    def create_user(self, email=None, password=None, **extra_fields):
+        extra_fields.setdefault("is_staff", False)
+        extra_fields.setdefault("is_superuser", False)
+        return self._create_user(email, password, **extra_fields)
 
     def create_superuser(self, email, password=None, **extra_fields):
         extra_fields.setdefault("is_staff", True)
@@ -25,28 +30,26 @@ class RobocupUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 
-class RobocupUser(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)  # Unique email
     date_joined = models.DateTimeField(default=timezone.now)
-    last_login = models.DateTimeField(default=timezone.now)
+    last_login = models.DateTimeField(blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
     objects = RobocupUserManager()
 
     USERNAME_FIELD = "email"  # Use email as the unique identifier
+    EMAIL_FIELD = "email"
     REQUIRED_FIELDS = []
 
-    groups = models.ManyToManyField(
-        "auth.Group", blank=True, related_name="robocupuser_set", related_query_name="robocupuser"  # Add related_name
-    )
-
-    user_permissions = models.ManyToManyField(
-        "auth.Permission",
-        blank=True,
-        related_name="robocupuser_set",  # Add related_name
-        related_query_name="robocupuser",
-    )
+    class Meta:
+        verbose_name = "User"
+        verbose_name_plural = "Users"
 
     def __str__(self):
         return self.email
+
+    def get_email_field_name(cls):
+        return cls.email
