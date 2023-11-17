@@ -8,6 +8,8 @@ django-bootstrap-v5 = "*"
 django-environ = "*"
 psycopg = "*"
 psycopg-binary = "*"
+crispy = "*"
+crispy-bootstrap5 = "*"
 
 [dev-packages]
 pre-commit = "*"
