@@ -44,6 +44,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "web.common",
+    "web.administrator",
+    "web.leader",
+    "web.org",
+    "web.users",
 ]
 
 MIDDLEWARE = [
