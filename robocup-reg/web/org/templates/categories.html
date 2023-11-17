@@ -1,14 +1,50 @@
 {% extends 'org-panel.html' %} {% block title %}Robocup HOME{% endblock %}
 
-<!DOCTYPE html>
-<html lang="en">
+
 {% block content %}
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
 <body>
-<h2>Kategórie</h2>
+<p></p>
+    <div class="btn-group-horizontal" role="group" aria-label="Button group">
+        <button id="check_in" type="button" class="btn btn-info btn-fixed-width" href="/check_in" >Check-in</button>
+        <button id="categories" type="button" class="btn btn-info btn-fixed-width" href="/categories">Kategórie</button>
+    </div>
+
+
+    <script>
+        // Custom JavaScript/jQuery to handle button clicks
+        $(document).ready(function(){
+            $(".btn-group-horizontal .btn").click(function(){
+                // Remove 'fw-bold' class from all buttons
+                $(".btn-group-horizontal .btn").removeClass("fw-bold");
+
+                // Add 'fw-bold' class to the clicked button
+                $(this).addClass("fw-bold");
+            });
+        });
+    </script>
+    <script type="text/javascript">
+            document.getElementById("categories").onclick = function () {
+                location.href = "/categories";
+            };
+            document.getElementById("check_in").onclick = function () {
+                location.href = "/check_in";
+
+            };
+    </script>
+
+    <p></p>
+    <div class="container mt-3 " >
+    <h2>Kategórie</h2>
+    <ul class="list-group" id="itemList">
+        <li class="list-group-item">Item 1</li>
+        <li class="list-group-item">Item 2</li>
+        <li class="list-group-item">Item 3</li>
+        <!-- Add more items as needed -->
+    </ul>
+    </div>
+
+
+
 </body>
 {% endblock %}
 </html>

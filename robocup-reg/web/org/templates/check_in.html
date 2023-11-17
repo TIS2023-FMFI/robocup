@@ -33,18 +33,27 @@
 
 
     <div class="container mt-3">
-    <h2>Check-in</h2>
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Vyhľadať registráciiu" id="searchInput">
+        <h2>Check-in</h2>
+        <from>
+            <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Vyhľadať vedúceho výpravy" id="searchInput">
+            </div>
+            <h5>Zaškrtnite prítomných</h5>
+            <ul class="list-group" id="itemList">
+                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">First checkbox</li>
+                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Second checkbox</li>
+                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Third checkbox</li>
+                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Fourth checkbox</li>
+                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Fifth checkbox</li>
+            </ul>
+            <p></p>
+            <ul>
+               <button class="btn btn-info btn-md float">Potvrdiť</button>
+            </ul>
+        </from>
+
     </div>
 
-    <ul class="list-group" id="itemList">
-        <li class="list-group-item">Item 1</li>
-        <li class="list-group-item">Item 2</li>
-        <li class="list-group-item">Item 3</li>
-        <!-- Add more items as needed -->
-    </ul>
-    </div>
     <script>
     // Custom JavaScript for filtering items based on search input
     $(document).ready(function(){
