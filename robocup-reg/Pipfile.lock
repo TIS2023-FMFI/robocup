@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b34628730352e901fbe81e8eb699b5d855737acb6d40afbff5d61c4e46a76223"
+            "sha256": "8b370c3d29593006d0e772876e6fc510a5c142362ce6ef0ba6f57534ada86cc8"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -34,11 +34,11 @@
         },
         "django": {
             "hashes": [
-                "sha256:08f41f468b63335aea0d904c5729e0250300f6a1907bf293a65499496cdbc68f",
-                "sha256:a64d2487cdb00ad7461434320ccc38e60af9c404773a2f95ab0093b4453a3215"
+                "sha256:8e0f1c2c2786b5c0e39fe1afce24c926040fad47c8ea8ad30aaf1188df29fc41",
+                "sha256:e1d37c51ad26186de355cbcec16613ebdabfa9689bbade9c538835205a8abbe9"
             ],
             "markers": "python_version >= '3.8'",
-            "version": "==4.2.6"
+            "version": "==4.2.7"
         },
         "django-bootstrap-v5": {
             "hashes": [
@@ -48,6 +48,24 @@
             "index": "pypi",
             "markers": "python_version >= '3.6' and python_version < '4.0'",
             "version": "==1.0.11"
+        },
+        "django-environ": {
+            "hashes": [
+                "sha256:0ff95ab4344bfeff693836aa978e6840abef2e2f1145adff7735892711590c05",
+                "sha256:f32a87aa0899894c27d4e1776fa6b477e8164ed7f6b3e410a62a6d72caaf64be"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.6' and python_version < '4'",
+            "version": "==0.11.2"
+        },
+        "psycopg": {
+            "hashes": [
+                "sha256:8ec5230d6a7eb654b4fb3cf2d3eda8871d68f24807b934790504467f1deee9f8",
+                "sha256:cec7ad2bc6a8510e56c45746c631cf9394148bdc8a9a11fd8cf8554ce129ae78"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.7'",
+            "version": "==3.1.12"
         },
         "soupsieve": {
             "hashes": [
@@ -70,7 +88,7 @@
                 "sha256:8f92fc8806f9a6b641eaa5318da32b44d401efaac0f6678c9bc448ba3605faa0",
                 "sha256:df8e4339e9cb77357558cbdbceca33c303714cf861d1eef15e1070055ae8b7ef"
             ],
-            "markers": "python_version < '3.11'",
+            "markers": "python_version >= '3.8'",
             "version": "==4.8.0"
         }
     },
@@ -92,19 +110,19 @@
         },
         "filelock": {
             "hashes": [
-                "sha256:08c21d87ded6e2b9da6728c3dff51baf1dcecf973b768ef35bcbc3447edb9ad4",
-                "sha256:2e6f249f1f3654291606e046b09f1fd5eac39b360664c27f5aad072012f8bcbd"
+                "sha256:521f5f56c50f8426f5e03ad3b281b490a87ef15bc6c526f168290f0c7148d44e",
+                "sha256:57dbda9b35157b05fb3e58ee91448612eb674172fab98ee235ccb0b5bee19a1c"
             ],
             "markers": "python_version >= '3.8'",
-            "version": "==3.12.4"
+            "version": "==3.13.1"
         },
         "identify": {
             "hashes": [
-                "sha256:afe67f26ae29bab007ec21b03d4114f41316ab9dd15aa8736a167481e108da54",
-                "sha256:f302a4256a15c849b91cfcdcec052a8ce914634b2f77ae87dad29cd749f2d88d"
+                "sha256:7736b3c7a28233637e3c36550646fc6389bedd74ae84cb788200cc8e2dd60b75",
+                "sha256:90199cb9e7bd3c5407a9b7e81b4abec4bb9d249991c79439ec8af740afc6293d"
             ],
             "markers": "python_version >= '3.8'",
-            "version": "==2.5.30"
+            "version": "==2.5.31"
         },
         "nodeenv": {
             "hashes": [
@@ -197,11 +215,11 @@
         },
         "virtualenv": {
             "hashes": [
-                "sha256:b80039f280f4919c77b30f1c23294ae357c4c8701042086e3fc005963e4e537b",
-                "sha256:e8361967f6da6fbdf1426483bfe9fca8287c242ac0bc30429905721cefbff752"
+                "sha256:02ece4f56fbf939dbbc33c0715159951d6bf14aaf5457b092e4548e1382455af",
+                "sha256:520d056652454c5098a00c0f073611ccbea4c79089331f60bf9d7ba247bb7381"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==20.24.5"
+            "version": "==20.24.6"
         }
     }
 }

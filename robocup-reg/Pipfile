@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 django-bootstrap-v5 = "*"
+django-environ = "*"
+psycopg = "*"
 
 [dev-packages]
 pre-commit = "*"
