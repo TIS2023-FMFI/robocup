@@ -25,8 +25,3 @@ class CustomLoginForm(forms.ModelForm):
         # Customize form labels, if needed
         self.fields["email"].label = "Email"  # Change 'email' to 'username'
         self.fields["password"].label = "Password"
-
-    def clean(self):
-        if self.is_valid():
-            self.cleaned_data["email"]
-            self.cleaned_data["email"]
