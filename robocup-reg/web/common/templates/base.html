@@ -8,30 +8,42 @@
         <title>{% block title %}RoboCup{% endblock %}</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-info">
+    <nav class="navbar navbar-expand-md navbar-light bg-info">
         <div class="container-fluid">
             <div>
               <ul class="navbar-nav">
               <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/home" ><strong>Robocup</strong></a>
+              <a class="nav-link" aria-current="page" href="/home" style="" ><strong>Robocup</strong></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" aria-current="page" href="/home">Domov</a>
                 </li>
+                  {% if user.is_authenticated %}
                 <li class="nav-item">
-                  <a class="nav-link" href="/registracia">Registracia</a>
+                  <a class="nav-link" href="/registracia">Registrácia</a>
                 </li>
-                  <li class="nav-item">
-                  <a class="nav-link" href="/vysledky">Výsledky</a>
+                  {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="/registracia">Administrácia</a>
+                </li>
+                  {% endif %}
+                <li class="nav-item">
+                  <a class="nav-link" href="/vysledky">Organizácia</a>
                 </li>
               </ul>
             </div>
         <div>
           <ul class="navbar-nav">
+            {% if user.is_authenticated %}
+            <span class="navbar-text"> Prihlásený: {{user.username}} | </span>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Odhlásiť sa</a>
+            </li>
+            {% else %}
             <li class="nav-item">
               <a class="nav-link" href="/home">Prihlásiť sa</a>
             </li>
-
+            {% endif %}
           </ul>
         </div>
       </div>
