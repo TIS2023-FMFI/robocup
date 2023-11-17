@@ -1,13 +1,12 @@
-from django.contrib.auth import login
-from django.contrib.auth.hashers import check_password
+from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.shortcuts import redirect, render
-from .models import RobocupUser
-import logging
 
-from .forms import RegisterForm, LoginForm
+from .forms import CustomLoginForm, RegisterForm
+
+User = get_user_model()
 
 
-def register(request):
+def register_view(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -17,38 +16,31 @@ def register(request):
     else:
         form = RegisterForm()
 
-    return render(request, "login.html", {"form": form})
+    return render(request, "register.html", {"form": form})
 
 
-def signin(request):
-    if request.method == "POST":
-        logging.debug("We are in")
-        form = LoginForm(request.POST)
-        print(form.errors)
+def login_view(request, *args, **kwargs):
+    context = {}
+    user = request.user
+    if user.is_authenticated:
+        redirect("home")
+
+    if request.POST:
+        form = CustomLoginForm(request.POST)
         if form.is_valid():
-            print('pass')
-        email = request.POST["username"]
-        password = request.POST["password"]
-        logging.debug(f"We are in {email}, {password}")
-        user = authenticate(email, password)
-        if user is not None:
-            logging.debug(f"We are in {user}")
-            login(request, user)
-            return redirect("/home")
+            email = request.POST["email"]
+            password = request.POST["password"]
+            user = authenticate(email=email, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect("home")
+        else:
+            context["login_form"] = form
     else:
-        form = LoginForm()
+        context["form"] = CustomLoginForm()
+    return render(request, "login.html", context)
 
-    return render(request, "login.html", {"form": form})
 
-
-def authenticate(email=None, password=None):
-    try:
-        # Get the corresponding user.
-        user = RobocupUser.objects.get(email=email)
-        #  If password, matches just return the user. Otherwise, return None.
-        if check_password(password, user.password):
-            return user
-        return None
-    except RobocupUser.DoesNotExist:
-        # No user was found.
-        return None
+def logout_view(request):
+    logout(request)
+    return redirect("home")

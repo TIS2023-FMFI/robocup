@@ -1,34 +1,32 @@
 from django import forms
-from django.contrib.auth.forms import BaseUserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import BaseUserCreationForm
 
-from web.users.models import RobocupUser
+from web.users.models import User
 
 
 class RegisterForm(BaseUserCreationForm):
     email = forms.EmailField(required=True)
 
     class Meta:
-        model = RobocupUser
+        model = User
         fields = ["email", "password1", "password2"]
 
 
-class LoginForm(AuthenticationForm):
+class CustomLoginForm(forms.ModelForm):
     email = forms.EmailField(required=True)
+    password = forms.CharField(label="Heslo", widget=forms.PasswordInput)
 
     class Meta:
-        model = RobocupUser
-        fields = ["username", "password"]
+        model = User
+        fields = ["email", "password"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Customize form labels, if needed
-        self.fields['email'].label = 'Email'
-        self.fields['password'].label = 'Password'
+        self.fields["email"].label = "Email"  # Change 'email' to 'username'
+        self.fields["password"].label = "Password"
 
     def clean(self):
-        email = self.cleaned_data.get('email')
-        password = self.cleaned_data.get('password')
-
-        # Your custom validation logic here, e.g., checking if the user is active
-
-        return self.cleaned_data
+        if self.is_valid():
+            self.cleaned_data["email"]
+            self.cleaned_data["email"]
