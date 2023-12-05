@@ -10,6 +10,7 @@ psycopg = "*"
 psycopg-binary = "*"
 crispy = "*"
 crispy-bootstrap5 = "*"
+gunicorn = "*"
 
 [dev-packages]
 pre-commit = "*"
