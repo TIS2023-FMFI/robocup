@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "web.leader",
     "web.org",
     "web.users",
+    "import_export",
 ]
 
 MIDDLEWARE = [

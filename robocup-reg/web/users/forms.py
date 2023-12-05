@@ -35,3 +35,7 @@ class CustomLoginForm(forms.ModelForm):
                 raise forms.ValidationError("Invalid Login")
 
         return self.cleaned_data
+
+
+class CSVImportForm(forms.Form):
+    csv_file = forms.FileField()

@@ -53,3 +53,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_email_field_name(cls):
         return cls.email
+
+
+class Record(models.Model):
+    team_name = models.CharField(max_length=100)
+    order = models.CharField(max_length=100)

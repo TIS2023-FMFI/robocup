@@ -11,6 +11,7 @@ psycopg-binary = "*"
 crispy = "*"
 crispy-bootstrap5 = "*"
 gunicorn = "*"
+django-import-export = "*"
 
 [dev-packages]
 pre-commit = "*"
