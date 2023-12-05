@@ -69,7 +69,7 @@ class Person(models.Model):
     phone_number = models.CharField(max_length=100, unique=True)
     birth_date = models.DateTimeField()
     primary_school = models.BooleanField()
-    diet = models.CharField(default="Ziadna", max_length=100)
+    diet = models.CharField(default="Ziadna", max_length=1000)
     accomodation1 = models.BooleanField(default=True)
     accomodation2 = models.BooleanField(default=True)
     food1 = models.BooleanField(default=True)
@@ -86,6 +86,25 @@ class Team(models.Model):
     competitors = ArrayField(models.IntegerField())
     categories = ArrayField(models.IntegerField())  # v ktorych kategoriach tim sutazi
     category = models.BooleanField(default=True) # T - ZS, F - SS
+
+
+class Event(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100, unique=True)
+    place = models.CharField(max_length=100)
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    registration_start_date = models.DateTimeField()
+    registration_end_date = models.DateTimeField()
+    registration_open = models.BooleanField(default=False) # F - zatvorena, T - otvorena
+    is_active = models.BooleanField(default=False) # ci je to aktualny event
+    categories = ArrayField(models.IntegerField())
+
+
+class Category(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100, unique=True)
+    primary_school = models.CharField(default=True) # T - ZS, F - SS
 
 
 
