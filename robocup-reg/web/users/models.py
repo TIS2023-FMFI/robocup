@@ -1,7 +1,7 @@
+from django.contrib import admin
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.db import models
 from django.utils import timezone
-from django.contrib.postgres.fields import ArrayField
 
 
 class RobocupUserManager(UserManager):
@@ -55,65 +55,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_email_field_name(cls):
         return cls.email
 
+    def get_short_name(self):
+        return self.email.split("@")[0]
+
 
 class Record(models.Model):
     team_name = models.CharField(max_length=100)
     order = models.CharField(max_length=100)
 
 
-class Person(models.Model):
-    id = models.AutoField(primary_key=True)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100, unique=True)
-    phone_number = models.CharField(max_length=100, unique=True)
-    birth_date = models.DateTimeField()
-    primary_school = models.BooleanField()
-    diet = models.CharField(default="Ziadna", max_length=1000)
-    accomodation1 = models.BooleanField(default=True)
-    accomodation2 = models.BooleanField(default=True)
-    food1 = models.BooleanField(default=True)
-    food2 = models.BooleanField(default=True)
-    food3 = models.BooleanField(default=True)
-    supervisor = models.CharField(max_length=100)
-
-
-class Team(models.Model):
-    id = models.AutoField(primary_key=True)
-    team_name = models.CharField(max_length=100, unique=True)
-    team_leader = models.IntegerField()
-    organization = models.CharField(max_length=100)
-    competitors = ArrayField(models.IntegerField())
-    categories = ArrayField(models.IntegerField())  # v ktorych kategoriach tim sutazi
-    category = models.BooleanField(default=True) # T - ZS, F - SS
-
-
-class Event(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100, unique=True)
-    place = models.CharField(max_length=100)
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
-    registration_start_date = models.DateTimeField()
-    registration_end_date = models.DateTimeField()
-    registration_open = models.BooleanField(default=False) # F - zatvorena, T - otvorena
-    is_active = models.BooleanField(default=False) # ci je to aktualny event
-    categories = ArrayField(models.IntegerField())
-
-
-class Category(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100, unique=True)
-    primary_school = models.CharField(default=True) # T - ZS, F - SS
-    list_of_results = models.CharField(max_length=100)
-    soccer = models.BooleanField(default=False) # T - soccer, F - ne soccer
-    group_size = models.IntegerField(default=4)
-    advance = models.IntegerField(default=2)
-    ranking_params = models.CharField(max_length=100)
-
-
-
-
-
-
-
+admin.site.register(Record)
+admin.site.register(User)
