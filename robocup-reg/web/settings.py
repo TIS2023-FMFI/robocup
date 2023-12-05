@@ -158,3 +158,6 @@ EMAIL_HOST_USER = "apikey"  # this is exactly the value 'apikey'
 EMAIL_HOST_PASSWORD = env("SENDGRID_API_KEY")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+CSRF_TRUSTED_ORIGINS = ["http://robocup.thefilip.eu","https://robocup.thefilip.eu"]
+
