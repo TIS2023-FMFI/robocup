@@ -36,7 +36,7 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["0.0.0.0", "robocup.thefilip.eu"]
+ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "robocup.thefilip.eu"]
 
 
 # Application definition
@@ -159,5 +159,4 @@ EMAIL_HOST_PASSWORD = env("SENDGRID_API_KEY")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-CSRF_TRUSTED_ORIGINS = ["http://robocup.thefilip.eu","https://robocup.thefilip.eu"]
-
+CSRF_TRUSTED_ORIGINS = ["http://robocup.thefilip.eu", "https://robocup.thefilip.eu"]
