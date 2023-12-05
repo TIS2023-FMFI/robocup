@@ -105,6 +105,13 @@ class Category(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, unique=True)
     primary_school = models.CharField(default=True) # T - ZS, F - SS
+    list_of_results = models.CharField(max_length=100)
+    soccer = models.BooleanField(default=False) # T - soccer, F - ne soccer
+    group_size = models.IntegerField(default=4)
+    advance = models.IntegerField(default=2)
+    ranking_params = models.CharField(max_length=100)
+
+
 
 
 
