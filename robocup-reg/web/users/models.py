@@ -58,3 +58,24 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Record(models.Model):
     team_name = models.CharField(max_length=100)
     order = models.CharField(max_length=100)
+
+
+class Person(models.Model):
+    id = models.AutoField(primary_key=True)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100)
+    phone_number = models.CharField(max_length=100)
+    birth_date = models.DateTimeField()
+    primary_school = models.BooleanField()
+    diet = models.CharField(default="Ziadna", max_length=100)
+    accomodation1 = models.BooleanField(default=True)
+    accomodation2 = models.BooleanField(default=True)
+    food1 = models.BooleanField(default=True)
+    food2 = models.BooleanField(default=True)
+    food3 = models.BooleanField(default=True)
+    supervisor = models.CharField(max_length=100)
+
+
+
+
