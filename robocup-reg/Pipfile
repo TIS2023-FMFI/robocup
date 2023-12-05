@@ -12,6 +12,7 @@ crispy = "*"
 crispy-bootstrap5 = "*"
 gunicorn = "*"
 django-import-export = "*"
+django-staticfiles = "*"
 
 [dev-packages]
 pre-commit = "*"
