@@ -10,12 +10,17 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 import environ
 
 environ.Env.read_env(".env")
 env = environ.Env()
+
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(PROJECT_ROOT, "static")
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,7 +36,7 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["0.0.0.0", "robocup.thefilip.eu"]
 
 
 # Application definition
