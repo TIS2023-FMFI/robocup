@@ -26,7 +26,7 @@ class RegisterFormSupervisor(BaseUserCreationForm):
                   "accomodation2", "food1", "food2", "food3"]
 
 
-class RegisterFormTeam(BaseUserCreationForm):
+class RegisterFormTeam(forms.Form):
     team_name = forms.CharField(required=True)
 
     class Meta:
