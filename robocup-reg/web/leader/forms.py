@@ -24,3 +24,12 @@ class RegisterFormSupervisor(BaseUserCreationForm):
         fields = ["first_name", "last_name", "email",
                   "phone_number", "diet", "accomodation1",
                   "accomodation2", "food1", "food2", "food3"]
+
+
+class RegisterFormTeam(BaseUserCreationForm):
+    team_name = forms.CharField(required=True)
+
+    class Meta:
+        model = Team
+        fields = ["team_name", "team_leader", "organization",
+                  "categories", "competitors"]
