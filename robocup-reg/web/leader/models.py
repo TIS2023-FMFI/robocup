@@ -7,7 +7,7 @@ from ..users import models as user_models
 
 class Person(models.Model):
     id = models.AutoField(primary_key=True)
-    leader_email = models.ForeignKey(to=user_models.User, on_delete=models.CASCADE)
+    _user = models.ForeignKey(to=user_models.User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100, unique=True)
@@ -29,7 +29,7 @@ class Person(models.Model):
 
 class Team(models.Model):
     id = models.AutoField(primary_key=True)
-    leader_email = models.ForeignKey(to=user_models.User, on_delete=models.CASCADE)
+    _user = models.ForeignKey(to=user_models.User, on_delete=models.CASCADE)
     team_name = models.CharField(max_length=100, unique=True)
     team_leader = models.IntegerField()
     organization = models.CharField(max_length=100)
