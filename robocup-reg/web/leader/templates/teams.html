@@ -1,40 +1,51 @@
 <div class="container mt-3 visually-hidden" id="teams-div">
-        <h2>Tímy</h2>
-        <form>
-            <table class="table">
-                <thead>
-                    <tr class="table-primary">
-                        <th scope="col">Nazov</th>
-                        <th scope="col">Leader</th>
-                        <th scope="col">Organizácia</th>
-                        <th scope="col">Súťažiaci</th>
-                        <th scope="col">Kategórie</th>
-                        <th scope="col">ZS/SS</th>
-                        <th scope="col">Zmazat</th>
-                        <th scope="col">Edit</th>
+    <h2>Tímy</h2>
+    <form>
+        <table class="table">
+            <thead>
+                <tr class="table-primary">
+                    <th scope="col">Názov</th>
+                    <th scope="col">Vedúci tímu</th>
+                    <th scope="col">Organizácia</th>
+                    <th scope="col">Súťažiaci</th>
+                    <th scope="col">Kategórie</th>
+                    <th scope="col">ZŠ/SŠ</th>
+                    <th scope="col">Zmazať</th>
+                    <th scope="col">Edit</th>
+                </tr>
+            </thead>
+            {% for team in teams %}
+            <thead>
+                <tr>
+                    <th scope="col">{{ team.team_name}}</th>
+                    <th scope="col">{{ team.team_leader}}</th>
+                    <th scope="col">{{ team.organization}}</th>
+                    <th scope="col">{% for pers in team.competitors.all%}{{ pers }}; {% endfor %}</th>
+                    <th scope="col">{% for cat in team.categories.all%} {{ cat }}; {% endfor %}</th>
+                    <th scope="col">{{ team.category}}</th>
 
-                    </tr>
-                </thead>
-                {% for team in teams %}
-                <thead>
-                    <tr>
-                        <th scope="col">{{ team.team_name}}</th>
-                        <th scope="col">{{ team.team_leader}}</th>
-                        <th scope="col">{{ team.organization}}</th>
-                        <th scope="col">{% for pers in team.competitors.all%}{{ pers }}; {% endfor %}</th>
-                        <th scope="col">{% for cat in team.categories.all%} {{ cat }}; {% endfor %}</th>
-                        <th scope="col">{{ team.category}}</th>
+                    <th scope="col"><button type="button" class="btn btn-danger">Zmazať</button></th>
+                    <th scope="col"><button type="button" class="btn btn-success">Upraviť</button></th>
+                </tr>
+            </thead>
+            {% endfor %}
+        </table>
+        <button id="team_assembly" type="button" class="btn btn-info btn-fixed-width" onclick="team_fun(1)">Pridaj tím</button>
+    </form>
+</div>
 
-                        <th scope="col"><button type="button" class="btn btn-danger">Zmazat</button></th>
-                        <th scope="col"><button type="button" class="btn btn-success">Edit</button></th>
-                    </tr>
-                </thead>
-                {% endfor %}
-            </table>
+<div class="container mt-3 visually-hidden" id="add_team-div">
+    <button id="add_team" type="button" class="btn btn-info btn-fixed-width" onclick="team_fun(2)">Zostav tím</button>
+</div>
 
-
-           <button id="supervisor_reg" type="button" class="btn btn-info btn-fixed-width" href="/supervisor_reg">Pridaj tím</button>
-
-        </form>
-
-    </div>
+<script>
+    function team_fun(a) {
+        if(a == 1){
+            document.getElementById('teams-div').setAttribute("class","container mt-3 visually-hidden")
+            document.getElementById('add_team-div').setAttribute("class","container mt-3")
+        }else{
+            document.getElementById('teams-div').setAttribute("class","container mt-3")
+            document.getElementById('add_team-div').setAttribute("class","container mt-3 visually-hidden")
+        }
+    }
+</script>
