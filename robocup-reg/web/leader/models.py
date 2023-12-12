@@ -5,6 +5,7 @@ from django.db import models
 
 class Person(models.Model):
     id = models.AutoField(primary_key=True)
+    leader_email = models.EmailField()
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100, unique=True)
@@ -26,6 +27,7 @@ class Person(models.Model):
 
 class Team(models.Model):
     id = models.AutoField(primary_key=True)
+    leader_email = models.EmailField()
     team_name = models.CharField(max_length=100, unique=True)
     team_leader = models.IntegerField()
     organization = models.CharField(max_length=100)
