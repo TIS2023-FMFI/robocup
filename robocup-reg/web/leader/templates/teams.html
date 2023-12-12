@@ -1,0 +1,40 @@
+<div class="container mt-3 visually-hidden" id="teams-div">
+        <h2>Tímy</h2>
+        <form>
+            <table class="table">
+                <thead>
+                    <tr class="table-primary">
+                        <th scope="col">Nazov</th>
+                        <th scope="col">Leader</th>
+                        <th scope="col">Organizácia</th>
+                        <th scope="col">Súťažiaci</th>
+                        <th scope="col">Kategórie</th>
+                        <th scope="col">ZS/SS</th>
+                        <th scope="col">Zmazat</th>
+                        <th scope="col">Edit</th>
+
+                    </tr>
+                </thead>
+                {% for team in teams %}
+                <thead>
+                    <tr>
+                        <th scope="col">{{ team.team_name}}</th>
+                        <th scope="col">{{ team.team_leader}}</th>
+                        <th scope="col">{{ team.organization}}</th>
+                        <th scope="col">{{ team.competitors}}</th>
+                        <th scope="col">{{ team.categories}}</th>
+                        <th scope="col">{{ team.category}}</th>
+
+                        <th scope="col"><button type="button" class="btn btn-danger">Zmazat</button></th>
+                        <th scope="col"><button type="button" class="btn btn-success">Edit</button></th>
+                    </tr>
+                </thead>
+                {% endfor %}
+            </table>
+
+
+           <button id="supervisor_reg" type="button" class="btn btn-info btn-fixed-width" href="/supervisor_reg">Pridaj tím</button>
+
+        </form>
+
+    </div>

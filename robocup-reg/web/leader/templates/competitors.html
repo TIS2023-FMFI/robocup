@@ -1,0 +1,53 @@
+<div class="container mt-3 visually-hidden" id="competitors-div">
+        <h2>Súťažiaci</h2>
+        <form>
+            <table class="table">
+                <thead>
+                    <tr class="table-primary">
+                        <th scope="col">Meno</th>
+                        <th scope="col">Priezvko</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Tel. c</th>
+                        <th scope="col">Dozor</th>
+                        <th scope="col">Datum nar</th>
+                        <th scope="col">ZS/SS</th>
+                        <th scope="col">Dieta</th>
+                        <th scope="col">Ubyt den 1</th>
+                        <th scope="col">Ubyt den 2</th>
+                        <th scope="col">Strava den 1</th>
+                        <th scope="col">Strava den 2</th>
+                        <th scope="col">Strava den 3</th>
+                        <th scope="col">Zmazat</th>
+                        <th scope="col">Edit</th>
+
+                    </tr>
+                </thead>
+                {% for competitor in competitors %}
+                <thead>
+                    <tr>
+                        <th scope="col">{{ competitor.first_name}}</th>
+                        <th scope="col">{{ competitor.last_name}}</th>
+                        <th scope="col">{{ competitor.email}}</th>
+                        <th scope="col">{{ competitor.phone_number}}</th>
+                        <th scope="col">{{ competitor.supervisor}}</th>
+                        <th scope="col">{{ competitor.birth_date}}</th>
+                        <th scope="col">{{ competitor.primary_school}}</th>
+                        <th scope="col">{{ competitor.diet}}</th>
+                        <th scope="col">{{ competitor.accomodation1}}</th>
+                        <th scope="col">{{ competitor.accomodation2}}</th>
+                        <th scope="col">{{ competitor.food1}}</th>
+                        <th scope="col">{{ competitor.food2}}</th>
+                        <th scope="col">{{ competitor.food3}}</th>
+                        <th scope="col"><button type="button" class="btn btn-danger">Zmazat</button></th>
+                        <th scope="col"><button type="button" class="btn btn-success">Edit</button></th>
+                    </tr>
+                </thead>
+                {% endfor %}
+            </table>
+
+
+           <button id="supervisor_reg" type="button" class="btn btn-info btn-fixed-width" href="/supervisor_reg">Pridaj sutaziaceho</button>
+
+        </form>
+
+    </div>
