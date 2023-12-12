@@ -5,28 +5,26 @@
     <body>
 <p></p>
     <div class="btn-group-horizontal" role="group" aria-label="Button group">
-        <button id="supervisors" type="button" class="btn btn-info btn-fixed-width" value="1" onclick="fun()">Dozor</button>
-        <button id="players" type="button" class="btn btn-info btn-fixed-width" value="2"  onclick="fun()">Súťažiaci</button>
-        <button id="teams" type="button" class="btn btn-info btn-fixed-width" value="3" onclick="fun()">Tímy</button>
+        <button id="supervisors" type="button" class="btn btn-info btn-fixed-width btn-dark" onclick="fun(1)">Dozor</button>
+        <button id="players" type="button" class="btn btn-info btn-fixed-width" onclick="fun(2)">Súťažiaci</button>
+        <button id="teams" type="button" class="btn btn-info btn-fixed-width" onclick="fun(3)">Tímy</button>
     </div>
 
     <script>
-    function fun() {
-        if(select.value==1){
-        document.getElementById('1').style.display = "block";
-        }else if(select.value == 2){
-            document.getElementById('2').style.display = "block";
-        }else{
-            document.getElementById('3').style.display = "block";
+    function fun(a) {
+        if(a==1){
+            document.getElementById('dozor-div').setAttribute("class","container mt-3")
+            document.getElementById('sutaziaci-div').setAttribute("class","container mt-3 visually-hidden")
+            document.getElementById('timy-div').setAttribute("class","container mt-3 visually-hidden")
+        }else if(a== 2){
+            document.getElementById('dozor-div').setAttribute("class","container mt-3 visually-hidden")
+            document.getElementById('sutaziaci-div').setAttribute("class","container mt-3")
+            document.getElementById('timy-div').setAttribute("class","container mt-3 visually-hidden")
+        }else if (a==3){
+            document.getElementById('dozor-div').setAttribute("class","container mt-3 visually-hidden")
+            document.getElementById('sutaziaci-div').setAttribute("class","container mt-3 visually-hidden")
+            document.getElementById('timy-div').setAttribute("class","container mt-3")
         }
-    }
-
-    function players_fun() {
-
-    }
-
-    function teams_fun() {
-
     }
 
     </script>
@@ -44,7 +42,7 @@
     </script>
 
 
-    <div class="container mt-3" id="1">
+    <div class="container mt-3" id="dozor-div">
         <h2>Dozor</h2>
         <form>
             <ul class="list-group" id="itemList">
@@ -60,7 +58,7 @@
         </form>
     </div>
 
-    <div class="container mt-3" id="2">
+    <div class="container mt-3 visually-hidden" id="sutaziaci-div">
         <h2>Suťažiaci</h2>
         <form>
             <ul class="list-group" id="itemList">
@@ -76,7 +74,7 @@
         </form>
     </div>
 
-    <div class="container mt-3" id="3">
+    <div class="container mt-3 visually-hidden" id="timy-div">
         <h2>Tímy</h2>
         <form>
             <ul class="list-group" id="itemList">
