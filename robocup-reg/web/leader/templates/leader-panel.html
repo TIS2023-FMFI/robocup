@@ -2,8 +2,9 @@
 
 {% block content %}
 
+
     <body>
-<p></p>
+    <p></p>
     <div class="btn-group-horizontal" role="group" aria-label="Button group">
         <button id="supervisors" type="button" class="btn btn-info btn-fixed-width btn-dark" onclick="fun(1)">Dozor</button>
         <button id="players" type="button" class="btn btn-info btn-fixed-width" onclick="fun(2)">Súťažiaci</button>
@@ -13,17 +14,17 @@
     <script>
     function fun(a) {
         if(a == 1){
-            document.getElementById('dozor-div').setAttribute("class","container mt-3")
-            document.getElementById('sutaziaci-div').setAttribute("class","container mt-3 visually-hidden")
-            document.getElementById('timy-div').setAttribute("class","container mt-3 visually-hidden")
+            document.getElementById('dozor-div').setAttribute("class","container mt-5")
+            document.getElementById('sutaziaci-div').setAttribute("class","container mt-5 visually-hidden")
+            document.getElementById('timy-div').setAttribute("class","container mt-5 visually-hidden")
         }else if(a == 2){
-            document.getElementById('dozor-div').setAttribute("class","container mt-3 visually-hidden")
-            document.getElementById('sutaziaci-div').setAttribute("class","container mt-3")
-            document.getElementById('timy-div').setAttribute("class","container mt-3 visually-hidden")
+            document.getElementById('dozor-div').setAttribute("class","container mt-5 visually-hidden")
+            document.getElementById('sutaziaci-div').setAttribute("class","container mt-5")
+            document.getElementById('timy-div').setAttribute("class","container mt-5 visually-hidden")
         }else if (a == 3){
-            document.getElementById('dozor-div').setAttribute("class","container mt-3 visually-hidden")
-            document.getElementById('sutaziaci-div').setAttribute("class","container mt-3 visually-hidden")
-            document.getElementById('timy-div').setAttribute("class","container mt-3")
+            document.getElementById('dozor-div').setAttribute("class","container mt-5 visually-hidden")
+            document.getElementById('sutaziaci-div').setAttribute("class","container mt-5 visually-hidden")
+            document.getElementById('timy-div').setAttribute("class","container mt-5")
         }
     }
     </script>
@@ -41,52 +42,108 @@
     </script>
 
 
-    <div class="container mt-3" id="dozor-div">
-        <h2>Dozor</h2>
-        <form>
-            <ul class="list-group" id="itemList">
-                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="..."><strong>Meno</strong></li>
-                {% for supervisor in supervisors %}
-                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">{{ supervisor.first_name}}</li>
-                {% endfor %}
-            </ul>
-            <p></p>
-            <ul>
-               <button id="supervisor_reg" type="button" class="btn btn-info btn-fixed-width" href="/supervisor_reg">Pridaj dozor</button>
-            </ul>
-        </form>
+{#    <div class="container mt-3" id="dozor-div">#}
+{#        <h2>Dozor</h2>#}
+{#        <form>#}
+{#            <ul class="list-group" id="itemList">#}
+{#                <li class="list-group-item"><strong>Meno</strong>Priezvisko</li>#}
+{#                {% for supervisor in supervisors %}#}
+{#                <li class="list-group-item">{{ supervisor.first_name}}</li>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#            <p></p>#}
+{#            <ul>#}
+{#               <button id="supervisor_reg" type="button" class="btn btn-info btn-fixed-width" href="/supervisor_reg">Pridaj dozor</button>#}
+{#            </ul>#}
+{#        </form>#}
+{#        #}
+{#    </div>#}
+
+    <div class="container mt-5 " id="dozor-div">
+        <h2>Zaregistrovaný dozor</h2>
+
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Meno</th>
+                    <th>Priezvisko</th>
+                    <th>E-mail</th>
+                    <th>Tel. číslo</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for supervisor in supervisors %}
+                <tr>
+                    <td>{{ supervisor.first_name}}</td>
+                    <td>{{ supervisor.last_name}}</td>
+                    <td>{{ supervisor.email}}</td>
+                    <td>{{ supervisor.phone_number}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <p></p>
+        <ul>
+           <button id="supervisor_reg" type="button" class="btn btn-info btn-fixed-width" href="/supervisor_reg">Pridaj dozor</button>
+        </ul>
     </div>
 
-    <div class="container mt-3 visually-hidden" id="sutaziaci-div">
-        <h2>Suťažiaci</h2>
-        <form>
-            <ul class="list-group" id="itemList">
-                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="..."><strong>Meno</strong></li>
-                {% for competitor in competitors %}
-                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">{{ competitor.first_name}}</li>
-                {% endfor %}
-            </ul>
-            <p></p>
-            <ul>
-               <button id="supervisor_reg" type="button" class="btn btn-info btn-fixed-width" href="/supervisor_reg">Pridaj dozor</button>
-            </ul>
-        </form>
+    <div class="container mt-5 visually-hidden" id="sutaziaci-div">
+        <h2>Súťažiaci</h2>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Meno</th>
+                    <th>Priezvisko</th>
+                    <th>E-mail</th>
+                    <th>Tel. číslo</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for competitor in competitors %}
+                <tr>
+                    <td>{{ competitor.first_name}}</td>
+                    <td>{{ competitor.last_name}}</td>
+                    <td>{{ competitor.email}}</td>
+                    <td>{{ competitor.phone_number}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <p></p>
+        <ul>
+           <button id="competitor_reg" type="button" class="btn btn-info btn-fixed-width" href="/competitor_reg">Pridaj dozor</button>
+        </ul>
     </div>
 
     <div class="container mt-3 visually-hidden" id="timy-div">
         <h2>Tímy</h2>
-        <form>
-            <ul class="list-group" id="itemList">
-                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="..."><strong>Meno</strong></li>
-                {% for team in teams %}
-                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">{{ team.team_name}}</li>
-                {% endfor %}
-            </ul>
-            <p></p>
-            <ul>
-               <button id="supervisor_reg" type="button" class="btn btn-info btn-fixed-width" href="/supervisor_reg">Pridaj dozor</button>
-            </ul>
-        </form>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Názov</th>
+                    <th>Vedúci tímu</th>
+                    <th>Organizácia</th>
+                    <th>Súťažiaci</th>
+                    <th>Kategórie</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for team in teams %}
+                <tr>
+                    <td>{{ team.team_name}}</td>
+                    <td>{{ team.team_leader}}</td>
+                    <td>{{ team.organization}}</td>
+                    <td>{{ team.competitors}}</td>
+                    <td>{{ team.categories}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <p></p>
+        <ul>
+           <button id="team_assembly" type="button" class="btn btn-info btn-fixed-width" href="/team_assembly">Vytvor tím</button>
+        </ul>
     </div>
 
     </body>
