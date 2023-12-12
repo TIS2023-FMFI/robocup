@@ -49,5 +49,13 @@ class Team(models.Model):
         return self.team_name
 
 
-admin.site.register(Team)
-admin.site.register(Person)
+class PersonAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in Person._meta.fields if field.name != "id"]
+
+
+class TeamAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in Team._meta.fields if field.name != "id"]
+
+
+admin.site.register(Team, TeamAdmin)
+admin.site.register(Person, PersonAdmin)
