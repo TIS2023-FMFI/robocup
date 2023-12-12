@@ -35,23 +35,12 @@
         jQuery(document).ready(function(){
             $(".btn-group-horizontal .btn").click(function(){
                 // Remove 'fw-bold' class from all buttons
-                $(".btn-group-horizontal .btn").removeClass("fw-bold");
+                $(".btn-group-horizontal .btn").removeClass("btn-dark");
 
                 // Add 'fw-bold' class to the clicked button
-                $(this).addClass("fw-bold");
+                $(this).addClass("btn-dark");
             });
         });
-    </script>
-    <script type="text/javascript">
-            document.getElementById("players").onclick = function () {
-                location.href = "/players";
-            };
-            document.getElementById("teams").onclick = function () {
-                location.href = "/teams";
-            };
-            document.getElementById("supervisors").onclick = function () {
-                location.href = "/supervisors";
-            };
     </script>
 
 
