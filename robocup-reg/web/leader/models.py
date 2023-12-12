@@ -11,7 +11,7 @@ class Person(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100, unique=True)
-    phone_number = models.CharField(max_length=100, unique=True)
+    phone_number = models.CharField(max_length=100, unique=True, blank=True, null=True)
     birth_date = models.DateTimeField()
     primary_school = models.BooleanField()
     diet = models.CharField(default="Ziadna", max_length=1000)
