@@ -28,7 +28,7 @@ class Person(models.Model):
         verbose_name_plural = "People"
 
     def __str__(self):
-        return self.first_name + self.last_name
+        return self.first_name + " " + self.last_name
 
 
 class Team(models.Model):
