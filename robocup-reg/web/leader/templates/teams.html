@@ -21,8 +21,8 @@
                         <th scope="col">{{ team.team_name}}</th>
                         <th scope="col">{{ team.team_leader}}</th>
                         <th scope="col">{{ team.organization}}</th>
-                        <th scope="col">{{ team.competitors}}</th>
-                        <th scope="col">{{ team.categories}}</th>
+                        <th scope="col">{% for pers in team.competitors.all%}{{ pers }}; {% endfor %}</th>
+                        <th scope="col">{% for cat in team.categories.all%} {{ cat }}; {% endfor %}</th>
                         <th scope="col">{{ team.category}}</th>
 
                         <th scope="col"><button type="button" class="btn btn-danger">Zmazat</button></th>
