@@ -3,9 +3,13 @@ from django import forms
 from web.org.models import Event, Category
 
 
-class RegisterFormEvent(forms.Form):
+class EventForm(forms.Form):
     name = forms.CharField(required=True)
     place = forms.CharField(required=True)
+    start_date = forms.DateTimeField(required=True)
+    end_date = forms.DateTimeField(required=True)
+    registration_start_date = forms.DateTimeField(required=True)
+    registration_end_date = forms.DateTimeField(required=True)
 
     class Meta:
         model = Event
@@ -14,8 +18,9 @@ class RegisterFormEvent(forms.Form):
                      "registration_open", "categories"]
 
 
-class RegisterFormCategory(forms.Form):
+class CategoryForm(forms.Form):
     name = forms.CharField(required=True)
+    primary_school = forms.CharField(required=True)
 
     class Meta:
         model = Category

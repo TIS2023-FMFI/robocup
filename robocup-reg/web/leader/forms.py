@@ -4,8 +4,11 @@ from django.contrib.auth.forms import BaseUserCreationForm
 from web.leader.models import Person, Team
 
 
-class RegisterFormCompetitor(BaseUserCreationForm):
+class CompetitorForm(BaseUserCreationForm):
     email = forms.EmailField(required=True)
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
+    birth_date = forms.CharField(required=True)
 
     class Meta:
         model = Person
@@ -16,8 +19,10 @@ class RegisterFormCompetitor(BaseUserCreationForm):
                   "food1", "food2", "food3", "supervisor"]
 
 
-class RegisterFormSupervisor(BaseUserCreationForm):
+class SupervisorForm(BaseUserCreationForm):
     email = forms.EmailField(required=True)
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
 
     class Meta:
         model = Person
@@ -26,8 +31,12 @@ class RegisterFormSupervisor(BaseUserCreationForm):
                   "accomodation2", "food1", "food2", "food3"]
 
 
-class RegisterFormTeam(forms.Form):
+class TeamForm(forms.Form):
     team_name = forms.CharField(required=True)
+    team_leader = forms.CharField(required=True)
+    organization = forms.CharField(required=True)
+    categories = forms.CharField(required=True)
+    competitors = forms.CharField(required=True)
 
     class Meta:
         model = Team
