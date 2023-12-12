@@ -1,7 +1,7 @@
 from django.contrib import admin
-from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
+from ..org import models as org_models
 from ..users import models as user_models
 
 
@@ -21,7 +21,7 @@ class Person(models.Model):
     food2 = models.BooleanField(default=True)
     food3 = models.BooleanField(default=True)
     is_supervisor = models.BooleanField(default=False)
-    supervisor = models.CharField(max_length=100)
+    supervisor = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         verbose_name = "Person"
@@ -35,10 +35,10 @@ class Team(models.Model):
     id = models.AutoField(primary_key=True)
     _user = models.ForeignKey(to=user_models.User, on_delete=models.CASCADE)
     team_name = models.CharField(max_length=100, unique=True)
-    team_leader = models.IntegerField()
+    team_leader = models.ForeignKey(to=Person, on_delete=models.CASCADE, related_name="leader")
     organization = models.CharField(max_length=100)
-    competitors = ArrayField(models.IntegerField())
-    categories = ArrayField(models.IntegerField())  # v ktorych kategoriach tim sutazi
+    competitors = models.ManyToManyField(Person)
+    categories = models.ManyToManyField(org_models.Category)  # v ktorych kategoriach tim sutazi
     category = models.BooleanField(default=True)  # T - ZS, F - SS
 
     class Meta:
