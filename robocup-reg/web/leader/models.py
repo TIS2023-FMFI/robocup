@@ -20,6 +20,7 @@ class Person(models.Model):
     food1 = models.BooleanField(default=True)
     food2 = models.BooleanField(default=True)
     food3 = models.BooleanField(default=True)
+    is_supervisor = models.BooleanField(default=False)
     supervisor = models.CharField(max_length=100)
 
     class Meta:
