@@ -26,6 +26,9 @@ class Person(models.Model):
         verbose_name = "Person"
         verbose_name_plural = "People"
 
+    def __str__(self):
+        return self.first_name + self.last_name
+
 
 class Team(models.Model):
     id = models.AutoField(primary_key=True)
@@ -36,6 +39,13 @@ class Team(models.Model):
     competitors = ArrayField(models.IntegerField())
     categories = ArrayField(models.IntegerField())  # v ktorych kategoriach tim sutazi
     category = models.BooleanField(default=True)  # T - ZS, F - SS
+
+    class Meta:
+        verbose_name = "Team"
+        verbose_name_plural = "Teams"
+
+    def __str__(self):
+        return self.team_name
 
 
 admin.site.register(Team)

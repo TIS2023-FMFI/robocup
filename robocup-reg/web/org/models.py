@@ -15,6 +15,13 @@ class Event(models.Model):
     is_active = models.BooleanField(default=False)  # ci je to aktualny event
     categories = ArrayField(models.IntegerField())
 
+    class Meta:
+        verbose_name = "Event"
+        verbose_name_plural = "Events"
+
+    def __str__(self):
+        return self.name
+
 
 class Category(models.Model):
     id = models.AutoField(primary_key=True)
@@ -29,6 +36,9 @@ class Category(models.Model):
     class Meta:
         verbose_name = "Category"
         verbose_name_plural = "Categories"
+
+    def __str__(self):
+        return self.name
 
 
 admin.site.register(Event)
