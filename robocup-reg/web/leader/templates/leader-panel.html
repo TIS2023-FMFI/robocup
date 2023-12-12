@@ -1,5 +1,107 @@
 {% extends 'base.html' %} {% block title %}Robocup HOME{% endblock %}
 
 {% block content %}
-    <h1>LEADER PANEL</h1>
+
+    <body>
+<p></p>
+    <div class="btn-group-horizontal" role="group" aria-label="Button group">
+        <button id="supervisors" type="button" class="btn btn-info btn-fixed-width" value="1" onclick="fun()">Dozor</button>
+        <button id="players" type="button" class="btn btn-info btn-fixed-width" value="2"  onclick="fun()">Súťažiaci</button>
+        <button id="teams" type="button" class="btn btn-info btn-fixed-width" value="3" onclick="fun()">Tímy</button>
+    </div>
+
+    <script>
+    function fun() {
+        if(select.value==1){
+        document.getElementById('1').style.display = "block";
+        }else if(select.value == 2){
+            document.getElementById('2').style.display = "block";
+        }else{
+            document.getElementById('3').style.display = "block";
+        }
+    }
+
+    function players_fun() {
+
+    }
+
+    function teams_fun() {
+
+    }
+
+    </script>
+    <script>
+        // Custom JavaScript/jQuery to handle button clicks
+        $(document).ready(function(){
+            $(".btn-group-horizontal .btn").click(function(){
+                // Remove 'fw-bold' class from all buttons
+                $(".btn-group-horizontal .btn").removeClass("fw-bold");
+
+                // Add 'fw-bold' class to the clicked button
+                $(this).addClass("fw-bold");
+            });
+        });
+    </script>
+    <script type="text/javascript">
+            document.getElementById("players").onclick = function () {
+                location.href = "/players";
+            };
+            document.getElementById("teams").onclick = function () {
+                location.href = "/teams";
+            };
+            document.getElementById("supervisors").onclick = function () {
+                location.href = "/supervisors";
+            };
+    </script>
+
+
+    <div class="container mt-3" id="1">
+        <h2>Dozor</h2>
+        <form>
+            <ul class="list-group" id="itemList">
+                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="..."><strong>Meno</strong></li>
+                {% for supervisor in supervisors %}
+                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">{{ supervisor.first_name}}</li>
+                {% endfor %}
+            </ul>
+            <p></p>
+            <ul>
+               <button id="supervisor_reg" type="button" class="btn btn-info btn-fixed-width" href="/supervisor_reg">Pridaj dozor</button>
+            </ul>
+        </form>
+    </div>
+
+    <div class="container mt-3" id="2">
+        <h2>Tímy</h2>
+        <form>
+            <ul class="list-group" id="itemList">
+                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="..."><strong>Meno</strong></li>
+                {% for supervisor in supervisors %}
+                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">{{ supervisor.first_name}}</li>
+                {% endfor %}
+            </ul>
+            <p></p>
+            <ul>
+               <button id="supervisor_reg" type="button" class="btn btn-info btn-fixed-width" href="/supervisor_reg">Pridaj dozor</button>
+            </ul>
+        </form>
+    </div>
+
+    <div class="container mt-3" id="3">
+        <h2>Suťažiaci</h2>
+        <form>
+            <ul class="list-group" id="itemList">
+                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="..."><strong>Meno</strong></li>
+                {% for supervisor in supervisors %}
+                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">{{ supervisor.first_name}}</li>
+                {% endfor %}
+            </ul>
+            <p></p>
+            <ul>
+               <button id="supervisor_reg" type="button" class="btn btn-info btn-fixed-width" href="/supervisor_reg">Pridaj dozor</button>
+            </ul>
+        </form>
+    </div>
+
+    </body>
 {% endblock %}
