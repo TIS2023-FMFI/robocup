@@ -25,18 +25,18 @@
     <script>
     function fun_org(a) {
         if(a == 1){
-            document.getElementById('category-div').setAttribute("class","container mt-3")
-            document.getElementById('check-in-div').setAttribute("class","container mt-3 visually-hidden")
-        }else{
-            document.getElementById('category-div').setAttribute("class","container mt-3 visually-hidden")
+            document.getElementById('category-div').setAttribute("class","container mt-3  visually-hidden")
             document.getElementById('check-in-div').setAttribute("class","container mt-3")
+        }else{
+            document.getElementById('category-div').setAttribute("class","container mt-3")
+            document.getElementById('check-in-div').setAttribute("class","container mt-3  visually-hidden")
         }
     }
     </script>
 
 
 
-    <div class="container mt-3 " id="category-div" >
+    <div class="container mt-3  visually-hidden" id="category-div" >
         <h2>Kategórie</h2>
         <ul class="list-group" id="itemList">
             <li class="list-group-item">Item 1</li>
@@ -45,7 +45,7 @@
         </ul>
     </div>
 
-    <div class="container mt-3 visually-hidden" id="check-in-div">
+    <div class="container mt-3" id="check-in-div">
         <h2>Check-in</h2>
         <form>
             <div class="input-group mb-3">
