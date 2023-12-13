@@ -22,6 +22,7 @@ robocup/robocup-reg/  (env files, docker, etc)
 
 ### What do you need to contribute to the codebase
 #### Set-up pipenv
+**Python 3.10 is necessary**
 Open project in pycharm and create a proper pipenv interpreter (https://www.jetbrains.com/help/pycharm/pipenv.html#pipenv-existing-project)
 #### Set-up pre-commit
 `pip install pre-commit`
