@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "django.contrib.staticfiles " "crispy_forms",
+    "django.contrib.staticfiles",
+    "crispy_forms",
     "crispy_bootstrap5",
     "web.common",
     "web.administrator",
@@ -160,3 +161,5 @@ CSRF_TRUSTED_ORIGINS = ["http://robocup.thefilip.eu", "https://robocup.thefilip.
 
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "static"
