@@ -8,6 +8,7 @@ class CompetitorForm(forms.ModelForm):
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
     birth_date = forms.CharField(required=True)
+    supervisor = forms.ModelChoiceField(queryset=None)
 
     class Meta:
         model = Person
@@ -33,11 +34,8 @@ class CompetitorForm(forms.ModelForm):
         super(CompetitorForm, self).__init__(*args, **kwargs)
         if user:
             self.user = user
-        self.supervisor = forms.ModelMultipleChoiceField(
-            label="Vyber dozorujucu osobu",
-            queryset=Person.objects.filter(user_id=user.id, is_supervisor=True),
-            widget=forms.Select,
-        )
+            self.fields["supervisor"].queryset = Person.objects.filter(user_id=user.id, is_supervisor=True)
+            self.fields["supervisor"].label = "Vyber dozorujucu osobu"
 
     def save(self, commit=True):
         instance = super(CompetitorForm, self).save(commit=False)
