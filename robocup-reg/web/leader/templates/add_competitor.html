@@ -3,7 +3,7 @@
 {% block content %}
 
 <div>
-    <form method="post">
+    <form method="post" action="{% url 'add_competitor' %}">
         <div style="display: flex">
             {% csrf_token %}
             <div style="width: 30%; box-sizing: border-box; padding: 20px;" >
@@ -67,6 +67,11 @@
                         <td id="second" style="padding: 4px; text-align: center"></td>
                         <td style="padding: 4px; text-align: center"></td>
                     </tr>
+                    <tr>
+                        <td style="padding: 4px"> Dátum narodenia </td>
+                        <td id="first" style="padding: 4px; text-align: center" >{{ form.birth_date }}</td>
+
+                    </tr>
 
                 </table>
             </div>
@@ -74,7 +79,7 @@
         <a style="padding: 7px"> <a style="color: red">*</a><a> </a> Povinne</a><br>
         <a style="padding: 7px; border-bottom: 20px"> <a style="color: red">**</a> Povinne aspoň jedno</a><br>
         <p></p>
-        <input type="submit" value="Pridaj dozorujúcu osobu" style="border-radius: 5px; background: cyan">
+        <input type="submit" value="Pridaj súťažiaceho" style="border-radius: 5px; background: cyan">
     </form>
 
 </div>

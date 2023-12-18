@@ -1,3 +1,5 @@
+import datetime
+
 from django import forms
 
 from web.leader.models import Person, Team
@@ -7,7 +9,12 @@ class CompetitorForm(forms.ModelForm):
     email = forms.EmailField(required=True)
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
-    birth_date = forms.CharField(required=True)
+    birth_date = forms.DateField(
+        required=True,
+        widget=forms.SelectDateWidget(
+            years=range(datetime.date.today().year - 18, datetime.date.today().year)
+        ),  # Adjust the range as needed
+    )
     supervisor = forms.ModelChoiceField(queryset=None)
 
     class Meta:
