@@ -7,3 +7,7 @@ def home(request):
 
 def results(request):
     return render(request, "results.html")
+
+
+def leader_panel(request):
+    return render(request, "leader_panel.html")

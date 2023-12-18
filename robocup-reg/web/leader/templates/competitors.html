@@ -43,23 +43,6 @@
             </thead>
             {% endfor %}
         </table>
-        <button id="competitor_reg" type="button" class="btn btn-info btn-fixed-width" onclick="com_fun(1)">Pridaj súťažiaceho</button>
+        <a id="competitor_reg"  class="btn btn-info btn-fixed-width" href="/leader_panel/add_competitor" >Pridaj súťažiaceho</a>
     </form>
 </div>
-
-<div class="container mt-3 visually-hidden" id="competitors_reg-div">
-    <h2>Nový súťažiaci</h2>
-    <button id="competitor_reg_submit" type="button" class="btn btn-info btn-fixed-width" onclick="com_fun(2)">Pridať</button>
-</div>
-
-<script>
-    function com_fun(a) {
-        if(a == 1){
-            document.getElementById('competitors-div').setAttribute("class","container mt-3 visually-hidden")
-            document.getElementById('competitors_reg-div').setAttribute("class","container mt-3")
-        }else{
-            document.getElementById('competitors-div').setAttribute("class","container mt-3")
-            document.getElementById('competitors_reg-div').setAttribute("class","container mt-3 visually-hidden")
-        }
-    }
-</script>
