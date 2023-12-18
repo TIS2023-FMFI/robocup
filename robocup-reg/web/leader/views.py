@@ -67,6 +67,7 @@ def team_assembly(request):
     if request.POST:
         form = TeamForm(request.POST)
         if form.is_valid():
+            form.save()
             return redirect("leader_panel")
         else:
             context["form"] = form
@@ -80,6 +81,7 @@ def add_competitor(request):
     if request.POST:
         form = CompetitorForm(request.POST)
         if form.is_valid():
+            form.save()
             return redirect("leader_panel")
         else:
             context["form"] = form
@@ -93,6 +95,7 @@ def add_supervisor(request):
     if request.POST:
         form = SupervisorForm(request.POST)
         if form.is_valid():
+            form.save()
             return redirect("leader_panel")
         else:
             context["form"] = form
