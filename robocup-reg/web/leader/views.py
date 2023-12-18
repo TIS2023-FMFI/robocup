@@ -25,35 +25,38 @@ def form_validation(form, request, html):
 
 def edit_competitor(request, id):
     post = get_object_or_404(Person, id=id)
+    html = "competitors.html"
 
     if request.method == "GET":
         data = {"form": CompetitorForm(instance=post), "id": id}
-        return render(request, "competitors.html", data)
+        return render(request, f"{html}", data)
 
     elif request.method == "POST":
         form = CompetitorForm(request.POST, instance=post)
-        form_validation(form, request, "competitors.html")
+        form_validation(form, request, f"{html}")
 
 
 def edit_supervisor(request, id):
     post = get_object_or_404(Person, id=id)
+    html = "supervisors.html"
 
     if request.method == "GET":
         data = {"form": SupervisorForm(instance=post), "id": id}
-        return render(request, "supervisors.html", data)
+        return render(request, f"{html}", data)
 
     elif request.method == "POST":
         form = SupervisorForm(request.POST, instance=post)
-        return form_validation(form, request, "supervisors.html")
+        return form_validation(form, request, f"{html}")
 
 
 def edit_team(request, id):
     post = get_object_or_404(Person, id=id)
+    html = "teams.html"
 
     if request.method == "GET":
         data = {"form": TeamForm(instance=post), "id": id}
-        return render(request, "teams.html", data)
+        return render(request, f"{html}", data)
 
     elif request.method == "POST":
         form = TeamForm(request.POST, instance=post)
-        return form_validation(form, request, "teams.html")
+        return form_validation(form, request, f"{html}")
