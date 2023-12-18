@@ -60,3 +60,15 @@ def edit_team(request, id):
     elif request.method == "POST":
         form = TeamForm(request.POST, instance=post)
         return form_validation(form, request, f"{html}")
+
+
+def team_assembly(request):
+    return render(request, "team_assembly.html")
+
+
+def add_competitor(request):
+    return render(request, "add_competitor.html")
+
+
+def add_supervisor(request):
+    return render(request, "add_supervisor.html")
