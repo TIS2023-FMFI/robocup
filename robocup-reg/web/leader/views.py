@@ -6,9 +6,9 @@ from .models import Person, Team
 
 
 def leader_panel(request):
-    competitors = Person.objects.filter(_user_id=request.user.id, is_supervisor=False)
-    supervisors = Person.objects.filter(_user_id=request.user.id, is_supervisor=True)
-    teams = Team.objects.filter(_user_id=request.user.id)
+    competitors = Person.objects.filter(user_id=request.user.id, is_supervisor=False)
+    supervisors = Person.objects.filter(user_id=request.user.id, is_supervisor=True)
+    teams = Team.objects.filter(user_id=request.user.id)
     data = {"competitors": competitors, "supervisors": supervisors, "teams": teams}
     return render(request, "leader-panel.html", data)
 
@@ -65,42 +65,42 @@ def edit_team(request, id):
 def team_assembly(request):
     context = {}
     if request.POST:
-        form = TeamForm(request.POST)
+        form = TeamForm(request.POST, user=request.user)
         if form.is_valid():
             form.save()
             return redirect("leader_panel")
         else:
             context["form"] = form
     else:
-        context["form"] = TeamForm()
+        context["form"] = TeamForm(user=request.user)
     return render(request, "team_assembly.html", context)
 
 
 def add_competitor(request):
     context = {}
     if request.POST:
-        form = CompetitorForm(request.POST)
+        form = CompetitorForm(request.POST, user=request.user)
         if form.is_valid():
             form.save()
             return redirect("leader_panel")
         else:
             context["form"] = form
     else:
-        context["form"] = CompetitorForm()
+        context["form"] = CompetitorForm(user=request.user)
     return render(request, "add_competitor.html", context)
 
 
 def add_supervisor(request):
     context = {}
     if request.POST:
-        form = SupervisorForm(request.POST)
+        form = SupervisorForm(request.POST, user=request.user)
         if form.is_valid():
             form.save()
             return redirect("leader_panel")
         else:
             context["form"] = form
     else:
-        context["form"] = SupervisorForm()
+        context["form"] = SupervisorForm(user=request.user)
     return render(request, "add_supervisor.html", context)
 
 

@@ -3,7 +3,7 @@
 {% block content %}
 
 <div>
-        <form>
+        <form method="post" action="{% url 'add_supervisor' %}">
             <div style="display: flex">
                 {% csrf_token %}
                 <div style="width: 30%; box-sizing: border-box; padding: 20px;" >
