@@ -47,12 +47,12 @@ class Category(models.Model):
 
 
 class EventAdmin(admin.ModelAdmin):
-    ist_display = [field.name for field in Event._meta.fields if field.name != "id"]
+    list_display = [field.name for field in Event._meta.fields if field.name != "id"]
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    ist_display = [field.name for field in Category._meta.fields if field.name != "id"]
+    list_display = [field.name for field in Category._meta.fields if field.name != "id"]
 
 
 admin.site.register(Event, EventAdmin)
-admin.site.register(Category, EventAdmin)
+admin.site.register(Category, CategoryAdmin)
