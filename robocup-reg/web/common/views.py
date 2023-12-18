@@ -31,8 +31,27 @@ def download_competitors(request):
     sutaziaci = leader_models.Person.objects.filter(is_supervisor=False)
 
     w = csv.writer(response)
-    w.writerow(["meno", "priezvisko"])
+    w.writerow(["meno", "priezvisko", "organizacia"])
     for s in sutaziaci:
-        w.writerow([s.first_name, s.last_name])
+        teamy = leader_models.Team.objects.filter(competitors=s.id)
+        w.writerow([s.first_name, s.last_name, teamy[0].organization])
+
+    return response
+
+
+def download_teams(request):
+    response = HttpResponse(
+        content_type="text/csv",
+        headers={"Content-Disposition": 'attachment; filename="teamy.csv"'},
+    )
+
+    teamy = leader_models.Team.objects.all()
+
+    w = csv.writer(response)
+    w.writerow(["nazov", "organizacia", "rola", "meno"])
+    for t in teamy:
+        w.writerow([t.team_name, t.organization, "veduci", t.team_leader.first_name + " " + t.team_leader.last_name])
+        for s in t.competitors.all():
+            w.writerow(["", "", "clen", s.first_name + " " + s.last_name])
 
     return response
