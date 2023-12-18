@@ -84,3 +84,10 @@ def delete_supervisor(request, id):
     competitor.delete()
     html = "supervisors.html"
     return render(request, f"{html}")
+
+
+def delete_team(request, id):
+    competitor = Person.objects.get(id=id)
+    competitor.delete()
+    html = "teams.html"
+    return render(request, f"{html}")
