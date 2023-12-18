@@ -1,6 +1,6 @@
 from django import forms
 
-from web.org.models import Event, Category
+from web.org.models import Category, Event
 
 
 class EventForm(forms.Form):
@@ -13,9 +13,16 @@ class EventForm(forms.Form):
 
     class Meta:
         model = Event
-        fieldsets = ["name", "place", "start_date", "end_date",
-                     "registration_start_date", "registration_end_date",
-                     "registration_open", "categories"]
+        fieldsets = [
+            "name",
+            "place",
+            "start_date",
+            "end_date",
+            "registration_start_date",
+            "registration_end_date",
+            "registration_open",
+            "categories",
+        ]
 
 
 class CategoryForm(forms.Form):
@@ -24,5 +31,8 @@ class CategoryForm(forms.Form):
 
     class Meta:
         model = Category
-        fieldsets = ["name", "primary_school", "list_of_results", "soccer",
-                     "group_size", "advance", "ranking_params"]
+        fieldsets = ["name", "primary_school", "list_of_results", "soccer", "group_size", "advance", "ranking_params"]
+
+
+class CSVImportForm(forms.Form):
+    csv_file = forms.FileField()

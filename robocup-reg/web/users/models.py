@@ -59,10 +59,4 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.email.split("@")[0]
 
 
-class Record(models.Model):
-    team_name = models.CharField(max_length=100)
-    order = models.CharField(max_length=100)
-
-
-admin.site.register(Record)
 admin.site.register(User)

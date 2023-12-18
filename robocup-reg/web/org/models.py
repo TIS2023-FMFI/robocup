@@ -54,5 +54,11 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = [field.name for field in Category._meta.fields if field.name != "id"]
 
 
+class Record(models.Model):
+    team_name = models.CharField(max_length=100)
+    order = models.CharField(max_length=100)
+
+
+admin.site.register(Record)
 admin.site.register(Event, EventAdmin)
 admin.site.register(Category, CategoryAdmin)
