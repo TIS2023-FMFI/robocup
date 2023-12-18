@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import CompetitorForm, SupervisorForm, TeamForm
 from .models import Person, Team
@@ -63,15 +63,42 @@ def edit_team(request, id):
 
 
 def team_assembly(request):
-    return render(request, "team_assembly.html")
+    context = {}
+    if request.POST:
+        form = TeamForm(request.POST)
+        if form.is_valid():
+            return redirect("leader_panel")
+        else:
+            context["form"] = form
+    else:
+        context["form"] = TeamForm()
+    return render(request, "team_assembly.html", context)
 
 
 def add_competitor(request):
-    return render(request, "add_competitor.html")
+    context = {}
+    if request.POST:
+        form = CompetitorForm(request.POST)
+        if form.is_valid():
+            return redirect("leader_panel")
+        else:
+            context["form"] = form
+    else:
+        context["form"] = CompetitorForm()
+    return render(request, "add_competitor.html", context)
 
 
 def add_supervisor(request):
-    return render(request, "add_supervisor.html")
+    context = {}
+    if request.POST:
+        form = SupervisorForm(request.POST)
+        if form.is_valid():
+            return redirect("leader_panel")
+        else:
+            context["form"] = form
+    else:
+        context["form"] = SupervisorForm()
+    return render(request, "add_supervisor.html", context)
 
 
 def delete_competitor(request, id):
