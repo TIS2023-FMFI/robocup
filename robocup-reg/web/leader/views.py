@@ -106,20 +106,23 @@ def add_supervisor(request):
 
 def delete_competitor(request, id):
     competitor = Person.objects.get(id=id)
-    competitor.delete()
     html = "competitors.html"
+    if request.method == "POST":
+        competitor.delete()
     return render(request, f"{html}")
 
 
 def delete_supervisor(request, id):
     supervisor = Person.objects.get(id=id)
-    supervisor.delete()
     html = "supervisors.html"
+    if request.method == "POST":
+        supervisor.delete()
     return render(request, f"{html}")
 
 
 def delete_team(request, id):
     team = Person.objects.get(id=id)
-    team.delete()
     html = "teams.html"
+    if request.method == "POST":
+        team.delete()
     return render(request, f"{html}")
