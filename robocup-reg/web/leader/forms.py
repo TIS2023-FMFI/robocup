@@ -24,6 +24,7 @@ class CompetitorForm(forms.ModelForm):
             "food1",
             "food2",
             "food3",
+            "supervisor",
         ]
 
     def __init__(self, *args, **kwargs):
@@ -32,6 +33,11 @@ class CompetitorForm(forms.ModelForm):
         super(CompetitorForm, self).__init__(*args, **kwargs)
         if user:
             self.user = user
+        self.supervisor = forms.ModelMultipleChoiceField(
+            label="Vyber dozorujucu osobu",
+            queryset=Person.objects.filter(user_id=user.id, is_supervisor=True),
+            widget=forms.Select,
+        )
 
     def save(self, commit=True):
         instance = super(CompetitorForm, self).save(commit=False)

@@ -14,7 +14,7 @@ class Person(models.Model):
     phone_number = models.CharField(max_length=100, unique=True, blank=True, null=True)
     birth_date = models.DateField(null=True)
     primary_school = models.BooleanField(null=True)
-    diet = models.CharField(default="", max_length=1000)
+    diet = models.CharField(default="", max_length=1000, blank=True)
     accomodation1 = models.BooleanField(default=True)
     accomodation2 = models.BooleanField(default=True)
     food1 = models.BooleanField(default=True)

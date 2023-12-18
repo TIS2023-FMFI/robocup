@@ -87,6 +87,7 @@ def add_competitor(request):
             context["form"] = form
     else:
         context["form"] = CompetitorForm(user=request.user)
+    print(context["form"].fields)
     return render(request, "add_competitor.html", context)
 
 

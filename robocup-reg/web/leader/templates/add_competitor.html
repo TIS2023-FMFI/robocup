@@ -2,8 +2,80 @@
 
 {% block content %}
 
+<div>
+    <form method="post">
+        <div style="display: flex">
+            {% csrf_token %}
+            <div style="width: 30%; box-sizing: border-box; padding: 20px;" >
+                <table>
+                    <tr>
+                        <td> Meno <a style="color: red">*</a></td><td> {{ form.first_name }}</td>
+                    </tr>
+                    <tr>
+                        <td> Priezvisko <a style="color: red">*</a></td><td> {{ form.last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td> E-mail <a style="color: red">**</a></td><td> {{ form.email }}</td>
+                    </tr>
+                    <tr>
+                        <td> Telefón <a style="color: red">**</a></td><td> {{ form.phone_number }}</td>
+                    </tr>
+                    <tr>
+                        <td> Diéta </td>
+                        <td> {{ form.diet }} </td>
+                    </tr>
+                    <tr>
+                        <td> {{ form.supervisor.label }} </td>
+                        <td> {{ form.supervisor }} </td>
+                    </tr>
+                </table>
+            </div>
+            <div style="width: 50%; box-sizing: border-box; padding: 20px; align-content: center" >
+                <table>
+                    <tr>
+                        <td></td>
+                        <td style="padding: 4px; text-align: center"> 1. deň </td>
+                        <td style="padding: 4px; text-align: center"> 2. deň </td>
+                        <td style="padding: 4px; text-align: center"> 3. deň </td>
+                    </tr>
+                    <tr>
+                        <td>Strava</td><td style="padding:4px; text-align: center"> {{ form.food1 }}</td>
+                        <td style="padding: 4px; text-align: center"> {{ form.food2 }}</td>
+                        <td style="padding: 4px; text-align: center"> {{ form.food3 }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="padding: 4px; text-align: center"> 1. noc </td>
+                        <td style="padding: 4px; text-align: center"> 2. noc </td>
+                        <td style="padding: 4px; text-align: center"></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 4px"> Ubytovanie</td>
+                        <td style="padding: 4px; text-align: center">{{ form.accomodation1 }}</td>
+                        <td style="padding: 4px; text-align: center">{{ form.accomodation2 }}</td>
+                        <td style="padding: 4px; text-align: center"> </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="padding: 4px; text-align: center"> Áno </td>
+                        <td style="padding: 4px; text-align: center"> </td>
+                        <td style="padding: 4px; text-align: center"></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 4px"> Je žiakom ZŠ </td>
+                        <td id="first" style="padding: 4px; text-align: center" >{{ form.primary_school }}</td>
+                        <td id="second" style="padding: 4px; text-align: center"></td>
+                        <td style="padding: 4px; text-align: center"></td>
+                    </tr>
 
+                </table>
+            </div>
+        </div>
+        <a style="padding: 7px"> <a style="color: red">*</a><a> </a> Povinne</a><br>
+        <a style="padding: 7px; border-bottom: 20px"> <a style="color: red">**</a> Povinne aspoň jedno</a><br>
+        <p></p>
+        <input type="submit" value="Pridaj dozorujúcu osobu" style="border-radius: 5px; background: cyan">
+    </form>
 
-
-
+</div>
 {% endblock %}
