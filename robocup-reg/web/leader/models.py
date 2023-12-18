@@ -13,7 +13,7 @@ class Person(models.Model):
     email = models.EmailField(max_length=100, unique=True)
     phone_number = models.CharField(max_length=100, unique=True, blank=True, null=True)
     birth_date = models.DateField(null=True)
-    primary_school = models.BooleanField(null=True)
+    primary_school = models.BooleanField(default=False)
     diet = models.CharField(default="", max_length=1000, blank=True)
     accomodation1 = models.BooleanField(default=True)
     accomodation2 = models.BooleanField(default=True)

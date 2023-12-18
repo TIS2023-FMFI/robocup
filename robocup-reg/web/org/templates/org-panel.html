@@ -10,13 +10,9 @@
     </div>
 
     <script>
-        // Custom JavaScript/jQuery to handle button clicks
         jQuery(document).ready(function(){
             $(".btn-group-horizontal .btn").click(function(){
-                // Remove 'fw-bold' class from all buttons
                 $(".btn-group-horizontal .btn").removeClass("btn-dark");
-
-                // Add 'fw-bold' class to the clicked button
                 $(this).addClass("btn-dark");
             });
         });
