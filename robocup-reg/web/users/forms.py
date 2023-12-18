@@ -1,11 +1,10 @@
 from django import forms
 from django.contrib.auth import authenticate
-from django.contrib.auth.forms import BaseUserCreationForm
 
 from web.users.models import User
 
 
-class RegisterForm(BaseUserCreationForm):
+class RegisterForm(forms.ModelForm):
     email = forms.EmailField(required=True)
 
     class Meta:
