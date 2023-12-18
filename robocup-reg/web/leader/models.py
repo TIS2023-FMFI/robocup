@@ -12,7 +12,7 @@ class Person(models.Model):
     last_name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100, unique=True)
     phone_number = models.CharField(max_length=100, unique=True, blank=True, null=True)
-    birth_date = models.DateTimeField()
+    birth_date = models.DateField()
     primary_school = models.BooleanField()
     diet = models.CharField(default="Ziadna", max_length=1000)
     accomodation1 = models.BooleanField(default=True)
