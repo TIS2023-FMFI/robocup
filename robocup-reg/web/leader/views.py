@@ -72,3 +72,8 @@ def add_competitor(request):
 
 def add_supervisor(request):
     return render(request, "add_supervisor.html")
+def delete_competitor(request, id):
+    competitor = Person.objects.get(id=id)
+    competitor.delete()
+    html = "competitor.html"
+    return render(request, f"{html}")
