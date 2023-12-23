@@ -2,10 +2,17 @@
 
 {% block content %}
 <body>
+<div class="text-danger text-uppercase">
+    <p>{{ form.errors }}</p>
+</div>
 <div class="container mt-5">
     <h2>Zostanevie tímu</h2>
 
-    <form>
+        {% if form.instance.id %}
+        <form method="post" action="{% url 'team_edit' form.instance.id %}">
+    {% else %}
+        <form method="post" action="{% url 'team_add' %}">
+    {% endif %}
     {% csrf_token %}
     {{ form.as_p }}
 {#        <div class="mb-3">#}
@@ -21,16 +28,16 @@
 {#            <label for="competitors"><strong>Súťažiaci</strong></label>#}
 {#            <select id="competitors" class="form-select" multiple>#}
 {#                {% for competitor in competitors %}#}
-{#                    <option>{{ competitor.first_name }}</option>#}
+{#                    <option>{{ competitor }}</option>#}
 {#                {%  endfor %}#}
 {#            </select>#}
 {#        </div>#}
 {##}
 {#        <div class="mb-3">#}
-{#            <label for="supervisor"><strong>Dozor</strong></label>#}
-{#            <select id="supervisor" class="form-select">#}
-{#                {% for team_leader in team_leaders %}#}
-{#                    <option>{{ team_leader.first_name}}</option>#}
+{#            <label for="team_leader"><strong>Veduci timu</strong></label>#}
+{#            <select id="team_leader" class="form-select">#}
+{#                {% for competitors in competitors %}#}
+{#                    <option>{{ competitors }}</option>#}
 {#                {% endfor %}#}
 {#            </select>#}
 {#        </div>#}
@@ -43,7 +50,7 @@
 {#                {% endfor %}#}
 {#            </select>#}
 {#        </div>#}
-
+{##}
         {% if form.instance.id %}
             <input type="submit" value="Uprav tím" style="border-radius: 5px; background: cyan">
         {% else %}

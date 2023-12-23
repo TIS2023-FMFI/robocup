@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 
+from ..org.models import Category
 from .forms import CompetitorForm, SupervisorForm, TeamForm
 from .models import Person, Team
 
@@ -54,7 +55,7 @@ def supervisor_edit(request, id):
 
 
 def team_edit(request, id):
-    instance = get_object_or_404(Person, id=id)
+    instance = get_object_or_404(Team, id=id)
     html = "team_assembly.html"
     if request.method == "POST":
         form = TeamForm(request.POST, instance=instance, user=request.user)
@@ -70,6 +71,10 @@ def team_edit(request, id):
 
 def team_add(request):
     context = {}
+    competitors = Person.objects.filter(is_supervisor=False, user=request.user)
+    categories = Category.objects.all()
+    context["competitors"] = competitors
+    context["categories"] = categories
     if request.POST:
         form = TeamForm(request.POST, user=request.user)
         if form.is_valid():
