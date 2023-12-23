@@ -3,7 +3,11 @@
 {% block content %}
 
 <div>
-    <form method="post" action="{% url 'competitor_add' %}">
+    {% if form.instance.id %}
+        <form method="post" action="{% url 'competitor_edit' form.instance.id %}">
+    {% else %}
+        <form method="post" action="{% url 'competitor_add' %}">
+    {% endif %}
         <div class="text-danger text-uppercase">
                 <p>{{ form.errors }}</p>
             </div>
@@ -82,7 +86,11 @@
         <a style="padding: 7px"> <a style="color: red">*</a><a> </a> Povinne</a><br>
         <a style="padding: 7px; border-bottom: 20px"> <a style="color: red">**</a> Povinne aspoň jedno</a><br>
         <p></p>
-        <input type="submit" value="Pridaj súťažiaceho" style="border-radius: 5px; background: cyan">
+        {% if form.instance.id %}
+            <input type="submit" value="Uprav súťažiaceho" style="border-radius: 5px; background: cyan">
+        {% else %}
+            <input type="submit" value="Pridaj súťažiaceho" style="border-radius: 5px; background: cyan">
+        {% endif %}
     </form>
 
 </div>

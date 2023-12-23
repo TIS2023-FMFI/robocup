@@ -24,42 +24,48 @@ def form_validation(form, request, html):
 
 
 def competitor_edit(request, id):
-    post = get_object_or_404(Person, id=id)
-    html = "competitors.html"
+    instance = get_object_or_404(Person, id=id)
+    html = "add_competitor.html"
+    if request.method == "POST":
+        form = CompetitorForm(request.POST, instance=instance, user=request.user)
 
-    if request.method == "GET":
-        data = {"form": CompetitorForm(instance=post), "id": id}
-        return render(request, f"{html}", data)
+        if form.is_valid():
+            form.save()
+            return redirect("leader_panel")
+    else:
+        form = CompetitorForm(instance=instance, user=request.user)
 
-    elif request.method == "POST":
-        form = CompetitorForm(request.POST, instance=post)
-        form_validation(form, request, f"{html}")
+    return render(request, f"{html}", {"form": form})
 
 
 def supervisor_edit(request, id):
-    post = get_object_or_404(Person, id=id)
-    html = "supervisors.html"
+    instance = get_object_or_404(Person, id=id)
+    html = "add_supervisor.html"
+    if request.method == "POST":
+        form = SupervisorForm(request.POST, instance=instance, user=request.user)
 
-    if request.method == "GET":
-        data = {"form": SupervisorForm(instance=post), "id": id}
-        return render(request, f"{html}", data)
+        if form.is_valid():
+            form.save()
+            return redirect("leader_panel")
+    else:
+        form = SupervisorForm(instance=instance, user=request.user)
 
-    elif request.method == "POST":
-        form = SupervisorForm(request.POST, instance=post)
-        return form_validation(form, request, f"{html}")
+    return render(request, f"{html}", {"form": form})
 
 
 def team_edit(request, id):
-    post = get_object_or_404(Person, id=id)
-    html = "teams.html"
+    instance = get_object_or_404(Person, id=id)
+    html = "team_assembly.html"
+    if request.method == "POST":
+        form = TeamForm(request.POST, instance=instance, user=request.user)
 
-    if request.method == "GET":
-        data = {"form": TeamForm(instance=post), "id": id}
-        return render(request, f"{html}", data)
+        if form.is_valid():
+            form.save()
+            return redirect("leader_panel")
+    else:
+        form = TeamForm(instance=instance, user=request.user)
 
-    elif request.method == "POST":
-        form = TeamForm(request.POST, instance=post)
-        return form_validation(form, request, f"{html}")
+    return render(request, f"{html}", {"form": form})
 
 
 def team_add(request):
