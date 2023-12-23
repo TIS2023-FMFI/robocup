@@ -103,10 +103,13 @@ class TeamForm(forms.ModelForm):
         super(TeamForm, self).__init__(*args, **kwargs)
         if user:
             self.user = user
-            self.fields["team_leader"].queryset = Person.objects.filter(user_id=user.id, is_supervisor=False)
+            self.fields["team_leader"].queryset = Person.objects.filter(user_id=user.id, is_supervisor=True)
             self.fields["team_leader"].label = "Vedúci tímu:"
             self.fields["competitors"].queryset = Person.objects.filter(user_id=user.id, is_supervisor=False)
             self.fields["competitors"].label = "Členovia tímu"
+            self.fields["organization"].label = "Škola/Organizácia"
+            self.fields["team_name"].label = "Názov tímu"
+            self.fields["categories"].label = "Kategórie"
 
     def save(self, commit=True):
         instance = super(TeamForm, self).save(commit=False)

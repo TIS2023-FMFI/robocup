@@ -1,8 +1,57 @@
 {% extends 'base.html' %} {% block title %}Robocup leader panel {% endblock %}
 
 {% block content %}
+<body>
+<div class="container mt-5">
+    <h2>Zostanevie tímu</h2>
 
+    <form>
+    {% csrf_token %}
+    {{ form.as_p }}
+{#        <div class="mb-3">#}
+{#            <label for="teamName"><strong>Meno tímu</strong></label>#}
+{#            <input type="text" class="form-control" id="teamName" >#}
+{#        </div>#}
+{##}
+{#        <div class="mb-3">#}
+{#            <label for="organizationName"><strong>Meno organizácie/školy</strong></label>#}
+{#            <input type="text" class="form-control" id="organizationName" >#}
+{#        </div>#}
+{#        <div class="mb-3">#}
+{#            <label for="competitors"><strong>Súťažiaci</strong></label>#}
+{#            <select id="competitors" class="form-select" multiple>#}
+{#                {% for competitor in competitors %}#}
+{#                    <option>{{ competitor.first_name }}</option>#}
+{#                {%  endfor %}#}
+{#            </select>#}
+{#        </div>#}
+{##}
+{#        <div class="mb-3">#}
+{#            <label for="supervisor"><strong>Dozor</strong></label>#}
+{#            <select id="supervisor" class="form-select">#}
+{#                {% for team_leader in team_leaders %}#}
+{#                    <option>{{ team_leader.first_name}}</option>#}
+{#                {% endfor %}#}
+{#            </select>#}
+{#        </div>#}
+{##}
+{#        <div class="mb-3">#}
+{#            <label for="categories"><strong>Katetórie</strong></label>#}
+{#            <select id="categories" class="form-select" multiple>#}
+{#                {% for category in categories %}#}
+{#                    <option>{{ category.name }}</option>#}
+{#                {% endfor %}#}
+{#            </select>#}
+{#        </div>#}
 
+        {% if form.instance.id %}
+            <input type="submit" value="Uprav tím" style="border-radius: 5px; background: cyan">
+        {% else %}
+            <input type="submit" value="Pridaj tím" style="border-radius: 5px; background: cyan">
+        {% endif %}
+    </form>
+</div>
+</body>
 
 
 
