@@ -3,7 +3,7 @@
 {% block content %}
 
 <div>
-    <form method="post" action="{% url 'add_competitor' %}">
+    <form method="post" action="{% url 'competitor_add' %}">
         <div style="display: flex">
             {% csrf_token %}
             <div style="width: 30%; box-sizing: border-box; padding: 20px;" >

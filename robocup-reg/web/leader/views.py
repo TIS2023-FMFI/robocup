@@ -23,7 +23,7 @@ def form_validation(form, request, html):
         return render(request, f"{html}", {"form": form})
 
 
-def edit_competitor(request, id):
+def competitor_edit(request, id):
     post = get_object_or_404(Person, id=id)
     html = "competitors.html"
 
@@ -36,7 +36,7 @@ def edit_competitor(request, id):
         form_validation(form, request, f"{html}")
 
 
-def edit_supervisor(request, id):
+def supervisor_edit(request, id):
     post = get_object_or_404(Person, id=id)
     html = "supervisors.html"
 
@@ -49,7 +49,7 @@ def edit_supervisor(request, id):
         return form_validation(form, request, f"{html}")
 
 
-def edit_team(request, id):
+def team_edit(request, id):
     post = get_object_or_404(Person, id=id)
     html = "teams.html"
 
@@ -62,7 +62,7 @@ def edit_team(request, id):
         return form_validation(form, request, f"{html}")
 
 
-def team_assembly(request):
+def team_add(request):
     context = {}
     if request.POST:
         form = TeamForm(request.POST, user=request.user)
@@ -76,7 +76,7 @@ def team_assembly(request):
     return render(request, "team_assembly.html", context)
 
 
-def add_competitor(request):
+def competitor_add(request):
     context = {}
     if request.POST:
         form = CompetitorForm(request.POST, user=request.user)
@@ -90,7 +90,7 @@ def add_competitor(request):
     return render(request, "add_competitor.html", context)
 
 
-def add_supervisor(request):
+def supervisor_add(request):
     context = {}
     if request.POST:
         form = SupervisorForm(request.POST, user=request.user)
@@ -104,25 +104,19 @@ def add_supervisor(request):
     return render(request, "add_supervisor.html", context)
 
 
-def delete_competitor(request, id):
+def competitor_delete(request, id):
     competitor = Person.objects.get(id=id)
-    html = "competitors.html"
-    if request.method == "POST":
-        competitor.delete()
-    return render(request, f"{html}")
+    competitor.delete()
+    return redirect(to="/leader-panel")
 
 
-def delete_supervisor(request, id):
+def supervisor_delete(request, id):
     supervisor = Person.objects.get(id=id)
-    html = "supervisors.html"
-    if request.method == "POST":
-        supervisor.delete()
-    return render(request, f"{html}")
+    supervisor.delete()
+    return redirect(to="/leader-panel")
 
 
-def delete_team(request, id):
-    team = Person.objects.get(id=id)
-    html = "teams.html"
-    if request.method == "POST":
-        team.delete()
-    return render(request, f"{html}")
+def team_delete(request, id):
+    team = Team.objects.get(id=id)
+    team.delete()
+    return redirect(to="/leader-panel")
