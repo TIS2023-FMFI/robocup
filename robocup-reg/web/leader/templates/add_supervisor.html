@@ -1,11 +1,13 @@
 {% extends 'base.html' %} {% block title %}Robocup leader panel {% endblock %}
 
 {% block content %}
-
-<div>
+    <div>
         <form method="post" action="{% url 'supervisor_add' %}">
 
-        <div style="display: flex">
+            <div class="text-danger text-uppercase">
+                <p>{{ form.errors }}</p>
+            </div>
+            <div style="display: flex">
             {% csrf_token %}
             <div style="width: 30%; box-sizing: border-box; padding: 20px;" >
                 <table>

@@ -4,6 +4,9 @@
 
 <div>
     <form method="post" action="{% url 'competitor_add' %}">
+        <div class="text-danger text-uppercase">
+                <p>{{ form.errors }}</p>
+            </div>
         <div style="display: flex">
             {% csrf_token %}
             <div style="width: 30%; box-sizing: border-box; padding: 20px;" >
