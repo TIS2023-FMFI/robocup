@@ -91,10 +91,7 @@ class SupervisorForm(forms.ModelForm):
 
 class TeamForm(forms.ModelForm):
     team_name = forms.CharField(required=True)
-    team_leader = forms.CharField(required=True)
     organization = forms.CharField(required=True)
-    categories = forms.CharField(required=True)
-    competitors = forms.CharField(required=True)
 
     class Meta:
         model = Team
@@ -106,6 +103,10 @@ class TeamForm(forms.ModelForm):
         super(TeamForm, self).__init__(*args, **kwargs)
         if user:
             self.user = user
+            self.fields["team_leader"].queryset = Person.objects.filter(user_id=user.id, is_supervisor=False)
+            self.fields["team_leader"].label = "Vedúci tímu:"
+            self.fields["competitors"].queryset = Person.objects.filter(user_id=user.id, is_supervisor=False)
+            self.fields["competitors"].label = "Členovia tímu"
 
     def save(self, commit=True):
         instance = super(TeamForm, self).save(commit=False)
