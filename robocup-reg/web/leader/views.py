@@ -105,15 +105,19 @@ def supervisor_add(request):
 
 
 def competitor_delete(request, id):
-    competitor = Person.objects.get(id=id)
-    competitor.delete()
+    delete_person(id, request.user)
     return redirect(to="/leader-panel")
 
 
 def supervisor_delete(request, id):
-    supervisor = Person.objects.get(id=id)
-    supervisor.delete()
+    delete_person(id, request.user)
     return redirect(to="/leader-panel")
+
+
+def delete_person(id, user):
+    supervisor = Person.objects.get(id=id)
+    if user == supervisor.user:
+        supervisor.delete()
 
 
 def team_delete(request, id):
