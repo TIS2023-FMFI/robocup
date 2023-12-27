@@ -116,4 +116,5 @@ class TeamForm(forms.ModelForm):
         instance.user = self.user  # Set the user field
         if commit:
             instance.save()
+        self.save_m2m()
         return instance
