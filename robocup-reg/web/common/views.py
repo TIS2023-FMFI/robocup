@@ -3,7 +3,7 @@ import csv
 from django.shortcuts import HttpResponse, render
 
 from ..leader.models import Person, Team
-from ..org.models import Event
+from ..org.models import Category, Event
 
 
 def home(request):
@@ -15,7 +15,10 @@ def home(request):
 
 
 def results(request):
-    return render(request, "results.html")
+    teams = Team.objects.all()
+    categories = Category.objects.all()
+    data = {"teams": teams, "categories": categories}
+    return render(request, "results.html", context=data)
 
 
 def leader_panel(request):
