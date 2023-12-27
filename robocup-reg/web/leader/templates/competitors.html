@@ -37,7 +37,7 @@
                     <th scope="col">{{ competitor.food1}}</th>
                     <th scope="col">{{ competitor.food2}}</th>
                     <th scope="col">{{ competitor.food3}}</th>
-                    <th scope="col"><a type="button" class="btn btn-danger" href="{% url 'competitor_delete' competitor.id %}">Zmazať</a></th>
+                    <th scope="col"><a type="button" class="btn btn-danger" href="#" onclick="confirmDelete({{ competitor.id }}, '{{ competitor.first_name }} {{competitor.last_name }}','competitor')">Zmazať</a></th>
                     <th scope="col"><a type="button" class="btn btn-success" href="{% url 'competitor_edit' competitor.id %}">Upraviť</a></th>
                 </tr>
             </thead>

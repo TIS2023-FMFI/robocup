@@ -40,6 +40,31 @@
                 $(this).addClass("btn-dark");
             });
         });
+
+
+
+    function confirmDelete(id,name,obj) {
+        // Display a confirmation dialog
+        switch (obj){
+            case 'team':
+                var userConfirmed = confirm("Ste si istí, že chcete zmazať tím "+ name +"?");
+            break
+            case 'supervisor':
+                var userConfirmed = confirm("Ste si istí, že chcete zmazať dozor "+ name +"?");
+                break
+            case 'competitor':
+                var userConfirmed = confirm("Ste si istí, že chcete zmazať súťažiaceho "+ name +"?");
+                break
+
+        }
+
+        // If the user confirms, navigate to the team deletion URL
+        if (userConfirmed) {
+            var deletionUrl = "{% url 'team_delete' 0 %}".replace('0', id).replace('team',obj);
+            window.location.href = deletionUrl;
+        }
+    }
+
     </script>
 
     {% include 'supervisors.html' %}
