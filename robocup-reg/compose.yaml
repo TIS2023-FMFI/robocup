@@ -1,0 +1,15 @@
+version: "3.4"
+
+services:
+    web:
+        build:
+          context: .
+        ports:
+          - "8001:8000"
+        volumes:
+          - ./:/app/
+        environment:
+          - DEBUG=True
+        env_file:
+          - .env
+        command: "./entrypoint.sh dev"

@@ -5,6 +5,16 @@ name = "pypi"
 
 [packages]
 django-bootstrap-v5 = "*"
+django-environ = "*"
+psycopg = "*"
+psycopg-binary = "*"
+crispy = "*"
+crispy-bootstrap5 = "*"
+gunicorn = "*"
+django-import-export = "*"
+whitenoise = "*"
+django-staticfiles = "*"
+django-multiselectfield = "*"
 
 [dev-packages]
 pre-commit = "*"

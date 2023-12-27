@@ -1,0 +1,67 @@
+{% extends 'base.html' %} {% block title %}Robocup HOME{% endblock %}
+
+{% block content %}
+
+<body>
+<p></p>
+        <div class="btn-group-horizontal" role="group" aria-label="Button group">
+        <button id="check_in" type="button" class="btn btn-info btn-fixed-width btn-dark" onclick="fun_org(1)">Check-in</button>
+        <button id="categories" type="button" class="btn btn-info btn-fixed-width" onclick="fun_org(2)">Kategórie</button>
+    </div>
+
+    <script>
+        jQuery(document).ready(function(){
+            $(".btn-group-horizontal .btn").click(function(){
+                $(".btn-group-horizontal .btn").removeClass("btn-dark");
+                $(this).addClass("btn-dark");
+            });
+        });
+    </script>
+
+    <script>
+    function fun_org(a) {
+        if(a == 1){
+            document.getElementById('category-div').setAttribute("class","container mt-3  visually-hidden")
+            document.getElementById('check-in-div').setAttribute("class","container mt-3")
+        }else{
+            document.getElementById('category-div').setAttribute("class","container mt-3")
+            document.getElementById('check-in-div').setAttribute("class","container mt-3  visually-hidden")
+        }
+    }
+    </script>
+
+
+
+    <div class="container mt-3  visually-hidden" id="category-div" >
+        <h2>Kategórie</h2>
+        <ul class="list-group" id="itemList">
+            <li class="list-group-item">Item 1</li>
+            <li class="list-group-item">Item 2</li>
+            <li class="list-group-item">Item 3</li>
+        </ul>
+    </div>
+
+    <div class="container mt-3" id="check-in-div">
+        <h2>Check-in</h2>
+        <form>
+            <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Vyhľadať vedúceho výpravy" id="searchInput">
+            </div>
+            <h5>Zaškrtnite prítomných</h5>
+            <ul class="list-group" id="itemList">
+                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Jano</li>
+                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Matej</li>
+                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Olga</li>
+                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Imrich</li>
+                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Jozefina</li>
+            </ul>
+            <p></p>
+            <ul>
+               <button class="btn btn-info btn-md float">Potvrdiť</button>
+            </ul>
+        </form>
+    </div>
+
+
+</body>
+{% endblock %}

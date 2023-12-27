@@ -1,0 +1,34 @@
+<div class="container mt-3 visually-hidden" id="teams-div">
+    <h2>Tímy</h2>
+    <form>
+        <table class="table">
+            <thead>
+                <tr class="table-primary">
+                    <th scope="col">Názov</th>
+                    <th scope="col">Vedúci tímu</th>
+                    <th scope="col">Organizácia</th>
+                    <th scope="col">Súťažiaci</th>
+                    <th scope="col">Kategórie</th>
+                    <th scope="col">ZŠ/SŠ</th>
+                    <th scope="col">Zmazať</th>
+                    <th scope="col">Upraviť</th>
+                </tr>
+            </thead>
+            {% for team in teams %}
+            <thead>
+                <tr>
+                    <th scope="col">{{ team.team_name}}</th>
+                    <th scope="col">{{ team.team_leader}}</th>
+                    <th scope="col">{{ team.organization}}</th>
+                    <th scope="col">{% for pers in team.competitors.all%}{{ pers }}; {% endfor %}</th>
+                    <th scope="col">{% for cat in team.categories.all%} {{ cat }}; {% endfor %}</th>
+                    <th scope="col">{{ team.category}}</th>
+                    <th scope="col"><a type="button" class="btn btn-danger" href="#" onclick="confirmDelete({{ team.id }}, '{{ team.team_name }}','team')">Zmazať</a></th>
+                    <th scope="col"><a type="button" class="btn btn-success" href="{% url 'team_edit' team.id %}">Upraviť</a></th>
+                </tr>
+            </thead>
+            {% endfor %}
+        </table>
+        <a id="team_assembly" class="btn btn-info btn-fixed-width" href="/leader-panel/team/add">Pridaj tím</a>
+    </form>
+</div>

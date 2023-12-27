@@ -1,0 +1,10 @@
+{% extends 'base.html' %} {% block title %}Robocup HOME{% endblock %}
+
+<!-- templates/import.html -->
+{% load crispy_forms_tags %} {% block content %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Import CSV</button>
+</form>
+{% endblock %}
