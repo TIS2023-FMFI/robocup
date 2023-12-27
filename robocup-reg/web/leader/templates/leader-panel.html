@@ -1,5 +1,78 @@
 {% extends 'base.html' %} {% block title %}Robocup HOME{% endblock %}
 
 {% block content %}
-    <h1>LEADER PANEL</h1>
+
+
+    <body>
+    <p></p>
+    <div class="btn-group-horizontal" role="group" aria-label="Button group">
+        <button id="supervisors" type="button" class="btn btn-info btn-fixed-width btn-dark" onclick="fun(1)">Dozor</button>
+        <button id="players" type="button" class="btn btn-info btn-fixed-width" onclick="fun(2)">Súťažiaci</button>
+        <button id="teams" type="button" class="btn btn-info btn-fixed-width" onclick="fun(3)">Tímy</button>
+    </div>
+
+    <script>
+    function fun(a) {
+
+        if(a == 1){
+            document.getElementById('supervisor-div').setAttribute("class","container mt-3")
+            document.getElementById('competitors-div').setAttribute("class","container mt-3 visually-hidden")
+            document.getElementById('teams-div').setAttribute("class","container mt-3 visually-hidden")
+        }else if(a == 2){
+            document.getElementById('supervisor-div').setAttribute("class","container mt-3 visually-hidden")
+            document.getElementById('competitors-div').setAttribute("class","container mt-3")
+            document.getElementById('teams-div').setAttribute("class","container mt-3 visually-hidden")
+        }else if (a == 3){
+            document.getElementById('supervisor-div').setAttribute("class","container mt-3 visually-hidden")
+            document.getElementById('competitors-div').setAttribute("class","container mt-3 visually-hidden")
+            document.getElementById('teams-div').setAttribute("class","container mt-3")
+        }
+    }
+    </script>
+    <script>
+        // Custom JavaScript/jQuery to handle button clicks
+        jQuery(document).ready(function(){
+            $(".btn-group-horizontal .btn").click(function(){
+                // Remove 'fw-bold' class from all buttons
+                $(".btn-group-horizontal .btn").removeClass("btn-dark");
+
+                // Add 'fw-bold' class to the clicked button
+                $(this).addClass("btn-dark");
+            });
+        });
+
+
+
+    function confirmDelete(id,name,obj) {
+        // Display a confirmation dialog
+        switch (obj){
+            case 'team':
+                var userConfirmed = confirm("Ste si istí, že chcete zmazať tím "+ name +"?");
+            break
+            case 'supervisor':
+                var userConfirmed = confirm("Ste si istí, že chcete zmazať dozor "+ name +"?");
+                break
+            case 'competitor':
+                var userConfirmed = confirm("Ste si istí, že chcete zmazať súťažiaceho "+ name +"?");
+                break
+
+        }
+
+        // If the user confirms, navigate to the team deletion URL
+        if (userConfirmed) {
+            var deletionUrl = "{% url 'team_delete' 0 %}".replace('0', id).replace('team',obj);
+            window.location.href = deletionUrl;
+        }
+    }
+
+    </script>
+
+    {% include 'supervisors.html' %}
+
+    {% include 'competitors.html' %}
+
+    {% include 'teams.html' %}
+
+
+    </body>
 {% endblock %}

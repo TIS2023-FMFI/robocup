@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name = "viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <meta name = "viewport" content="width=device-width, initial-scale=1.0 ">
+          {% load bootstrap5 %}
+          {% bootstrap_css %}
+          {% bootstrap_javascript %}
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
         <title>{% block title %}RoboCup{% endblock %}</title>
 </head>
 <body>
@@ -14,11 +18,11 @@
             <div>
               <ul class="navbar-nav">
               <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/home" style="" ><strong>Robocup</strong></a>
-                </li>
+                <a class="nav-link" data-bs-toggle="collapse" aria-current="page" href="/home" style="" ><strong>Robocup</strong></a>
+              </li>
                   {% if user.is_authenticated %}
                 <li class="nav-item">
-                  <a class="nav-link" href="/register">Registrácia</a>
+                  <a class="nav-link" href="/leader-panel">Registrácia</a>
                 </li>
                   {% elif user.is_authenticated  %}
                 <li class="nav-item">
@@ -26,7 +30,7 @@
                 </li>
                   {% endif %}
                 <li class="nav-item">
-                  <a class="nav-link" href="/check_in">Organizácia</a>
+                  <a class="nav-link" href="/org-panel">Organizácia</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/results">Výsledky</a>

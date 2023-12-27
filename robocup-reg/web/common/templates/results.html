@@ -1,8 +1,40 @@
-{% extends 'base.html' %} {% block title %}Robocup RESULTS{% endblock %}<!DOCTYPE html>
+{% extends 'base.html' %} {% block title %}Robocup RESULTS{% endblock %}
 {% block content %}
     <div class="container-fluid">
             <div class="container-fluid p-5 my-5 bg-light " style="text-align: center">
               <p class="align-content-center"><strong>Výsledkové listiny</strong></p>
             </div>
-        </div>
+
+    <a class="btn" href="download-competitors">Stiahni vsetkych sutaziacich</a>
+    <a class="btn" href="download-teams">Stiahni vsetky timy</a>
+
+
+    <div class="container mt-5">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Tim</th>
+            {% for category in categories %}
+                <th>{{ category.name }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for team in teams %}
+            <tr>
+                <td>{{ team.team_name }}</td>
+                {% for category in categories %}
+                    {% if category in team.categories.all %}
+                        <td class="table-primary">prihlásení</td>
+                    {% else %}
+                        <td>   </td>
+                    {% endif %}
+
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+    </div>
 {% endblock %}
