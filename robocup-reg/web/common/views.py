@@ -2,12 +2,12 @@ import csv
 
 from django.shortcuts import HttpResponse, render
 
-from ..leader import models as leader_models
-from ..org import models as org_models
+from ..leader.models import Person, Team
+from ..org.models import Event
 
 
 def home(request):
-    event = org_models.Event.objects.filter(is_active=True, registration_open=True)
+    event = Event.objects.filter(is_active=True, registration_open=True)
     if event:
         data = {"open_event": event[0]}
         return render(request, "home.html", data)
@@ -28,13 +28,16 @@ def download_competitors(request):
         headers={"Content-Disposition": 'attachment; filename="sutaziaci.csv"'},
     )
 
-    sutaziaci = leader_models.Person.objects.filter(is_supervisor=False)
+    sutaziaci = Person.objects.filter(is_supervisor=False)
 
     w = csv.writer(response)
     w.writerow(["meno", "priezvisko", "organizacia"])
     for s in sutaziaci:
-        teamy = leader_models.Team.objects.filter(competitors=s.id)
-        w.writerow([s.first_name, s.last_name, teamy[0].organization])
+        teamy = Team.objects.filter(competitors=s.id)
+        org = ""
+        if teamy:
+            org = teamy[0].organization
+        w.writerow([s.first_name, s.last_name, org])
 
     return response
 
@@ -45,7 +48,7 @@ def download_teams(request):
         headers={"Content-Disposition": 'attachment; filename="teamy.csv"'},
     )
 
-    teamy = leader_models.Team.objects.all()
+    teamy = Team.objects.all()
 
     w = csv.writer(response)
     w.writerow(["nazov", "organizacia", "rola", "meno"])
