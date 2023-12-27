@@ -17,8 +17,6 @@
 {#    {{ form.as_p }}#}
         <div class="mb-3">
             <label for="teamName"><strong>Meno tímu</strong></label>
-{#            <p type="input" class="form-control">{{ form.team_name }}</p>#}
-{#            <input type="text" class="form-control" id="teamName"  {{ form.team_name }}  >#}
             <input type="text" class="form-control" id="teamName" name="{{ form.team_name.html_name }}" value="{{ form.team_name.value|default_if_none:'' }}" {% if form.team_name.errors %}aria-invalid="true"{% endif %}>
         </div>
 

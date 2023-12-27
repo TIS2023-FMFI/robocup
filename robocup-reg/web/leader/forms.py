@@ -12,7 +12,7 @@ class CompetitorForm(forms.ModelForm):
     birth_date = forms.DateField(
         required=True,
         widget=forms.SelectDateWidget(
-            years=range(datetime.date.today().year - 18, datetime.date.today().year)
+            years=range(datetime.date.today().year - 20, datetime.date.today().year)
         ),  # Adjust the range as needed
     )
     supervisor = forms.ModelChoiceField(queryset=None)
@@ -42,7 +42,7 @@ class CompetitorForm(forms.ModelForm):
         if user:
             self.user = user
             self.fields["supervisor"].queryset = Person.objects.filter(user_id=user.id, is_supervisor=True)
-            self.fields["supervisor"].label = "Vyber dozorujucu osobu"
+            self.fields["supervisor"].label = "Vyber dozorujúcu osobu"
 
     def save(self, commit=True):
         instance = super(CompetitorForm, self).save(commit=False)
