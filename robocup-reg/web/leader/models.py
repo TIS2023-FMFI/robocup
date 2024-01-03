@@ -10,7 +10,7 @@ class Person(models.Model):
     user = models.ForeignKey(to=user_models.User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100, unique=True)
+    email = models.EmailField(max_length=100, unique=True, blank=True, null=True)
     phone_number = models.CharField(max_length=100, unique=True, blank=True, null=True)
     birth_date = models.DateField(null=True)
     primary_school = models.BooleanField(default=False)
