@@ -83,9 +83,10 @@ def download_teams(request):
 
 
 def download_team_for_category(request, id):
+    category = Category.objects.filter(id=id)
     response = HttpResponse(
         content_type="text/csv",
-        headers={"Content-Disposition": f'attachment; filename="teamy_cat{id}.csv"'},
+        headers={"Content-Disposition": f'attachment; filename="teamy_cat{category.get().name}.csv"'},
     )
     teamy = Team.objects.filter(categories=id)
     w = csv.writer(response)
