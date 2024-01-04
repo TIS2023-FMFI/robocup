@@ -87,17 +87,20 @@ def team_add(request):
     return render(request, "team_assembly.html", context)
 
 
-def competitor_add(request):
+def competitor_add(request, user=None):
     context = {}
+    if not user:
+        user = request.user
     if request.POST:
-        form = CompetitorForm(request.POST, user=request.user)
+
+        form = CompetitorForm(request.POST, user=user)
         if form.is_valid():
             form.save()
             return redirect("leader_panel")
         else:
             context["form"] = form
     else:
-        context["form"] = CompetitorForm(user=request.user)
+        context["form"] = CompetitorForm(user=user)
     return render(request, "add_competitor.html", context)
 
 
