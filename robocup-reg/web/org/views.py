@@ -6,21 +6,20 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 from ..leader.models import Person
-from .forms import ExpeditionLeaderForm, JSONUploadForm
+from .forms import BulkCheckInFormSet, ExpeditionLeaderForm, JSONUploadForm
 from .models import Category
 
 
 def org_panel(request):
+    results = {}
     if request.method == "POST":
         form = ExpeditionLeaderForm(request.POST)
         if form.is_valid():
             query = form.cleaned_data["search_query"]
-            results = Person.objects.filter(
-                Q(first_name__icontains=query) | Q(last_name__icontains=query), is_supervisor=True
-            )
+            results = Person.objects.filter(Q(first_name__icontains=query) | Q(last_name__icontains=query))
 
         else:
-            results = Person.objects.filter(is_supervisor=True)
+            results = Person.objects.filter()
     else:
         form = ExpeditionLeaderForm()
         results = Person.objects.filter(is_supervisor=True)
@@ -30,7 +29,18 @@ def org_panel(request):
 def check_in(request, id):
     people = Person.objects.filter(user=id)
 
-    context = {"people": people}
+    context = {"people": people, "checked_user": id}
+    if request.method == "POST":
+        formset = BulkCheckInFormSet(request.POST)
+        if formset.is_valid():
+            for form, person in zip(formset, people):
+                person.checked_in = form.cleaned_data["checked_in"]
+                person.save()
+    else:
+        formset = BulkCheckInFormSet(initial=[{"checked_in": person.checked_in} for person in people])
+        print(formset)
+    context["form"] = formset
+
     return render(request, "check-in.html", context)
 
 

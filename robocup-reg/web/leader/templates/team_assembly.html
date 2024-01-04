@@ -10,10 +10,10 @@
 
         {% if form.instance.id %}
         <form method="post" action="{% url 'team_edit' form.instance.id %}">
-    {% else %}
-        <form method="post" action="{% url 'team_add' %}">
-    {% endif %}
-    {% csrf_token %}
+        {% else %}
+            <form method="post" action="{% url 'team_add' %}">
+        {% endif %}
+        {% csrf_token %}
         <div class="mb-3">
             <label for="teamName"><strong>Meno tímu</strong></label>
             <input type="text" class="form-control" id="teamName" name="{{ form.team_name.html_name }}" value="{{ form.team_name.value|default_if_none:'' }}" {% if form.team_name.errors %}aria-invalid="true"{% endif %}>

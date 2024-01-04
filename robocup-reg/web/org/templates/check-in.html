@@ -1,9 +1,30 @@
 {% extends 'base.html' %} {% block title %}Robocup HOME{% endblock %}
 
 {% block content %}
-
-    {% for person in people %}
-        <p>{{ person }}</p>
-    {% endfor %}
-
+    <h3>Zaskrtnite pritomnych</h3>
+    <form method="POST" action="{% url 'check-in' id=checked_user%}">
+        {% csrf_token %}
+        {{ formset.management_form }}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Checked In</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for f in form %}
+                    <tr>
+                        <td>{{ f.instance.id }}</td>
+                        <td>{{ f.instance.first_name }}</td>
+                        <td>{{ f.instance.last_name }}</td>
+                        <td>{{ f.checked_in }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button type="submit">Update Checked In Status</button>
+    </form>
 {% endblock content %}

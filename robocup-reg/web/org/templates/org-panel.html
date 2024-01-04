@@ -40,6 +40,7 @@
             {% endfor %}
         </ul>
     </div>
+<<<<<<< Updated upstream
     <div id="check-in-div">
         <div class="input-group mb-3">
                 <h5>Vyhladaj veduceho vypravy</h5>
@@ -80,7 +81,29 @@
 {#            </ul>#}
 {#        </form>#}
 {#    </div>#}
+=======
+>>>>>>> Stashed changes
 
+    <div id="check-in-div">
+    <div class="input-group mb-3" >
+            <h5>Vyhladaj veduceho vypravy</h5>
+    </div>
+        <form method="post" action="{% url 'org-panel' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Search</button>
+        </form>
+    <form method="post">
+        {% csrf_token %}
+        <div id="check_in_results">
+            {% for participant in results %}
+                <li>{{ participant.first_name }} {{ participant.last_name }}
+                    (<a href="{% url 'check-in' participant.user.id %}">{{ participant.user.email }}</a>)
+                </li>
+            {% endfor %}
+        </div>
+    </form>
 
+    </div>
 </body>
 {% endblock %}

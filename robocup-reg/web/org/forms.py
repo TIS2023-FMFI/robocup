@@ -1,5 +1,7 @@
 from django import forms
+from django.forms import formset_factory
 
+from web.leader.models import Person
 from web.org.models import Category, Event
 
 
@@ -59,3 +61,12 @@ class ExpeditionLeaderForm(forms.Form):
 
 class JSONUploadForm(forms.Form):
     json_file = forms.FileField()
+
+
+class BulkCheckInForm(forms.ModelForm):
+    class Meta:
+        model = Person
+        fields = ["first_name", "last_name", "checked_in"]
+
+
+BulkCheckInFormSet = formset_factory(BulkCheckInForm, extra=0)

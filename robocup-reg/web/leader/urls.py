@@ -9,7 +9,6 @@ urlpatterns = [
     path("leader-panel/supervisor/edit/<int:id>/", views.supervisor_edit, name="supervisor_edit"),
     path("leader-panel/supervisor/delete/<int:id>/", views.supervisor_delete, name="supervisor_delete"),
     path("leader-panel/competitor/add", views.competitor_add, name="competitor_add"),
-    path("leader-panel/competitor/add/<int:user>", views.competitor_add, name="competitor_add"),
     path("leader-panel/competitor/edit/<int:id>/", views.competitor_edit, name="competitor_edit"),
     path("leader-panel/competitor/delete/<int:id>/", views.competitor_delete, name="competitor_delete"),
     path("leader-panel/team/add", views.team_add, name="team_add"),

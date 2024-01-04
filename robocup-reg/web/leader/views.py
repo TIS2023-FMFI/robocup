@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 
 from ..org.models import Category
+from ..users.models import User
 from .forms import CompetitorForm, SupervisorForm, TeamForm
 from .models import Person, Team
 
@@ -87,12 +88,13 @@ def team_add(request):
     return render(request, "team_assembly.html", context)
 
 
-def competitor_add(request, user=None):
+def competitor_add(request, id=None):
     context = {}
-    if not user:
-        user = request.user
+    user = request.user
+    if id:
+        user = User.objects.filter(id=id).get()
+        context["id"] = id
     if request.POST:
-
         form = CompetitorForm(request.POST, user=user)
         if form.is_valid():
             form.save()
