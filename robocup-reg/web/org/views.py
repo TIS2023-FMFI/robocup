@@ -1,8 +1,11 @@
 import csv
 
+from django.core import serializers
+from django.http import HttpResponse
 from django.shortcuts import render
 
 from .forms import CSVImportForm
+from .models import Category
 
 
 def org_panel(request):
@@ -22,3 +25,31 @@ def import_csv(request):
         form = CSVImportForm()
 
     return render(request, "results.html", {"form": form})
+
+
+def download_categories(request):
+    category = Category.objects.all()
+    for cat in category:
+        if cat.results is not None:
+            cat.results = None
+    data = serializers.serialize("json", category)
+    response = HttpResponse(
+        data,
+        content_type="application/json",
+        headers={"Content-Disposition": 'attachment; filename="categories.json"'},
+    )
+    return response
+
+
+def download_category(request, id):
+    category = Category.objects.filter(id=id)
+    for cat in category:
+        if cat.results is not None:
+            cat.results = None
+    data = serializers.serialize("json", category)
+    response = HttpResponse(
+        data,
+        content_type="application/json",
+        headers={"Content-Disposition": f'attachment; filename="category_{category.get().name}.json"'},
+    )
+    return response
