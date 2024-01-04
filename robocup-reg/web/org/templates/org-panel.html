@@ -1,24 +1,27 @@
-{% extends 'base.html' %} {% block title %}Robocup HOME{% endblock %}
-
+{% extends 'base.html' %}
+{% block title %}Robocup HOME{% endblock %}
 {% block content %}
-
-<div>
-<p></p>
+    <div>
+        <p></p>
         <div class="btn-group-horizontal" role="group" aria-label="Button group">
-        <button id="check_in" type="button" class="btn btn-info btn-fixed-width btn-dark" onclick="fun_org(1)">Check-in</button>
-        <button id="categories" type="button" class="btn btn-info btn-fixed-width" onclick="fun_org(2)">Kategórie</button>
-    </div>
-
-    <script>
+            <button id="check_in"
+                    type="button"
+                    class="btn btn-info btn-fixed-width btn-dark"
+                    onclick="fun_org(1)">Check-in</button>
+            <button id="categories"
+                    type="button"
+                    class="btn btn-info btn-fixed-width"
+                    onclick="fun_org(2)">Kategórie</button>
+        </div>
+        <script>
         jQuery(document).ready(function(){
             $(".btn-group-horizontal .btn").click(function(){
                 $(".btn-group-horizontal .btn").removeClass("btn-dark");
                 $(this).addClass("btn-dark");
             });
         });
-    </script>
-
-    <script>
+        </script>
+        <script>
     function fun_org(a) {
         if(a == 1){
             document.getElementById('category-div').setAttribute("class","container mt-3  visually-hidden")
@@ -28,21 +31,16 @@
             document.getElementById('check-in-div').setAttribute("class","container mt-3  visually-hidden")
         }
     }
-    </script>
-
-
-
-    <div class="container mt-3  visually-hidden" id="category-div" >
-        <h2>Kategórie</h2>
-        <ul>
-            {% for item in categories %}
-                <li>{{ item.name }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-<<<<<<< Updated upstream
-    <div id="check-in-div">
-        <div class="input-group mb-3">
+        </script>
+        <div class="container mt-3  visually-hidden" id="category-div">
+            <h2>Kategórie</h2>
+            <ul>
+                {% for item in categories %}<li>{{ item.name }}</li>{% endfor %}
+            </ul>
+        </div>
+        <<<<<<< Updated upstream
+        <div id="check-in-div">
+            <div class="input-group mb-3">
                 <h5>Vyhladaj veduceho vypravy</h5>
             </div>
             <div>
@@ -51,59 +49,58 @@
                     {{ form.as_p }}
                     <button type="submit">Search</button>
                 </form>
-
                 <ul>
                     {% for ExpLeader in results %}
-                        <li>{{ ExpLeader.first_name }} {{ ExpLeader.last_name }} (<a href="{% url 'check-in' ExpLeader.user.id %}">{{ ExpLeader.user.email }}</a>)</li>
+                        <li>
+                            {{ ExpLeader.first_name }} {{ ExpLeader.last_name }} (<a href="{% url 'check-in' ExpLeader.user.id %}">{{ ExpLeader.user.email }}</a>)
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
-    </div>
-
-{#    <div class="container mt-3" id="check-in-div">#}
-{#        <h2>Check-in</h2>#}
-{#        <form>#}
-{##}
-{##}
-{##}
-{##}
-{#            <h5>Zaškrtnite prítomných</h5>#}
-{#            <ul class="list-group" id="itemList">#}
-{#                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Jano</li>#}
-{#                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Matej</li>#}
-{#                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Olga</li>#}
-{#                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Imrich</li>#}
-{#                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Jozefina</li>#}
-{#            </ul>#}
-{#            <p></p>#}
-{#            <ul>#}
-{#               <button class="btn btn-info btn-md float">Potvrdiť</button>#}
-{#            </ul>#}
-{#        </form>#}
-{#    </div>#}
-=======
->>>>>>> Stashed changes
-
-    <div id="check-in-div">
-    <div class="input-group mb-3" >
-            <h5>Vyhladaj veduceho vypravy</h5>
-    </div>
-        <form method="post" action="{% url 'org-panel' %}">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Search</button>
-        </form>
-    <form method="post">
-        {% csrf_token %}
-        <div id="check_in_results">
-            {% for participant in results %}
-                <li>{{ participant.first_name }} {{ participant.last_name }}
-                    (<a href="{% url 'check-in' participant.user.id %}">{{ participant.user.email }}</a>)
-                </li>
-            {% endfor %}
         </div>
-    </form>
-
-    </div>
-</body>
+        {#    <div class="container mt-3" id="check-in-div">#}
+        {#        <h2>Check-in</h2>#}
+        {#        <form>#}
+        {##}
+        {##}
+        {##}
+        {##}
+        {#            <h5>Zaškrtnite prítomných</h5>#}
+        {#            <ul class="list-group" id="itemList">#}
+        {#                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Jano</li>#}
+        {#                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Matej</li>#}
+        {#                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Olga</li>#}
+        {#                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Imrich</li>#}
+        {#                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Jozefina</li>#}
+        {#            </ul>#}
+        {#            <p></p>#}
+        {#            <ul>#}
+        {#               <button class="btn btn-info btn-md float">Potvrdiť</button>#}
+        {#            </ul>#}
+        {#        </form>#}
+        {#    </div>#}
+        =======
+        >>>>>>> Stashed changes
+        <div id="check-in-div">
+            <div class="input-group mb-3">
+                <h5>Vyhladaj veduceho vypravy</h5>
+            </div>
+            <form method="post" action="{% url 'org-panel' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Search</button>
+            </form>
+            <form method="post">
+                {% csrf_token %}
+                <div id="check_in_results">
+                    {% for participant in results %}
+                        <li>
+                            {{ participant.first_name }} {{ participant.last_name }}
+                            (<a href="{% url 'check-in' participant.user.id %}">{{ participant.user.email }}</a>)
+                        </li>
+                    {% endfor %}
+                </div>
+            </form>
+        </div>
+    </body>
 {% endblock %}

@@ -1,63 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-
+    <head>
+        <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name = "viewport" content="width=device-width, initial-scale=1.0 ">
-          {% load bootstrap5 %}
-          {% bootstrap_css %}
-          {% bootstrap_javascript %}
+        {% load bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-        <title>{% block title %}RoboCup{% endblock %}</title>
-</head>
-{% load static %}
-<body>
-    <nav class="navbar navbar-expand-md navbar-light bg-info">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/home">
-                <img src=" {% static 'rcj_logo.png' %}"  width="50" height="30">
-            </a>
-            <div  class="collapse navbar-collapse">
-              <ul class="navbar-nav">
-                  {% if user.is_authenticated %}
-                <li class="nav-item">
-                  <a class="nav-link fw-bold" href="/leader-panel">Registrácia</a>
-                </li>
-                {% endif %}
-                {% if user.is_authenticated and user.is_staff %}
-                <li class="nav-item">
-                  <a class="nav-link fw-bold" href="/org-panel">Organizácia</a>
-                </li>
-                {% endif %}
-
-                {% if user.is_authenticated and user.is_superuser %}
-                <li class="nav-item">
-                  <a class="nav-link fw-bold" href="/admin">Administrácia</a>
-                </li>
-                {% endif %}
-                <li class="nav-item">
-                  <a class="nav-link fw-bold" href="/results">Výsledky</a>
-                </li>
-              </ul>
+        <title>
+            {% block title %}RoboCup{% endblock %}
+        </title>
+    </head>
+    {% load static %}
+    <body>
+        <nav class="navbar navbar-expand-md navbar-light bg-info">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/home">
+                    <img src=" {% static 'rcj_logo.png' %}"  width="50" height="30">
+                </a>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav">
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link fw-bold" href="/leader-panel">Registrácia</a>
+                            </li>
+                        {% endif %}
+                        {% if user.is_authenticated and user.is_staff %}
+                            <li class="nav-item">
+                                <a class="nav-link fw-bold" href="/org-panel">Organizácia</a>
+                            </li>
+                        {% endif %}
+                        {% if user.is_authenticated and user.is_superuser %}
+                            <li class="nav-item">
+                                <a class="nav-link fw-bold" href="/admin">Administrácia</a>
+                            </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="/results">Výsledky</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="navbar-nav">
+                        {% if user.is_authenticated %}
+                            <span class="navbar-text">Prihlásený: {{ user.email }} |</span>
+                            <li class="nav-item">
+                                <a class="nav-link fw-bold" href="/logout">Odhlásiť sa</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link fw-bold" href="/login">Prihlásiť sa</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
-        <div>
-          <ul class="navbar-nav">
-            {% if user.is_authenticated %}
-            <span class="navbar-text"> Prihlásený: {{user.email}} | </span>
-            <li class="nav-item">
-              <a class="nav-link fw-bold" href="/logout">Odhlásiť sa</a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-              <a class="nav-link fw-bold" href="/login">Prihlásiť sa</a>
-            </li>
-            {% endif %}
-          </ul>
+        </nav>
+        <div class="container">
+            {% block content %}{% endblock %}
         </div>
-      </div>
-    </nav>
-    <div class="container">{% block content %} {% endblock %}</div>
-</body>
+    </body>
 </html>

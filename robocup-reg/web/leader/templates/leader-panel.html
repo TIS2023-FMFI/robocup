@@ -1,17 +1,23 @@
-{% extends 'base.html' %} {% block title %}Robocup HOME{% endblock %}
-
+{% extends 'base.html' %}
+{% block title %}Robocup HOME{% endblock %}
 {% block content %}
-
-
     <body>
-    <p></p>
-    <div class="btn-group-horizontal" role="group" aria-label="Button group">
-        <button id="supervisors" type="button" class="btn btn-info btn-fixed-width btn-dark" onclick="fun(1)">Dozor</button>
-        <button id="players" type="button" class="btn btn-info btn-fixed-width" onclick="fun(2)">Súťažiaci</button>
-        <button id="teams" type="button" class="btn btn-info btn-fixed-width" onclick="fun(3)">Tímy</button>
-    </div>
-
-    <script>
+        <p></p>
+        <div class="btn-group-horizontal" role="group" aria-label="Button group">
+            <button id="supervisors"
+                    type="button"
+                    class="btn btn-info btn-fixed-width btn-dark"
+                    onclick="fun(1)">Dozor</button>
+            <button id="players"
+                    type="button"
+                    class="btn btn-info btn-fixed-width"
+                    onclick="fun(2)">Súťažiaci</button>
+            <button id="teams"
+                    type="button"
+                    class="btn btn-info btn-fixed-width"
+                    onclick="fun(3)">Tímy</button>
+        </div>
+        <script>
     function fun(a) {
 
         if(a == 1){
@@ -28,8 +34,8 @@
             document.getElementById('teams-div').setAttribute("class","container mt-3")
         }
     }
-    </script>
-    <script>
+        </script>
+        <script>
         // Custom JavaScript/jQuery to handle button clicks
         jQuery(document).ready(function(){
             $(".btn-group-horizontal .btn").click(function(){
@@ -65,14 +71,9 @@
         }
     }
 
-    </script>
-
-    {% include 'supervisors.html' %}
-
-    {% include 'competitors.html' %}
-
-    {% include 'teams.html' %}
-
-
+        </script>
+        {% include 'supervisors.html' %}
+        {% include 'competitors.html' %}
+        {% include 'teams.html' %}
     </body>
 {% endblock %}

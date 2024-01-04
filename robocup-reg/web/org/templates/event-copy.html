@@ -1,11 +1,9 @@
-{% extends 'base.html' %} {% block title %}Robocup HOME{% endblock %}
-
+{% extends 'base.html' %}
+{% block title %}Robocup HOME{% endblock %}
 {% block content %}
-
     <form method="post" action="{% url 'copy-event' %}">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Vyber event</button>
     </form>
-
 {% endblock content %}

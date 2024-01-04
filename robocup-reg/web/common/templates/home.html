@@ -1,22 +1,30 @@
-{% extends 'base.html' %} {% block title %}Robocup HOME{% endblock %}
-
+{% extends 'base.html' %}
+{% block title %}Robocup HOME{% endblock %}
 {% block content %}
     {% if user.is_authenticated %}
         <div class="container-fluid">
             <div class="container-fluid p-5 my-5 bg-light " style="text-align: center">
                 {% if open_event.registrations_fits_today %}
-              <p class="align-content-center" ><strong>Registrácia na {{ open_event.name }} je otvorená!</strong></p>
-              <button class="button" href="/register" >Registruj svoj tím</button>
+                    <p class="align-content-center">
+                        <strong>Registrácia na {{ open_event.name }} je otvorená!</strong>
+                    </p>
+                    <button class="button" href="/register">Registruj svoj tím</button>
                 {% else %}
-              <p class="align-content-center" ><strong>Žiadna registrácia otvorená nie je. :/</strong></p>
+                    <p class="align-content-center">
+                        <strong>Žiadna registrácia otvorená nie je. :/</strong>
+                    </p>
                 {% endif %}
             </div>
         </div>
     {% else %}
         <div class="container-fluid">
             <div class="container-fluid p-5 my-5 bg-light " style="text-align: center">
-              <p class="align-content-center"><strong>Na prístup k registrácií súťažiacich/tímov je potrebné sa prihlásiť.</strong></p>
-              <p class="align-content-center"><strong>Nemáte konto? Registrujte sa <a href="/register">Tu</a>.</strong></p>
+                <p class="align-content-center">
+                    <strong>Na prístup k registrácií súťažiacich/tímov je potrebné sa prihlásiť.</strong>
+                </p>
+                <p class="align-content-center">
+                    <strong>Nemáte konto? Registrujte sa <a href="/register">Tu</a>.</strong>
+                </p>
             </div>
         </div>
     {% endif %}

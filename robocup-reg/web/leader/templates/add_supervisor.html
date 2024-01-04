@@ -1,101 +1,149 @@
-{% extends 'base.html' %} {% block title %}Robocup leader panel {% endblock %}
-
+{% extends 'base.html' %}
+{% block title %}Robocup leader panel{% endblock %}
 {% block content %}
     <div>
-
-            {% if form.instance.id %}
-                <form method="post" action="{% url 'supervisor_edit' form.instance.id %}">
+        {% if form.instance.id %}
+            <form method="post" action="{% url 'supervisor_edit' form.instance.id %}">
             {% else %}
                 <form method="post" action="{% url 'supervisor_add' %}">
-            {% endif %}
-            <div class="text-danger text-uppercase">
-                <p>{{ form.errors }}</p>
-            </div>
-            <div >
-            {% csrf_token %}
-            <div class="mb-3">
-                <label for="name"><strong>Meno <a style="color: red">*</a></strong></label>
-                <input type="text" class="form-control" id="first_name" name="{{ form.first_name.html_name }}" value="{{ form.first_name.value|default_if_none:'' }}" {% if form.first_name.errors %}aria-invalid="true"{% endif %}>
-            </div>
-
-            <div class="mb-3">
-                <label for="lastname"><strong>Priezvisko <a style="color: red">*</a></strong></label>
-                <input type="text" class="form-control" id="last_name" name="{{ form.last_name.html_name }}" value="{{ form.last_name.value|default_if_none:'' }}" {% if form.last_name.errors %}aria-invalid="true"{% endif %}>
-            </div>
-            <div class="mb-3">
-                <label for="email"><strong>E-mail <a style="color: red">**</a></strong></label>
-                <input type="text" class="form-control" id="email" name="{{ form.email.html_name }}" value="{{ form.email.value|default_if_none:'' }}" {% if form.email.errors %}aria-invalid="true"{% endif %}>
-            </div>
-
-            <div class="mb-3">
-                <label for="phone_number"><strong>Telefónne číslo <a style="color: red">**</a></strong></label>
-                <input type="text" class="form-control" id="phone_number" name="{{ form.phone_number.html_name }}" value="{{ form.phone_number.value|default_if_none:'' }}" {% if form.phone_number.errors %}aria-invalid="true"{% endif %}>
-            </div>
-            <div class="mb-3">
-                <label for="diet"><strong>Diéta</strong></label>
-                <input type="text" class="form-control" id="diet" name="{{ form.diet.html_name }}" value="{{ form.diet.value|default_if_none:'' }}" {% if form.diet.errors %}aria-invalid="true"{% endif %}>
-            </div>
-{#            <div style="width: 30%; box-sizing: border-box; padding: 20px;" >#}
-{#                <table>#}
-{#                    <tr>#}
-{#                        <td> Meno <a style="color: red">*</a></td><td> {{ form.first_name }}</td>#}
-{#                    </tr>#}
-{#                    <tr>#}
-{#                        <td> Priezvisko <a style="color: red">*</a></td><td> {{ form.last_name }}</td>#}
-{#                    </tr>#}
-{#                    <tr>#}
-{#                        <td> E-mail <a style="color: red">**</a></td><td> {{ form.email }}</td>#}
-{#                    </tr>#}
-{#                    <tr>#}
-{#                        <td> Telefón <a style="color: red">**</a></td><td> {{ form.phone_number }}</td>#}
-{#                    </tr>#}
-{#                    <tr>#}
-{#                        <td> Diéta </td>#}
-{#                        <td> {{ form.diet }} </td>#}
-{#                    </tr>#}
-{#                </table>#}
-{##}
-{#            </div>#}
-            <div style="width: 50%; box-sizing: border-box; padding: 20px; align-content: center" >
-                <table>
-                    <tr>
-                        <td></td>
-                        <td style="padding: 4px; text-align: center"> 1. deň </td>
-                        <td style="padding: 4px; text-align: center"> 2. deň </td>
-                        <td style="padding: 4px; text-align: center"> 3. deň </td>
-                    </tr>
-                    <tr>
-                        <td>Strava</td><td style="padding:4px; text-align: center"> {{ form.food1 }}</td>
-                        <td style="padding: 4px; text-align: center"> {{ form.food2 }}</td>
-                        <td style="padding: 4px; text-align: center"> {{ form.food3 }}</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td style="padding: 4px; text-align: center"> 1. noc </td>
-                        <td style="padding: 4px; text-align: center"> 2. noc </td>
-                        <td style="padding: 4px; text-align: center"></td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 4px"> Ubytovanie</td>
-                        <td style="padding: 4px; text-align: center">{{ form.accomodation1 }}</td>
-                        <td style="padding: 4px; text-align: center">{{ form.accomodation2 }}</td>
-                        <td style="padding: 4px; text-align: center"> </td>
-                    </tr>
-
-                </table>
-            </div>
+                {% endif %}
+                <div class="text-danger text-uppercase">
+                    <p>{{ form.errors }}</p>
+                </div>
+                <div>
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name">
+                            <strong>Meno <a style="color: red">*</a></strong>
+                        </label>
+                        <input type="text"
+                               class="form-control"
+                               id="first_name"
+                               name="{{ form.first_name.html_name }}"
+                               value="{{ form.first_name.value|default_if_none:'' }}"
+                               {% if form.first_name.errors %}aria-invalid="true"{% endif %}>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastname">
+                            <strong>Priezvisko <a style="color: red">*</a></strong>
+                        </label>
+                        <input type="text"
+                               class="form-control"
+                               id="last_name"
+                               name="{{ form.last_name.html_name }}"
+                               value="{{ form.last_name.value|default_if_none:'' }}"
+                               {% if form.last_name.errors %}aria-invalid="true"{% endif %}>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email">
+                            <strong>E-mail <a style="color: red">**</a></strong>
+                        </label>
+                        <input type="text"
+                               class="form-control"
+                               id="email"
+                               name="{{ form.email.html_name }}"
+                               value="{{ form.email.value|default_if_none:'' }}"
+                               {% if form.email.errors %}aria-invalid="true"{% endif %}>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone_number">
+                            <strong>Telefónne číslo <a style="color: red">**</a></strong>
+                        </label>
+                        <input type="text"
+                               class="form-control"
+                               id="phone_number"
+                               name="{{ form.phone_number.html_name }}"
+                               value="{{ form.phone_number.value|default_if_none:'' }}"
+                               {% if form.phone_number.errors %}aria-invalid="true"{% endif %}>
+                    </div>
+                    <div class="mb-3">
+                        <label for="diet">
+                            <strong>Diéta</strong>
+                        </label>
+                        <input type="text"
+                               class="form-control"
+                               id="diet"
+                               name="{{ form.diet.html_name }}"
+                               value="{{ form.diet.value|default_if_none:'' }}"
+                               {% if form.diet.errors %}aria-invalid="true"{% endif %}>
+                    </div>
+                    {#            <div style="width: 30%; box-sizing: border-box; padding: 20px;" >#}
+                    {#                <table>#}
+                    {#                    <tr>#}
+                    {#                        <td> Meno <a style="color: red">*</a></td><td> {{ form.first_name }}</td>#}
+                    {#                    </tr>#}
+                    {#                    <tr>#}
+                    {#                        <td> Priezvisko <a style="color: red">*</a></td><td> {{ form.last_name }}</td>#}
+                    {#                    </tr>#}
+                    {#                    <tr>#}
+                    {#                        <td> E-mail <a style="color: red">**</a></td><td> {{ form.email }}</td>#}
+                    {#                    </tr>#}
+                    {#                    <tr>#}
+                    {#                        <td> Telefón <a style="color: red">**</a></td><td> {{ form.phone_number }}</td>#}
+                    {#                    </tr>#}
+                    {#                    <tr>#}
+                    {#                        <td> Diéta </td>#}
+                    {#                        <td> {{ form.diet }} </td>#}
+                    {#                    </tr>#}
+                    {#                </table>#}
+                    {##}
+                    {#            </div>#}
+                    <div style="width: 50%;
+                                box-sizing: border-box;
+                                padding: 20px;
+                                align-content: center">
+                        <table>
+                            <tr>
+                                <td></td>
+                                <td style="padding: 4px; text-align: center">1. deň</td>
+                                <td style="padding: 4px; text-align: center">2. deň</td>
+                                <td style="padding: 4px; text-align: center">3. deň</td>
+                            </tr>
+                            <tr>
+                                <td>Strava</td>
+                                <td style="padding:4px; text-align: center">{{ form.food1 }}</td>
+                                <td style="padding: 4px; text-align: center">{{ form.food2 }}</td>
+                                <td style="padding: 4px; text-align: center">{{ form.food3 }}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td style="padding: 4px; text-align: center">1. noc</td>
+                                <td style="padding: 4px; text-align: center">2. noc</td>
+                                <td style="padding: 4px; text-align: center"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 4px">Ubytovanie</td>
+                                <td style="padding: 4px; text-align: center">{{ form.accomodation1 }}</td>
+                                <td style="padding: 4px; text-align: center">{{ form.accomodation2 }}</td>
+                                <td style="padding: 4px; text-align: center"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div>
+                    <p></p>
+                </div>
+                <a style="padding: 7px"> <a style="color: red">*</a><a></a> Povinne</a>
+                <br>
+                <a style="padding: 7px"> <a style="color: red">**</a> Povinne aspoň jedno</a>
+                <br>
+                <div>
+                    <p></p>
+                </div>
+                {% if form.instance.id %}
+                    <input type="submit"
+                           value="Uprav dozorujúcu osobu"
+                           style="border-radius: 5px;
+                                  background: cyan">
+                {% else %}
+                    <input type="submit"
+                           value="Pridaj dozorujúcu osobu"
+                           style="border-radius: 5px;
+                                  background: cyan">
+                {% endif %}
+            </form>
         </div>
-        <div><p></p></div>
-        <a style="padding: 7px"> <a style="color: red">*</a><a> </a> Povinne</a><br>
-        <a style="padding: 7px"> <a style="color: red">**</a> Povinne aspoň jedno</a><br>
-        <div><p></p></div>
-        {% if form.instance.id %}
-            <input type="submit" value="Uprav dozorujúcu osobu" style="border-radius: 5px; background: cyan">
-        {% else %}
-            <input type="submit" value="Pridaj dozorujúcu osobu" style="border-radius: 5px; background: cyan">
-        {% endif %}
-    </form>
-
-</div>
-<div><p></p></div>
-{% endblock %}
+        <div>
+            <p></p>
+        </div>
+    {% endblock %}
