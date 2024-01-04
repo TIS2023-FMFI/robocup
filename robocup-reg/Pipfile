@@ -15,6 +15,7 @@ django-import-export = "*"
 whitenoise = "*"
 django-staticfiles = "*"
 django-multiselectfield = "*"
+jsonfield = "*"
 
 [dev-packages]
 pre-commit = "*"

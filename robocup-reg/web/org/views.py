@@ -3,7 +3,6 @@ import csv
 from django.shortcuts import render
 
 from .forms import CSVImportForm
-from .models import Record
 
 
 def org_panel(request):
@@ -16,12 +15,10 @@ def import_csv(request):
         if form.is_valid():
             csv_file = request.FILES["csv_file"].read().decode("utf-8").splitlines()
             csv_reader = csv.DictReader(csv_file)
-
             for row in csv_reader:
-                Record.objects.create(team_name=row["Meno tímu"], order=row["Poradie"])
+                print(row)
 
-            # return redirect('success_page')  # Redirect to a success page
     else:
         form = CSVImportForm()
 
-    return render(request, "import.html", {"form": form})
+    return render(request, "results.html", {"form": form})

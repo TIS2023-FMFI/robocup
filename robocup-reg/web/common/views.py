@@ -1,8 +1,9 @@
 import csv
 
-from django.shortcuts import HttpResponse, render
+from django.shortcuts import HttpResponse, get_object_or_404, render
 
 from ..leader.models import Person, Team
+from ..org.forms import CSVImportForm
 from ..org.models import Category, Event
 
 
@@ -17,8 +18,26 @@ def home(request):
 def results(request):
     teams = Team.objects.all()
     categories = Category.objects.all()
-    data = {"teams": teams, "categories": categories}
-    return render(request, "results.html", context=data)
+    if request.method == "POST":
+        form = CSVImportForm(request.POST, request.FILES)
+        if form.is_valid():
+            csv_file = request.FILES["csv_file"].read().decode("utf-8").splitlines()
+            csv_reader = csv.DictReader(csv_file)
+            json_array = []
+            all_team_names = Team.objects.values_list("team_name", flat=True)
+
+            for row in csv_reader:
+                if row["Tim"] in all_team_names:
+                    json_array.append(row)
+            instance = get_object_or_404(Category, id=1)
+            instance.results = json_array
+            instance.save()
+
+    else:
+        form = CSVImportForm()
+    data = {"teams": teams, "categories": categories, "form": form}
+
+    return render(request, "results.html", data)
 
 
 def leader_panel(request):
@@ -59,5 +78,19 @@ def download_teams(request):
         w.writerow([t.team_name, t.organization, "veduci", t.team_leader.first_name + " " + t.team_leader.last_name])
         for s in t.competitors.all():
             w.writerow(["", "", "clen", s.first_name + " " + s.last_name])
+
+    return response
+
+
+def download_team_for_category(request, id):
+    response = HttpResponse(
+        content_type="text/csv",
+        headers={"Content-Disposition": f'attachment; filename="teamy_cat{id}.csv"'},
+    )
+    teamy = Team.objects.filter(categories=id)
+    w = csv.writer(response)
+    w.writerow(["nazov", "poriadie"])
+    for t in teamy:
+        w.writerow([t.team_name, 0])
 
     return response

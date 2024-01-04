@@ -2,6 +2,7 @@ import datetime
 
 from django.contrib import admin
 from django.db import models
+from jsonfield import JSONField
 
 
 class Event(models.Model):
@@ -37,6 +38,7 @@ class Category(models.Model):
     advance = models.IntegerField(default=2)
     ranking_params = models.CharField(max_length=100)
     event = models.ForeignKey(to=Event, on_delete=models.CASCADE, null=True)
+    results = JSONField(null=True, blank=True)
 
     class Meta:
         verbose_name = "Category"

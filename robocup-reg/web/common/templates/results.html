@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {% block title %}Robocup RESULTS{% endblock %}
-{% block content %}
+{% load crispy_forms_tags %} {% block content %}
+
     <div class="container-fluid">
             <div class="container-fluid p-5 my-5 bg-light " style="text-align: center">
               <p class="align-content-center"><strong>Výsledkové listiny</strong></p>
@@ -7,7 +8,6 @@
 
     <a class="btn" href="download-competitors">Stiahni vsetkych sutaziacich</a>
     <a class="btn" href="download-teams">Stiahni vsetky timy</a>
-
 
     <div class="container mt-5">
     <table class="table">
@@ -36,5 +36,11 @@
         </tbody>
     </table>
 </div>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Import CSV</button>
+    </form>
+
     </div>
 {% endblock %}
