@@ -51,3 +51,7 @@ class CategoryForm(forms.ModelForm):
 
 class CSVImportForm(forms.Form):
     csv_file = forms.FileField()
+
+
+class ExpeditionLeaderForm(forms.Form):
+    search_query = forms.CharField(max_length=255, required=False, label="Search")

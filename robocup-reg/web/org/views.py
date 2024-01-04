@@ -1,30 +1,36 @@
-import csv
-
 from django.core import serializers
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from .forms import CSVImportForm
+from ..leader.models import Person
+from .forms import ExpeditionLeaderForm
 from .models import Category
 
 
 def org_panel(request):
-    return render(request, "org-panel.html")
-
-
-def import_csv(request):
     if request.method == "POST":
-        form = CSVImportForm(request.POST, request.FILES)
+        form = ExpeditionLeaderForm(request.POST)
         if form.is_valid():
-            csv_file = request.FILES["csv_file"].read().decode("utf-8").splitlines()
-            csv_reader = csv.DictReader(csv_file)
-            for row in csv_reader:
-                print(row)
+            query = form.cleaned_data["search_query"]
+            results = Person.objects.filter(
+                Q(first_name__icontains=query) | Q(last_name__icontains=query), is_supervisor=True
+            )
 
+        else:
+            results = Person.objects.filter(is_supervisor=True)
     else:
-        form = CSVImportForm()
+        form = ExpeditionLeaderForm()
+        results = Person.objects.filter(is_supervisor=True)
+    print(results)
+    return render(request, "org-panel.html", {"form": form, "results": results})
 
-    return render(request, "results.html", {"form": form})
+
+def check_in(request, id):
+    people = Person.objects.filter(user=id)
+
+    context = {"people": people}
+    return render(request, "check-in.html", context)
 
 
 def download_categories(request):

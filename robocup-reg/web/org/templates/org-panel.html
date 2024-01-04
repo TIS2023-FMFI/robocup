@@ -34,33 +34,50 @@
 
     <div class="container mt-3  visually-hidden" id="category-div" >
         <h2>Kategórie</h2>
-        <ul class="list-group" id="itemList">
-            <li class="list-group-item">Item 1</li>
-            <li class="list-group-item">Item 2</li>
-            <li class="list-group-item">Item 3</li>
+        <ul>
+            {% for item in categories %}
+                <li>{{ item.name }}</li>
+            {% endfor %}
         </ul>
     </div>
-
-    <div class="container mt-3" id="check-in-div">
-        <h2>Check-in</h2>
-        <form>
-            <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Vyhľadať vedúceho výpravy" id="searchInput">
+        <div class="input-group mb-3">
+                <h5>Vyhladaj veduceho vypravy</h5>
             </div>
-            <h5>Zaškrtnite prítomných</h5>
-            <ul class="list-group" id="itemList">
-                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Jano</li>
-                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Matej</li>
-                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Olga</li>
-                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Imrich</li>
-                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Jozefina</li>
-            </ul>
-            <p></p>
-            <ul>
-               <button class="btn btn-info btn-md float">Potvrdiť</button>
-            </ul>
-        </form>
-    </div>
+            <div>
+                <form method="post" action="{% url 'org-panel' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Search</button>
+                </form>
+
+                <ul>
+                    {% for ExpLeader in results %}
+                        <li>{{ ExpLeader.first_name }} {{ ExpLeader.last_name }} (<a href="{% url 'check-in' ExpLeader.user.id %}">{{ ExpLeader.user.email }}</a>)</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+{#    <div class="container mt-3" id="check-in-div">#}
+{#        <h2>Check-in</h2>#}
+{#        <form>#}
+{##}
+{##}
+{##}
+{##}
+{#            <h5>Zaškrtnite prítomných</h5>#}
+{#            <ul class="list-group" id="itemList">#}
+{#                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Jano</li>#}
+{#                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Matej</li>#}
+{#                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Olga</li>#}
+{#                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Imrich</li>#}
+{#                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Jozefina</li>#}
+{#            </ul>#}
+{#            <p></p>#}
+{#            <ul>#}
+{#               <button class="btn btn-info btn-md float">Potvrdiť</button>#}
+{#            </ul>#}
+{#        </form>#}
+{#    </div>#}
 
 
 </body>

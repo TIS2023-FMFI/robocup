@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block title %}Robocup HOME{% endblock %}
+
+{% block content %}
+
+    {% for person in people %}
+        <p>{{ person }}</p>
+    {% endfor %}
+
+{% endblock content %}
