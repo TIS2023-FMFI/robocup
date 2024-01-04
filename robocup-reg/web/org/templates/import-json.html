@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block title %}Robocup HOME{% endblock %}
+
+{% block content %}
+    <!-- upload_json.html -->
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+
+{% endblock content %}

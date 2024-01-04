@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<body>
+<div>
 <p></p>
         <div class="btn-group-horizontal" role="group" aria-label="Button group">
         <button id="check_in" type="button" class="btn btn-info btn-fixed-width btn-dark" onclick="fun_org(1)">Check-in</button>
@@ -40,6 +40,7 @@
             {% endfor %}
         </ul>
     </div>
+    <div id="check-in-div">
         <div class="input-group mb-3">
                 <h5>Vyhladaj veduceho vypravy</h5>
             </div>
@@ -56,6 +57,7 @@
                     {% endfor %}
                 </ul>
             </div>
+    </div>
 
 {#    <div class="container mt-3" id="check-in-div">#}
 {#        <h2>Check-in</h2>#}

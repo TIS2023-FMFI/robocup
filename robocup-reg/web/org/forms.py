@@ -55,3 +55,7 @@ class CSVImportForm(forms.Form):
 
 class ExpeditionLeaderForm(forms.Form):
     search_query = forms.CharField(max_length=255, required=False, label="Search")
+
+
+class JSONUploadForm(forms.Form):
+    json_file = forms.FileField()

@@ -33,6 +33,7 @@ class CompetitorForm(forms.ModelForm):
             "food2",
             "food3",
             "supervisor",
+            # "checked_in"
         ]
 
     def __init__(self, *args, **kwargs):
@@ -78,6 +79,7 @@ class SupervisorForm(forms.ModelForm):
             "food1",
             "food2",
             "food3",
+            # "checked_in"
         ]
 
     def __init__(self, *args, **kwargs):

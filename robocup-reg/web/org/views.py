@@ -1,10 +1,12 @@
+import json
+
 from django.core import serializers
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render
 
 from ..leader.models import Person
-from .forms import ExpeditionLeaderForm
+from .forms import ExpeditionLeaderForm, JSONUploadForm
 from .models import Category
 
 
@@ -22,7 +24,6 @@ def org_panel(request):
     else:
         form = ExpeditionLeaderForm()
         results = Person.objects.filter(is_supervisor=True)
-    print(results)
     return render(request, "org-panel.html", {"form": form, "results": results})
 
 
@@ -59,3 +60,26 @@ def download_category(request, id):
         headers={"Content-Disposition": f'attachment; filename="category_{category.get().name}.json"'},
     )
     return response
+
+
+def import_json(request):
+    if request.method == "POST":
+        form = JSONUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            json_file = request.FILES["json_file"]
+            data = json.load(json_file)
+
+            # Process data and save it to the database
+            # This depends on the structure of your JSON and your model
+            for item in data:
+                obj = Category.create(item)
+                if obj is not None:
+                    print(item)
+                    obj.save()
+                else:
+                    print(f"{item}: {obj}")
+
+    else:
+        form = JSONUploadForm()
+
+    return render(request, "import-json.html", {"form": form})
