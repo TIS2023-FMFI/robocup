@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 from ..leader.models import Person
-from .forms import BulkCheckInFormSet, ExpeditionLeaderForm, JSONUploadForm
+from .forms import BulkCheckInFormSet, EventToCopyFromForm, ExpeditionLeaderForm, JSONUploadForm
 from .models import Category
 
 
@@ -93,3 +93,13 @@ def import_json(request):
         form = JSONUploadForm()
 
     return render(request, "import-json.html", {"form": form})
+
+
+def copy_categories_from_last_event(request):
+    if request.method == "POST":
+        form = EventToCopyFromForm(request.POST)
+        if form.is_valid():
+            pass
+    else:
+        form = EventToCopyFromForm()
+    return render(request, "org-panel.html", {"form": form})

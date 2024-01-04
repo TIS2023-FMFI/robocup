@@ -15,4 +15,5 @@ urlpatterns = [
     path("download-category/<int:id>/", views.download_category, name="download-category"),
     path("org-panel/check-in/<int:id>/", views.check_in, name="check-in"),
     path("org-panel/competitor/add/<int:id>", leader_views.competitor_add, name="competitor_add_2"),
+    path("org-panel/copy-event/", views.copy_categories_from_last_event, name="copy-event"),
 ]

@@ -70,3 +70,7 @@ class BulkCheckInForm(forms.ModelForm):
 
 
 BulkCheckInFormSet = formset_factory(BulkCheckInForm, extra=0)
+
+
+class EventToCopyFromForm(forms.Form):
+    event = forms.ModelChoiceField(queryset=Event.objects.all())
