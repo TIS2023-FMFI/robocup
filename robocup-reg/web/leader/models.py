@@ -22,7 +22,7 @@ class Person(models.Model):
     food3 = models.BooleanField(default=True)
     is_supervisor = models.BooleanField(default=False)
     supervisor = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)
-    # checked_in = models.BooleanField(default=False)
+    checked_in = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "Person"

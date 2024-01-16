@@ -1,5 +1,6 @@
 import json
 
+from django.contrib.auth.decorators import user_passes_test
 from django.core import serializers
 from django.db.models import Q
 from django.http import HttpResponse
@@ -10,6 +11,7 @@ from .forms import BulkCheckInFormSet, EventToCopyFromForm, ExpeditionLeaderForm
 from .models import Category
 
 
+@user_passes_test(lambda user: user.is_staff)
 def org_panel(request):
     results = {}
     if request.method == "POST":
@@ -26,6 +28,7 @@ def org_panel(request):
     return render(request, "org-panel.html", {"form": form, "results": results})
 
 
+@user_passes_test(lambda user: user.is_staff)
 def check_in(request, id):
     people = Person.objects.filter(user=id)
 
@@ -44,6 +47,7 @@ def check_in(request, id):
     return render(request, "check-in.html", context)
 
 
+@user_passes_test(lambda user: user.is_staff)
 def download_categories(request):
     category = Category.objects.all()
     for cat in category:
@@ -58,6 +62,7 @@ def download_categories(request):
     return response
 
 
+@user_passes_test(lambda user: user.is_staff)
 def download_category(request, id):
     category = Category.objects.filter(id=id)
     for cat in category:
@@ -72,6 +77,7 @@ def download_category(request, id):
     return response
 
 
+@user_passes_test(lambda user: user.is_superuser)
 def import_json(request):
     if request.method == "POST":
         form = JSONUploadForm(request.POST, request.FILES)
@@ -95,6 +101,7 @@ def import_json(request):
     return render(request, "import-json.html", {"form": form})
 
 
+@user_passes_test(lambda user: user.is_superuser)
 def copy_categories_from_last_event(request):
     if request.method == "POST":
         form = EventToCopyFromForm(request.POST)
