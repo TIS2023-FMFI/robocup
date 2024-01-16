@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.core import serializers
 from django.db.models import Q
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from ..leader.models import Person
 from .forms import BulkCheckInFormSet, EventToCopyFromForm, ExpeditionLeaderForm, JSONUploadForm
@@ -30,20 +30,26 @@ def org_panel(request):
 
 @user_passes_test(lambda user: user.is_staff)
 def check_in(request, id):
-    people = Person.objects.filter(user=id)
+    user_persons = Person.objects.filter(user_id=id).order_by("last_name")
 
-    context = {"people": people, "checked_user": id}
     if request.method == "POST":
-        formset = BulkCheckInFormSet(request.POST)
+        formset = BulkCheckInFormSet(request.POST, prefix="person")
         if formset.is_valid():
-            for form, person in zip(formset, people):
+            for form, person in zip(formset, user_persons):
                 person.checked_in = form.cleaned_data["checked_in"]
                 person.save()
+            # TODO
+            # messages.success(request,messages.SUCCESS,'Check-in ulozeny')
+            return redirect("org-panel")
     else:
-        formset = BulkCheckInFormSet(initial=[{"checked_in": person.checked_in} for person in people])
-        print(formset)
-    context["form"] = formset
-
+        formset = BulkCheckInFormSet(
+            prefix="person", initial=[{"checked_in": person.checked_in, "name": str(person)} for person in user_persons]
+        )
+    context = {
+        "formset": formset,
+        "user_persons": user_persons,
+        "checked_user": id,
+    }
     return render(request, "check-in.html", context)
 
 

@@ -64,9 +64,11 @@ class JSONUploadForm(forms.Form):
 
 
 class BulkCheckInForm(forms.ModelForm):
+    name = forms.CharField(required=False, widget=forms.TextInput(attrs={"readonly": "readonly"}))
+
     class Meta:
         model = Person
-        fields = ["first_name", "last_name", "checked_in"]
+        fields = ["checked_in", "name"]
 
 
 BulkCheckInFormSet = formset_factory(BulkCheckInForm, extra=0)

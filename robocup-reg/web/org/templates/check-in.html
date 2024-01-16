@@ -5,26 +5,23 @@
     <form method="POST" action="{% url 'check-in' id=checked_user %}">
         {% csrf_token %}
         {{ formset.management_form }}
-        <table>
+        <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Checked In</th>
+                    <th scope="col">Osoba</th>
+                    <th scope="col">Pritomna</th>
                 </tr>
             </thead>
             <tbody>
-                {% for f in form %}
+                {% for form in formset %}
+                    {{ form.errors }}
                     <tr>
-                        <td>{{ f.instance.id }}</td>
-                        <td>{{ f.instance.first_name }}</td>
-                        <td>{{ f.instance.last_name }}</td>
-                        <td>{{ f.checked_in }}</td>
+                        <th>{{ form.name.initial }}</th>
+                        <th>{{ form.checked_in }}</th>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <button type="submit">Update Checked In Status</button>
+        <button type="submit">Uloz</button>
     </form>
 {% endblock content %}
