@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
 from ..org.models import Category
@@ -7,6 +8,7 @@ from .forms import CompetitorForm, SupervisorForm, TeamForm
 from .models import Person, Team
 
 
+@login_required
 def leader_panel(request):
     competitors = Person.objects.filter(user_id=request.user.id, is_supervisor=False)
     supervisors = Person.objects.filter(user_id=request.user.id, is_supervisor=True)
@@ -15,16 +17,7 @@ def leader_panel(request):
     return render(request, "leader-panel.html", data)
 
 
-def form_validation(form, request, html):
-    if form.is_valid():
-        form.save()
-        messages.success(request, "The post has been updated successfully.")
-        return render(request, f"{html}")
-    else:
-        messages.error(request, "Please correct the following errors:")
-        return render(request, f"{html}", {"form": form})
-
-
+@login_required
 def competitor_edit(request, id):
     instance = get_object_or_404(Person, id=id)
     html = "add_competitor.html"
@@ -40,6 +33,7 @@ def competitor_edit(request, id):
     return render(request, f"{html}", {"form": form})
 
 
+@login_required
 def supervisor_edit(request, id):
     instance = get_object_or_404(Person, id=id)
     html = "add_supervisor.html"
@@ -55,6 +49,7 @@ def supervisor_edit(request, id):
     return render(request, f"{html}", {"form": form})
 
 
+@login_required
 def team_edit(request, id):
     instance = get_object_or_404(Team, id=id)
     html = "team_assembly.html"
@@ -70,6 +65,7 @@ def team_edit(request, id):
     return render(request, f"{html}", {"form": form})
 
 
+@login_required
 def team_add(request):
     context = {}
     competitors = Person.objects.filter(is_supervisor=False, user=request.user)
@@ -88,6 +84,7 @@ def team_add(request):
     return render(request, "team_assembly.html", context)
 
 
+@login_required
 def competitor_add(request, id=None):
     context = {}
     user = request.user
@@ -106,6 +103,7 @@ def competitor_add(request, id=None):
     return render(request, "add_competitor.html", context)
 
 
+@login_required
 def supervisor_add(request):
     context = {}
     if request.POST:
@@ -120,13 +118,22 @@ def supervisor_add(request):
     return render(request, "add_supervisor.html", context)
 
 
+@login_required
 def competitor_delete(request, id):
     delete_person(id, request.user)
     return redirect(to="/leader-panel")
 
 
+@login_required
 def supervisor_delete(request, id):
     delete_person(id, request.user)
+    return redirect(to="/leader-panel")
+
+
+@login_required
+def team_delete(request, id):
+    team = Team.objects.get(id=id)
+    team.delete()
     return redirect(to="/leader-panel")
 
 
@@ -136,7 +143,11 @@ def delete_person(id, user):
         supervisor.delete()
 
 
-def team_delete(request, id):
-    team = Team.objects.get(id=id)
-    team.delete()
-    return redirect(to="/leader-panel")
+def form_validation(form, request, html):
+    if form.is_valid():
+        form.save()
+        messages.success(request, "The post has been updated successfully.")
+        return render(request, f"{html}")
+    else:
+        messages.error(request, "Please correct the following errors:")
+        return render(request, f"{html}", {"form": form})

@@ -40,10 +40,6 @@ def results(request):
     return render(request, "results.html", data)
 
 
-def leader_panel(request):
-    return render(request, "leader_panel.html")
-
-
 def download_competitors(request):
     response = HttpResponse(
         content_type="text/csv",
