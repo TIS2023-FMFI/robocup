@@ -1,5 +1,6 @@
 import json
 
+from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 from django.core import serializers
 from django.db.models import Q
@@ -38,8 +39,7 @@ def check_in(request, id):
             for form, person in zip(formset, user_persons):
                 person.checked_in = form.cleaned_data["checked_in"]
                 person.save()
-            # TODO
-            # messages.success(request,messages.SUCCESS,'Check-in ulozeny')
+            messages.success(request, "Check-in ulozeny")
             return redirect("org-panel")
     else:
         formset = BulkCheckInFormSet(

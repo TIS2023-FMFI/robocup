@@ -58,6 +58,41 @@
             </div>
         </nav>
         <div class="container">
+            {% for message in messages %}
+                {% if 'success' in message.tags %}
+                    <div class="alert alert-success">
+                        <strong>ÚSPECH!</strong>
+                        {{ message }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            {% for message in messages %}
+                {% if 'error' in message.tags %}
+                    <div class="alert alert-danger">
+                        <strong>CHYBA!</strong>
+                        {{ message }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            {% for message in messages %}
+                {% if 'info' in message.tags %}
+                    <div class="alert alert-info">
+                        <strong>INFO!</strong>
+                        {{ message }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <script>
+            $(document).ready(function(){
+                // Set the duration (in milliseconds) for the alerts to be visible
+                var alertDuration = 5000; // 5 seconds
+
+                // Hide the alerts after the specified duration
+                $(".alert").delay(alertDuration).fadeOut("slow");
+            });
+        </script>
+        <div class="container">
             {% block content %}{% endblock %}
         </div>
     </body>
