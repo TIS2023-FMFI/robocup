@@ -26,6 +26,7 @@ def competitor_edit(request, id):
 
         if form.is_valid():
             form.save()
+            messages.success(request, "Zmeny boli uložené.")
             return redirect("leader_panel")
     else:
         form = CompetitorForm(instance=instance, user=request.user)
@@ -42,6 +43,7 @@ def supervisor_edit(request, id):
 
         if form.is_valid():
             form.save()
+            messages.success(request, "Zmeny boli uložené.")
             return redirect("leader_panel")
     else:
         form = SupervisorForm(instance=instance, user=request.user)
@@ -58,6 +60,7 @@ def team_edit(request, id):
 
         if form.is_valid():
             form.save()
+            messages.success(request, "Zmeny boli uložené.")
             return redirect("leader_panel")
     else:
         form = TeamForm(instance=instance, user=request.user)
@@ -76,6 +79,7 @@ def team_add(request):
         form = TeamForm(request.POST, user=request.user)
         if form.is_valid():
             form.save()
+            messages.success(request, "Tím bol pridaný.")
             return redirect("leader_panel")
         else:
             context["form"] = form
@@ -95,6 +99,7 @@ def competitor_add(request, id=None):
         form = CompetitorForm(request.POST, user=user)
         if form.is_valid():
             form.save()
+            messages.success(request, "Súťažiaci bol pridaný.")
             return redirect("leader_panel")
         else:
             context["form"] = form
@@ -110,6 +115,7 @@ def supervisor_add(request):
         form = SupervisorForm(request.POST, user=request.user)
         if form.is_valid():
             form.save()
+            messages.success(request, "Dozor bol pridaný.")
             return redirect("leader_panel")
         else:
             context["form"] = form
@@ -120,27 +126,34 @@ def supervisor_add(request):
 
 @login_required
 def competitor_delete(request, id):
-    delete_person(id, request.user)
-    return redirect(to="/leader-panel")
+    if delete_person(id, request.user):
+        messages.success(request, "Súťažiaci bol odstánený.")
+        return redirect(to="/leader-panel")
 
 
 @login_required
 def supervisor_delete(request, id):
-    delete_person(id, request.user)
-    return redirect(to="/leader-panel")
+    if delete_person(id, request.user):
+        messages.success(request, "Dozor bol odstánený.")
+        return redirect(to="/leader-panel")
 
 
 @login_required
 def team_delete(request, id):
     team = Team.objects.get(id=id)
-    team.delete()
-    return redirect(to="/leader-panel")
+    if request.user == team.user:
+        team.delete()
+        messages.success(request, "Tím bol odstánený.")
+
+        return redirect(to="/leader-panel")
 
 
 def delete_person(id, user):
     supervisor = Person.objects.get(id=id)
     if user == supervisor.user:
         supervisor.delete()
+        return True
+    return False
 
 
 def form_validation(form, request, html):

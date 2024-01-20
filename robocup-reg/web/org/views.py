@@ -100,6 +100,7 @@ def import_json(request):
                     obj.save()
                 else:
                     print(f"{item}: {obj}")
+            messages.success(request, "JSON importovany")
 
     else:
         form = JSONUploadForm()
