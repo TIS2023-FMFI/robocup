@@ -9,7 +9,7 @@
             </p>
         </div>
         <a class="btn btn-primary" href="download-competitors"><strong>Stiahni všetkých súťažiacich</strong></a>
-        <a class="btn btn-primary" style="background: " href="download-teams"><strong>Stiahni všetky tímy</strong></a>
+        <a class="btn btn-primary"  href="download-teams"><strong>Stiahni všetky tímy</strong></a>
         <div class="container mt-5">
             <table class="table">
                 <thead>
@@ -37,7 +37,12 @@
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Import CSV</button>
+            <button type="submit" class="btn-primary">Import CSV</button>
         </form>
     </div>
+    <footer>
+        <div>
+            <p></p>
+        </div>
+    </footer>
 {% endblock %}

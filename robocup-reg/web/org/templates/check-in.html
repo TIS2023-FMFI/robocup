@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Robocup HOME{% endblock %}
 {% block content %}
-    <h3>Zaskrtnite pritomnych</h3>
+    <h3>Zaškrtnite prítomnych</h3>
     <form method="POST" action="{% url 'check-in' id=checked_user %}">
         {% csrf_token %}
         {{ formset.management_form }}
@@ -9,7 +9,7 @@
             <thead>
                 <tr>
                     <th scope="col">Osoba</th>
-                    <th scope="col">Pritomna</th>
+                    <th scope="col">Prítomná</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +22,6 @@
                 {% endfor %}
             </tbody>
         </table>
-        <button type="submit">Uloz</button>
+        <button type="submit">Ulož</button>
     </form>
 {% endblock content %}
