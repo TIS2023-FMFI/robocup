@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
 from ..org.models import Category
-from ..users.models import User
+from ..users.models import RobocupUser
 from .forms import CompetitorForm, SupervisorForm, TeamForm
 from .models import Person, Team
 
@@ -93,7 +93,7 @@ def competitor_add(request, id=None):
     context = {}
     user = request.user
     if id:
-        user = User.objects.filter(id=id).get()
+        user = RobocupUser.objects.filter(id=id).get()
         context["id"] = id
     if request.POST:
         form = CompetitorForm(request.POST, user=user)

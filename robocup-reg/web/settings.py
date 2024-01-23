@@ -40,7 +40,7 @@ ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "robocup.thefilip.eu"]
 LANGUAGE_CODE = "sk-sk"
 TIME_ZONE = "Europe/Bratislava"
 
-AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = "users.RobocupUser"
 
 # Application definition
 
