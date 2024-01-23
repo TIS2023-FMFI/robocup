@@ -13,7 +13,7 @@ def register_view(request):
         if form.is_valid():
             user = form.save()
             send_mail(
-                "New registraton",
+                "New registration",
                 f"A new registration was created under your name {user.email}.",
                 from_email="robocup@thefilip.eu",
                 recipient_list=[user.email],

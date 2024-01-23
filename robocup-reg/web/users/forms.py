@@ -2,14 +2,14 @@ from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import BaseUserCreationForm
 
-from web.users.models import User
+from web.users.models import RobocupUser
 
 
 class RegisterForm(BaseUserCreationForm):
     email = forms.EmailField(required=True)
 
     class Meta:
-        model = User
+        model = RobocupUser
         fields = ["email", "password1", "password2"]
 
 
@@ -18,7 +18,7 @@ class CustomLoginForm(forms.ModelForm):
     password = forms.CharField(label="Heslo", widget=forms.PasswordInput)
 
     class Meta:
-        model = User
+        model = RobocupUser
         fields = ["email", "password"]
 
     def __init__(self, *args, **kwargs):
