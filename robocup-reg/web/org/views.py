@@ -12,7 +12,7 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
-from web.users.models import RobocupUserManager
+from web.users.models import RobocupUser, RobocupUserManager
 
 from ..leader.models import Person
 from .forms import BulkCheckInFormSet, EventToCopyFromForm, ExpeditionLeaderForm, JSONUploadForm, StaffUserCreationForm
@@ -134,24 +134,23 @@ def create_staff_user(request):
             password = "".join(random.choices(string.ascii_uppercase + string.digits, k=8))
             # password = User.objects.make_random_password(length=16)
             # TODO check if email is free
-
-            # Create a new user and set them as staff
-            user = RobocupUserManager.create_user(
-                self=RobocupUserManager(), email=email, password=password, is_staff=True
-            )
-            print(user)
-            user.save()
-
-            # Send an email to the user
-            send_mail(
-                "Your Staff Account Has Been Created",
-                f"Your account has been created with the following"
-                f" credentials:\nUsername: {email}\nPassword: {password}",
-                from_email="robocup@thefilip.eu",
-                recipient_list=[user.email],
-            )
-            login(request, user)
-            return redirect("/home")
+            if not RobocupUser.objects.filter(email=email).exists():
+                # Create a new user and set them as staff
+                user = RobocupUserManager.create_user(
+                    self=RobocupUserManager(), email=email, password=password, is_staff=True
+                )
+                user.save()
+                send_mail(
+                    "Your Staff Account Has Been Created",
+                    f"Your account has been created with the following"
+                    f" credentials:\nUsername: {email}\nPassword: {password}",
+                    from_email="robocup@thefilip.eu",
+                    recipient_list=[user.email],
+                )
+                login(request, user)
+                return redirect("/home")
+            else:
+                messages.error(request, "User with the email address already exists.")
     else:
         form = StaffUserCreationForm()
 
