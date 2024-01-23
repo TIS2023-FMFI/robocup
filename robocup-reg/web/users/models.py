@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from django.utils import timezone
@@ -6,22 +7,20 @@ from django.utils import timezone
 
 class RobocupUserManager(BaseUserManager):
     def _create_user(self, email, password=None, **extra_fields):
-        pass
+        if not email:
+            raise ValueError("The Email field must be set")
+        email = self.normalize_email(email)
+        user = self.model(email=email, is_staff=extra_fields["is_staff"])
+        user.set_password(password)
+        user.save(force_insert=True)
+        return user
 
     def create_user(self, email=None, password=None, **extra_fields):
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("is_superuser", False)
-        if not email:
-            raise ValueError("The Email field must be set")
-        print("pswd", password, "mail", email, "etc", extra_fields)
-
-        email = self.normalize_email(email)
-        print("norm:", email, "model", self.model)
-        user = self.model(email=email, is_staff=extra_fields["is_staff"])
-        user.set_password(password)
-        user.save()
-        return user
-        # return self._create_user(email, password, **extra_fields)
+        if self.model is None:
+            self.model = get_user_model()
+        return self._create_user(email, password, **extra_fields)
 
     def create_superuser(self, email, password=None, **extra_fields):
         extra_fields.setdefault("is_staff", True)
