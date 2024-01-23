@@ -40,6 +40,8 @@ ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "robocup.thefilip.eu"]
 LANGUAGE_CODE = "sk-sk"
 TIME_ZONE = "Europe/Bratislava"
 
+AUTH_USER_MODEL = "users.User"
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -154,7 +156,6 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-AUTH_USER_MODEL = "users.User"
 
 EMAIL_HOST = "smtp.sendgrid.net"
 EMAIL_HOST_USER = "apikey"  # this is exactly the value 'apikey'

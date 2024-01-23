@@ -5,13 +5,18 @@ from django.utils import timezone
 
 
 class RobocupUserManager(UserManager):
+    # model = get_user_model()
     def _create_user(self, email, password=None, **extra_fields):
         if not email:
             raise ValueError("The Email field must be set")
+        print("pswd", password, "mail", email, "etc", extra_fields)
+
         email = self.normalize_email(email)
-        user = self.model(email=email, **extra_fields)
+        print("norm:", email, "model", self.model)
+
+        user = self.model(email=email, is_staff=extra_fields["is_staff"])
         user.set_password(password)
-        user.save(using=self._db)
+        user.save()
         return user
 
     def create_user(self, email=None, password=None, **extra_fields):
@@ -29,6 +34,9 @@ class RobocupUserManager(UserManager):
             raise ValueError("Superuser must have is_superuser=True.")
 
         return self.create_user(email, password, **extra_fields)
+
+    def set_model(self, model):
+        self.model = model
 
 
 class User(AbstractBaseUser, PermissionsMixin):
