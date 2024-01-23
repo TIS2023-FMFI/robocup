@@ -15,7 +15,7 @@ def home(request):
     return render(request, "home.html")
 
 
-def results(request, cat_id):
+def results(request, cat_id=None):
     teams = Team.objects.all()
     categories = Category.objects.all()
     if request.method == "POST":
@@ -29,7 +29,7 @@ def results(request, cat_id):
             for row in csv_reader:
                 if row["Tim"] in all_team_names:
                     json_array.append(row)
-            instance = get_object_or_404(Category, id=1)
+            instance = get_object_or_404(Category, id=cat_id)
             instance.results = json_array
             instance.save()
 
