@@ -33,12 +33,7 @@
     }
         </script>
     </div>
-    <div class="container mt-3  visually-hidden" id="category-div">
-        <h2>Kategórie</h2>
-        <ul>
-            {% for item in categories %}<li>{{ item.name }}</li>{% endfor %}
-        </ul>
-    </div>
+    {% include 'categories.html' %}
     <div id="check-in-div">
         <p></p>
         <div class="input-group mb-3 ">
@@ -59,48 +54,5 @@
             </ul>
         </div>
     </div>
-    {#    <div class="container mt-3" id="check-in-div">#}
-    {#        <h2>Check-in</h2>#}
-    {#        <form>#}
-    {##}
-    {##}
-    {##}
-    {##}
-    {#            <h5>Zaškrtnite prítomných</h5>#}
-    {#            <ul class="list-group" id="itemList">#}
-    {#                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Jano</li>#}
-    {#                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Matej</li>#}
-    {#                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Olga</li>#}
-    {#                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Imrich</li>#}
-    {#                <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Jozefina</li>#}
-    {#            </ul>#}
-    {#            <p></p>#}
-    {#            <ul>#}
-    {#               <button class="btn btn-info btn-md float">Potvrdiť</button>#}
-    {#            </ul>#}
-    {#        </form>#}
-    {#    </div>#}
-    {##}
-    {#        <div id="check-in-div">#}
-    {#            <div class="input-group mb-3">#}
-    {#                <h5>Vyhladaj veduceho vypravy</h5>#}
-    {#            </div>#}
-    {#            <form method="post" action="{% url 'org-panel' %}">#}
-    {#                {% csrf_token %}#}
-    {#                {{ form.as_p }}#}
-    {#                <button type="submit">Search</button>#}
-    {#            </form>#}
-    {#            <form method="post">#}
-    {#                {% csrf_token %}#}
-    {#                <div id="check_in_results">#}
-    {#                    {% for participant in results %}#}
-    {#                        <li>#}
-    {#                            {{ participant.first_name }} {{ participant.last_name }}#}
-    {#                            (<a href="{% url 'check-in' participant.user.id %}">{{ participant.user.email }}</a>)#}
-    {#                        </li>#}
-    {#                    {% endfor %}#}
-    {#                </div>#}
-    {#            </form>#}
-    {#        </div>#}
 </body>
 {% endblock %}
