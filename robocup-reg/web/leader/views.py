@@ -113,10 +113,14 @@ def competitor_add(request, id=None):
 
 
 @login_required
-def supervisor_add(request):
+def supervisor_add(request, id=None):
     context = {}
+    user = request.user
+    if id:
+        user = RobocupUser.objects.filter(id=id).get()
+        context["id"] = id
     if request.POST:
-        form = SupervisorForm(request.POST, user=request.user)
+        form = SupervisorForm(request.POST, user=user)
         if form.is_valid():
             form.save()
             messages.success(request, "Dozor bol pridaný.")
@@ -124,7 +128,7 @@ def supervisor_add(request):
         else:
             context["form"] = form
     else:
-        context["form"] = SupervisorForm(user=request.user)
+        context["form"] = SupervisorForm(user=user)
     return render(request, "add_supervisor.html", context)
 
 

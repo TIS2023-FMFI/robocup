@@ -24,4 +24,15 @@
         </table>
         <button type="submit">Ulož</button>
     </form>
+    <div class="container">
+        <a type="button"
+           class="btn btn-success"
+           href="{% url 'competitor_add' checked_user %}">Pridaj súťažiaceho</a>
+        <a type="button"
+           class="btn btn-success"
+           href="{% url 'supervisor_add' checked_user %}">Pridaj dozor</a>
+        <a type="button"
+           class="btn btn-success"
+           href="{% url 'team_add' checked_user %}">Pridaj tím</a>
+    </div>
 {% endblock content %}
