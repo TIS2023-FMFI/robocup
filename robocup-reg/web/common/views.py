@@ -15,7 +15,7 @@ def home(request):
     return render(request, "home.html")
 
 
-def results(request):
+def results(request, cat_id):
     teams = Team.objects.all()
     categories = Category.objects.all()
     if request.method == "POST":
@@ -35,7 +35,7 @@ def results(request):
 
     else:
         form = CSVImportForm()
-    data = {"teams": teams, "categories": categories, "form": form}
+    data = {"teams": teams, "categories": categories.cat_id, "form": form}
 
     return render(request, "results.html", data)
 
