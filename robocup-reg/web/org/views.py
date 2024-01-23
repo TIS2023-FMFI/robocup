@@ -3,8 +3,9 @@ import random
 import string
 
 from django.contrib import messages
-from django.contrib.auth import login
+from django.contrib.auth import login, update_session_auth_hash
 from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.forms import PasswordChangeForm
 from django.core import serializers
 from django.core.mail import send_mail
 from django.db.models import Q
@@ -155,3 +156,16 @@ def create_staff_user(request):
         form = StaffUserCreationForm()
 
     return render(request, "create_staff_user.html", {"form": form})
+
+
+def change_password(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, "Your password was successfully updated!")
+            return redirect("/home")
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, "change-password.html", {"form": form})

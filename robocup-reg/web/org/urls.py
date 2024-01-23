@@ -17,4 +17,5 @@ urlpatterns = [
     path("org-panel/competitor/add/<int:id>", leader_views.competitor_add, name="competitor_add_2"),
     path("org-panel/copy-event/", views.copy_categories_from_last_event, name="copy-event"),
     path("create-staff-user", views.create_staff_user, name="create-staff-user"),
+    path("change-password", views.change_password, name="change-password"),
 ]
