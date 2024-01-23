@@ -136,7 +136,7 @@ def create_staff_user(request):
             email = form.cleaned_data["email"]
             password = "".join(random.choices(string.ascii_uppercase + string.digits, k=8))
             # password = User.objects.make_random_password(length=16)
-            # TODO check if email is free
+
             if not RobocupUser.objects.filter(email=email).exists():
                 # Create a new user and set them as staff
                 user = RobocupUserManager.create_user(
