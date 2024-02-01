@@ -1,19 +1,41 @@
 {% extends 'base.html' %}
 {% block title %}Robocup RESULTS{% endblock %}
 {% block content %}
+    <h2>
+        <p class="align-content-center">
+            <strong>Výsledkové listiny</strong>
+        </p>
+    </h2>
     <div class="container-fluid">
+        <a class="btn dropdown-toggle navbar-link bg-info fw-bold"
+           role="button"
+           type="button"
+           id="dropdownMenuButton1"
+           data-bs-toggle="dropdown"
+           aria-expanded="false">Vyber kategóriu</a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            {% for item in categories %}
+                {{ form.errors }}
+                <li>
+                    <a class="dropdown-item" href="{% url 'results' item.id %}">{{ item.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <div>
+            <p>{{ category_results }}</p>
+        </div>
         <div class="container-fluid p-5 my-5 bg-light "
              style="text-align: center"
              id="1">
             <p class="align-content-center">
-                <strong>Výsledkové listiny</strong>
+                <strong>Prihlásenia tímov pre každú kategóriu</strong>
             </p>
             <div class="container mt-5">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Tim</th>
-                            {% for team in teams %}<th>{{ team }}</th>{% endfor %}
+                            <th>Tím</th>
+                            {% for category in categories %}<th>{{ category }}</th>{% endfor %}
                         </tr>
                     </thead>
                     <tbody>
@@ -35,30 +57,6 @@
         </div>
         <a class="btn btn-primary" href="download-competitors"><strong>Stiahni všetkých súťažiacich</strong></a>
         <a class="btn btn-primary"  href="download-teams"><strong>Stiahni všetky tímy</strong></a>
-        <div class="container mt-5">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Tim</th>
-                        {% for category in categories %}<th>{{ category.name }}</th>{% endfor %}
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for team in teams %}
-                        <tr>
-                            <td>{{ team.team_name }}</td>
-                            {% for category in categories %}
-                                {% if category in team.categories.all %}
-                                    <td class="table-primary">prihlásení</td>
-                                {% else %}
-                                    <td></td>
-                                {% endif %}
-                            {% endfor %}
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
     </div>
     <footer>
         <div>

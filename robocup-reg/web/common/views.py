@@ -14,11 +14,13 @@ def home(request):
     return render(request, "home.html")
 
 
-def results(request):
-    Team.objects.all()
-    Category.objects.all()
+def results(request, id=1):
+    teams = Team.objects.all()
+    categories = Category.objects.all()
+    category_res = Category.objects.all().filter(id=id).values("results")
 
-    return render(request, "results.html")
+    data = {"teams": teams, "categories": categories, "category_results": category_res}
+    return render(request, "results.html", data)
 
 
 def download_competitors(request):
