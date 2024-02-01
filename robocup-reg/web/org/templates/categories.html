@@ -4,27 +4,29 @@
         <thead>
             <tr class="table-primary">
                 <th scope="col">Názov</th>
-                <th scope="col">Prázdna výsledkovka</th>
-                <th scope="col">Plná výsledkovka</th>
+                <th scope="col">Prázdna výsledková listina</th>
+                <th scope="col">Vyplnená výsledková listina</th>
                 <th scope="col">Diplomy</th>
             </tr>
         </thead>
         {% for category in categories %}
             <tbody>
                 <tr>
-                    <td>{{ category.name }}</td>
                     <td>
-                        <a type="button"
-                           class="btn btn-success"
-                           href="{% url 'download-teams-for-category' category.id %}">Prázdna vysledkovka</a>
+                        <strong>{{ category.name }}</strong>
                     </td>
                     <td>
                         <a type="button"
                            class="btn btn-success"
-                           href="{% url 'upload-category-results' category.id %}">Nahraj vysledkovku</a>
+                           href="{% url 'download-teams-for-category' category.id %}">Prázdna výsledková listina</a>
                     </td>
                     <td>
-                        <a type="button" class="btn btn-primary" href="#">Generuj diplomy</a>
+                        <a type="button"
+                           class="btn btn-success"
+                           href="{% url 'upload-category-results' category.id %}">Nahraj výsledkovú listinu</a>
+                    </td>
+                    <td>
+                        <a type="button" class="btn btn-primary" href="#">Vygeneruj diplomy</a>
                     </td>
                 </tr>
             </tbody>
