@@ -34,7 +34,7 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "robocup.thefilip.eu"]
+ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "localhost", "robocup.skse.sk"]
 
 # Locale
 LANGUAGE_CODE = "sk-sk"
@@ -157,13 +157,13 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 
-EMAIL_HOST = "smtp.sendgrid.net"
-EMAIL_HOST_USER = "apikey"  # this is exactly the value 'apikey'
-EMAIL_HOST_PASSWORD = env("SENDGRID_API_KEY")
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+EMAIL_HOST = env("SMTP_HOST") 
+EMAIL_HOST_USER = env("SMTP_USER")      # this is exactly the value 'apikey'
+EMAIL_HOST_PASSWORD = env("SMTP_PASS")
+EMAIL_PORT = env("SMTP_PORT") 
+EMAIL_USE_TLS = env("SMTP_USETLS")
 
-CSRF_TRUSTED_ORIGINS = ["http://robocup.thefilip.eu", "https://robocup.thefilip.eu"]
+CSRF_TRUSTED_ORIGINS = ["https://robocup.skse.sk", "http://robocup.skse.sk"]
 
 STORAGES = {
     "staticfiles": {

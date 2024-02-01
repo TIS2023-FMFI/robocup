@@ -15,7 +15,7 @@ def register_view(request):
             send_mail(
                 "New registration",
                 f"A new registration was created under your name {user.email}.",
-                from_email="robocup@thefilip.eu",
+                from_email="robocup@dai.fmph.uniba.sk",
                 recipient_list=[user.email],
             )
             login(request, user)
