@@ -69,14 +69,18 @@ def team_edit(request, id):
 
 
 @login_required
-def team_add(request):
+def team_add(request, id=None):
     context = {}
-    competitors = Person.objects.filter(is_supervisor=False, user=request.user)
+    user = request.user
+    if id:
+        user = RobocupUser.objects.filter(id=id).get()
+        context["id"] = id
+    competitors = Person.objects.filter(is_supervisor=False, user=user)
     categories = Category.objects.all()
     context["competitors"] = competitors
     context["categories"] = categories
     if request.POST:
-        form = TeamForm(request.POST, user=request.user)
+        form = TeamForm(request.POST, user=user)
         if form.is_valid():
             form.save()
             messages.success(request, "Tím bol pridaný.")
@@ -84,7 +88,7 @@ def team_add(request):
         else:
             context["form"] = form
     else:
-        context["form"] = TeamForm(user=request.user)
+        context["form"] = TeamForm(user=user)
     return render(request, "team_assembly.html", context)
 
 
@@ -109,10 +113,14 @@ def competitor_add(request, id=None):
 
 
 @login_required
-def supervisor_add(request):
+def supervisor_add(request, id=None):
     context = {}
+    user = request.user
+    if id:
+        user = RobocupUser.objects.filter(id=id).get()
+        context["id"] = id
     if request.POST:
-        form = SupervisorForm(request.POST, user=request.user)
+        form = SupervisorForm(request.POST, user=user)
         if form.is_valid():
             form.save()
             messages.success(request, "Dozor bol pridaný.")
@@ -120,7 +128,7 @@ def supervisor_add(request):
         else:
             context["form"] = form
     else:
-        context["form"] = SupervisorForm(user=request.user)
+        context["form"] = SupervisorForm(user=user)
     return render(request, "add_supervisor.html", context)
 
 

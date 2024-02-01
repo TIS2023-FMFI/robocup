@@ -1,26 +1,28 @@
+import csv
 import json
 import random
 import string
 
 from django.contrib import messages
-from django.contrib.auth import login
+from django.contrib.auth import login, update_session_auth_hash
 from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.forms import PasswordChangeForm
 from django.core import serializers
 from django.core.mail import send_mail
 from django.db.models import Q
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
-from web.users.models import RobocupUserManager
+from web.org.forms import CSVImportForm
+from web.users.models import RobocupUser, RobocupUserManager
 
-from ..leader.models import Person
+from ..leader.models import Person, Team
 from .forms import BulkCheckInFormSet, EventToCopyFromForm, ExpeditionLeaderForm, JSONUploadForm, StaffUserCreationForm
 from .models import Category
 
 
 @user_passes_test(lambda user: user.is_staff)
 def org_panel(request):
-    results = {}
     if request.method == "POST":
         form = ExpeditionLeaderForm(request.POST)
         if form.is_valid():
@@ -32,7 +34,9 @@ def org_panel(request):
     else:
         form = ExpeditionLeaderForm()
         results = Person.objects.filter(is_supervisor=True)
-    return render(request, "org-panel.html", {"form": form, "results": results})
+    categories = Category.objects.all()
+    context = {"form": form, "results": results, "categories": categories}
+    return render(request, "org-panel.html", context)
 
 
 @user_passes_test(lambda user: user.is_staff)
@@ -132,26 +136,77 @@ def create_staff_user(request):
             email = form.cleaned_data["email"]
             password = "".join(random.choices(string.ascii_uppercase + string.digits, k=8))
             # password = User.objects.make_random_password(length=16)
-            # TODO check if email is free
 
-            # Create a new user and set them as staff
-            user = RobocupUserManager.create_user(
-                self=RobocupUserManager(), email=email, password=password, is_staff=True
-            )
-            print(user)
-            user.save()
-
-            # Send an email to the user
-            send_mail(
-                "Your Staff Account Has Been Created",
-                f"Your account has been created with the following"
-                f" credentials:\nUsername: {email}\nPassword: {password}",
-                from_email="robocup@thefilip.eu",
-                recipient_list=[user.email],
-            )
-            login(request, user)
-            return redirect("/home")
+            if not RobocupUser.objects.filter(email=email).exists():
+                # Create a new user and set them as staff
+                user = RobocupUserManager.create_user(
+                    self=RobocupUserManager(), email=email, password=password, is_staff=True
+                )
+                user.save()
+                send_mail(
+                    "Your Staff Account Has Been Created",
+                    f"Your account has been created with the following"
+                    f" credentials:\nUsername: {email}\nPassword: {password}",
+                    from_email="robocup@thefilip.eu",
+                    recipient_list=[user.email],
+                )
+                login(request, user)
+                return redirect("/home")
+            else:
+                messages.error(request, "User with the email address already exists.")
     else:
         form = StaffUserCreationForm()
 
     return render(request, "create_staff_user.html", {"form": form})
+
+
+def change_password(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, "Your password was successfully updated!")
+            return redirect("/home")
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, "change-password.html", {"form": form})
+
+
+def download_team_for_category(request, id):
+    category = Category.objects.filter(id=id)
+    response = HttpResponse(
+        content_type="text/csv",
+        headers={"Content-Disposition": f'attachment; filename="teamy_cat{category.get().name}.csv"'},
+    )
+    teamy = Team.objects.filter(categories=id)
+    w = csv.writer(response)
+    w.writerow(["nazov", "poriadie"])
+    for t in teamy:
+        w.writerow([t.team_name, 0])
+
+    return response
+
+
+def upload_category_results(request, id):
+    if request.method == "POST":
+        form = CSVImportForm(request.POST, request.FILES)
+        if form.is_valid():
+            csv_file = request.FILES["csv_file"].read().decode("utf-8").splitlines()
+            csv_reader = csv.DictReader(csv_file)
+            json_array = []
+            all_team_names = Team.objects.values_list("team_name", flat=True)
+
+            for row in csv_reader:
+                if row["nazov"] in all_team_names:
+                    json_array.append(row)
+            instance = get_object_or_404(Category, id=id)
+            instance.results = json_array
+            instance.save()
+            messages.success(request, "Výsledky boli nahrané.")
+            return redirect("/org-panel")
+
+    else:
+        form = CSVImportForm()
+    category = Category.objects.filter(id=id).get()
+    return render(request, "upload_category_results.html", {"form": form, "category": category})

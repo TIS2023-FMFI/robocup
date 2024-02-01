@@ -14,31 +14,26 @@
                     onclick="fun_org(2)">Kategórie</button>
         </div>
         <script>
-    jQuery(document).ready(function(){
-        $(".btn-group-horizontal .btn").click(function(){
-            $(".btn-group-horizontal .btn").removeClass("btn-dark");
-            $(this).addClass("btn-dark");
+        jQuery(document).ready(function(){
+            $(".btn-group-horizontal .btn").click(function(){
+                $(".btn-group-horizontal .btn").removeClass("btn-dark");
+                $(this).addClass("btn-dark");
+            });
         });
-    });
         </script>
         <script>
-        function fun_org(a) {
-            if(a == 1){
-                document.getElementById('category-div').setAttribute("class","container mt-3  visually-hidden")
-                document.getElementById('check-in-div').setAttribute("class","container mt-3")
-            }else{
-                document.getElementById('category-div').setAttribute("class","container mt-3")
-                document.getElementById('check-in-div').setAttribute("class","container mt-3  visually-hidden")
-            }
+    function fun_org(a) {
+        if(a == 1){
+            document.getElementById('category-div').setAttribute("class","container mt-3  visually-hidden")
+            document.getElementById('check-in-div').setAttribute("class","container mt-3")
+        }else{
+            document.getElementById('category-div').setAttribute("class","container mt-3")
+            document.getElementById('check-in-div').setAttribute("class","container mt-3  visually-hidden")
         }
+    }
         </script>
     </div>
-    <div class="container mt-3  visually-hidden" id="category-div">
-        <h2>Kategórie</h2>
-        <ul>
-            {% for item in results %}<li>{{ item.name }}</li>{% endfor %}
-        </ul>
-    </div>
+    {% include 'categories.html' %}
     <div id="check-in-div">
         <p></p>
         <div class="input-group mb-3 ">

@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block title %}Robocup RESULTS{% endblock %}
-{% load crispy_forms_tags %}
 {% block content %}
     <div class="container-fluid">
         <div class="container-fluid p-5 my-5 bg-light "
@@ -60,11 +59,6 @@
                 </tbody>
             </table>
         </div>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn-primary">Import CSV</button>
-        </form>
     </div>
     <footer>
         <div>
