@@ -59,7 +59,12 @@ def team_edit(request, id):
         form = TeamForm(request.POST, instance=instance, user=request.user)
 
         if form.is_valid():
-            form.save()
+            team = form.save()
+            for person in team.competitors.all():
+                if not person.primary_school:
+                    team.category = False
+                    team.save()
+                    break
             messages.success(request, "Zmeny boli uložené.")
             return redirect("leader_panel")
     else:
@@ -85,7 +90,12 @@ def team_add(request, id=None):
     if request.POST:
         form = TeamForm(request.POST, user=user)
         if form.is_valid():
-            form.save()
+            team = form.save()
+            for person in team.competitors.all():
+                if not person.primary_school:
+                    team.category = False
+                    team.save()
+                    break
             messages.success(request, "Tím bol pridaný.")
             return redirect("leader_panel")
         else:
