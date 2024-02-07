@@ -182,6 +182,7 @@ def download_team_for_category(request, id):
     teamy = Team.objects.filter(categories=id)
     w = csv.writer(response)
     w.writerow(["nazov", "poriadie"])
+
     for t in teamy:
         w.writerow([t.team_name, 0])
 
