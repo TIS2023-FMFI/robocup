@@ -1,5 +1,4 @@
 from django.contrib.auth import authenticate, get_user_model, login, logout
-from django.core.mail import send_mail
 from django.shortcuts import redirect, render
 
 from .forms import CustomLoginForm, RegisterForm
@@ -12,12 +11,12 @@ def register_view(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            send_mail(
-                "New registration",
-                f"A new registration was created under your name {user.email}.",
-                from_email="robocup@dai.fmph.uniba.sk",
-                recipient_list=[user.email],
-            )
+            # send_mail(
+            #     "New registration",
+            #     f"A new registration was created under your name {user.email}.",
+            #     from_email="robocup@dai.fmph.uniba.sk",
+            #     recipient_list=[user.email],
+            # )
             login(request, user)
             return redirect("/home")
     else:

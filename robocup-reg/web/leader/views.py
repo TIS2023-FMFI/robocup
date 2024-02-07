@@ -76,6 +76,9 @@ def team_add(request, id=None):
         user = RobocupUser.objects.filter(id=id).get()
         context["id"] = id
     competitors = Person.objects.filter(is_supervisor=False, user=user)
+    if not Person.objects.filter(user=user.id, is_supervisor=True).exists() or not competitors.exists():
+        messages.error(request, "Pre vytvorenie tímu je potrebné najprv vytvoriť dozor a súťažiacich.")
+        return redirect("leader_panel")
     categories = Category.objects.all()
     context["competitors"] = competitors
     context["categories"] = categories
@@ -99,6 +102,9 @@ def competitor_add(request, id=None):
     if id:
         user = RobocupUser.objects.filter(id=id).get()
         context["id"] = id
+    if not Person.objects.filter(user=user.id, is_supervisor=True).exists():
+        messages.error(request, "Pre vytvorenie súťažiaceho je potrebné najprv vytvoriť dozor.")
+        return redirect("leader_panel")
     if request.POST:
         form = CompetitorForm(request.POST, user=user)
         if form.is_valid():
