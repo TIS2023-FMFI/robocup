@@ -29,7 +29,13 @@
                         <th scope="col">
                             {% for cat in team.categories.all %}{{ cat }},{% endfor %}
                         </th>
-                        <th scope="col">{{ team.category }}</th>
+                        <th scope="col">
+                            {% if team.category %}
+                                ZŠ
+                            {% else %}
+                                SŠ
+                            {% endif %}
+                        </th>
                         <th scope="col">
                             <a type="button"
                                class="btn btn-danger"

@@ -33,7 +33,13 @@
                         <th scope="col">{{ competitor.phone_number }}</th>
                         <th scope="col">{{ competitor.supervisor }}</th>
                         <th scope="col">{{ competitor.birth_date }}</th>
-                        <th scope="col">{{ competitor.primary_school }}</th>
+                        <th scope="col">
+                            {% if competitor.primary_school %}
+                                ZŠ
+                            {% else %}
+                                SŠ
+                            {% endif %}
+                        </th>
                         <th scope="col">{{ competitor.diet }}</th>
                         <th scope="col">{{ competitor.accomodation1 }}</th>
                         <th scope="col">{{ competitor.accomodation2 }}</th>
