@@ -29,7 +29,13 @@
                     <tr>
                         <th scope="col">{{ competitor.first_name }}</th>
                         <th scope="col">{{ competitor.last_name }}</th>
-                        <th scope="col">{{ competitor.email }}</th>
+                        <th scope="col">
+                            {% if competitor.email == None %}
+                                -
+                            {% else %}
+                                competitor.email
+                            {% endif %}
+                        </th>
                         <th scope="col">{{ competitor.phone_number }}</th>
                         <th scope="col">{{ competitor.supervisor }}</th>
                         <th scope="col">{{ competitor.birth_date }}</th>
