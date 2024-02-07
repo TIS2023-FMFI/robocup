@@ -38,7 +38,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="email">
-                                <strong>E-mail <a style="color: red">**</a></strong>
+                                <strong>E-mail</strong>
                             </label>
                             <input type="text"
                                    class="form-control"
@@ -49,7 +49,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="phone_number">
-                                <strong>Telefónne číslo <a style="color: red">**</a></strong>
+                                <strong>Telefónne číslo <a style="color: red">*</a></strong>
                             </label>
                             <input type="text"
                                    class="form-control"
@@ -82,30 +82,6 @@
                                    {% if form.diet.errors %}aria-invalid="true"{% endif %}>
                         </div>
                     </div>
-                    {#            <div style="width: 30%; box-sizing: border-box; padding: 20px;" >#}
-                    {#                <table>#}
-                    {#                    <tr>#}
-                    {#                        <td> Meno <a style="color: red">*</a></td><td> {{ form.first_name }}</td>#}
-                    {#                    </tr>#}
-                    {#                    <tr>#}
-                    {#                        <td> Priezvisko <a style="color: red">*</a></td><td> {{ form.last_name }}</td>#}
-                    {#                    </tr>#}
-                    {#                    <tr>#}
-                    {#                        <td> E-mail <a style="color: red">**</a></td><td> {{ form.email }}</td>#}
-                    {#                    </tr>#}
-                    {#                    <tr>#}
-                    {#                        <td> Telefón <a style="color: red">**</a></td><td> {{ form.phone_number }}</td>#}
-                    {#                    </tr>#}
-                    {#                    <tr>#}
-                    {#                        <td> Diéta </td>#}
-                    {#                        <td> {{ form.diet }} </td>#}
-                    {#                    </tr>#}
-                    {#                    <tr>#}
-                    {#                        <td> {{ form.supervisor.label }} </td>#}
-                    {#                        <td> {{ form.supervisor }} </td>#}
-                    {#                    </tr>#}
-                    {#                </table>#}
-                    {#            </div>#}
                     <div style="display: flex;">
                         <div style="width: 50%;
                                     box-sizing: border-box;
@@ -150,7 +126,7 @@
                                     <td style="padding: 4px; text-align: center"></td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 4px">Je žiakom ZŠ</td>
+                                    <td style="padding: 4px">Je žiakom ZŠ/príma-kvarta</td>
                                     <td id="first" style="padding: 4px; text-align: center">{{ form.primary_school }}</td>
                                     <td id="second" style="padding: 4px; text-align: center"></td>
                                     <td style="padding: 4px; text-align: center"></td>
@@ -162,8 +138,11 @@
                             </table>
                         </div>
                     </div>
-                    <a style="padding: 7px"> <a style="color: red">*</a><a></a> Povinne,<a style="color: red">**</a> Povinne aspoň jedno</a>
+                    <a style="padding: 7px"> <a style="color: red">*</a> Povinné</a>
                     <br>
+                    <div>
+                        <p></p>
+                    </div>
                     {% if form.instance.id %}
                         <input type="submit"
                                value="Uprav súťažiaceho"
@@ -176,5 +155,8 @@
                                       background: cyan">
                     {% endif %}
                 </form>
+            </div>
+            <div>
+                <p></p>
             </div>
         {% endblock %}
