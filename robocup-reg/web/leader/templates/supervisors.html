@@ -29,11 +29,41 @@
                         <th scope="col">{{ supervisor.email }}</th>
                         <th scope="col">{{ supervisor.phone_number }}</th>
                         <th scope="col">{{ supervisor.diet }}</th>
-                        <th scope="col">{{ supervisor.accomodation1 }}</th>
-                        <th scope="col">{{ supervisor.accomodation2 }}</th>
-                        <th scope="col">{{ supervisor.food1 }}</th>
-                        <th scope="col">{{ supervisor.food2 }}</th>
-                        <th scope="col">{{ supervisor.food3 }}</th>
+                        <th scope="col">
+                            {% if supervisor.accomodation1 %}
+                                áno
+                            {% else %}
+                                nie
+                            {% endif %}
+                        </th>
+                        <th scope="col">
+                            {% if supervisor.accomodation2 %}
+                                áno
+                            {% else %}
+                                nie
+                            {% endif %}
+                        </th>
+                        <th scope="col">
+                            {% if supervisor.food1 %}
+                                áno
+                            {% else %}
+                                nie
+                            {% endif %}
+                        </th>
+                        <th scope="col">
+                            {% if supervisor.food2 %}
+                                áno
+                            {% else %}
+                                nie
+                            {% endif %}
+                        </th>
+                        <th scope="col">
+                            {% if supervisor.food3 %}
+                                áno
+                            {% else %}
+                                nie
+                            {% endif %}
+                        </th>
                         <th scope="col">
                             <a type="button"
                                class="btn btn-danger"

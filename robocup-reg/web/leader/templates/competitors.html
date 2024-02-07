@@ -41,11 +41,41 @@
                             {% endif %}
                         </th>
                         <th scope="col">{{ competitor.diet }}</th>
-                        <th scope="col">{{ competitor.accomodation1 }}</th>
-                        <th scope="col">{{ competitor.accomodation2 }}</th>
-                        <th scope="col">{{ competitor.food1 }}</th>
-                        <th scope="col">{{ competitor.food2 }}</th>
-                        <th scope="col">{{ competitor.food3 }}</th>
+                        <th scope="col">
+                            {% if competitor.accomodation1 %}
+                                áno
+                            {% else %}
+                                nie
+                            {% endif %}
+                        </th>
+                        <th scope="col">
+                            {% if competitor.accomodation2 %}
+                                áno
+                            {% else %}
+                                nie
+                            {% endif %}
+                        </th>
+                        <th scope="col">
+                            {% if competitor.food1 %}
+                                áno
+                            {% else %}
+                                nie
+                            {% endif %}
+                        </th>
+                        <th scope="col">
+                            {% if competitor.food2 %}
+                                áno
+                            {% else %}
+                                nie
+                            {% endif %}
+                        </th>
+                        <th scope="col">
+                            {% if competitor.food3 %}
+                                áno
+                            {% else %}
+                                nie
+                            {% endif %}
+                        </th>
                         <th scope="col">
                             <a type="button"
                                class="btn btn-danger"
