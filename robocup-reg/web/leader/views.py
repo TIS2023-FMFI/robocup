@@ -69,7 +69,13 @@ def team_edit(request, id):
             return redirect("leader_panel")
     else:
         form = TeamForm(instance=instance, user=request.user)
+        initial_team_leader = instance.team_leader
+        initial_competitors = instance.competitors.all()
+        initial_categories = instance.categories.all()
 
+        form.fields["team_leader"].initial = initial_team_leader
+        form.fields["competitors"].initial = initial_competitors
+        form.fields["categories"].initial = initial_categories
     return render(request, f"{html}", {"form": form})
 
 

@@ -52,20 +52,12 @@ class Category(models.Model):
         name = data["fields"]["name"]
         primary_school = data["fields"]["primary_school"]
         list_of_results = data["fields"]["list_of_results"]
-        soccer = data["fields"]["soccer"]
-        group_size = data["fields"]["group_size"]
-        advance = data["fields"]["advance"]
-        ranking_params = data["fields"]["ranking_params"]
         event = data["fields"]["event"]
         # results = data["fields"]["results"]
         return cls(
             name=name,
             primary_school=primary_school,
             list_of_results=list_of_results,
-            soccer=soccer,
-            group_size=group_size,
-            advance=advance,
-            ranking_params=ranking_params,
             event=Event.objects.filter(id=event).get(),
         )
 

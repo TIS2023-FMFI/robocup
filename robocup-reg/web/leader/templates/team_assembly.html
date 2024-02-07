@@ -46,7 +46,10 @@
                                     class="form-select"
                                     multiple>
                                 {% for competitor in form.competitors.field.queryset %}
-                                    <option value="{{ competitor.pk }}">{{ competitor }}</option>
+                                    <option value="{{ competitor.pk }}"
+                                            {% if competitor in form.competitors.initial %}selected{% endif %}>
+                                        {{ competitor }}
+                                    </option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -58,7 +61,10 @@
                                     name="{{ form.team_leader.name }}"
                                     class="form-select">
                                 {% for team_leader in form.team_leader.field.queryset %}
-                                    <option value="{{ team_leader.pk }}">{{ team_leader }}</option>
+                                    <option value="{{ team_leader.pk }}"
+                                            {% if form.team_leader.initial == team_leader.pk %}selected{% endif %}>
+                                        {{ team_leader }}
+                                    </option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -71,7 +77,10 @@
                                     class="form-select"
                                     multiple>
                                 {% for category in form.categories.field.queryset %}
-                                    <option value="{{ category.pk }}">{{ category }}</option>
+                                    <option value="{{ category.pk }}"
+                                            {% if category in form.categories.initial %}selected{% endif %}>
+                                        {{ category }}
+                                    </option>
                                 {% endfor %}
                             </select>
                         </div>

@@ -125,6 +125,8 @@ class TeamForm(forms.ModelForm):
             self.fields["team_name"].label = "Názov tímu"
             self.fields["categories"].label = "Kategórie"
 
+            # Set initial data for team_leader and competitors fields
+
     def save(self, commit=True):
         instance = super(TeamForm, self).save(commit=False)
         instance.user = self.user  # Set the user field
