@@ -32,16 +32,7 @@ class CategoryForm(forms.ModelForm):
 
     class Meta:
         model = Category
-        fields = [
-            "name",
-            "primary_school",
-            "list_of_results",
-            "soccer",
-            "group_size",
-            "advance",
-            "ranking_params",
-            "results",
-        ]
+        fields = ["name", "primary_school", "list_of_results", "results", "detailed_pdf"]
 
     def save(self, results, commit=True):
         instance = super(CategoryForm, self).save(commit=False)

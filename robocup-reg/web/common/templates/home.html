@@ -8,7 +8,9 @@
                     <p class="align-content-center">
                         <strong>Registrácia na {{ open_event.name }} je otvorená!</strong>
                     </p>
-                    <button class="button" href="/register">Registruj svoj tím</button>
+                    <a type="button"
+                       class="btn btn-info btn-fixed-width"
+                       href="{% url "leader_panel" %}">Registruj svoj tím</a>
                 {% else %}
                     <p class="align-content-center">
                         <strong>Žiadna registrácia otvorená nie je. :/</strong>

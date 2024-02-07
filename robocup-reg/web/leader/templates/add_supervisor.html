@@ -38,7 +38,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="email">
-                                <strong>E-mail <a style="color: red">**</a></strong>
+                                <strong>E-mail <a style="color: red">*</a></strong>
                             </label>
                             <input type="text"
                                    class="form-control"
@@ -49,7 +49,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="phone_number">
-                                <strong>Telefónne číslo <a style="color: red">**</a></strong>
+                                <strong>Telefónne číslo <a style="color: red">*</a></strong>
                             </label>
                             <input type="text"
                                    class="form-control"
@@ -69,27 +69,6 @@
                                    value="{{ form.diet.value|default_if_none:'' }}"
                                    {% if form.diet.errors %}aria-invalid="true"{% endif %}>
                         </div>
-                        {#            <div style="width: 30%; box-sizing: border-box; padding: 20px;" >#}
-                        {#                <table>#}
-                        {#                    <tr>#}
-                        {#                        <td> Meno <a style="color: red">*</a></td><td> {{ form.first_name }}</td>#}
-                        {#                    </tr>#}
-                        {#                    <tr>#}
-                        {#                        <td> Priezvisko <a style="color: red">*</a></td><td> {{ form.last_name }}</td>#}
-                        {#                    </tr>#}
-                        {#                    <tr>#}
-                        {#                        <td> E-mail <a style="color: red">**</a></td><td> {{ form.email }}</td>#}
-                        {#                    </tr>#}
-                        {#                    <tr>#}
-                        {#                        <td> Telefón <a style="color: red">**</a></td><td> {{ form.phone_number }}</td>#}
-                        {#                    </tr>#}
-                        {#                    <tr>#}
-                        {#                        <td> Diéta </td>#}
-                        {#                        <td> {{ form.diet }} </td>#}
-                        {#                    </tr>#}
-                        {#                </table>#}
-                        {##}
-                        {#            </div>#}
                         <div style="width: 50%;
                                     box-sizing: border-box;
                                     padding: 20px;
@@ -125,9 +104,7 @@
                     <div>
                         <p></p>
                     </div>
-                    <a style="padding: 7px"> <a style="color: red">*</a><a></a> Povinne</a>
-                    <br>
-                    <a style="padding: 7px"> <a style="color: red">**</a> Povinne aspoň jedno</a>
+                    <a style="padding: 7px"> <a style="color: red">*</a> Povinné</a>
                     <br>
                     <div>
                         <p></p>

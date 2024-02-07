@@ -18,9 +18,15 @@ def results(request, id=1):
     teams = Team.objects.all()
     categories = Category.objects.all()
     category_res = Category.objects.all().filter(id=id).values("results")
-
     data = {"teams": teams, "categories": categories, "category_results": category_res}
     return render(request, "results.html", data)
+
+
+def info(request):
+    teams = Team.objects.all()
+    categories = Category.objects.all()
+    data = {"teams": teams, "categories": categories}
+    return render(request, "info.html", data)
 
 
 def download_competitors(request):

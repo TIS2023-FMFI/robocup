@@ -1,5 +1,8 @@
 <div class="container mt-3 visually-hidden" id="teams-div">
     <h2>Tímy</h2>
+    <h7>
+    Tu môžete vytvoriť nový tím, kde vyberiete vedúceho tímu a súťažiacich.
+    </h7>
     <form>
         <table class="table">
             <thead>
@@ -21,12 +24,18 @@
                         <th scope="col">{{ team.team_leader }}</th>
                         <th scope="col">{{ team.organization }}</th>
                         <th scope="col">
-                            {% for pers in team.competitors.all %}{{ pers }};{% endfor %}
+                            {% for pers in team.competitors.all %}{{ pers }},{% endfor %}
                         </th>
                         <th scope="col">
-                            {% for cat in team.categories.all %}{{ cat }};{% endfor %}
+                            {% for cat in team.categories.all %}{{ cat }},{% endfor %}
                         </th>
-                        <th scope="col">{{ team.category }}</th>
+                        <th scope="col">
+                            {% if team.category %}
+                                ZŠ
+                            {% else %}
+                                SŠ
+                            {% endif %}
+                        </th>
                         <th scope="col">
                             <a type="button"
                                class="btn btn-danger"

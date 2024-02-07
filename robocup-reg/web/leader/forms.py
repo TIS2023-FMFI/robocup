@@ -9,6 +9,7 @@ from web.leader.models import Person, Team
 class CompetitorForm(forms.ModelForm):
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
+    phone_number = forms.CharField(required=True)
     birth_date = forms.DateField(
         required=True,
         widget=forms.SelectDateWidget(
@@ -66,6 +67,7 @@ class SupervisorForm(forms.ModelForm):
     email = forms.EmailField(required=True)
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
+    phone_number = forms.CharField(required=True)
 
     class Meta:
         model = Person
@@ -122,6 +124,8 @@ class TeamForm(forms.ModelForm):
             self.fields["organization"].label = "Škola/Organizácia"
             self.fields["team_name"].label = "Názov tímu"
             self.fields["categories"].label = "Kategórie"
+
+            # Set initial data for team_leader and competitors fields
 
     def save(self, commit=True):
         instance = super(TeamForm, self).save(commit=False)

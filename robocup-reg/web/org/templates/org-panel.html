@@ -45,13 +45,31 @@
                 {{ form.as_p }}
                 <button type="submit">Search</button>
             </form>
-            <ul>
-                {% for ExpLeader in results %}
-                    <li>
-                        {{ ExpLeader.first_name }} {{ ExpLeader.last_name }} (<a href="{% url 'check-in' ExpLeader.user.id %}">{{ ExpLeader.user.email }}</a>)
-                    </li>
-                {% endfor %}
-            </ul>
+            <div>
+                <p></p>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr class="table-primary">
+                        <th scope="col">Meno</th>
+                        <th scope="col">Priezvisko</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Check-in</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ExpLeader in results %}
+                        <tr>
+                            <td>{{ ExpLeader.first_name }}</td>
+                            <td>{{ ExpLeader.last_name }}</td>
+                            <td>{{ ExpLeader.user.email }}</td>
+                            <td>
+                                <a href="{% url 'check-in' ExpLeader.user.id %}"><strong>Urob check-in</strong></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 </body>
