@@ -29,16 +29,15 @@ class Event(models.Model):
 
 
 class Category(models.Model):
+    SCHOOLS = [("ZŠ", "Základná škola"), ("SŠ", "Stredná škola")]
+    RESULTS_LIST = [("BOTH", "Both"), ("COMB", "Combined"), ("SEPR", "Seperate")]
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
-    primary_school = models.CharField(default=True)  # T - ZS, F - SS
-    list_of_results = models.CharField(max_length=100)
-    soccer = models.BooleanField(default=False)  # T - soccer, F - ne soccer
-    group_size = models.IntegerField(default=4)
-    advance = models.IntegerField(default=2)
-    ranking_params = models.CharField(max_length=100)
+    primary_school = models.CharField(max_length=2, choices=SCHOOLS, default="ZŠ")  # T - ZS, F - SS
+    list_of_results = models.CharField(choices=RESULTS_LIST, default="COMB")
     event = models.ForeignKey(to=Event, on_delete=models.CASCADE, null=True)
     results = JSONField(null=True, blank=True)
+    detailed_pdf = models.FileField(null=True, blank=True, upload_to="uploads/%Y/%m/%d/")
 
     class Meta:
         verbose_name = "Category"
