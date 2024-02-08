@@ -39,7 +39,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="competitors">
-                                <strong>Súťažiaci</strong>
+                                <strong>Súťažiaci <a style="color: red">*</a> </strong>
                             </label>
                             <select id="multiple_select"
                                     name="{{ form.competitors.name }}"
@@ -70,7 +70,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="categories">
-                                <strong>Kategórie</strong>
+                                <strong>Kategórie <a style="color: red">**</a> </strong>
                             </label>
                             <select id="multiple_select1"
                                     name="{{ form.categories.name }}"
@@ -83,6 +83,14 @@
                                     </option>
                                 {% endfor %}
                             </select>
+                        </div>
+                        <div style="padding: 7px;">
+                            <div>
+                                <span style="color: red">*</span> Kliknutím na meno vyberiete súťažiaceho
+                            </div>
+                            <div>
+                                <span style="color: red">**</span> Kliknutím na názov vyberiete kategóriu
+                            </div>
                         </div>
                         {% if form.instance.id %}
                             <input type="submit"
