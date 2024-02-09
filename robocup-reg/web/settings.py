@@ -37,7 +37,7 @@ DEBUG = True
 ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "localhost", "robocup.skse.sk"]
 
 # Locale
-LANGUAGE_CODE = "sk-sk"
+LANGUAGE_CODE = "sk"
 TIME_ZONE = "Europe/Bratislava"
 
 AUTH_USER_MODEL = "users.RobocupUser"
