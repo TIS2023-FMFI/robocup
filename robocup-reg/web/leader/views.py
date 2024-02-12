@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
-from ..org.models import Category
+from ..org.models import Category, Event
 from ..users.models import RobocupUser
 from .forms import CompetitorForm, SupervisorForm, TeamForm
 from .models import Person, Team
@@ -10,6 +10,10 @@ from .models import Person, Team
 
 @login_required
 def leader_panel(request):
+    event = Event.objects.filter(is_active=True, registration_open=True)
+    if not event or not request.user.is_staff:
+        messages.error(request, "Neexistuje event na ktorý je možné sa registrovať.")
+        return redirect("home")
     competitors = Person.objects.filter(user_id=request.user.id, is_supervisor=False)
     supervisors = Person.objects.filter(user_id=request.user.id, is_supervisor=True)
     teams = Team.objects.filter(user_id=request.user.id)
