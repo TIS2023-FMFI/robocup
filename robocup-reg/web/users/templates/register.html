@@ -5,8 +5,8 @@
     <form method="post">
         {% csrf_token %}{{ form|crispy }}
         <p>
-            Have an account? Login <a href="/login">Here</a>!
+            Máte už účet? <a href=" {% url 'login' %}">Prihláste sa tu</a>!
         </p>
-        <button type="submit" class="btn btn-success">Register</button>
+        <button type="submit" class="btn btn-success">Registovať</button>
     </form>
 {% endblock %}
