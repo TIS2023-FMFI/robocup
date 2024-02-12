@@ -16,6 +16,7 @@ whitenoise = "*"
 django-staticfiles = "*"
 django-multiselectfield = "*"
 jsonfield = "*"
+unidecode = "*"
 
 [dev-packages]
 pre-commit = "*"

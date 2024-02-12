@@ -12,6 +12,7 @@ from django.core.mail import send_mail
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from unidecode import unidecode
 
 from web.org.forms import CSVImportForm
 from web.users.models import RobocupUser, RobocupUserManager
@@ -177,7 +178,7 @@ def download_team_for_category(request, id):
     category = Category.objects.filter(id=id)
     response = HttpResponse(
         content_type="text/csv",
-        headers={"Content-Disposition": f'attachment; filename="teamy_cat{category.get().name}.csv"'},
+        headers={"Content-Disposition": f'attachment; filename="teamy_cat{unidecode(category.get().name)}.csv"'},
     )
     teamy = Team.objects.filter(categories=id)
     w = csv.writer(response)
