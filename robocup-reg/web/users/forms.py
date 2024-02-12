@@ -12,6 +12,12 @@ class RegisterForm(BaseUserCreationForm):
         model = RobocupUser
         fields = ["email", "password1", "password2"]
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["email"].label = "Email"  # Change 'email' to 'username'
+        self.fields["password1"].label = "Heslo"
+        self.fields["password2"].label = "Potvdenie hesla"
+
 
 class CustomLoginForm(forms.ModelForm):
     email = forms.EmailField(required=True)
@@ -25,7 +31,7 @@ class CustomLoginForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         # Customize form labels, if needed
         self.fields["email"].label = "Email"  # Change 'email' to 'username'
-        self.fields["password"].label = "Password"
+        self.fields["password"].label = "Heslo"
 
     def clean(self):
         if self.is_valid():

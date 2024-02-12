@@ -12,6 +12,13 @@
                     <div class="text-danger text-uppercase">
                         <p>{{ form.errors }}</p>
                     </div>
+                    <div style="border: 1px solid lightgrey;
+                                padding: 10px;
+                                background-color: lightgrey">
+                        <p class="align-content-center">
+                            <strong>text GDPR</strong>
+                        </p>
+                    </div>
                     <div>
                         {% csrf_token %}
                         <div class="mb-3">
@@ -110,15 +117,9 @@
                         <p></p>
                     </div>
                     {% if form.instance.id %}
-                        <input type="submit"
-                               value="Uprav dozorujúcu osobu"
-                               style="border-radius: 5px;
-                                      background: cyan">
+                        <input type="submit" value="Uprav dozorujúcu osobu" class="btn btn-info">
                     {% else %}
-                        <input type="submit"
-                               value="Pridaj dozorujúcu osobu"
-                               style="border-radius: 5px;
-                                      background: cyan">
+                        <input type="submit" value="Pridaj dozorujúcu osobu" class="btn btn-info">
                     {% endif %}
                 </form>
             </div>

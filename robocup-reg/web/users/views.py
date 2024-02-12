@@ -60,6 +60,7 @@ def login_view(request, *args, **kwargs):
                 return redirect("home")
         else:
             context["login_form"] = form
+            context["form"] = CustomLoginForm()
     else:
         context["form"] = CustomLoginForm()
     return render(request, "login.html", context)

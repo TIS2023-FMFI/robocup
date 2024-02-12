@@ -29,7 +29,7 @@ class Event(models.Model):
 
 
 class Category(models.Model):
-    SCHOOLS = [("ZŠ", "Základná škola"), ("SŠ", "Stredná škola")]
+    SCHOOLS = [("ZŠ", "Základná škola"), ("V", "Všetci")]
     RESULTS_LIST = [("BOTH", "Both"), ("COMB", "Combined"), ("SEPR", "Seperate")]
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)

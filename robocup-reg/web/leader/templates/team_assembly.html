@@ -41,6 +41,7 @@
                             <label for="competitors">
                                 <strong>Súťažiaci</strong>
                             </label>
+                            (Kliknutím na meno vyberiete súťažiaceho)
                             <select id="multiple_select"
                                     name="{{ form.competitors.name }}"
                                     class="form-select"
@@ -55,7 +56,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="team_leader">
-                                <strong>Veduci timu</strong>
+                                <strong>Vedúci timu</strong>
                             </label>
                             <select id="{{ form.team_leader.id_for_label }}"
                                     name="{{ form.team_leader.name }}"
@@ -72,6 +73,7 @@
                             <label for="categories">
                                 <strong>Kategórie</strong>
                             </label>
+                            (Kliknutím na názov vyberiete kategóriu)
                             <select id="multiple_select1"
                                     name="{{ form.categories.name }}"
                                     class="form-select"
@@ -85,15 +87,9 @@
                             </select>
                         </div>
                         {% if form.instance.id %}
-                            <input type="submit"
-                                   value="Uprav tím"
-                                   style="border-radius: 5px;
-                                          background: cyan">
+                            <input type="submit" value="Uprav tím" class="btn btn-info">
                         {% else %}
-                            <input type="submit"
-                                   value="Pridaj tím"
-                                   style="border-radius: 5px;
-                                          background: cyan">
+                            <input type="submit" value="Pridaj tím" class="btn btn-info">
                         {% endif %}
                     </form>
                 </div>
