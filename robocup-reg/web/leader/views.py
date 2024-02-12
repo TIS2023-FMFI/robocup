@@ -11,7 +11,7 @@ from .models import Person, Team
 @login_required
 def leader_panel(request):
     event = Event.objects.filter(is_active=True, registration_open=True)
-    if not event or not request.user.is_staff:
+    if not event.exists() or not request.user.is_staff:
         messages.error(request, "Neexistuje event na ktorý je možné sa registrovať.")
         return redirect("home")
     competitors = Person.objects.filter(user_id=request.user.id, is_supervisor=False)

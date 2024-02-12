@@ -17,11 +17,11 @@
     <body>
         <div class="h-100 d-flex align-items-center justify-content-center">
             <a href="https://skse.sk">
-                <img src=" {% static 'skse.png' %}"  width="100%" height="86">
+                <img src=" {% static 'skse.png' %}"  width="100%" height="5%">
             </a>
         </div>
         <nav class="navbar navbar-expand-md navbar-light"
-             style="background-color: rgba(0,128,240,0.75)">
+             style="background-color: rgba(0,128,240,0.25)">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/home">
                     <img src=" {% static 'rcj_logo.png' %}"  width="100" height="60">
@@ -30,24 +30,24 @@
                     <ul class="navbar-nav">
                         {% if user.is_authenticated %}
                             <li class="nav-item">
-                                <a class="nav-link fw-bold" href="/leader-panel">Registrácia</a>
+                                <a class="nav-link fw-bold fs-6" href="/leader-panel">Registrácia</a>
                             </li>
                         {% endif %}
                         {% if user.is_authenticated and user.is_staff %}
                             <li class="nav-item">
-                                <a class="nav-link fw-bold" href="/org-panel">Organizácia</a>
+                                <a class="nav-link fw-bold fs-6" href="/org-panel">Organizácia</a>
                             </li>
                         {% endif %}
                         {% if user.is_authenticated and user.is_superuser %}
                             <li class="nav-item">
-                                <a class="nav-link fw-bold" href="/admin">Administrácia</a>
+                                <a class="nav-link fw-bold fs-6" href="/admin">Administrácia</a>
                             </li>
                         {% endif %}
                         <li class="nav-item">
-                            <a class="nav-link fw-bold" href="/results">Výsledky</a>
+                            <a class="nav-link fw-bold fs-6" href="/results">Výsledky</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-bold" href="/info">Informácie</a>
+                            <a class="nav-link fw-bold fs-6" href="/info">Informácie</a>
                         </li>
                     </ul>
                 </div>
@@ -56,11 +56,11 @@
                         {% if user.is_authenticated %}
                             <span class="navbar-text">Prihlásený: {{ user.email }} |</span>
                             <li class="nav-item">
-                                <a class="nav-link fw-bold" href="/logout">Odhlásiť sa</a>
+                                <a class="nav-link fw-bold fs-6" href="/logout">Odhlásiť sa</a>
                             </li>
                         {% else %}
                             <li class="nav-item">
-                                <a class="nav-link fw-bold" href="/login">Prihlásiť sa</a>
+                                <a class="nav-link fw-bold fs-6" href="/login">Prihlásiť sa</a>
                             </li>
                         {% endif %}
                     </ul>
@@ -101,6 +101,19 @@
                 // Hide the alerts after the specified duration
                 $(".alert").delay(alertDuration).fadeOut("slow");
             });
+        </script>
+        <h2 id="device-width" class="text-danger"></h2>
+        <script>
+            var deviceWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+            var widthElement = document.getElementById('device-width');
+
+            if (widthElement) {
+
+                if (deviceWidth < 768) {
+                    widthElement.innerHTML = 'Vaša obrazovka je príliš malá - prosím zväčšite okno alebo na mobile zapnite zobrazenie pre počítač.';
+                }
+            }
         </script>
         <div class="container">
             {% block content %}{% endblock %}
