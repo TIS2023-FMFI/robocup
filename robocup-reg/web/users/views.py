@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from django.shortcuts import redirect, render
 
 from .forms import CustomLoginForm, RegisterForm
@@ -12,12 +13,28 @@ def register_view(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            send_mail(
-                "New registration",
-                f"A new registration was created under your name {user.email}.",
+            email = EmailMessage(
+                "[rcj] Ucet vytvoreny",
+                f"Dobrý deň!\n\nPráve ste si na stránkach robocup.skse.sk vytvorili\nnový účet s prihlasovacím e-mailom {user.email}.\n"
+                 "Pokračujte ďalej zadaním všetkých dospelých členov\n"
+                 "Vašej výpravy (dozor), potom zadaním všetkých\n"
+                 "žiakov vo výprave - každému žiakovi nastavte, ktorý\n"
+                 "dozor za neho zodpovedá. Potom povytvárajte jednotlivé\n"
+                 "tímy a zaraďte žiakov do tímov a nastavte vedúcich tímov\n"
+                 "vybratých zo sprievodných osôb a v ktorých kategóriách\n"
+                 "budú jednotlivé tímy súťažiť: https://robocup.skse.sk/\n"
+                 "\nV prípade ťažkostí alebo otázok sa neváhajte obrátiť\n"
+                 "na organizátorov (kohut@skse.sk).\n\n"
+                 "Tešíme sa na Vašu účasť!"
+                 "\n\n(tento e-mail bol vygerovaný automaticky)",
                 from_email="robocup@dai.fmph.uniba.sk",
-                recipient_list=[user.email],
+                to=[user.email],
+                reply_to=["kohut@skse.sk"],
             )
+            email.send()
+            send_mail("[rcj] nova registracia", f"zaregistroval sa: {user.email}",
+                    from_email="robocup@dai.fmph.uniba.sk", 
+                    recipient_list=["pavel.petrovic@gmail.com"])
             login(request, user)
             return redirect("/home")
     else:
