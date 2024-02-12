@@ -48,6 +48,7 @@ class CSVImportForm(forms.Form):
 
 class ExpeditionLeaderForm(forms.Form):
     search_query = forms.CharField(max_length=255, required=False, label="Search")
+    search_query.label = "Meno"
 
 
 class JSONUploadForm(forms.Form):

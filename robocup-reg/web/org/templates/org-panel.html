@@ -43,7 +43,7 @@
             <form method="post" action="{% url 'org-panel' %}">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button type="submit">Search</button>
+                <button type="submit" class="btn btn-success">Hľadaj</button>
             </form>
             <div>
                 <p></p>
