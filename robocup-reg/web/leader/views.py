@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.mail import EmailMessage
 from django.shortcuts import get_object_or_404, redirect, render
 
 from ..org.models import Category, Event
@@ -29,7 +30,8 @@ def competitor_edit(request, id):
         form = CompetitorForm(request.POST, instance=instance, user=request.user)
 
         if form.is_valid():
-            form.save()
+            obj = form.save()
+            send_alert(request.user, obj, "pridal")
             messages.success(request, "Zmeny boli uložené.")
             return redirect("leader_panel")
     else:
@@ -46,7 +48,8 @@ def supervisor_edit(request, id):
         form = SupervisorForm(request.POST, instance=instance, user=request.user)
 
         if form.is_valid():
-            form.save()
+            obj = form.save()
+            send_alert(request.user, obj, "pridal")
             messages.success(request, "Zmeny boli uložené.")
             return redirect("leader_panel")
     else:
@@ -69,6 +72,7 @@ def team_edit(request, id):
                     team.category = False
                     team.save()
                     break
+            send_alert(request.user, team, "pridal")
             messages.success(request, "Zmeny boli uložené.")
             return redirect("leader_panel")
     else:
@@ -106,6 +110,7 @@ def team_add(request, id=None):
                     team.category = False
                     team.save()
                     break
+            send_alert(user, team, "pridal")
             messages.success(request, "Tím bol pridaný.")
             return redirect("leader_panel")
         else:
@@ -128,7 +133,8 @@ def competitor_add(request, id=None):
     if request.POST:
         form = CompetitorForm(request.POST, user=user)
         if form.is_valid():
-            form.save()
+            obj = form.save()
+            send_alert(user, obj, "pridal")
             messages.success(request, "Súťažiaci bol pridaný.")
             return redirect("leader_panel")
         else:
@@ -148,7 +154,8 @@ def supervisor_add(request, id=None):
     if request.POST:
         form = SupervisorForm(request.POST, user=user)
         if form.is_valid():
-            form.save()
+            obj = form.save()
+            send_alert(user, obj, "pridal")
             messages.success(request, "Dozor bol pridaný.")
             return redirect("leader_panel")
         else:
@@ -176,6 +183,7 @@ def supervisor_delete(request, id):
 def team_delete(request, id):
     team = Team.objects.get(id=id)
     if request.user == team.user:
+        send_alert(request.user, team, "zmazal")
         team.delete()
         messages.success(request, "Tím bol odstánený.")
 
@@ -185,6 +193,7 @@ def team_delete(request, id):
 def delete_person(id, user):
     supervisor = Person.objects.get(id=id)
     if user == supervisor.user:
+        send_alert(user, supervisor, "zmazal")
         supervisor.delete()
         return True
     return False
@@ -198,3 +207,19 @@ def form_validation(form, request, html):
     else:
         messages.error(request, "Please correct the following errors:")
         return render(request, f"{html}", {"form": form})
+
+
+def send_alert(user, instance, change):
+    event = Event.objects.filter(is_active=True, registration_open=True)
+    if event:
+        event = event[0]
+        if not event.registrations_fits_today:
+            email = EmailMessage(
+                "[rcj] Zmena v registracii po datume",
+                f"""
+                Pouzivatel {user.email} {change} v registacii: {instance}.
+                """,
+                from_email="robocup@dai.fmph.uniba.sk",
+                to=["pavel.petrovic@gmail.com"],
+            )
+            email.send()
