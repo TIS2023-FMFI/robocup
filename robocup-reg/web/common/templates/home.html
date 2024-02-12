@@ -1,6 +1,19 @@
 {% extends 'base.html' %}
 {% block title %}Robocup HOME{% endblock %}
 {% block content %}
+    <h2 id="device-width" class="text-danger"></h2>
+    <script>
+        var deviceWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+        var widthElement = document.getElementById('device-width');
+
+        if (widthElement) {
+
+            if (deviceWidth < 768) {
+                widthElement.innerHTML = 'Vaša obrazovka je príliš malá - prosím zväčšite okno alebo na mobile zapne zobrazenie pre počítač.';
+            }
+        }
+    </script>
     {% if user.is_authenticated %}
         <div class="container-fluid">
             <div class="container-fluid p-5 my-5 bg-light " style="text-align: center">
