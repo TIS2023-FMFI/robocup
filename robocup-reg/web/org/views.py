@@ -219,12 +219,21 @@ def upload_category_results(request, id):
 
 def diploms_for_category(request, id):
     category = Category.objects.filter(id=id).get()
-    return make_diplom(category=category)
+    results = dict()
+    for rec in category.results:
+        print(rec["nazov"], ": ", rec["poriadie"])
+        results[rec["nazov"]] = int(rec["poriadie"])
+
+    return make_diplom(category=category, results=results)
 
 
-def make_diplom(category):
+def make_diplom(category, results):
     event = Event.objects.filter(is_active=True).get()
-    teams = Team.objects.filter(categories=category)
+    _teams = Team.objects.filter(categories=category)
+    teams = dict()
+    for team in _teams:
+        teams[team] = results[team.team_name]
+    teams = dict(sorted(teams.items(), key=lambda item: item[1]))
     context = {
         "event": event,
         "category": category,
