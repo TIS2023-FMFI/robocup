@@ -2,6 +2,7 @@ import csv
 import json
 import random
 import string
+from io import BytesIO
 
 from django.contrib import messages
 from django.contrib.auth import login, update_session_auth_hash
@@ -12,13 +13,16 @@ from django.core.mail import send_mail
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.template.loader import get_template
+from unidecode import unidecode
+from xhtml2pdf import pisa
 
 from web.org.forms import CSVImportForm
 from web.users.models import RobocupUser, RobocupUserManager
 
 from ..leader.models import Person, Team
 from .forms import BulkCheckInFormSet, EventToCopyFromForm, ExpeditionLeaderForm, JSONUploadForm, StaffUserCreationForm
-from .models import Category
+from .models import Category, Event
 
 
 @user_passes_test(lambda user: user.is_staff)
@@ -177,7 +181,7 @@ def download_team_for_category(request, id):
     category = Category.objects.filter(id=id)
     response = HttpResponse(
         content_type="text/csv",
-        headers={"Content-Disposition": f'attachment; filename="teamy_cat{category.get().name}.csv"'},
+        headers={"Content-Disposition": f'attachment; filename="teamy_cat{unidecode(category.get().name)}.csv"'},
     )
     teamy = Team.objects.filter(categories=id)
     w = csv.writer(response)
@@ -211,3 +215,41 @@ def upload_category_results(request, id):
         form = CSVImportForm()
     category = Category.objects.filter(id=id).get()
     return render(request, "upload_category_results.html", {"form": form, "category": category})
+
+
+def diploms_for_category(request, id):
+    category = Category.objects.filter(id=id).get()
+    results = dict()
+    for rec in category.results:
+        print(rec["nazov"], ": ", rec["poriadie"])
+        results[rec["nazov"]] = int(rec["poriadie"])
+
+    return make_diplom(category=category, results=results)
+
+
+def make_diplom(category, results):
+    event = Event.objects.filter(is_active=True).get()
+    _teams = Team.objects.filter(categories=category)
+    teams = dict()
+    for team in _teams:
+        teams[team] = results[team.team_name]
+    teams = dict(sorted(teams.items(), key=lambda item: item[1]))
+    context = {
+        "event": event,
+        "category": category,
+        "teams": teams,
+    }
+    pdf = html_to_pdf("diplom.html", context_dict=context)
+
+    # rendering the template
+    return HttpResponse(pdf, content_type="application/pdf")
+
+
+def html_to_pdf(template_src, context_dict={}):
+    template = get_template(template_src)
+    html = template.render(context_dict)
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type="application/pdf")
+    return None
