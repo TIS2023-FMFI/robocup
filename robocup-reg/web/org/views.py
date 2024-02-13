@@ -2,6 +2,7 @@ import csv
 import json
 import random
 import string
+from io import BytesIO
 
 from django.contrib import messages
 from django.contrib.auth import login, update_session_auth_hash
@@ -12,14 +13,16 @@ from django.core.mail import send_mail
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.template.loader import get_template
 from unidecode import unidecode
+from xhtml2pdf import pisa
 
 from web.org.forms import CSVImportForm
 from web.users.models import RobocupUser, RobocupUserManager
 
 from ..leader.models import Person, Team
 from .forms import BulkCheckInFormSet, EventToCopyFromForm, ExpeditionLeaderForm, JSONUploadForm, StaffUserCreationForm
-from .models import Category
+from .models import Category, Event
 
 
 @user_passes_test(lambda user: user.is_staff)
@@ -212,3 +215,32 @@ def upload_category_results(request, id):
         form = CSVImportForm()
     category = Category.objects.filter(id=id).get()
     return render(request, "upload_category_results.html", {"form": form, "category": category})
+
+
+def diploms_for_category(request, id):
+    category = Category.objects.filter(id=id).get()
+    return make_diplom(category=category)
+
+
+def make_diplom(category):
+    event = Event.objects.filter(is_active=True).get()
+    teams = Team.objects.filter(categories=category)
+    context = {
+        "event": event,
+        "category": category,
+        "teams": teams,
+    }
+    pdf = html_to_pdf("diplom.html", context_dict=context)
+
+    # rendering the template
+    return HttpResponse(pdf, content_type="application/pdf")
+
+
+def html_to_pdf(template_src, context_dict={}):
+    template = get_template(template_src)
+    html = template.render(context_dict)
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type="application/pdf")
+    return None

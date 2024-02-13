@@ -17,6 +17,7 @@ django-staticfiles = "*"
 django-multiselectfield = "*"
 jsonfield = "*"
 unidecode = "*"
+xhtml2pdf = "*"
 
 [dev-packages]
 pre-commit = "*"

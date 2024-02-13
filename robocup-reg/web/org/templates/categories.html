@@ -26,7 +26,9 @@
                            href="{% url 'upload-category-results' category.id %}">Nahraj výsledkovú listinu</a>
                     </td>
                     <td>
-                        <a type="button" class="btn btn-primary" href="#">Vygeneruj diplomy</a>
+                        <a type="button"
+                           class="btn btn-primary"
+                           href=" {% url 'diplom' category.id %}">Vygeneruj diplomy</a>
                     </td>
                 </tr>
             </tbody>

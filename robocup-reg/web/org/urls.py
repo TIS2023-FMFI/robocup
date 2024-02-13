@@ -24,4 +24,5 @@ urlpatterns = [
         name="download-teams-for-category",
     ),
     path("org-panel/upload-category-results/<int:id>/", views.upload_category_results, name="upload-category-results"),
+    path("org-panel/diplom/<int:id>", views.diploms_for_category, name="diplom"),
 ]
