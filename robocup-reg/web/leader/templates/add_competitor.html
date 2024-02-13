@@ -12,13 +12,6 @@
                     <div class="text-danger text-uppercase">
                         <p>{{ form.errors }}</p>
                     </div>
-                    <div style="border: 1px solid lightgrey;
-                                padding: 10px;
-                                background-color: lightgrey">
-                        <p class="align-content-center">
-                            <strong>text GDPR</strong>
-                        </p>
-                    </div>
                     <div>
                         {% csrf_token %}
                         <div class="mb-3">
@@ -89,6 +82,7 @@
                                    {% if form.diet.errors %}aria-invalid="true"{% endif %}>
                         </div>
                     </div>
+		    Uhradením poplatku za stravu a ubytovanie máte nárok na dve ubytovania a stravu takto: 1. deň: obed, večera, 2. deň: raňajky, obed, večera, 3. deň: raňajky. Ak vopred viete, že niektoré z nich nevyužijete, zaznačte to prosím:
                     <div style="display: flex;">
                         <div style="width: 50%;
                                     box-sizing: border-box;
@@ -155,6 +149,14 @@
                     {% else %}
                         <input type="submit" value="Pridaj súťažiaceho" class="btn btn-info">
                     {% endif %}
+                    <br><br>
+		    <div style="border: 1px solid lightgrey;
+                                padding: 10px;
+                                background-color: lightgrey">
+                        <p class="align-content-center">
+                            <strong>GDPR: Slovenská spoločnosť elektronikov ochraňuje zadané údaje a zbiera ich iba pre účely komunikácie s tímami o podmienkach súťaže, vyhodnocovanie a zverejňovanie tímov prihlásených do súťaže i výsledkov zo súťaže, zabezpečenie ubytovania a stravy počas súťaže a na prípadné informovanie o ďalších podujatiach ojedinelými správami. E-mail, telefónne číslo, alebo dátum narodenia nie je nikdy zverejnený na žiadnej verejnej stránke. Za udelenie súhlasu s evidovaním údajov od jednotlivých členov tímu zodpovedá ten, kto ich do systému zadáva (registrátor tímov). V prípade, že chcete, aby Vaše údaje boli zmazané, napíšte organizátorom.</strong>
+                        </p>
+                    </div>
                 </form>
             </div>
             <div>

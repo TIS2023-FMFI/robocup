@@ -31,7 +31,7 @@ def competitor_edit(request, id):
 
         if form.is_valid():
             obj = form.save()
-            send_alert(request.user, obj, "pridal")
+            send_alert(request.user, obj, "zmenene udaje sutaziaceho")
             messages.success(request, "Zmeny boli uložené.")
             return redirect("leader_panel")
     else:
@@ -49,7 +49,7 @@ def supervisor_edit(request, id):
 
         if form.is_valid():
             obj = form.save()
-            send_alert(request.user, obj, "pridal")
+            send_alert(request.user, obj, "zmenene udaje doprevadzajucej osoby")
             messages.success(request, "Zmeny boli uložené.")
             return redirect("leader_panel")
     else:
@@ -72,7 +72,7 @@ def team_edit(request, id):
                     team.category = False
                     team.save()
                     break
-            send_alert(request.user, team, "pridal")
+            send_alert(request.user, team, "zmenene udaje o time (kategorie/ucastnikov/nazov/team leader...)")
             messages.success(request, "Zmeny boli uložené.")
             return redirect("leader_panel")
     else:
@@ -110,7 +110,7 @@ def team_add(request, id=None):
                     team.category = False
                     team.save()
                     break
-            send_alert(user, team, "pridal")
+            send_alert(user, team, "pridany novy tim")
             messages.success(request, "Tím bol pridaný.")
             return redirect("leader_panel")
         else:
@@ -134,7 +134,7 @@ def competitor_add(request, id=None):
         form = CompetitorForm(request.POST, user=user)
         if form.is_valid():
             obj = form.save()
-            send_alert(user, obj, "pridal")
+            send_alert(user, obj, "pridany novy sutaziaci")
             messages.success(request, "Súťažiaci bol pridaný.")
             return redirect("leader_panel")
         else:
@@ -155,7 +155,7 @@ def supervisor_add(request, id=None):
         form = SupervisorForm(request.POST, user=user)
         if form.is_valid():
             obj = form.save()
-            send_alert(user, obj, "pridal")
+            send_alert(user, obj, "pridana nova sprievodna osoba")
             messages.success(request, "Dozor bol pridaný.")
             return redirect("leader_panel")
         else:
@@ -183,7 +183,7 @@ def supervisor_delete(request, id):
 def team_delete(request, id):
     team = Team.objects.get(id=id)
     if request.user == team.user:
-        send_alert(request.user, team, "zmazal")
+        send_alert(request.user, team, "tim zmazany")
         team.delete()
         messages.success(request, "Tím bol odstánený.")
 
@@ -193,7 +193,7 @@ def team_delete(request, id):
 def delete_person(id, user):
     supervisor = Person.objects.get(id=id)
     if user == supervisor.user:
-        send_alert(user, supervisor, "zmazal")
+        send_alert(user, supervisor, "clen timu zmazany")
         supervisor.delete()
         return True
     return False
@@ -216,8 +216,7 @@ def send_alert(user, instance, change):
         if not event.registrations_fits_today:
             email = EmailMessage(
                 "[rcj] Zmena v registracii po datume",
-                f"""
-                Pouzivatel {user.email} {change} v registacii: {instance}.
+                f"""Pouzivatel {user.email} vykonal zmenu po skonceni registracie:\n\n{change}\n\nnovy/upraveny udaj:\n\n{instance}.
                 """,
                 from_email="robocup@dai.fmph.uniba.sk",
                 to=["pavel.petrovic@gmail.com"],
