@@ -10,7 +10,7 @@ class RobocupUserManager(BaseUserManager):
         if not email:
             raise ValueError("The Email field must be set")
         email = self.normalize_email(email)
-        user = self.model(email=email, is_staff=extra_fields["is_staff"])
+        user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(force_insert=True)
         return user
