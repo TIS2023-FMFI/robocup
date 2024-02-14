@@ -34,24 +34,31 @@
             </tbody>
         {% endfor %}
     </table>
-    <div class="container border">
-        <h3>Manazment kategorii</h3>
-        <div class="row">
-            <div class="col-sm">
-                <form method="post" action="{% url 'copy-event' %}">
-                    {% csrf_token %}
-                    {{ event_form.as_p }}
-                    <button type="submit" class="btn btn-success">Kopíruj kategórie z eventu.</button>
-                </form>
-            </div>
-            <div class="col-sm">
-                <a href="{% url 'download-categories' %}"
-                   class="btn btn-primary"
-                   type="button">Vyexportuj vsetky kategorie</a>
-            </div>
-            <div class="col-sm">
-                <a href="{% url 'import-json' %}" class="btn btn-primary" type="button">Import kategorii</a>
+    {% if user.is_authenticated and user.is_superuser %}
+        <div class="container border p-2">
+            <h3>Manazment</h3>
+            <div class="row">
+                <div class="col-sm">
+                    <form method="post" action="{% url 'copy-event' %}">
+                        {% csrf_token %}
+                        {{ event_form.as_p }}
+                        <button type="submit" class="btn btn-success">Kopíruj kategórie z eventu.</button>
+                    </form>
+                </div>
+                <div class="col-sm">
+                    <a href="{% url 'download-categories' %}"
+                       class="btn btn-primary"
+                       type="button">Vyexportuj vsetky kategorie</a>
+                </div>
+                <div class="col-sm">
+                    <a href="{% url 'import-json' %}" class="btn btn-primary" type="button">Import kategorii</a>
+                </div>
+                <div class="col-sm">
+                    <a href="{% url 'create-staff-user' %}"
+                       class="btn btn-primary"
+                       type="button">Vytvor konto organizatora</a>
+                </div>
             </div>
         </div>
-    </div>
+    {% endif %}
 </div>

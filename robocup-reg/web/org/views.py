@@ -148,7 +148,6 @@ def create_staff_user(request):
             email = form.cleaned_data["email"]
             password = "".join(random.choices(string.ascii_uppercase + string.digits, k=8))
             # password = User.objects.make_random_password(length=16)
-
             if not RobocupUser.objects.filter(email=email).exists():
                 # Create a new user and set them as staff
                 user = RobocupUserManager.create_user(
@@ -158,7 +157,8 @@ def create_staff_user(request):
                 send_mail(
                     "Your Staff Account Has Been Created",
                     f"Your account has been created with the following"
-                    f" credentials:\nUsername: {email}\nPassword: {password}",
+                    f" credentials:\nUsername: {email}\nPassword: {password}"
+                    f"you can change this password after login at https://robocup.skse.sk/change-password .",
                     from_email="robocup@thefilip.eu",
                     recipient_list=[user.email],
                 )
