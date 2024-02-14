@@ -157,7 +157,7 @@ def create_staff_user(request):
                 send_mail(
                     "Your Staff Account Has Been Created",
                     f"Your account has been created with the following"
-                    f" credentials:\nUsername: {email}\nPassword: {password}"
+                    f" credentials:\nUsername: {email}\nPassword: {password}\n"
                     f"you can change this password after login at https://robocup.skse.sk/change-password .",
                     from_email="robocup@thefilip.eu",
                     recipient_list=[user.email],
