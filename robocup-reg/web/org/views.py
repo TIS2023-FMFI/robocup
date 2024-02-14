@@ -37,9 +37,10 @@ def org_panel(request):
             results = Person.objects.filter()
     else:
         form = ExpeditionLeaderForm()
+        event_form = EventToCopyFromForm(request.POST)
         results = Person.objects.filter(is_supervisor=True)
-    categories = Category.objects.all()
-    context = {"form": form, "results": results, "categories": categories}
+    categories = Category.objects.filter(event__is_active=True)
+    context = {"form": form, "event_form": event_form, "results": results, "categories": categories}
     return render(request, "org-panel.html", context)
 
 
@@ -69,7 +70,7 @@ def check_in(request, id):
 
 @user_passes_test(lambda user: user.is_staff)
 def download_categories(request):
-    category = Category.objects.all()
+    category = Category.objects.filter(event__is_active=True)
     for cat in category:
         if cat.results is not None:
             cat.results = None
@@ -115,6 +116,7 @@ def import_json(request):
                 else:
                     print(f"{item}: {obj}")
             messages.success(request, "JSON importovany")
+            return redirect("org-panel")
 
     else:
         form = JSONUploadForm()
@@ -127,10 +129,16 @@ def copy_categories_from_last_event(request):
     if request.method == "POST":
         form = EventToCopyFromForm(request.POST)
         if form.is_valid():
-            pass
-    else:
-        form = EventToCopyFromForm()
-    return render(request, "org-panel.html", {"form": form})
+            source_event = form.cleaned_data.get("source_event")
+            dest_event = form.cleaned_data.get("destination_event")
+            print(source_event, dest_event)
+            source_categories = Category.objects.filter(event=source_event)
+            for cat in source_categories:
+                cat.pk = None
+                cat.results = None
+                cat.event = dest_event
+                cat.save()
+    return redirect("org-panel")
 
 
 def create_staff_user(request):

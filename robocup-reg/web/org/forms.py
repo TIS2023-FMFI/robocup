@@ -67,7 +67,8 @@ BulkCheckInFormSet = formset_factory(BulkCheckInForm, extra=0)
 
 
 class EventToCopyFromForm(forms.Form):
-    event = forms.ModelChoiceField(queryset=Event.objects.all())
+    source_event = forms.ModelChoiceField(queryset=Event.objects.all())
+    destination_event = forms.ModelChoiceField(queryset=Event.objects.all())
 
 
 class StaffUserCreationForm(forms.Form):
