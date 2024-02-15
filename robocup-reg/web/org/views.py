@@ -228,6 +228,8 @@ def upload_category_results(request, id):
 def diploms_for_category(request, id):
     category = Category.objects.filter(id=id).get()
     results = dict()
+    if not category.results:
+        return redirect("org-panel")
     for rec in category.results:
         print(rec["nazov"], ": ", rec["poriadie"])
         results[rec["nazov"]] = int(rec["poriadie"])
