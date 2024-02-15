@@ -18,7 +18,7 @@ def results(request, id=1):
     teams = Team.objects.all()
     # print(Event.objects.filter(is_active=True).first())
     # categories = Category.objects.filter(event=Event.objects.filter(is_active=True).get()[0])
-    categories = Category.objects.filter(event=Event.objects.filter(is_active=True).first())
+    categories = Category.objects.filter(event__is_active=True)
     category_res = Category.objects.all().filter(id=id).values("results")
     data = {"teams": teams, "categories": categories, "category_results": category_res}
     return render(request, "results.html", data)
