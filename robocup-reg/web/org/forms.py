@@ -72,7 +72,8 @@ class EventToCopyFromForm(forms.Form):
 
 
 class StaffUserCreationForm(forms.Form):
-    email = forms.EmailField(label="Enter email of the new staff user")
+    # email = forms.EmailField(label="Enter email of the new staff user")
+    email = forms.EmailField(label="Email:")
 
     class Meta:
         fields = ["email"]

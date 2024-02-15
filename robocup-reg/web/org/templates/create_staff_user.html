@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}Robocup HOME{% endblock %}
-<!-- templates/import.html -->
-{% load crispy_forms_tags %}
 {% block content %}
+    <h1>Vytvor konto pre organizátora</h1>
+    {% load crispy_forms_tags %}
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Create User</button>
+        <button type="submit" class="btn btn-primary">Vytvor organizátora</button>
     </form>
 {% endblock %}
