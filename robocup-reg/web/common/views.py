@@ -19,8 +19,16 @@ def results(request, id=1):
     # print(Event.objects.filter(is_active=True).first())
     # categories = Category.objects.filter(event=Event.objects.filter(is_active=True).get()[0])
     categories = Category.objects.filter(event__is_active=True)
+    cat_name = Category.objects.all().filter(id=id).values("name")[0]["name"]
     category_res = Category.objects.all().filter(id=id).values("results")
-    data = {"teams": teams, "categories": categories, "category_results": category_res}
+    result_dict = category_res[0]["results"]
+    zoz = []
+    for i in range(1, len(result_dict) + 1):
+        for prvok in result_dict:
+            if prvok["poradie"] == str(i):
+                zoz.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+
+    data = {"teams": teams, "categories": categories, "category_results": zoz, "cat_name": cat_name}
     return render(request, "results.html", data)
 
 

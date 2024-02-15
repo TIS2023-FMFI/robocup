@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Robocup HOME{% endblock %}
 {% block content %}
-    <div class="container-fluid p-5 my-5 bg-light "
-         style="text-align: center"
-         id="1">
+    <div class="container-fluid p-5 my-5 bg-light " id="1">
         <p class="align-content-center">
             <strong>Prihlásenia tímov pre každú kategóriu</strong>
         </p>
@@ -31,7 +29,7 @@
                 </tbody>
             </table>
         </div>
+        <a class="btn btn-primary" href="download-competitors"><strong>Stiahni všetkých súťažiacich</strong></a>
+        <a class="btn btn-primary"  href="download-teams"><strong>Stiahni všetky tímy</strong></a>
     </div>
-    <a class="btn btn-primary" href="download-competitors"><strong>Stiahni všetkých súťažiacich</strong></a>
-    <a class="btn btn-primary"  href="download-teams"><strong>Stiahni všetky tímy</strong></a>
 {% endblock %}

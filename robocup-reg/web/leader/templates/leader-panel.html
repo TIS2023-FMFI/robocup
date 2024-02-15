@@ -2,42 +2,42 @@
 {% block title %}Robocup HOME{% endblock %}
 {% block content %}
     <body>
-        <p></p>
+        <br>
         <div class="btn-group-horizontal" role="group" aria-label="Button group">
             <button id="supervisors"
                     type="button"
-                    class="btn btn-info btn-fixed-width btn-dark"
+                    class="btn btn-primary btn-fixed-width btn-dark"
                     onclick="fun(1)">Dozor</button>
             <button id="players"
                     type="button"
-                    class="btn btn-info btn-fixed-width"
+                    class="btn btn-primary btn-fixed-width"
                     onclick="fun(2)">Súťažiaci</button>
             <button id="teams"
                     type="button"
-                    class="btn btn-info btn-fixed-width"
+                    class="btn btn-primary btn-fixed-width"
                     onclick="fun(3)">Tímy</button>
         </div>
         <script>
             function fun(a) {
 
                 if(a == 1){
-                    document.getElementById('supervisors').setAttribute("class", "btn btn-info btn-fixed-width btn-dark")
-                    document.getElementById('players').setAttribute("class", "btn btn-info btn-fixed-width")
-                    document.getElementById('teams').setAttribute("class", "btn btn-info btn-fixed-width")
+                    document.getElementById('supervisors').setAttribute("class", "btn btn-primary btn-fixed-width btn-dark")
+                    document.getElementById('players').setAttribute("class", "btn btn-primary btn-fixed-width")
+                    document.getElementById('teams').setAttribute("class", "btn btn-primary btn-fixed-width")
                     document.getElementById('supervisor-div').setAttribute("class","container mt-3")
                     document.getElementById('competitors-div').setAttribute("class","container mt-3 visually-hidden")
                     document.getElementById('teams-div').setAttribute("class","container mt-3 visually-hidden")
                 }else if(a == 2){
-                    document.getElementById('supervisors').setAttribute("class", "btn btn-info btn-fixed-width")
-                    document.getElementById('players').setAttribute("class", "btn btn-info btn-fixed-width btn-dark")
-                    document.getElementById('teams').setAttribute("class", "btn btn-info btn-fixed-width")
+                    document.getElementById('supervisors').setAttribute("class", "btn btn-primary btn-fixed-width")
+                    document.getElementById('players').setAttribute("class", "btn btn-primary btn-fixed-width btn-dark")
+                    document.getElementById('teams').setAttribute("class", "btn btn-primary btn-fixed-width")
                     document.getElementById('supervisor-div').setAttribute("class","container mt-3 visually-hidden")
                     document.getElementById('competitors-div').setAttribute("class","container mt-3")
                     document.getElementById('teams-div').setAttribute("class","container mt-3 visually-hidden")
                 }else if (a == 3){
-                    document.getElementById('supervisors').setAttribute("class", "btn btn-info btn-fixed-width")
-                    document.getElementById('players').setAttribute("class", "btn btn-info btn-fixed-width")
-                    document.getElementById('teams').setAttribute("class", "btn btn-info btn-fixed-width btn-dark")
+                    document.getElementById('supervisors').setAttribute("class", "btn btn-primary btn-fixed-width")
+                    document.getElementById('players').setAttribute("class", "btn btn-primary btn-fixed-width")
+                    document.getElementById('teams').setAttribute("class", "btn btn-primary btn-fixed-width btn-dark")
                     document.getElementById('supervisor-div').setAttribute("class","container mt-3 visually-hidden")
                     document.getElementById('competitors-div').setAttribute("class","container mt-3 visually-hidden")
                     document.getElementById('teams-div').setAttribute("class","container mt-3")
