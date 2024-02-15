@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
-{% block title %}Robocup HOME{% endblock %}
+{% block title %}JSON upload{% endblock %}
 {% block content %}
     <!-- upload_json.html -->
+    <h1>Nahraj JSON s kategóriami</h1>
+    {% load crispy_forms_tags %}
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Upload</button>
+        <button type="submit" class="btn btn-primary">Ulož JSON</button>
     </form>
 {% endblock content %}
