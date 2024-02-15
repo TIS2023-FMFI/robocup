@@ -55,9 +55,6 @@ class RobocupUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
-    def get_email_field_name(cls):
-        return cls.email
-
     def get_short_name(self):
         return self.email.split("@")[0]
 

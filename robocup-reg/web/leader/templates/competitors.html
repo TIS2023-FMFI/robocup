@@ -33,7 +33,7 @@
                             {% if competitor.email == None %}
                                 -
                             {% else %}
-                                competitor.email
+                                {{ competitor.email }}
                             {% endif %}
                         </th>
                         <th scope="col">{{ competitor.phone_number }}</th>
