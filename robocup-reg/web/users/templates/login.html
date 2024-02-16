@@ -7,8 +7,9 @@
         <p>
             Nemáte ešte účet? <a href=" {% url 'register' %}">Zaregistrujte sa tu</a>!
         </p>
-        {#        <p><a href="{% url 'change-password' %}">Zabudli ste heslo ?</a></p>#}
+        <p>
+            <a href="{% url 'password_reset' %}">Zabudli ste heslo ?</a>
+        </p>
         <input type="submit" class="btn btn-success" value="Prihlásiť sa">
     </form>
-    {# Assumes you set up the password_reset view in your URLconf #}
 {% endblock %}
