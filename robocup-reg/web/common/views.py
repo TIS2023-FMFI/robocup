@@ -21,7 +21,6 @@ def results(request, id=1):
     # categories = Category.objects.filter(event=Event.objects.filter(is_active=True).get()[0])
     categories = Category.objects.filter(event__is_active=True)
     selected_category = categories.filter(id=id).get()
-    cat_name = selected_category.name
     result_dict = selected_category.results
     zoz = []
     if result_dict:
@@ -31,8 +30,7 @@ def results(request, id=1):
                     zoz.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
     else:
         messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
-
-    data = {"teams": teams, "categories": categories, "category_results": zoz, "cat_name": cat_name}
+    data = {"teams": teams, "categories": categories, "category_results": zoz, "selected_category": selected_category}
     return render(request, "results.html", data)
 
 
@@ -79,3 +77,7 @@ def download_teams(request):
             w.writerow(["", "", "clen", s.first_name + " " + s.last_name])
 
     return response
+
+
+def detailed_results(request, id):
+    return HttpResponse("TO BE IMPLEMENTED")

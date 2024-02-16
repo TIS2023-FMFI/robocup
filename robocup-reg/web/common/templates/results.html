@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container-fluid">
         <h2>
-            Výsledkové listiny pre kategóriu <span class="text-primary fw-bold text-decoration-underline">{{ cat_name }}</span>
+            Výsledkové listiny pre kategóriu <span class="text-primary fw-bold text-decoration-underline">{{ selected_category.name }}</span>
         </h2>
         <a class="btn dropdown-toggle navbar-link btn-primary fw-bold"
            role="button"
@@ -38,7 +38,8 @@
             </tbody>
         </table>
         <br>
-        <a class="btn btn-primary" href="download_detailed_res"><strong>Stiahni detailné výsledky</strong></a>
+        <a class="btn btn-primary"
+           href="{% url 'detailed_results' selected_category.id %}"><strong>Stiahni detailné výsledky</strong></a>
     </div>
 </div>
 <footer>
