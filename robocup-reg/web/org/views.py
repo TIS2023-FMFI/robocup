@@ -229,6 +229,7 @@ def diploms_for_category(request, id):
     category = Category.objects.filter(id=id).get()
     results = dict()
     if not category.results:
+        messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
         return redirect("org-panel")
     for rec in category.results:
         print(rec["nazov"], ": ", rec["poradie"])
