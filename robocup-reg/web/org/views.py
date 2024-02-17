@@ -231,8 +231,8 @@ def diploms_for_category(request, id):
     if not category.results:
         return redirect("org-panel")
     for rec in category.results:
-        print(rec["nazov"], ": ", rec["poriadie"])
-        results[rec["nazov"]] = int(rec["poriadie"])
+        print(rec["nazov"], ": ", rec["poradie"])
+        results[rec["nazov"]] = int(rec["poradie"])
 
     return make_diplom(category=category, results=results)
 
