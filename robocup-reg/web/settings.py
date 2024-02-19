@@ -155,7 +155,7 @@ EMAIL_HOST_PASSWORD = env("SMTP_PASS")
 EMAIL_PORT = env("SMTP_PORT")
 EMAIL_USE_TLS = env("SMTP_USETLS")
 
-DEFAULT_FROM_EMAIL = "robocup@thefilip.eu"
+DEFAULT_FROM_EMAIL = "robocup@dai.fmph.uniba.sk"
 
 CSRF_TRUSTED_ORIGINS = ["https://robocup.skse.sk", "http://robocup.skse.sk"]
 
