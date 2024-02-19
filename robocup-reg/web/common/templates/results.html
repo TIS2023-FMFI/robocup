@@ -1,40 +1,50 @@
-{% extends 'base.html' %} {% block title %}Robocup RESULTS{% endblock %}
+{% extends 'base.html' %}
+{% block title %}Robocup RESULTS{% endblock %}
 {% block content %}
     <div class="container-fluid">
-            <div class="container-fluid p-5 my-5 bg-light " style="text-align: center">
-              <p class="align-content-center"><strong>Výsledkové listiny</strong></p>
-            </div>
-
-    <a class="btn" href="download-competitors">Stiahni vsetkych sutaziacich</a>
-    <a class="btn" href="download-teams">Stiahni vsetky timy</a>
-
-
-    <div class="container mt-5">
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Tim</th>
-            {% for category in categories %}
-                <th>{{ category.name }}</th>
+        <h2>
+            Výsledkové listiny pre kategóriu <span class="text-primary fw-bold text-decoration-underline">{{ selected_category.name }}</span>
+        </h2>
+        <a class="btn dropdown-toggle navbar-link btn-primary fw-bold"
+           role="button"
+           type="button"
+           id="dropdownMenuButton1"
+           data-bs-toggle="dropdown"
+           aria-expanded="false">Vyber kategóriu</a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            {% for item in categories %}
+                {{ form.errors }}
+                <li>
+                    <a class="dropdown-item" href="{% url 'results' item.id %}">{{ item.name }}</a>
+                </li>
             {% endfor %}
-        </tr>
-        </thead>
-        <tbody>
-        {% for team in teams %}
-            <tr>
-                <td>{{ team.team_name }}</td>
-                {% for category in categories %}
-                    {% if category in team.categories.all %}
-                        <td class="table-primary">prihlásení</td>
-                    {% else %}
-                        <td>   </td>
-                    {% endif %}
-
-                {% endfor %}
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-</div>
+        </ul>
     </div>
+    <div class="container mt-5">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Poradie</th>
+                    <th>Tím</th>
+                    <th>Body</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in category_results %}
+                    <tr>
+                        {% for value in row %}<td>{{ value }}</td>{% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <a class="btn btn-primary"
+           href="{% url 'detailed_results' selected_category.id %}"><strong>Stiahni detailné výsledky</strong></a>
+    </div>
+</div>
+<footer>
+    <div>
+        <p></p>
+    </div>
+</footer>
 {% endblock %}

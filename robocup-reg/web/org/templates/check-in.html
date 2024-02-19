@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Robocup HOME{% endblock %}
+{% block content %}
+    <h3>Zaškrtnite prítomnych</h3>
+    <form method="POST" action="{% url 'check-in' id=checked_user %}">
+        {% csrf_token %}
+        {{ formset.management_form }}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Osoba</th>
+                    <th scope="col">Prítomná</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for form in formset %}
+                    {{ form.errors }}
+                    <tr>
+                        <th>{{ form.name.initial }}</th>
+                        <th>{{ form.checked_in }}</th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-danger">Ulož</button>
+    </form>
+    <div>
+        <p></p>
+    </div>
+    {#    <div class="container">#}
+    <a type="button"
+       class="btn btn-success"
+       href="{% url 'competitor_add' checked_user %}">Pridaj súťažiaceho</a>
+    <a type="button"
+       class="btn btn-success"
+       href="{% url 'supervisor_add' checked_user %}">Pridaj dozor</a>
+    <a type="button"
+       class="btn btn-success"
+       href="{% url 'team_add' checked_user %}">Pridaj tím</a>
+    {#    </div>#}
+{% endblock content %}

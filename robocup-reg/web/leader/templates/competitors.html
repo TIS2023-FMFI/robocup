@@ -1,5 +1,8 @@
 <div class="container mt-3 visually-hidden" id="competitors-div">
     <h2>Súťažiaci</h2>
+    <h7>
+    Tu môžete zaregistrovať nového súťažiaceho.
+    </h7>
     <form>
         <table class="table">
             <thead>
@@ -7,13 +10,13 @@
                     <th scope="col">Meno</th>
                     <th scope="col">Priezvisko</th>
                     <th scope="col">E-mail</th>
-                    <th scope="col">Tel. č</th>
+                    <th scope="col">Tel. číslo</th>
                     <th scope="col">Dozor</th>
                     <th scope="col">Dátum nar.</th>
-                    <th scope="col">ZŠ/SŠ</th>
+                    <th scope="col">ZŠ/Všetci</th>
                     <th scope="col">Diéta</th>
-                    <th scope="col">Ubyt 1. deň</th>
-                    <th scope="col">Ubyt 2. deň</th>
+                    <th scope="col">Ubyt. 1. deň</th>
+                    <th scope="col">Ubyt. 2. deň</th>
                     <th scope="col">Strava 1. deň</th>
                     <th scope="col">Strava 2. deň</th>
                     <th scope="col">Strava 3. deň</th>
@@ -22,27 +25,80 @@
                 </tr>
             </thead>
             {% for competitor in competitors %}
-            <thead>
-                <tr>
-                    <th scope="col">{{ competitor.first_name}}</th>
-                    <th scope="col">{{ competitor.last_name}}</th>
-                    <th scope="col">{{ competitor.email}}</th>
-                    <th scope="col">{{ competitor.phone_number}}</th>
-                    <th scope="col">{{ competitor.supervisor}}</th>
-                    <th scope="col">{{ competitor.birth_date}}</th>
-                    <th scope="col">{{ competitor.primary_school}}</th>
-                    <th scope="col">{{ competitor.diet}}</th>
-                    <th scope="col">{{ competitor.accomodation1}}</th>
-                    <th scope="col">{{ competitor.accomodation2}}</th>
-                    <th scope="col">{{ competitor.food1}}</th>
-                    <th scope="col">{{ competitor.food2}}</th>
-                    <th scope="col">{{ competitor.food3}}</th>
-                    <th scope="col"><a type="button" class="btn btn-danger" href="#" onclick="confirmDelete({{ competitor.id }}, '{{ competitor.first_name }} {{competitor.last_name }}','competitor')">Zmazať</a></th>
-                    <th scope="col"><a type="button" class="btn btn-success" href="{% url 'competitor_edit' competitor.id %}">Upraviť</a></th>
-                </tr>
-            </thead>
+                <thead>
+                    <tr>
+                        <th scope="col">{{ competitor.first_name }}</th>
+                        <th scope="col">{{ competitor.last_name }}</th>
+                        <th scope="col">
+                            {% if competitor.email == None %}
+                                -
+                            {% else %}
+                                {{ competitor.email }}
+                            {% endif %}
+                        </th>
+                        <th scope="col">{{ competitor.phone_number }}</th>
+                        <th scope="col">{{ competitor.supervisor }}</th>
+                        <th scope="col">{{ competitor.birth_date }}</th>
+                        <th scope="col">
+                            {% if competitor.primary_school %}
+                                ZŠ
+                            {% else %}
+                                Všetci
+                            {% endif %}
+                        </th>
+                        <th scope="col">{{ competitor.diet }}</th>
+                        <th scope="col">
+                            {% if competitor.accomodation1 %}
+                                áno
+                            {% else %}
+                                nie
+                            {% endif %}
+                        </th>
+                        <th scope="col">
+                            {% if competitor.accomodation2 %}
+                                áno
+                            {% else %}
+                                nie
+                            {% endif %}
+                        </th>
+                        <th scope="col">
+                            {% if competitor.food1 %}
+                                áno
+                            {% else %}
+                                nie
+                            {% endif %}
+                        </th>
+                        <th scope="col">
+                            {% if competitor.food2 %}
+                                áno
+                            {% else %}
+                                nie
+                            {% endif %}
+                        </th>
+                        <th scope="col">
+                            {% if competitor.food3 %}
+                                áno
+                            {% else %}
+                                nie
+                            {% endif %}
+                        </th>
+                        <th scope="col">
+                            <a type="button"
+                               class="btn btn-danger"
+                               href="#"
+                               onclick="confirmDelete({{ competitor.id }}, '{{ competitor.first_name }} {{ competitor.last_name }}','competitor')">Zmazať</a>
+                        </th>
+                        <th scope="col">
+                            <a type="button"
+                               class="btn btn-success"
+                               href="{% url 'competitor_edit' competitor.id %}">Upraviť</a>
+                        </th>
+                    </tr>
+                </thead>
             {% endfor %}
         </table>
-        <a id="competitor_reg"  class="btn btn-info btn-fixed-width" href="/leader-panel/competitor/add" >Pridaj súťažiaceho</a>
+        <a id="competitor_reg"
+           class="btn btn-primary btn-fixed-width"
+           href="/leader-panel/competitor/add">Pridaj súťažiaceho</a>
     </form>
 </div>

@@ -1,66 +1,103 @@
-{% extends 'base.html' %} {% block title %}Robocup leader panel {% endblock %}
-
+{% extends 'base.html' %}
+{% block title %}Robocup leader panel{% endblock %}
 {% block content %}
-<body>
-<div class="text-danger text-uppercase">
-    <p>{{ form.errors }}</p>
-</div>
-<div class="container mt-5">
-    <h2>Zostanevie tímu</h2>
-
-        {% if form.instance.id %}
-        <form method="post" action="{% url 'team_edit' form.instance.id %}">
-    {% else %}
-        <form method="post" action="{% url 'team_add' %}">
-    {% endif %}
-    {% csrf_token %}
-{#    {{ form.as_p }}#}
-        <div class="mb-3">
-            <label for="teamName"><strong>Meno tímu</strong></label>
-            <input type="text" class="form-control" id="teamName" name="{{ form.team_name.html_name }}" value="{{ form.team_name.value|default_if_none:'' }}" {% if form.team_name.errors %}aria-invalid="true"{% endif %}>
+    <body>
+        <div class="text-danger text-uppercase">
+            <p>{{ form.errors }}</p>
         </div>
-
-        <div class="mb-3">
-            <label for="organizationName"><strong>Meno organizácie/školy</strong></label>
-            <input type="text" class="form-control" id="organization" name="{{ form.organization.html_name }}" value="{{ form.organization.value|default_if_none:'' }}" {% if form.organization.errors %}aria-invalid="true"{% endif %}>
-        </div>
-        <div class="mb-3">
-            <label for="competitors"><strong>Súťažiaci</strong></label>
-            <select id="multiple_select" name="{{ form.competitors.name }}" class="form-select" multiple>
-            {% for competitor in form.competitors.field.queryset %}
-                <option value="{{ competitor.pk }}">{{ competitor }}</option>
-            {% endfor %}
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="team_leader"><strong>Veduci timu</strong></label>
-            <select id="{{ form.team_leader.id_for_label }}" name="{{ form.team_leader.name }}" class="form-select">
-                {% for team_leader in form.team_leader.field.queryset %}
-                    <option value="{{ team_leader.pk }}">{{ team_leader }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="categories"><strong>Kategórie</strong></label>
-            <select id="multiple_select1" name="{{ form.categories.name }}" class="form-select" multiple>
-                {% for category in form.categories.field.queryset %}
-                    <option value="{{ category.pk }}">{{ category }}</option>
-                {% endfor %}
-            </select>
-        </div>
-
-        {% if form.instance.id %}
-            <input type="submit" value="Uprav tím" style="border-radius: 5px; background: cyan">
-        {% else %}
-            <input type="submit" value="Pridaj tím" style="border-radius: 5px; background: cyan">
-        {% endif %}
-    </form>
-</div>
-<div><p></p></div>
-</body>
-
-<script>
+        <div class="container mt-5">
+            <h2>Zostavenie tímu</h2>
+            {% if form.instance.id %}
+                <form method="post" action="{% url 'team_edit' form.instance.id %}">
+                {% elif id is not None %}
+                    <form method="post" action="{% url 'team_add' id %}">
+                    {% else %}
+                        <form method="post" action="{% url 'team_add' %}">
+                        {% endif %}
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="teamName">
+                                <strong>Meno tímu</strong>
+                            </label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="teamName"
+                                   name="{{ form.team_name.html_name }}"
+                                   value="{{ form.team_name.value|default_if_none:'' }}"
+                                   {% if form.team_name.errors %}aria-invalid="true"{% endif %}>
+                        </div>
+                        <div class="mb-3">
+                            <label for="organizationName">
+                                <strong>Meno organizácie/školy</strong>
+                            </label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="organization"
+                                   name="{{ form.organization.html_name }}"
+                                   value="{{ form.organization.value|default_if_none:'' }}"
+                                   {% if form.organization.errors %}aria-invalid="true"{% endif %}>
+                        </div>
+                        <div class="mb-3">
+                            <label for="competitors">
+                                <strong>Súťažiaci</strong>
+                            </label>
+                            (Kliknutím na meno vyberiete súťažiaceho)
+                            <select id="multiple_select"
+                                    name="{{ form.competitors.name }}"
+                                    class="form-select"
+                                    multiple>
+                                {% for competitor in form.competitors.field.queryset %}
+                                    <option value="{{ competitor.pk }}"
+                                            {% if competitor in form.competitors.initial %}selected{% endif %}>
+                                        {{ competitor }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="team_leader">
+                                <strong>Vedúci timu</strong>
+                            </label>
+                            <select id="{{ form.team_leader.id_for_label }}"
+                                    name="{{ form.team_leader.name }}"
+                                    class="form-select">
+                                {% for team_leader in form.team_leader.field.queryset %}
+                                    <option value="{{ team_leader.pk }}"
+                                            {% if form.team_leader.initial == team_leader.pk %}selected{% endif %}>
+                                        {{ team_leader }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="categories">
+                                <strong>Kategórie</strong>
+                            </label>
+                            (Kliknutím na názov vyberiete kategóriu)
+                            <select id="multiple_select1"
+                                    name="{{ form.categories.name }}"
+                                    class="form-select"
+                                    multiple>
+                                {% for category in form.categories.field.queryset %}
+                                    <option value="{{ category.pk }}"
+                                            {% if category in form.categories.initial %}selected{% endif %}>
+                                        {{ category }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        {% if form.instance.id %}
+                            <input type="submit" value="Uprav tím" class="btn btn-primary">
+                        {% else %}
+                            <input type="submit" value="Pridaj tím" class="btn btn-primary">
+                        {% endif %}
+                    </form>
+                </div>
+                <div>
+                    <p></p>
+                </div>
+            </body>
+            <script>
     document.getElementById("multiple_select").addEventListener('mousedown', function(e) {
         e.preventDefault();
         var select = this;
@@ -78,5 +115,5 @@
         setTimeout(function(){ select.scrollTop = scroll; }, 0);
         select.focus();
     });
-</script>
-{% endblock %}
+            </script>
+        {% endblock %}

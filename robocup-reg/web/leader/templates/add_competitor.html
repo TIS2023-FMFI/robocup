@@ -1,132 +1,166 @@
-{% extends 'base.html' %} {% block title %}Robocup leader panel {% endblock %}
-
+{% extends 'base.html' %}
+{% block title %}Robocup leader panel{% endblock %}
 {% block content %}
-
-<div>
-    {% if form.instance.id %}
-        <form method="post" action="{% url 'competitor_edit' form.instance.id %}">
-    {% else %}
-        <form method="post" action="{% url 'competitor_add' %}">
-    {% endif %}
-        <div class="text-danger text-uppercase">
-                <p>{{ form.errors }}</p>
-            </div>
-        <div>
-            {% csrf_token %}
-            <div class="mb-3">
-                <label for="name"><strong>Meno <a style="color: red">*</a></strong></label>
-                <input type="text" class="form-control" id="first_name" name="{{ form.first_name.html_name }}" value="{{ form.first_name.value|default_if_none:'' }}" {% if form.first_name.errors %}aria-invalid="true"{% endif %}>
-            </div>
-
-            <div class="mb-3">
-                <label for="lastname"><strong>Priezvisko <a style="color: red">*</a></strong></label>
-                <input type="text" class="form-control" id="last_name" name="{{ form.last_name.html_name }}" value="{{ form.last_name.value|default_if_none:'' }}" {% if form.last_name.errors %}aria-invalid="true"{% endif %}>
-            </div>
-            <div class="mb-3">
-                <label for="email"><strong>E-mail <a style="color: red">**</a></strong></label>
-                <input type="text" class="form-control" id="email" name="{{ form.email.html_name }}" value="{{ form.email.value|default_if_none:'' }}" {% if form.email.errors %}aria-invalid="true"{% endif %}>
-            </div>
-
-            <div class="mb-3">
-                <label for="phone_number"><strong>Telefónne číslo <a style="color: red">**</a></strong></label>
-                <input type="text" class="form-control" id="phone_number" name="{{ form.phone_number.html_name }}" value="{{ form.phone_number.value|default_if_none:'' }}" {% if form.phone_number.errors %}aria-invalid="true"{% endif %}>
-            </div>
-            <div class="mb-3">
-                <label for="supervisor"><strong>Dozor <a style="color: red">*</a></strong></label>
-                <select id="{{ form.supervisor.id_for_label }}" name="{{ form.supervisor.name }}" class="form-select">
-                    {% for supervisor in form.supervisor.field.queryset %}
-                        <option value="{{ supervisor.pk }}">{{ supervisor }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="diet"><strong>Diéta</strong></label>
-                <input type="text" class="form-control" id="diet" name="{{ form.diet.html_name }}" value="{{ form.diet.value|default_if_none:'' }}" {% if form.diet.errors %}aria-invalid="true"{% endif %}>
-            </div>
-        </div>
-{#            <div style="width: 30%; box-sizing: border-box; padding: 20px;" >#}
-{#                <table>#}
-{#                    <tr>#}
-{#                        <td> Meno <a style="color: red">*</a></td><td> {{ form.first_name }}</td>#}
-{#                    </tr>#}
-{#                    <tr>#}
-{#                        <td> Priezvisko <a style="color: red">*</a></td><td> {{ form.last_name }}</td>#}
-{#                    </tr>#}
-{#                    <tr>#}
-{#                        <td> E-mail <a style="color: red">**</a></td><td> {{ form.email }}</td>#}
-{#                    </tr>#}
-{#                    <tr>#}
-{#                        <td> Telefón <a style="color: red">**</a></td><td> {{ form.phone_number }}</td>#}
-{#                    </tr>#}
-{#                    <tr>#}
-{#                        <td> Diéta </td>#}
-{#                        <td> {{ form.diet }} </td>#}
-{#                    </tr>#}
-{#                    <tr>#}
-{#                        <td> {{ form.supervisor.label }} </td>#}
-{#                        <td> {{ form.supervisor }} </td>#}
-{#                    </tr>#}
-{#                </table>#}
-{#            </div>#}
-        <div style="display: flex;">
-            <div style="width: 50%; box-sizing: border-box; padding: 20px; align-content: center" >
-                <table>
-                    <tr>
-                        <td></td>
-                        <td style="padding: 4px; text-align: center"> 1. deň </td>
-                        <td style="padding: 4px; text-align: center"> 2. deň </td>
-                        <td style="padding: 4px; text-align: center"> 3. deň </td>
-                    </tr>
-                    <tr>
-                        <td>Strava</td><td style="padding:4px; text-align: center"> {{ form.food1 }}</td>
-                        <td style="padding: 4px; text-align: center"> {{ form.food2 }}</td>
-                        <td style="padding: 4px; text-align: center"> {{ form.food3 }}</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td style="padding: 4px; text-align: center"> 1. noc </td>
-                        <td style="padding: 4px; text-align: center"> 2. noc </td>
-                        <td style="padding: 4px; text-align: center"></td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 4px"> Ubytovanie</td>
-                        <td style="padding: 4px; text-align: center">{{ form.accomodation1 }}</td>
-                        <td style="padding: 4px; text-align: center">{{ form.accomodation2 }}</td>
-                        <td style="padding: 4px; text-align: center"> </td>
-                    </tr>
-                </table>
-            </div>
-            <div style="width: 50%; box-sizing: border-box; padding: 20px; align-content: center" >
-                <table>
-                    <tr>
-                        <td></td>
-                        <td style="padding: 4px; text-align: center"> Áno </td>
-                        <td style="padding: 4px; text-align: center"> </td>
-                        <td style="padding: 4px; text-align: center"></td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 4px"> Je žiakom ZŠ </td>
-                        <td id="first" style="padding: 4px; text-align: center" >{{ form.primary_school }}</td>
-                        <td id="second" style="padding: 4px; text-align: center"></td>
-                        <td style="padding: 4px; text-align: center"></td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 4px"> Dátum narodenia </td>
-                        <td id="first" style="padding: 4px; text-align: center" >{{ form.birth_date }}</td>
-
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <a style="padding: 7px"> <a style="color: red">*</a><a> </a> Povinne,<a style="color: red">**</a> Povinne aspoň jedno</a><br>
-{#        <a style="padding: 7px; border-bottom: 20px"> <a style="color: red">**</a> Povinne aspoň jedno</a><br>#}
-
+    <div>
         {% if form.instance.id %}
-            <input type="submit" value="Uprav súťažiaceho" style="border-radius: 5px; background: cyan">
-        {% else %}
-            <input type="submit" value="Pridaj súťažiaceho" style="border-radius: 5px; background: cyan">
-        {% endif %}
-    </form>
-
-</div>
-{% endblock %}
+            <form method="post" action="{% url 'competitor_edit' form.instance.id %}">
+            {% elif id is not None %}
+                <form method="post" action="{% url 'competitor_add' id %}">
+                {% else %}
+                    <form method="post" action="{% url 'competitor_add' %}">
+                    {% endif %}
+                    <div class="text-danger text-uppercase">
+                        <p>{{ form.errors }}</p>
+                    </div>
+                    <div>
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name">
+                                <strong>Meno <a style="color: red">*</a></strong>
+                            </label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="first_name"
+                                   name="{{ form.first_name.html_name }}"
+                                   value="{{ form.first_name.value|default_if_none:'' }}"
+                                   {% if form.first_name.errors %}aria-invalid="true"{% endif %}>
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastname">
+                                <strong>Priezvisko <a style="color: red">*</a></strong>
+                            </label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="last_name"
+                                   name="{{ form.last_name.html_name }}"
+                                   value="{{ form.last_name.value|default_if_none:'' }}"
+                                   {% if form.last_name.errors %}aria-invalid="true"{% endif %}>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email">
+                                <strong>E-mail</strong>
+                            </label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="email"
+                                   name="{{ form.email.html_name }}"
+                                   value="{{ form.email.value|default_if_none:'' }}"
+                                   {% if form.email.errors %}aria-invalid="true"{% endif %}>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone_number">
+                                <strong>Telefónne číslo <a style="color: red">*</a></strong>
+                            </label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="phone_number"
+                                   name="{{ form.phone_number.html_name }}"
+                                   value="{{ form.phone_number.value|default_if_none:'' }}"
+                                   {% if form.phone_number.errors %}aria-invalid="true"{% endif %}>
+                        </div>
+                        <div class="mb-3">
+                            <label for="supervisor">
+                                <strong>Dozor <a style="color: red">*</a></strong>
+                            </label>
+                            <select id="{{ form.supervisor.id_for_label }}"
+                                    name="{{ form.supervisor.name }}"
+                                    class="form-select">
+                                {% for supervisor in form.supervisor.field.queryset %}
+                                    <option value="{{ supervisor.pk }}">{{ supervisor }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="diet">
+                                <strong>Diéta</strong>
+                            </label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="diet"
+                                   name="{{ form.diet.html_name }}"
+                                   value="{{ form.diet.value|default_if_none:'' }}"
+                                   {% if form.diet.errors %}aria-invalid="true"{% endif %}>
+                        </div>
+                    </div>
+                    Uhradením poplatku za stravu a ubytovanie máte nárok na dve ubytovania a stravu takto: 1. deň: obed, večera, 2. deň: raňajky, obed, večera, 3. deň: raňajky. Ak vopred viete, že niektoré z nich nevyužijete, zaznačte to prosím:
+                    <div style="display: flex;">
+                        <div style="width: 50%;
+                                    box-sizing: border-box;
+                                    padding: 20px;
+                                    align-content: center">
+                            <table>
+                                <tr>
+                                    <td></td>
+                                    <td style="padding: 4px; text-align: center">1. deň</td>
+                                    <td style="padding: 4px; text-align: center">2. deň</td>
+                                    <td style="padding: 4px; text-align: center">3. deň</td>
+                                </tr>
+                                <tr>
+                                    <td>Strava</td>
+                                    <td style="padding:4px; text-align: center">{{ form.food1 }}</td>
+                                    <td style="padding: 4px; text-align: center">{{ form.food2 }}</td>
+                                    <td style="padding: 4px; text-align: center">{{ form.food3 }}</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td style="padding: 4px; text-align: center">1. noc</td>
+                                    <td style="padding: 4px; text-align: center">2. noc</td>
+                                    <td style="padding: 4px; text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 4px">Ubytovanie</td>
+                                    <td style="padding: 4px; text-align: center">{{ form.accomodation1 }}</td>
+                                    <td style="padding: 4px; text-align: center">{{ form.accomodation2 }}</td>
+                                    <td style="padding: 4px; text-align: center"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="width: 50%;
+                                    box-sizing: border-box;
+                                    padding: 20px;
+                                    align-content: center">
+                            <table>
+                                <tr>
+                                    <td></td>
+                                    <td style="padding: 4px; text-align: center">Áno</td>
+                                    <td style="padding: 4px; text-align: center"></td>
+                                    <td style="padding: 4px; text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 4px">Je žiakom ZŠ/príma-kvarta</td>
+                                    <td id="first" style="padding: 4px; text-align: center">{{ form.primary_school }}</td>
+                                    <td id="second" style="padding: 4px; text-align: center"></td>
+                                    <td style="padding: 4px; text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 4px">Dátum narodenia</td>
+                                    <td id="first" style="padding: 4px; text-align: center">{{ form.birth_date }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <a style="padding: 7px"> <a style="color: red">*</a> Povinné</a>
+                    <br>
+                    <div>
+                        <p></p>
+                    </div>
+                    {% if form.instance.id %}
+                        <input type="submit" value="Uprav súťažiaceho" class="btn btn-primary">
+                    {% else %}
+                        <input type="submit" value="Pridaj súťažiaceho" class="btn btn-primary">
+                    {% endif %}
+                    <br>
+                    <br>
+                    <div style="border: 1px solid lightgrey;
+                                padding: 10px;
+                                background-color: lightgrey">
+                        <p class="align-content-center">
+                            <strong>GDPR: Slovenská spoločnosť elektronikov ochraňuje zadané údaje a zbiera ich iba pre účely komunikácie s tímami o podmienkach súťaže, vyhodnocovanie a zverejňovanie tímov prihlásených do súťaže i výsledkov zo súťaže, zabezpečenie ubytovania a stravy počas súťaže a na prípadné informovanie o ďalších podujatiach ojedinelými správami. E-mail, telefónne číslo, alebo dátum narodenia nie je nikdy zverejnený na žiadnej verejnej stránke. Za udelenie súhlasu s evidovaním údajov od jednotlivých členov tímu zodpovedá ten, kto ich do systému zadáva (registrátor tímov). V prípade, že chcete, aby Vaše údaje boli zmazané, napíšte organizátorom.</strong>
+                        </p>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <p></p>
+            </div>
+        {% endblock %}

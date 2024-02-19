@@ -34,8 +34,17 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "robocup.thefilip.eu"]
+ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "localhost", "robocup.skse.sk"]
 
+# Locale
+LANGUAGE_CODE = "sk"
+TIME_ZONE = "Europe/Bratislava"
+
+AUTH_USER_MODEL = "users.RobocupUser"
+
+USE_I18N = True
+
+USE_TZ = True
 
 # Application definition
 
@@ -66,6 +75,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
 ]
 
 ROOT_URLCONF = "web.urls"
@@ -124,18 +134,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/4.2/topics/i18n/
-
-LANGUAGE_CODE = "en-us"
-
-TIME_ZONE = "UTC"
-
-USE_I18N = True
-
-USE_TZ = True
-
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -150,15 +148,16 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-AUTH_USER_MODEL = "users.User"
 
-EMAIL_HOST = "smtp.sendgrid.net"
-EMAIL_HOST_USER = "apikey"  # this is exactly the value 'apikey'
-EMAIL_HOST_PASSWORD = env("SENDGRID_API_KEY")
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+EMAIL_HOST = env("SMTP_HOST")
+EMAIL_HOST_USER = env("SMTP_USER")  # this is exactly the value 'apikey'
+EMAIL_HOST_PASSWORD = env("SMTP_PASS")
+EMAIL_PORT = env("SMTP_PORT")
+EMAIL_USE_TLS = env("SMTP_USETLS")
 
-CSRF_TRUSTED_ORIGINS = ["http://robocup.thefilip.eu", "https://robocup.thefilip.eu"]
+DEFAULT_FROM_EMAIL = "robocup@thefilip.eu"
+
+CSRF_TRUSTED_ORIGINS = ["https://robocup.skse.sk", "http://robocup.skse.sk"]
 
 STORAGES = {
     "staticfiles": {
@@ -169,3 +168,5 @@ STORAGES = {
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "static"
+
+MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"

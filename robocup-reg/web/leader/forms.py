@@ -1,14 +1,15 @@
 import datetime
 
 from django import forms
+from django.core.exceptions import ValidationError
 
 from web.leader.models import Person, Team
 
 
 class CompetitorForm(forms.ModelForm):
-    email = forms.EmailField(required=True)
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
+    phone_number = forms.CharField(required=True)
     birth_date = forms.DateField(
         required=True,
         widget=forms.SelectDateWidget(
@@ -33,6 +34,8 @@ class CompetitorForm(forms.ModelForm):
             "food2",
             "food3",
             "supervisor",
+            # "checked_in"
+            "supervisor",
         ]
 
     def __init__(self, *args, **kwargs):
@@ -43,6 +46,14 @@ class CompetitorForm(forms.ModelForm):
             self.user = user
             self.fields["supervisor"].queryset = Person.objects.filter(user_id=user.id, is_supervisor=True)
             self.fields["supervisor"].label = "Vyber dozorujúcu osobu"
+
+    def clean(self):
+        cleaned_data = super().clean()
+        email = cleaned_data.get("email")
+        phone_number = cleaned_data.get("phone_number")
+
+        if not email and not phone_number:
+            raise ValidationError("Please provide either an email or a phone number.")
 
     def save(self, commit=True):
         instance = super(CompetitorForm, self).save(commit=False)
@@ -56,6 +67,7 @@ class SupervisorForm(forms.ModelForm):
     email = forms.EmailField(required=True)
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
+    phone_number = forms.CharField(required=True)
 
     class Meta:
         model = Person
@@ -69,6 +81,8 @@ class SupervisorForm(forms.ModelForm):
             "accomodation2",
             "food1",
             "food2",
+            "food3",
+            # "checked_in"
             "food3",
         ]
 
@@ -110,6 +124,8 @@ class TeamForm(forms.ModelForm):
             self.fields["organization"].label = "Škola/Organizácia"
             self.fields["team_name"].label = "Názov tímu"
             self.fields["categories"].label = "Kategórie"
+
+            # Set initial data for team_leader and competitors fields
 
     def save(self, commit=True):
         instance = super(TeamForm, self).save(commit=False)

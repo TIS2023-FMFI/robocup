@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Robocup HOME{% endblock %}
+{% block content %}
+    <div class="container-fluid p-5 my-5 bg-light " id="1">
+        <p class="align-content-center">
+            <strong>Prihlásenia tímov pre každú kategóriu</strong>
+        </p>
+        <div class="container mt-5">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Tím</th>
+                        {% for category in categories %}<th>{{ category }}</th>{% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for team in teams %}
+                        <tr>
+                            <td>{{ team.team_name }}</td>
+                            {% for category in categories %}
+                                {% if category in team.categories.all %}
+                                    <td class="table-primary">prihlásení</td>
+                                {% else %}
+                                    <td></td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a class="btn btn-primary" href="download-competitors"><strong>Stiahni všetkých súťažiacich</strong></a>
+        <a class="btn btn-primary"  href="download-teams"><strong>Stiahni všetky tímy</strong></a>
+    </div>
+{% endblock %}

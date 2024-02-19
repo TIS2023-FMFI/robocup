@@ -15,6 +15,10 @@ django-import-export = "*"
 whitenoise = "*"
 django-staticfiles = "*"
 django-multiselectfield = "*"
+jsonfield = "*"
+unidecode = "*"
+xhtml2pdf = "*"
+django = "==4.2"
 
 [dev-packages]
 pre-commit = "*"

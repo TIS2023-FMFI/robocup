@@ -1,62 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-
+    {% load static %}
+    <head>
+        <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name = "viewport" content="width=device-width, initial-scale=1.0 ">
-          {% load bootstrap5 %}
-          {% bootstrap_css %}
-          {% bootstrap_javascript %}
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% load bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-        <title>{% block title %}RoboCup{% endblock %}</title>
-</head>
-<body>
-    <nav class="navbar navbar-expand-md navbar-light bg-info">
-        <div class="container-fluid">
-            <div>
-              <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" aria-current="page" href="/home" style="" ><strong>Robocup</strong></a>
-              </li>
-                  {% if user.is_authenticated %}
-                <li class="nav-item">
-                  <a class="nav-link" href="/leader-panel">Registrácia</a>
-                </li>
-                {% endif %}
-                {% if user.is_authenticated and user.is_staff %}
-                <li class="nav-item">
-                  <a class="nav-link" href="/org-panel">Organizácia</a>
-                </li>
-                {% endif %}
-
-                {% if user.is_authenticated and user.is_superuser %}
-                <li class="nav-item">
-                  <a class="nav-link" href="/admin">Administrácia</a>
-                </li>
-                {% endif %}
-                <li class="nav-item">
-                  <a class="nav-link" href="/results">Výsledky</a>
-                </li>
-              </ul>
-            </div>
-        <div>
-          <ul class="navbar-nav">
-            {% if user.is_authenticated %}
-            <span class="navbar-text"> Prihlásený: {{user.email}} | </span>
-            <li class="nav-item">
-              <a class="nav-link" href="/logout">Odhlásiť sa</a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="/login">Prihlásiť sa</a>
-            </li>
-            {% endif %}
-          </ul>
+        <title>
+            {% block title %}RoboCup{% endblock %}
+        </title>
+    </head>
+    <body>
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <a href="https://skse.sk">
+                <img src=" {% static 'skse.png' %}"  width="100%">
+            </a>
         </div>
-      </div>
-    </nav>
-    <div class="container">{% block content %} {% endblock %}</div>
-</body>
+        <nav class="navbar navbar-expand-md navbar-light"
+             style="background-color: rgba(0,128,240,0.25)">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/home">
+                    <img src=" {% static 'rcj_logo.png' %}"  width="100" height="60">
+                </a>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav">
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link fw-bold fs-6" href="/leader-panel">Registrácia</a>
+                            </li>
+                        {% endif %}
+                        {% if user.is_authenticated and user.is_staff %}
+                            <li class="nav-item">
+                                <a class="nav-link fw-bold fs-6" href="/org-panel">Organizácia</a>
+                            </li>
+                        {% endif %}
+                        {% if user.is_authenticated and user.is_superuser %}
+                            <li class="nav-item">
+                                <a class="nav-link fw-bold fs-6" href="/admin">Administrácia</a>
+                            </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold fs-6" href="/results">Výsledky</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold fs-6" href="/info">Informácie</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="navbar-nav">
+                        {% if user.is_authenticated %}
+                            <span class="navbar-text">Prihlásený: {{ user.email }} |</span>
+                            <li class="nav-item">
+                                <a class="nav-link fw-bold fs-6" href="/logout">Odhlásiť sa</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link fw-bold fs-6" href="/login">Prihlásiť sa</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container mt-2">
+            {% for message in messages %}
+                {% if 'success' in message.tags %}
+                    <div class="alert alert-success">
+                        <strong>ÚSPECH!</strong>
+                        {{ message }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            {% for message in messages %}
+                {% if 'error' in message.tags %}
+                    <div class="alert alert-danger">
+                        <strong>CHYBA!</strong>
+                        {{ message }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            {% for message in messages %}
+                {% if 'info' in message.tags %}
+                    <div class="alert alert-info">
+                        <strong>INFO!</strong>
+                        {{ message }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <script>
+            $(document).ready(function(){
+                // Set the duration (in milliseconds) for the alerts to be visible
+                var alertDuration = 5000; // 5 seconds
+
+                // Hide the alerts after the specified duration
+                $(".alert").delay(alertDuration).fadeOut("slow");
+            });
+        </script>
+        <h2 id="device-width" class="text-danger"></h2>
+        <script>
+            var deviceWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+            var widthElement = document.getElementById('device-width');
+
+            if (widthElement) {
+
+                if (deviceWidth < 768) {
+                    widthElement.innerHTML = 'Vaša obrazovka je príliš malá - prosím zväčšite okno alebo na mobile zapnite zobrazenie pre počítač.';
+                }
+            }
+        </script>
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
 </html>
