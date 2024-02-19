@@ -149,11 +149,13 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 
-EMAIL_HOST = env("SMTP_HOST") 
-EMAIL_HOST_USER = env("SMTP_USER")      # this is exactly the value 'apikey'
+EMAIL_HOST = env("SMTP_HOST")
+EMAIL_HOST_USER = env("SMTP_USER")  # this is exactly the value 'apikey'
 EMAIL_HOST_PASSWORD = env("SMTP_PASS")
-EMAIL_PORT = env("SMTP_PORT") 
+EMAIL_PORT = env("SMTP_PORT")
 EMAIL_USE_TLS = env("SMTP_USETLS")
+
+DEFAULT_FROM_EMAIL = "robocup@thefilip.eu"
 
 CSRF_TRUSTED_ORIGINS = ["https://robocup.skse.sk", "http://robocup.skse.sk"]
 

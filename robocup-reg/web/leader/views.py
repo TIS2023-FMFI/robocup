@@ -98,7 +98,7 @@ def team_add(request, id=None):
     if not Person.objects.filter(user=user.id, is_supervisor=True).exists() or not competitors.exists():
         messages.error(request, "Pre vytvorenie tímu je potrebné najprv vytvoriť dozor a súťažiacich.")
         return redirect("leader_panel")
-    categories = Category.objects.all()
+    categories = Category.objects.filter(event__is_active=True)
     context["competitors"] = competitors
     context["categories"] = categories
     if request.POST:
@@ -216,7 +216,8 @@ def send_alert(user, instance, change):
         if not event.registrations_fits_today:
             email = EmailMessage(
                 "[rcj] Zmena v registracii po datume",
-                f"""Pouzivatel {user.email} vykonal zmenu po skonceni registracie:\n\n{change}\n\nnovy/upraveny udaj:\n\n{instance}.
+                f"""Pouzivatel {user.email} vykonal zmenu po skonceni registracie:
+                \n\n{change}\n\nnovy/upraveny udaj:\n\n{instance}.
                 """,
                 from_email="robocup@dai.fmph.uniba.sk",
                 to=["pavel.petrovic@gmail.com"],

@@ -2,23 +2,40 @@
 {% load static %}
 {% block title %}Robocup HOME{% endblock %}
 {% block content %}
-        <div class="container-fluid">
-		<br><span style="color: green"><b>Vitajte! &nbsp;&nbsp;&nbsp;Vítejte! &nbsp;&nbsp;&nbsp;Üdvözöljük! &nbsp;&nbsp;&nbsp;Willkommen! &nbsp;&nbsp;&nbsp;Dobrodošli! &nbsp;&nbsp;&nbsp;Witamy! &nbsp;&nbsp;&nbsp;Привітання!</b><br><br></span>
-		<b>Slovenská spoločnosť elektronikov v spolupráci s CVTI SR a SPŠE na Zochovej ulici v Bratislave Vás pozýva do 28. ročníka celoslovenskej súťaže v stavbe a programovaní robotov pre základné a stredné školy ROBOCUP 2024, ktorá sa koná 6. až 8. marca.</b> <br><br>
-		Postup pri registrácii:<br>
-		1. Vytvoriť si účet na tejto stránke (registrátor), cez ktorý zadáte celú svoju výpravu (sprievodné osoby, súťažiaci a tímy).<br>
-		2. Zadať údaje o všetkých sprievodných osobách celej výpravy (dozor)<br>
-		3. Zadať údaje o všetkých súťažiacich celej výpravy (súťažiaci) - ku každému súťažiacemu priradíte dozor, ktorý za neho bude zodpovedať počas súťaže.<br>
-		4. Vytvoriť tímy, kde je pre každý tím možné vybrať súťažiacich aj súťažné kategórie, v ktorých bude tím súťažiť, každý tím má svojho vedúceho tímu (dozor), ktorý zodpovedá za správnosť údajov aj komunikáciu s tímom. Súťažiaci môžu byť členmi viacerých tímov.<br>
-		5. Neskôr - kým je registrácia otvorená - je možné všetky údaje meniť.<br>
-		6. Po uzavretí registrácie je možné údaje meniť iba zaslaním mailu organizátorovi a po príchode na súťaž každý súťažiaci a dozor potrvdí svoju fyzickú prítomnosť. V prípade mimoriadnych okolností je možné robiť posledné zmeny na mieste konania - ale iba s výslovným súhlasom organizátora. <br>
-		8. Aktuálny zoznam zaregistrovaných tímov sa zobrazuje na tejto stránke a po súťaži sa tu zobrazia výsledky z jednotlivých kategórií.<br><br>
-		<b>Dôležité informácie o súťaži:</b> <!--
+    <div class="container-fluid">
+        <br>
+        <span style="color: green"><b>Vitajte! &nbsp;&nbsp;&nbsp;Vítejte! &nbsp;&nbsp;&nbsp;Üdvözöljük! &nbsp;&nbsp;&nbsp;Willkommen! &nbsp;&nbsp;&nbsp;Dobrodošli! &nbsp;&nbsp;&nbsp;Witamy! &nbsp;&nbsp;&nbsp;Привітання!</b>
+            <br>
+            <br>
+        </span>
+        <b>Slovenská spoločnosť elektronikov v spolupráci s CVTI SR a SPŠE na Zochovej ulici v Bratislave Vás pozýva do 28. ročníka celoslovenskej súťaže v stavbe a programovaní robotov pre základné a stredné školy ROBOCUP 2024, ktorá sa koná 6. až 8. marca.</b>
+        <br>
+        <br>
+        Postup pri registrácii:
+        <br>
+        1. Vytvoriť si účet na tejto stránke (registrátor), cez ktorý zadáte celú svoju výpravu (sprievodné osoby, súťažiaci a tímy).
+        <br>
+        2. Zadať údaje o všetkých sprievodných osobách celej výpravy (dozor)
+        <br>
+        3. Zadať údaje o všetkých súťažiacich celej výpravy (súťažiaci) - ku každému súťažiacemu priradíte dozor, ktorý za neho bude zodpovedať počas súťaže.
+        <br>
+        4. Vytvoriť tímy, kde je pre každý tím možné vybrať súťažiacich aj súťažné kategórie, v ktorých bude tím súťažiť, každý tím má svojho vedúceho tímu (dozor), ktorý zodpovedá za správnosť údajov aj komunikáciu s tímom. Súťažiaci môžu byť členmi viacerých tímov.
+        <br>
+        5. Neskôr - kým je registrácia otvorená - je možné všetky údaje meniť.
+        <br>
+        6. Po uzavretí registrácie je možné údaje meniť iba zaslaním mailu organizátorovi a po príchode na súťaž každý súťažiaci a dozor potrvdí svoju fyzickú prítomnosť. V prípade mimoriadnych okolností je možné robiť posledné zmeny na mieste konania - ale iba s výslovným súhlasom organizátora.
+        <br>
+        8. Aktuálny zoznam zaregistrovaných tímov sa zobrazuje na tejto stránke a po súťaži sa tu zobrazia výsledky z jednotlivých kategórií.
+        <br>
+        <br>
+        <b>Dôležité informácie o súťaži:</b> <!--
 		<a href="https://skse.sk/sse-files/html/aktivity/ROBOCUP2024/PropozicieRoboCup2024.pdf">Propozície RoboCup 2024 (pdf)</a><br><br>
 		-->
-		<a href="{% static 'Propozicie_RoboCup2024.pdf' %}">Propozície RoboCup 2024 (pdf)</a><br><br>
-		Ďalšie aktuálne organizačné informácie: <a href="https://wiki.robotika.sk/robowiki/index.php?title=RoboCup_Junior_Slovensko">Wiki stránka RoboCup Junior Slovensko</a>
-    {% if user.is_authenticated %}
+        <a href="{% static 'Propozicie_RoboCup2024.pdf' %}">Propozície RoboCup 2024 (pdf)</a>
+        <br>
+        <br>
+        Ďalšie aktuálne organizačné informácie: <a href="https://wiki.robotika.sk/robowiki/index.php?title=RoboCup_Junior_Slovensko">Wiki stránka RoboCup Junior Slovensko</a>
+        {% if user.is_authenticated %}
             <div class="container-fluid p-4 my-5 bg-light " style="text-align: center">
                 {% if open_event.registrations_fits_today %}
                     <p class="align-content-center">
@@ -46,5 +63,9 @@
             </div>
         </div>
     {% endif %}
-    <span style="font-size: smaller;color: grey">Systém registrácie je výsledkom študentského projektu na Tvorbe informačných systémov, je v skúšobnej prevádzke a prípadné ťažkosti alebo nedostatky prosím hláste na adrese robocup<img src=" {% static 'zavinac.png' %}" alt="@" title="@">dai.fmph.uniba.sk.</span><br><br> 
+    <span style="font-size: smaller;color: grey">Systém registrácie je výsledkom študentského projektu na Tvorbe informačných systémov, je v skúšobnej prevádzke a prípadné ťažkosti alebo nedostatky prosím hláste na adrese robocup
+        <img src=" {% static 'zavinac.png' %}" alt="@" title="@">
+    dai.fmph.uniba.sk.</span>
+    <br>
+    <br>
 {% endblock %}

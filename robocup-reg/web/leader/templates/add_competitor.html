@@ -82,7 +82,7 @@
                                    {% if form.diet.errors %}aria-invalid="true"{% endif %}>
                         </div>
                     </div>
-		    Uhradením poplatku za stravu a ubytovanie máte nárok na dve ubytovania a stravu takto: 1. deň: obed, večera, 2. deň: raňajky, obed, večera, 3. deň: raňajky. Ak vopred viete, že niektoré z nich nevyužijete, zaznačte to prosím:
+                    Uhradením poplatku za stravu a ubytovanie máte nárok na dve ubytovania a stravu takto: 1. deň: obed, večera, 2. deň: raňajky, obed, večera, 3. deň: raňajky. Ak vopred viete, že niektoré z nich nevyužijete, zaznačte to prosím:
                     <div style="display: flex;">
                         <div style="width: 50%;
                                     box-sizing: border-box;
@@ -145,12 +145,13 @@
                         <p></p>
                     </div>
                     {% if form.instance.id %}
-                        <input type="submit" value="Uprav súťažiaceho" class="btn btn-info">
+                        <input type="submit" value="Uprav súťažiaceho" class="btn btn-primary">
                     {% else %}
-                        <input type="submit" value="Pridaj súťažiaceho" class="btn btn-info">
+                        <input type="submit" value="Pridaj súťažiaceho" class="btn btn-primary">
                     {% endif %}
-                    <br><br>
-		    <div style="border: 1px solid lightgrey;
+                    <br>
+                    <br>
+                    <div style="border: 1px solid lightgrey;
                                 padding: 10px;
                                 background-color: lightgrey">
                         <p class="align-content-center">

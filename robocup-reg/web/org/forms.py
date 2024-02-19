@@ -67,11 +67,13 @@ BulkCheckInFormSet = formset_factory(BulkCheckInForm, extra=0)
 
 
 class EventToCopyFromForm(forms.Form):
-    event = forms.ModelChoiceField(queryset=Event.objects.all())
+    source_event = forms.ModelChoiceField(queryset=Event.objects.all())
+    destination_event = forms.ModelChoiceField(queryset=Event.objects.all())
 
 
 class StaffUserCreationForm(forms.Form):
-    email = forms.EmailField(label="Enter email of the new staff user")
+    # email = forms.EmailField(label="Enter email of the new staff user")
+    email = forms.EmailField(label="Email:")
 
     class Meta:
         fields = ["email"]

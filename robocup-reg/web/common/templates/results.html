@@ -1,13 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}Robocup RESULTS{% endblock %}
 {% block content %}
-    <h2>
-        <p class="align-content-center">
-            <strong>Výsledkové listiny</strong>
-        </p>
-    </h2>
     <div class="container-fluid">
-        <a class="btn dropdown-toggle navbar-link bg-info fw-bold"
+        <h2>
+            Výsledkové listiny pre kategóriu <span class="text-primary fw-bold text-decoration-underline">{{ selected_category.name }}</span>
+        </h2>
+        <a class="btn dropdown-toggle navbar-link btn-primary fw-bold"
            role="button"
            type="button"
            id="dropdownMenuButton1"
@@ -21,33 +19,32 @@
                 </li>
             {% endfor %}
         </ul>
-        {#        <div>#}
-        {##}
-        {#            <table border="1">#}
-        {#        <thead>#}
-        {#            <tr>#}
-        {#                <th>nazov</th>#}
-        {#                <th>Skore</th>#}
-        {#                <!-- Add more table headers for each field in your model -->#}
-        {#            </tr>#}
-        {#        </thead>#}
-        {#        <tbody>#}
-        {#            {% for obj in category_results %}#}
-        {#            <tr>#}
-        {#                <td>{{ obj.name }}</td>#}
-        {#                <td>{{ obj.body }}</td>#}
-        {#                <!-- Add more table cells for each field in your model -->#}
-        {#            </tr>#}
-        {#            {% endfor %}#}
-        {#        </tbody>#}
-        {#    </table>#}
-        {#        </div>#}
-        {#        <a class="btn btn-primary" href="download-competitors"><strong>Stiahni všetkých súťažiacich</strong></a>#}
-        {#        <a class="btn btn-primary"  href="download-teams"><strong>Stiahni všetky tímy</strong></a>#}
     </div>
-    <footer>
-        <div>
-            <p></p>
-        </div>
-    </footer>
+    <div class="container mt-5">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Poradie</th>
+                    <th>Tím</th>
+                    <th>Body</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in category_results %}
+                    <tr>
+                        {% for value in row %}<td>{{ value }}</td>{% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <a class="btn btn-primary"
+           href="{% url 'detailed_results' selected_category.id %}"><strong>Stiahni detailné výsledky</strong></a>
+    </div>
+</div>
+<footer>
+    <div>
+        <p></p>
+    </div>
+</footer>
 {% endblock %}

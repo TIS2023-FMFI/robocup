@@ -29,6 +29,8 @@ from .models import Category, Event
 def org_panel(request):
     if request.method == "POST":
         form = ExpeditionLeaderForm(request.POST)
+        event_form = EventToCopyFromForm(request.POST)
+
         if form.is_valid():
             query = form.cleaned_data["search_query"]
             results = Person.objects.filter(Q(first_name__icontains=query) | Q(last_name__icontains=query))
@@ -37,9 +39,10 @@ def org_panel(request):
             results = Person.objects.filter()
     else:
         form = ExpeditionLeaderForm()
+        event_form = EventToCopyFromForm(request.POST)
         results = Person.objects.filter(is_supervisor=True)
-    categories = Category.objects.all()
-    context = {"form": form, "results": results, "categories": categories}
+    categories = Category.objects.filter(event__is_active=True)
+    context = {"form": form, "event_form": event_form, "results": results, "categories": categories}
     return render(request, "org-panel.html", context)
 
 
@@ -69,7 +72,7 @@ def check_in(request, id):
 
 @user_passes_test(lambda user: user.is_staff)
 def download_categories(request):
-    category = Category.objects.all()
+    category = Category.objects.filter(event__is_active=True)
     for cat in category:
         if cat.results is not None:
             cat.results = None
@@ -115,6 +118,7 @@ def import_json(request):
                 else:
                     print(f"{item}: {obj}")
             messages.success(request, "JSON importovany")
+            return redirect("org-panel")
 
     else:
         form = JSONUploadForm()
@@ -127,10 +131,16 @@ def copy_categories_from_last_event(request):
     if request.method == "POST":
         form = EventToCopyFromForm(request.POST)
         if form.is_valid():
-            pass
-    else:
-        form = EventToCopyFromForm()
-    return render(request, "org-panel.html", {"form": form})
+            source_event = form.cleaned_data.get("source_event")
+            dest_event = form.cleaned_data.get("destination_event")
+            print(source_event, dest_event)
+            source_categories = Category.objects.filter(event=source_event)
+            for cat in source_categories:
+                cat.pk = None
+                cat.results = None
+                cat.event = dest_event
+                cat.save()
+    return redirect("org-panel")
 
 
 def create_staff_user(request):
@@ -140,7 +150,6 @@ def create_staff_user(request):
             email = form.cleaned_data["email"]
             password = "".join(random.choices(string.ascii_uppercase + string.digits, k=8))
             # password = User.objects.make_random_password(length=16)
-
             if not RobocupUser.objects.filter(email=email).exists():
                 # Create a new user and set them as staff
                 user = RobocupUserManager.create_user(
@@ -150,7 +159,8 @@ def create_staff_user(request):
                 send_mail(
                     "Your Staff Account Has Been Created",
                     f"Your account has been created with the following"
-                    f" credentials:\nUsername: {email}\nPassword: {password}",
+                    f" credentials:\nUsername: {email}\nPassword: {password}\n"
+                    f"you can change this password after login at https://robocup.skse.sk/change-password .",
                     from_email="robocup@thefilip.eu",
                     recipient_list=[user.email],
                 )
@@ -220,9 +230,12 @@ def upload_category_results(request, id):
 def diploms_for_category(request, id):
     category = Category.objects.filter(id=id).get()
     results = dict()
+    if not category.results:
+        messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
+        return redirect("org-panel")
     for rec in category.results:
-        print(rec["nazov"], ": ", rec["poriadie"])
-        results[rec["nazov"]] = int(rec["poriadie"])
+        print(rec["nazov"], ": ", rec["poradie"])
+        results[rec["nazov"]] = int(rec["poradie"])
 
     return make_diplom(category=category, results=results)
 
