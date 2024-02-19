@@ -29,6 +29,8 @@ from .models import Category, Event
 def org_panel(request):
     if request.method == "POST":
         form = ExpeditionLeaderForm(request.POST)
+        event_form = EventToCopyFromForm(request.POST)
+
         if form.is_valid():
             query = form.cleaned_data["search_query"]
             results = Person.objects.filter(Q(first_name__icontains=query) | Q(last_name__icontains=query))
