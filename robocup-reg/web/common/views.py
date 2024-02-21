@@ -69,6 +69,33 @@ def results(request, id=1):
                                 ss_cat_res.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
                             else:
                                 ss_cat_res.append([prvok["poradie"], prvok["nazov"]])
+        else:
+            messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
+    else:
+        if result_dict:
+            for i in range(1, len(result_dict) + 1):
+                for prvok in result_dict:
+                    if prvok["poradie"] == str(i):
+                        if "body" in prvok.keys():
+                            zoz.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+                        else:
+                            zoz.append([prvok["poradie"], prvok["nazov"]])
+            for i in range(1, len(result_dict) + 1):
+                for prvok in result_dict:
+                    if prvok["nazov"] in ZS_teams:
+                        if prvok["poradie"] == str(i):
+                            if "body" in prvok.keys():
+                                zs_cat_res.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+                            else:
+                                zs_cat_res.append([prvok["poradie"], prvok["nazov"]])
+                    else:
+                        if prvok["poradie"] == str(i):
+                            if "body" in prvok.keys():
+                                ss_cat_res.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+                            else:
+                                ss_cat_res.append([prvok["poradie"], prvok["nazov"]])
+        else:
+            messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
 
     data = {
         "teams": teams,

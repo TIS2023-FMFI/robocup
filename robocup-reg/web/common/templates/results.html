@@ -56,7 +56,7 @@
                     </tbody>
                 </table>
             {% endif %}
-        {% elif selected_category.list_of_results == "SEPR" or selected_category.list_of_results == "BOTH" %}
+        {% elif selected_category.list_of_results == "SEPR" %}
             <div>
                 <h4>Výsledky pre tímy so súťažiacimi iba zo základnej školy</h4>
                 {% if num_of_columns == 2 %}
@@ -94,6 +94,121 @@
                     </table>
                 {% endif %}
             </div>
+            <br>
+            <div>
+                <h4>Výsledky pre tímy, kde aspoň jeden súťažiaci je zo strednej školy</h4>
+                {% if num_of_columns == 2 %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Poradie</th>
+                                <th>Tím</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in ss_cat_res %}
+                                <tr>
+                                    {% for value in row %}<td>{{ value }}</td>{% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% elif num_of_columns > 2 %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Poradie</th>
+                                <th>Tím</th>
+                                <th>Body</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in ss_cat_res %}
+                                <tr>
+                                    {% for value in row %}<td>{{ value }}</td>{% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+        {% else %}
+            <h4>Výsledky pre všetky tímy dokopy</h4>
+            <div>
+                {% if num_of_columns == 2 %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Poradie</th>
+                                <th>Tím</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in category_results %}
+                                <tr>
+                                    {% for value in row %}<td>{{ value }}</td>{% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% elif num_of_columns > 2 %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Poradie</th>
+                                <th>Tím</th>
+                                <th>Body</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in category_results %}
+                                <tr>
+                                    {% for value in row %}<td>{{ value }}</td>{% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+            <br>
+            <div>
+                <h4>Výsledky pre tímy so súťažiacimi iba zo základnej školy</h4>
+                {% if num_of_columns == 2 %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Poradie</th>
+                                <th>Tím</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in zs_cat_res %}
+                                <tr>
+                                    {% for value in row %}<td>{{ value }}</td>{% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% elif num_of_columns > 2 %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Poradie</th>
+                                <th>Tím</th>
+                                <th>Body</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in zs_cat_res %}
+                                <tr>
+                                    {% for value in row %}<td>{{ value }}</td>{% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+            <br>
             <div>
                 <h4>Výsledky pre tímy, kde aspoň jeden súťažiaci je zo strednej školy</h4>
                 {% if num_of_columns == 2 %}
