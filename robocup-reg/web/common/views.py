@@ -20,7 +20,11 @@ def results(request, id=1):
     categories = Category.objects.filter(event__is_active=True)
     selected_category = categories.filter(id=id).get()
     result_dict = selected_category.results
-    num_of_columns = len(result_dict[0].keys())
+    if result_dict is None:
+        result_dict = dict()
+        num_of_columns = 0
+    else:
+        num_of_columns = len(result_dict[0].keys())
     teams_in_cat = set()
     ZS_teams = set()
     SS_teams = set()
