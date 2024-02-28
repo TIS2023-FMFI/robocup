@@ -10,7 +10,7 @@
                 <tr>
                     <th scope="col">Osoba</th>
                     <th scope="col">Prítomná</th>
-                    {#                    <th scope="col">Upraviť</th>#}
+                    <th scope="col">Upraviť</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,11 +19,11 @@
                     <tr>
                         <th>{{ form.name.initial }}</th>
                         <th>{{ form.checked_in }}</th>
-                        {#                        <th scope="col">#}
-                        {#                            <a type="button"#}
-                        {#                               class="btn btn-success"#}
-                        {#                               href="{% url 'competitor_edit' checked_user %}">Upraviť</a>#}
-                        {#                        </th>#}
+                        <th scope="col">
+                            <a type="button"
+                               class="btn btn-success"
+                               href="{% url 'competitor_edit' checked_user %}">Upraviť</a>
+                        </th>
                     </tr>
                 {% endfor %}
             </tbody>
