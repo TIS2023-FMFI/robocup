@@ -32,4 +32,10 @@
         <a class="btn btn-primary" href="download-competitors"><strong>Stiahni všetkých súťažiacich</strong></a>
         <a class="btn btn-primary"  href="download-teams"><strong>Stiahni všetky tímy</strong></a>
     </div>
+    {% if user.is_authenticated %}
+        <div class="container-fluid p-5 my-5 bg-light ">
+            <h2>Časť organizátora</h2>
+            <a class="btn btn-primary"  href="{% url 'download-detailed' %}"><strong>Stiahni všetky tímy</strong></a>
+        </div>
+    {% endif %}
 {% endblock %}

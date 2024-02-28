@@ -1,6 +1,7 @@
 import csv
 
 from django.contrib import messages
+from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import HttpResponse, render
 
 from ..leader.models import Person, Team
@@ -139,6 +140,26 @@ def download_competitors(request):
         if teamy:
             org = teamy[0].organization
         w.writerow([s.first_name, s.last_name, org])
+
+    return response
+
+
+@user_passes_test(lambda user: user.is_staff)
+def download_detailed(request):
+    response = HttpResponse(
+        content_type="text/csv",
+        headers={"Content-Disposition": 'attachment; filename="ucastnici.csv"'},
+    )
+
+    ucastnici = Person.objects.all()
+    w = csv.writer(response)
+    cols = [i.name.removeprefix("leader.") for i in Person.get_model_fields(Person)]
+    w.writerow(cols)
+    for obj in ucastnici:
+        row = []
+        for field in Person.get_model_fields(Person):
+            row.append(str(getattr(obj, field.name)))
+        w.writerow(row)
 
     return response
 
