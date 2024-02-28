@@ -12,5 +12,5 @@ services:
           - DEBUG=True
         env_file:
           - .env
-        command: "./entrypoint.sh dev"
+        command: "./entrypoint.sh docker"
         restart: always

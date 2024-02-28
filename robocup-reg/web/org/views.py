@@ -157,17 +157,19 @@ def create_staff_user(request):
                 )
                 user.save()
                 send_mail(
-                    "Your Staff Account Has Been Created",
-                    f"Your account has been created with the following"
-                    f" credentials:\nUsername: {email}\nPassword: {password}\n"
-                    f"you can change this password after login at https://robocup.skse.sk/change-password .",
-                    from_email="robocup@thefilip.eu",
+                    "ucet organizatora robocup.skse.sk",
+                    f"Administrátor stránky robocup.skse.sk pre Vás vytvoril\n"
+                    f"účet organizátora s nasledujúcimi prihlasovacími údajmi:\n"
+                    f"\nprihlasovací e-mail: {email}\nHeslo: {password}\n\n"
+                    f"po prihlásení si toto heslo môžete zmeniť na stránke:\n\n"
+                    f"    https://robocup.skse.sk/change-password .\n\n"
+                    f"Do systému sa prihlásite na stránke https://robocup.skse.sk/\n",
+                    from_email="robocup@dai.fmph.uniba.sk",
                     recipient_list=[user.email],
                 )
-                login(request, user)
                 return redirect("/home")
             else:
-                messages.error(request, "User with the email address already exists.")
+                messages.error(request, "Používateľ s touto e-mailovou adresou už existuje.")
     else:
         form = StaffUserCreationForm()
 
@@ -180,7 +182,7 @@ def change_password(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
-            messages.success(request, "Your password was successfully updated!")
+            messages.success(request, "Vaše heslo sa podarilo úspešne zmeniť!")
             return redirect("/home")
     else:
         form = PasswordChangeForm(request.user)

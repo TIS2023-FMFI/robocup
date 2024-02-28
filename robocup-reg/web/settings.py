@@ -32,7 +32,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env("DEBUG", default=False)
 
 ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "localhost", "robocup.skse.sk"]
 
@@ -155,7 +155,7 @@ EMAIL_HOST_PASSWORD = env("SMTP_PASS")
 EMAIL_PORT = env("SMTP_PORT")
 EMAIL_USE_TLS = env("SMTP_USETLS")
 
-DEFAULT_FROM_EMAIL = "robocup@thefilip.eu"
+DEFAULT_FROM_EMAIL = "robocup@dai.fmph.uniba.sk"
 
 CSRF_TRUSTED_ORIGINS = ["https://robocup.skse.sk", "http://robocup.skse.sk"]
 
