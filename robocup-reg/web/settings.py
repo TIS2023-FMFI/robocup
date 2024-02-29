@@ -32,7 +32,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env("DEBUG", default=False)
+# DEBUG = env("DEBUG", default=False)
+DEBUG = True
 
 ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "localhost", "robocup.skse.sk"]
 
@@ -160,6 +161,9 @@ DEFAULT_FROM_EMAIL = "robocup@dai.fmph.uniba.sk"
 CSRF_TRUSTED_ORIGINS = ["https://robocup.skse.sk", "http://robocup.skse.sk"]
 
 STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },

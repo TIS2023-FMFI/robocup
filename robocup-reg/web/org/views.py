@@ -21,7 +21,14 @@ from web.org.forms import CSVImportForm
 from web.users.models import RobocupUser, RobocupUserManager
 
 from ..leader.models import Person, Team
-from .forms import BulkCheckInFormSet, EventToCopyFromForm, ExpeditionLeaderForm, JSONUploadForm, StaffUserCreationForm
+from .forms import (
+    BulkCheckInFormSet,
+    EventToCopyFromForm,
+    ExpeditionLeaderForm,
+    JSONUploadForm,
+    PDFUploadForm,
+    StaffUserCreationForm,
+)
 from .models import Category, Event
 
 
@@ -119,13 +126,28 @@ def import_json(request):
                     obj.save()
                 else:
                     print(f"{item}: {obj}")
-            messages.success(request, "JSON importovany")
+            messages.success(request, "JSON importovaný")
             return redirect("org-panel")
 
     else:
         form = JSONUploadForm()
 
     return render(request, "import-json.html", {"form": form})
+
+
+def import_pdf(request, id):
+    if request.method == "POST":
+        form = PDFUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            pdf_file = request.FILES["pdf_file"]
+            category = Category.objects.filter(id=id).get()
+            category.detailed_pdf = pdf_file
+            category.save()
+            messages.success(request, "PDF importované")
+            return redirect("org-panel")
+    else:
+        form = PDFUploadForm()
+    return render(request, "import-pdf.html", {"form": form})
 
 
 @user_passes_test(lambda user: user.is_superuser)

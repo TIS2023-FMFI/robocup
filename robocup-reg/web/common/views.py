@@ -183,4 +183,4 @@ def download_teams(request):
 
 
 def detailed_results(request, id):
-    return HttpResponse("TO BE IMPLEMENTED")
+    return HttpResponse(Category.objects.filter(id=id).get().detailed_pdf, content_type="application/pdf")
