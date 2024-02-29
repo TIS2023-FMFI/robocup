@@ -6,6 +6,7 @@
                 <th scope="col">Názov</th>
                 <th scope="col">Prázdna výsledková listina</th>
                 <th scope="col">Vyplnená výsledková listina</th>
+                <th scope="col">Podrobná výsledková listina</th>
                 <th scope="col">Diplomy</th>
             </tr>
         </thead>
@@ -24,6 +25,11 @@
                         <a type="button"
                            class="btn btn-success"
                            href="{% url 'upload-category-results' category.id %}">Nahraj výsledkovú listinu</a>
+                    </td>
+                    <td>
+                        <a type="button"
+                           class="btn btn-success"
+                           href="{% url 'import-pdf' category.id %}">Nahraj podrobnú výsledkovú listinu</a>
                     </td>
                     <td>
                         <a type="button"

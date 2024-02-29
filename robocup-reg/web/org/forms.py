@@ -55,6 +55,10 @@ class JSONUploadForm(forms.Form):
     json_file = forms.FileField()
 
 
+class PDFUploadForm(forms.Form):
+    pdf_file = forms.FileField()
+
+
 class BulkCheckInForm(forms.ModelForm):
     name = forms.CharField(required=False, widget=forms.TextInput(attrs={"readonly": "readonly"}))
 

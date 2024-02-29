@@ -1,6 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
+
 if [ "${1:-prod}" = "docker" ]; then
   python manage.py migrate --force-color
   python manage.py collectstatic --no-input

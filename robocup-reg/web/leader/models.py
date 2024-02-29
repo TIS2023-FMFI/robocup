@@ -31,6 +31,9 @@ class Person(models.Model):
     def __str__(self):
         return self.first_name + " " + self.last_name
 
+    def get_model_fields(self):
+        return self._meta.fields
+
 
 class Team(models.Model):
     id = models.AutoField(primary_key=True)

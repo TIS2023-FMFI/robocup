@@ -5,7 +5,7 @@ import string
 from io import BytesIO
 
 from django.contrib import messages
-from django.contrib.auth import login, update_session_auth_hash
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.forms import PasswordChangeForm
 from django.core import serializers
@@ -21,7 +21,14 @@ from web.org.forms import CSVImportForm
 from web.users.models import RobocupUser, RobocupUserManager
 
 from ..leader.models import Person, Team
-from .forms import BulkCheckInFormSet, EventToCopyFromForm, ExpeditionLeaderForm, JSONUploadForm, StaffUserCreationForm
+from .forms import (
+    BulkCheckInFormSet,
+    EventToCopyFromForm,
+    ExpeditionLeaderForm,
+    JSONUploadForm,
+    PDFUploadForm,
+    StaffUserCreationForm,
+)
 from .models import Category, Event
 
 
@@ -49,6 +56,7 @@ def org_panel(request):
 @user_passes_test(lambda user: user.is_staff)
 def check_in(request, id):
     user_persons = Person.objects.filter(user_id=id).order_by("last_name")
+    user_teams = Team.objects.filter(user_id=id)
 
     if request.method == "POST":
         formset = BulkCheckInFormSet(request.POST, prefix="person")
@@ -65,6 +73,7 @@ def check_in(request, id):
     context = {
         "formset": formset,
         "user_persons": user_persons,
+        "user_teams": user_teams,
         "checked_user": id,
     }
     return render(request, "check-in.html", context)
@@ -117,13 +126,28 @@ def import_json(request):
                     obj.save()
                 else:
                     print(f"{item}: {obj}")
-            messages.success(request, "JSON importovany")
+            messages.success(request, "JSON importovaný")
             return redirect("org-panel")
 
     else:
         form = JSONUploadForm()
 
     return render(request, "import-json.html", {"form": form})
+
+
+def import_pdf(request, id):
+    if request.method == "POST":
+        form = PDFUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            pdf_file = request.FILES["pdf_file"]
+            category = Category.objects.filter(id=id).get()
+            category.detailed_pdf = pdf_file
+            category.save()
+            messages.success(request, "PDF importované")
+            return redirect("org-panel")
+    else:
+        form = PDFUploadForm()
+    return render(request, "import-pdf.html", {"form": form})
 
 
 @user_passes_test(lambda user: user.is_superuser)

@@ -1,6 +1,7 @@
 import csv
 
 from django.contrib import messages
+from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import HttpResponse, render
 
 from ..leader.models import Person, Team
@@ -17,20 +18,102 @@ def home(request):
 
 def results(request, id=1):
     teams = Team.objects.all()
-    # print(Event.objects.filter(is_active=True).first())
-    # categories = Category.objects.filter(event=Event.objects.filter(is_active=True).get()[0])
     categories = Category.objects.filter(event__is_active=True)
     selected_category = categories.filter(id=id).get()
     result_dict = selected_category.results
-    zoz = []
-    if result_dict:
-        for i in range(1, len(result_dict) + 1):
-            for prvok in result_dict:
-                if prvok["poradie"] == str(i):
-                    zoz.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+    if result_dict is None:
+        result_dict = dict()
+        num_of_columns = 0
     else:
-        messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
-    data = {"teams": teams, "categories": categories, "category_results": zoz, "selected_category": selected_category}
+        num_of_columns = len(result_dict[0].keys())
+    teams_in_cat = set()
+    ZS_teams = set()
+    SS_teams = set()
+    for team in teams:
+        for elem in team.categories.all():
+            if int(elem.id) == int(id):
+                teams_in_cat.add(team)
+
+    for team_ in teams_in_cat:
+        zs = True
+        for player in team_.competitors.all():
+            if not player.primary_school:
+                zs = False
+        if not zs:
+            SS_teams.add(team_.team_name)
+        else:
+            ZS_teams.add(team_.team_name)
+    zoz = []
+    ss_cat_res = []
+    zs_cat_res = []
+    if selected_category.list_of_results == "COMB":
+        if result_dict:
+            for i in range(1, len(result_dict) + 1):
+                for prvok in result_dict:
+                    if prvok["poradie"] == str(i):
+                        if "body" in prvok.keys():
+                            zoz.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+                        else:
+                            zoz.append([prvok["poradie"], prvok["nazov"]])
+        else:
+            messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
+
+    elif selected_category.list_of_results == "SEPR":
+        if result_dict:
+            for i in range(1, len(result_dict) + 1):
+                for prvok in result_dict:
+                    if prvok["nazov"] in ZS_teams:
+                        if prvok["poradie"] == str(i):
+                            if "body" in prvok.keys():
+                                zs_cat_res.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+                            else:
+                                zs_cat_res.append([prvok["poradie"], prvok["nazov"]])
+                    else:
+                        if prvok["poradie"] == str(i):
+                            if "body" in prvok.keys():
+                                ss_cat_res.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+                            else:
+                                ss_cat_res.append([prvok["poradie"], prvok["nazov"]])
+        else:
+            messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
+    else:
+        if result_dict:
+            for i in range(1, len(result_dict) + 1):
+                for prvok in result_dict:
+                    if prvok["poradie"] == str(i):
+                        if "body" in prvok.keys():
+                            zoz.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+                        else:
+                            zoz.append([prvok["poradie"], prvok["nazov"]])
+            for i in range(1, len(result_dict) + 1):
+                for prvok in result_dict:
+                    if prvok["nazov"] in ZS_teams:
+                        if prvok["poradie"] == str(i):
+                            if "body" in prvok.keys():
+                                zs_cat_res.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+                            else:
+                                zs_cat_res.append([prvok["poradie"], prvok["nazov"]])
+                    else:
+                        if prvok["poradie"] == str(i):
+                            if "body" in prvok.keys():
+                                ss_cat_res.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+                            else:
+                                ss_cat_res.append([prvok["poradie"], prvok["nazov"]])
+        else:
+            messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
+
+    data = {
+        "teams": teams,
+        "categories": categories,
+        "category_results": zoz,
+        "selected_category": selected_category,
+        "num_of_columns": num_of_columns,
+        "ZS_teams": ZS_teams,
+        "SS_teams": SS_teams,
+        "zs_cat_res": zs_cat_res,
+        "ss_cat_res": ss_cat_res,
+    }
+
     return render(request, "results.html", data)
 
 
@@ -61,6 +144,26 @@ def download_competitors(request):
     return response
 
 
+@user_passes_test(lambda user: user.is_staff)
+def download_detailed(request):
+    response = HttpResponse(
+        content_type="text/csv",
+        headers={"Content-Disposition": 'attachment; filename="ucastnici.csv"'},
+    )
+
+    ucastnici = Person.objects.all()
+    w = csv.writer(response)
+    cols = [i.name.removeprefix("leader.") for i in Person.get_model_fields(Person)]
+    w.writerow(cols)
+    for obj in ucastnici:
+        row = []
+        for field in Person.get_model_fields(Person):
+            row.append(str(getattr(obj, field.name)))
+        w.writerow(row)
+
+    return response
+
+
 def download_teams(request):
     response = HttpResponse(
         content_type="text/csv",
@@ -80,4 +183,4 @@ def download_teams(request):
 
 
 def detailed_results(request, id):
-    return HttpResponse("TO BE IMPLEMENTED")
+    return HttpResponse(Category.objects.filter(id=id).get().detailed_pdf, content_type="application/pdf")

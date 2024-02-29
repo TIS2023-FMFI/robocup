@@ -160,6 +160,9 @@ DEFAULT_FROM_EMAIL = "robocup@dai.fmph.uniba.sk"
 CSRF_TRUSTED_ORIGINS = ["https://robocup.skse.sk", "http://robocup.skse.sk"]
 
 STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },

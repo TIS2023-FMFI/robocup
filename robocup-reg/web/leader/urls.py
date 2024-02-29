@@ -17,4 +17,5 @@ urlpatterns = [
     path("leader-panel/team/add/<int:id>", views.team_add, name="team_add"),
     path("leader-panel/team/edit/<int:id>/", views.team_edit, name="team_edit"),
     path("leader-panel/team/delete/<int:id>/", views.team_delete, name="team_delete"),
+    path("leader-panel/team/edit/<int:id>-<int:uid>/", views.team_edit_org, name="team_edit_org"),
 ]
