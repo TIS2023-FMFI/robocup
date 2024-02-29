@@ -44,4 +44,26 @@
        class="btn btn-success"
        href="{% url 'team_add' checked_user %}">Pridaj tím</a>
     {#    </div>#}
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Názov tímu</th>
+                    <th scope="col">Uprav</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for team in user_teams %}
+                    <tr>
+                        <th>{{ team.team_name }}</th>
+                        <th scope="col">
+                            <a type="button"
+                               class="btn btn-success"
+                               href="{% url 'team_edit_org' id=team.id uid=checked_user %}">Upraviť</a>
+                        </th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock content %}

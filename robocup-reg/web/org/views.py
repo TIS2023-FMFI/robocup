@@ -5,7 +5,7 @@ import string
 from io import BytesIO
 
 from django.contrib import messages
-from django.contrib.auth import login, update_session_auth_hash
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.forms import PasswordChangeForm
 from django.core import serializers
@@ -49,6 +49,7 @@ def org_panel(request):
 @user_passes_test(lambda user: user.is_staff)
 def check_in(request, id):
     user_persons = Person.objects.filter(user_id=id).order_by("last_name")
+    user_teams = Team.objects.filter(user_id=id)
 
     if request.method == "POST":
         formset = BulkCheckInFormSet(request.POST, prefix="person")
@@ -65,6 +66,7 @@ def check_in(request, id):
     context = {
         "formset": formset,
         "user_persons": user_persons,
+        "user_teams": user_teams,
         "checked_user": id,
     }
     return render(request, "check-in.html", context)
