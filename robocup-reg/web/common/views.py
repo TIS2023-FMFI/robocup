@@ -1,4 +1,5 @@
 import csv
+import json
 
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
@@ -21,97 +22,157 @@ def results(request, id=1):
     categories = Category.objects.filter(event__is_active=True)
     selected_category = categories.filter(id=id).get()
     result_dict = selected_category.results
-    if result_dict is None:
-        result_dict = dict()
-        num_of_columns = 0
-    else:
-        num_of_columns = len(result_dict[0].keys())
+
     teams_in_cat = set()
     ZS_teams = set()
     SS_teams = set()
-    for team in teams:
-        for elem in team.categories.all():
-            if int(elem.id) == int(id):
-                teams_in_cat.add(team)
-
-    for team_ in teams_in_cat:
-        zs = True
-        for player in team_.competitors.all():
-            if not player.primary_school:
-                zs = False
-        if not zs:
-            SS_teams.add(team_.team_name)
-        else:
-            ZS_teams.add(team_.team_name)
     zoz = []
     ss_cat_res = []
     zs_cat_res = []
-    if selected_category.list_of_results == "COMB":
-        print("COMBINED")
-        print(f"RESULT DICT: {result_dict}")
-        if result_dict:
-            for prvok in result_dict:
-                if "body" in prvok.keys():
-                    zoz .append([prvok["poradie"], prvok["nazov"], prvok["body"]])
-                else:
-                    zoz .append([prvok["poradie"], prvok["nazov"]])
-            # order zoz by poradie
-            zoz = sorted(zoz, key=lambda x: int(x[0]))
 
-        else:
-            messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
+    group_results = {}
+    if result_dict:
+        if selected_category.is_soccer:
+            result_dict = json.loads(selected_category.results)
+            # Assuming result_dict is structured with group keys and match results
+            for group, matches in result_dict.items():
+                teams_stats = {}
+                for match_teams, match_result in matches.items():
+                    # print(f"match_result: {match_result}")
+                    team_a, team_b = match_teams.split('-')[0:2]
+                    # Initialize or update team stats
+                    for team in [team_a, team_b]:
+                        if team not in teams_stats:
+                            teams_stats[team] = {'P': 0, 'S': [0, 0], 'W': 0, 'D': 0, 'L': 0, 'Pts': 0}
 
-    elif selected_category.list_of_results == "SEPR":
-        if result_dict:
-            for prvok in result_dict:
-                if prvok["nazov"] in ZS_teams:
-                    if "body" in prvok.keys():
-                        zs_cat_res.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+                    if match_result == None or match_result == 'None':
+                        continue
+                    score_a, score_b = map(int, match_result.split(':'))
+
+                    # Update stats
+                    teams_stats[team_a]['P'] += 1
+                    teams_stats[team_b]['P'] += 1
+                    teams_stats[team_a]['S'][0] += score_a
+                    teams_stats[team_a]['S'][1] += score_b
+                    teams_stats[team_b]['S'][0] += score_b
+                    teams_stats[team_b]['S'][1] += score_a
+
+                    # Win, draw, loss logic
+                    if score_a > score_b:
+                        teams_stats[team_a]['W'] += 1
+                        teams_stats[team_b]['L'] += 1
+                        teams_stats[team_a]['Pts'] += 3
+                    elif score_a < score_b:
+                        teams_stats[team_b]['W'] += 1
+                        teams_stats[team_a]['L'] += 1
+                        teams_stats[team_b]['Pts'] += 3
                     else:
-                        zs_cat_res.append([prvok["poradie"], prvok["nazov"]])
-                    zs_cat_res = sorted(zs_cat_res, key=lambda x: int(x[0]))
-                else:
-                    if "body" in prvok.keys():
-                        ss_cat_res.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
-                    else:
-                        ss_cat_res.append([prvok["poradie"], prvok["nazov"]])
-                    ss_cat_res = sorted(ss_cat_res, key=lambda x: int(x[0]))
+                        teams_stats[team_a]['D'] += 1
+                        teams_stats[team_b]['D'] += 1
+                        teams_stats[team_a]['Pts'] += 1
+                        teams_stats[team_b]['Pts'] += 1
+
+                # Sort teams by points, then goal difference, then goals scored
+                group_results[group] = sorted(teams_stats.items(), key=lambda x: (-x[1]['Pts'], -(x[1]['S'][0] - x[1]['S'][1]), -x[1]['S'][0]))
+            data = {
+                "teams": teams,
+                "categories": categories,
+                "category_results": zoz,
+                "selected_category": selected_category,
+                "group_results": group_results,
+                "result_dict": result_dict,
+            }
         else:
-            messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
+            if result_dict is None:
+                result_dict = dict()
+                num_of_columns = 0
+            else:
+                num_of_columns = len(result_dict[0].keys())
+            for team in teams:
+                for elem in team.categories.all():
+                    if int(elem.id) == int(id):
+                        teams_in_cat.add(team)
+
+            for team_ in teams_in_cat:
+                zs = True
+                for player in team_.competitors.all():
+                    if not player.primary_school:
+                        zs = False
+                if not zs:
+                    SS_teams.add(team_.team_name)
+                else:
+                    ZS_teams.add(team_.team_name)
+            if selected_category.list_of_results == "COMB":
+                print("COMBINED")
+                print(f"RESULT DICT: {result_dict}")
+                if result_dict:
+                    for prvok in result_dict:
+                        if "body" in prvok.keys():
+                            zoz.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+                        else:
+                            zoz.append([prvok["poradie"], prvok["nazov"]])
+                    # order zoz by poradie
+                    zoz = sorted(zoz, key=lambda x: int(x[0]))
+
+                else:
+                    messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
+
+            elif selected_category.list_of_results == "SEPR":
+                if result_dict:
+                    for prvok in result_dict:
+                        if prvok["nazov"] in ZS_teams:
+                            if "body" in prvok.keys():
+                                zs_cat_res.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+                            else:
+                                zs_cat_res.append([prvok["poradie"], prvok["nazov"]])
+                            zs_cat_res = sorted(zs_cat_res, key=lambda x: int(x[0]))
+                        else:
+                            if "body" in prvok.keys():
+                                ss_cat_res.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+                            else:
+                                ss_cat_res.append([prvok["poradie"], prvok["nazov"]])
+                            ss_cat_res = sorted(ss_cat_res, key=lambda x: int(x[0]))
+                else:
+                    messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
+            else:
+                if result_dict:
+                    for prvok in result_dict:
+                        if "body" in prvok.keys():
+                            zoz.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+                        else:
+                            zoz.append([prvok["poradie"], prvok["nazov"]])
+                        for prvok in result_dict:
+                            if prvok["nazov"] in ZS_teams:
+                                if "body" in prvok.keys():
+                                    zs_cat_res.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+                                else:
+                                    zs_cat_res.append([prvok["poradie"], prvok["nazov"]])
+                                zs_cat_res = sorted(zs_cat_res, key=lambda x: int(x[0]))
+                            else:
+                                if "body" in prvok.keys():
+                                    ss_cat_res.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+                                else:
+                                    ss_cat_res.append([prvok["poradie"], prvok["nazov"]])
+                                ss_cat_res = sorted(ss_cat_res, key=lambda x: int(x[0]))
+                else:
+                    messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
+
+            data = {
+                "teams": teams,
+                "categories": categories,
+                "category_results": zoz,
+                "selected_category": selected_category,
+                "num_of_columns": num_of_columns,
+                "ZS_teams": ZS_teams,
+                "SS_teams": SS_teams,
+                "zs_cat_res": zs_cat_res,
+                "ss_cat_res": ss_cat_res,
+            }
     else:
-        if result_dict:
-            for prvok in result_dict:
-                if "body" in prvok.keys():
-                    zoz.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
-                else:
-                    zoz.append([prvok["poradie"], prvok["nazov"]])
-                for prvok in result_dict:
-                    if prvok["nazov"] in ZS_teams:
-                        if "body" in prvok.keys():
-                            zs_cat_res.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
-                        else:
-                            zs_cat_res.append([prvok["poradie"], prvok["nazov"]])
-                        zs_cat_res = sorted(zs_cat_res, key=lambda x: int(x[0]))
-                    else:
-                        if "body" in prvok.keys():
-                            ss_cat_res.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
-                        else:
-                            ss_cat_res.append([prvok["poradie"], prvok["nazov"]])
-                        ss_cat_res = sorted(ss_cat_res, key=lambda x: int(x[0]))
-        else:
-            messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
+        messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
 
-    data = {
-        "teams": teams,
-        "categories": categories,
-        "category_results": zoz,
-        "selected_category": selected_category,
-        "num_of_columns": num_of_columns,
-        "ZS_teams": ZS_teams,
-        "SS_teams": SS_teams,
-        "zs_cat_res": zs_cat_res,
-        "ss_cat_res": ss_cat_res,
-    }
+
+
 
     return render(request, "results.html", data)
 

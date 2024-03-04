@@ -34,7 +34,7 @@ class Category(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     primary_school = models.CharField(max_length=2, choices=SCHOOLS, default="ZŠ")  # T - ZS, F - SS
-    list_of_results = models.CharField(choices=RESULTS_LIST, default="COMB", max_length=255)
+    list_of_results = models.CharField(choices=RESULTS_LIST, default="COMB")
     event = models.ForeignKey(to=Event, on_delete=models.CASCADE, null=True)
     results = JSONField(null=True, blank=True)
     detailed_pdf = models.FileField(null=True, blank=True, upload_to="uploads/%Y/%m/%d/")
