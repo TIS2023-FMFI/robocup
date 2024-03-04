@@ -27,4 +27,5 @@ urlpatterns = [
     path("org-panel/diplom/<int:id>", views.diploms_for_category, name="diplom"),
     path("org-panel/competitor/edit/<int:id>/", leader_views.competitor_edit, name="competitor_edit_2"),
     path("org-panel/import-pdf/<int:id>/", views.import_pdf, name="import-pdf"),
+    path('org-panel/edit-results/<int:id>', views.edit_results_page, name='edit-results')
 ]

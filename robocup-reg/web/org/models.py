@@ -34,10 +34,21 @@ class Category(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     primary_school = models.CharField(max_length=2, choices=SCHOOLS, default="ZŠ")  # T - ZS, F - SS
-    list_of_results = models.CharField(choices=RESULTS_LIST, default="COMB")
+    list_of_results = models.CharField(choices=RESULTS_LIST, default="COMB", max_length=255)
     event = models.ForeignKey(to=Event, on_delete=models.CASCADE, null=True)
     results = JSONField(null=True, blank=True)
     detailed_pdf = models.FileField(null=True, blank=True, upload_to="uploads/%Y/%m/%d/")
+
+    is_soccer = models.BooleanField(default=False)
+    max_teams_per_group = models.IntegerField(default=0)
+    advancing_teams_per_group = models.IntegerField(default=0)
+
+    # pre_save kontrola
+    def save(self, *args, **kwargs):
+        if not self.is_soccer:
+            self.max_teams_per_group = 0
+            self.advancing_teams_per_group = 0
+        super(Category, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = "Category"
@@ -53,12 +64,24 @@ class Category(models.Model):
         primary_school = data["fields"]["primary_school"]
         list_of_results = data["fields"]["list_of_results"]
         event = data["fields"]["event"]
-        # results = data["fields"]["results"]
+
+        results = data["fields"]["results"]
+
+        is_soccer = data["fields"]["is_soccer"]
+        max_teams_per_group = data["fields"].get("max_teams_per_group")
+        advancing_teams_per_group = data["fields"].get("advancing_teams_per_group")
+
         return cls(
             name=name,
             primary_school=primary_school,
             list_of_results=list_of_results,
             event=Event.objects.filter(id=event).get(),
+
+            results=results,
+
+            is_soccer=is_soccer,
+            max_teams_per_group=max_teams_per_group,
+            advancing_teams_per_group=advancing_teams_per_group
         )
 
 

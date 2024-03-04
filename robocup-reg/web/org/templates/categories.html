@@ -16,6 +16,7 @@
                     <td>
                         <strong>{{ category.name }}</strong>
                     </td>
+                    {% if not category.is_soccer %}
                     <td>
                         <a type="button"
                            class="btn btn-success"
@@ -26,6 +27,21 @@
                            class="btn btn-success"
                            href="{% url 'upload-category-results' category.id %}">Nahraj výsledkovú listinu</a>
                     </td>
+                    {% else %}
+
+                        <td>
+                        <button type="button"
+                           class="btn btn-success"
+                           disabled>Prázdna výsledková listina</button>
+                    </td>
+
+                     <td>
+                        <a type="button"
+                            class="btn btn-info"
+                            href="{% url 'edit-results' category.id %}">Uprav výsledkovú listinu</a>
+                    </td>
+
+                    {% endif %}
                     <td>
                         <a type="button"
                            class="btn btn-success"
