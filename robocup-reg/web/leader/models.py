@@ -44,6 +44,7 @@ class Team(models.Model):
     competitors = models.ManyToManyField(Person)
     categories = models.ManyToManyField(org_models.Category)  # v ktorych kategoriach tim sutazi
     category = models.BooleanField(default=True)  # T - ZS, F - SS
+    country = models.CharField(max_length=100, default="Slovensko")
 
     class Meta:
         verbose_name = "Team"
