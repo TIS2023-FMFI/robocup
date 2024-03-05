@@ -26,13 +26,96 @@ def results(request, id=1):
     teams_in_cat = set()
     ZS_teams = set()
     SS_teams = set()
+
+    num_of_columns = 0
+    group_results = {}
     zoz = []
     ss_cat_res = []
     zs_cat_res = []
 
-    group_results = {}
-    if result_dict:
-        if selected_category.is_soccer:
+    # ak to neni soccer
+    if not selected_category.is_soccer:
+        
+        if result_dict is None:
+            result_dict = dict()
+            num_of_columns = 0
+        else:
+            num_of_columns = len(result_dict[0].keys())
+        
+        for team in teams:
+            for elem in team.categories.all():
+                if int(elem.id) == int(id):
+                    teams_in_cat.add(team)
+
+        for team_ in teams_in_cat:
+            zs = True
+            for player in team_.competitors.all():
+                if not player.primary_school:
+                    zs = False
+            if not zs:
+                SS_teams.add(team_.team_name)
+            else:
+                ZS_teams.add(team_.team_name)
+
+        if selected_category.list_of_results == "COMB":
+            if result_dict:
+                for i in range(1, len(result_dict) + 1):
+                    for prvok in result_dict:
+                        if prvok["poradie"] == str(i):
+                            if "body" in prvok.keys():
+                                zoz.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+                            else:
+                                zoz.append([prvok["poradie"], prvok["nazov"]])
+            else:
+                messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
+
+        elif selected_category.list_of_results == "SEPR":
+            if result_dict:
+                for i in range(1, len(result_dict) + 1):
+                    for prvok in result_dict:
+                        if prvok["nazov"] in ZS_teams:
+                            if prvok["poradie"] == str(i):
+                                if "body" in prvok.keys():
+                                    zs_cat_res.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+                                else:
+                                    zs_cat_res.append([prvok["poradie"], prvok["nazov"]])
+                        else:
+                            if prvok["poradie"] == str(i):
+                                if "body" in prvok.keys():
+                                    ss_cat_res.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+                                else:
+                                    ss_cat_res.append([prvok["poradie"], prvok["nazov"]])
+            else:
+                messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
+        else:
+            if result_dict:
+                for i in range(1, len(result_dict) + 1):
+                    for prvok in result_dict:
+                        if prvok["poradie"] == str(i):
+                            if "body" in prvok.keys():
+                                zoz.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+                            else:
+                                zoz.append([prvok["poradie"], prvok["nazov"]])
+                for i in range(1, len(result_dict) + 1):
+                    for prvok in result_dict:
+                        if prvok["nazov"] in ZS_teams:
+                            if prvok["poradie"] == str(i):
+                                if "body" in prvok.keys():
+                                    zs_cat_res.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+                                else:
+                                    zs_cat_res.append([prvok["poradie"], prvok["nazov"]])
+                        else:
+                            if prvok["poradie"] == str(i):
+                                if "body" in prvok.keys():
+                                    ss_cat_res.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
+                                else:
+                                    ss_cat_res.append([prvok["poradie"], prvok["nazov"]])
+            else:
+                messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
+
+     # ak to je soccer
+    elif selected_category.is_soccer:
+        if result_dict:
             result_dict = json.loads(selected_category.results)
             # Assuming result_dict is structured with group keys and match results
             for group, matches in result_dict.items():
@@ -74,105 +157,20 @@ def results(request, id=1):
 
                 # Sort teams by points, then goal difference, then goals scored
                 group_results[group] = sorted(teams_stats.items(), key=lambda x: (-x[1]['Pts'], -(x[1]['S'][0] - x[1]['S'][1]), -x[1]['S'][0]))
-            data = {
-                "teams": teams,
-                "categories": categories,
-                "category_results": zoz,
-                "selected_category": selected_category,
-                "group_results": group_results,
-                "result_dict": result_dict,
-            }
-        else:
-            if result_dict is None:
-                result_dict = dict()
-                num_of_columns = 0
-            else:
-                num_of_columns = len(result_dict[0].keys())
-            for team in teams:
-                for elem in team.categories.all():
-                    if int(elem.id) == int(id):
-                        teams_in_cat.add(team)
 
-            for team_ in teams_in_cat:
-                zs = True
-                for player in team_.competitors.all():
-                    if not player.primary_school:
-                        zs = False
-                if not zs:
-                    SS_teams.add(team_.team_name)
-                else:
-                    ZS_teams.add(team_.team_name)
-            if selected_category.list_of_results == "COMB":
-                print("COMBINED")
-                print(f"RESULT DICT: {result_dict}")
-                if result_dict:
-                    for prvok in result_dict:
-                        if "body" in prvok.keys():
-                            zoz.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
-                        else:
-                            zoz.append([prvok["poradie"], prvok["nazov"]])
-                    # order zoz by poradie
-                    zoz = sorted(zoz, key=lambda x: int(x[0]))
-
-                else:
-                    messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
-
-            elif selected_category.list_of_results == "SEPR":
-                if result_dict:
-                    for prvok in result_dict:
-                        if prvok["nazov"] in ZS_teams:
-                            if "body" in prvok.keys():
-                                zs_cat_res.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
-                            else:
-                                zs_cat_res.append([prvok["poradie"], prvok["nazov"]])
-                            zs_cat_res = sorted(zs_cat_res, key=lambda x: int(x[0]))
-                        else:
-                            if "body" in prvok.keys():
-                                ss_cat_res.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
-                            else:
-                                ss_cat_res.append([prvok["poradie"], prvok["nazov"]])
-                            ss_cat_res = sorted(ss_cat_res, key=lambda x: int(x[0]))
-                else:
-                    messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
-            else:
-                if result_dict:
-                    for prvok in result_dict:
-                        if "body" in prvok.keys():
-                            zoz.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
-                        else:
-                            zoz.append([prvok["poradie"], prvok["nazov"]])
-                        for prvok in result_dict:
-                            if prvok["nazov"] in ZS_teams:
-                                if "body" in prvok.keys():
-                                    zs_cat_res.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
-                                else:
-                                    zs_cat_res.append([prvok["poradie"], prvok["nazov"]])
-                                zs_cat_res = sorted(zs_cat_res, key=lambda x: int(x[0]))
-                            else:
-                                if "body" in prvok.keys():
-                                    ss_cat_res.append([prvok["poradie"], prvok["nazov"], prvok["body"]])
-                                else:
-                                    ss_cat_res.append([prvok["poradie"], prvok["nazov"]])
-                                ss_cat_res = sorted(ss_cat_res, key=lambda x: int(x[0]))
-                else:
-                    messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
-
-            data = {
-                "teams": teams,
-                "categories": categories,
-                "category_results": zoz,
-                "selected_category": selected_category,
-                "num_of_columns": num_of_columns,
-                "ZS_teams": ZS_teams,
-                "SS_teams": SS_teams,
-                "zs_cat_res": zs_cat_res,
-                "ss_cat_res": ss_cat_res,
-            }
-    else:
-        messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
-
-
-
+    data = {
+        "teams": teams,
+        "categories": categories,
+        "category_results": zoz,
+        "selected_category": selected_category,
+        "num_of_columns": num_of_columns,
+        "ZS_teams": ZS_teams,
+        "SS_teams": SS_teams,
+        "zs_cat_res": zs_cat_res,
+        "ss_cat_res": ss_cat_res,
+        "group_results": group_results,
+        "result_dict": result_dict,
+    }
 
     return render(request, "results.html", data)
 
@@ -244,3 +242,4 @@ def download_teams(request):
 
 def detailed_results(request, id):
     return HttpResponse(Category.objects.filter(id=id).get().detailed_pdf, content_type="application/pdf")
+
