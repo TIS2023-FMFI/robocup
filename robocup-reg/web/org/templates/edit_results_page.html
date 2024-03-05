@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}
+    Category results edit
+{% endblock title %}
+{% block content %}
+<h1>Edit Results Page {{ category.id }}</h1>
+<p>Výsledok zadávajte vo formáte: cislo:cislo</p>
+<h2>Skupiny</h2>
+<hr>
+<form method="post">
+    {% csrf_token %}
+    {% for group, matches in current_results.items %}
+        <h3>{{ group }}</h3>
+        {% for match, result in matches.items %}
+            <div>
+                <label>{{ match }}</label>
+                <input type="text" name="{{ match }}" value="{{ result }}">
+            </div>
+        {% endfor %}
+        <hr>
+    {% endfor %}
+    <button type="submit" name="action" value="save">Uložiť</button>
+    {% if second_round_generated %}
+    <button type="submit" name="action" value="generate_second_round" disabled>Vygeneruj zápasy pre druhé kolo</button>
+    {% else %}
+    <button type="submit" name="action" value="generate_second_round">Vygeneruj zápasy pre druhé kolo</button>
+    {% endif %}
+
+    {% if not final_group_generated %}
+        <button type="submit" name="action" value="generate_final_group">Vygeneruj finálnu skupinu</button>
+    {% else %}
+        <button type="submit" name="action" value="generate_final_group" disabled>Vygeneruj finálnu skupinu</button>
+    {% endif %}
+</form>
+
+<h2>Play-off</h2>
+
+{% for team in teams %}
+<p>{{ team }}</p>
+{% endfor %}
+{% endblock content %}

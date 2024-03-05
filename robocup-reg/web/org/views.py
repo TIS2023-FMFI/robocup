@@ -16,7 +16,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import get_template
 from unidecode import unidecode
 from xhtml2pdf import pisa
-
+from itertools import combinations
 from web.org.forms import CSVImportForm
 from web.users.models import RobocupUser, RobocupUserManager
 
@@ -221,10 +221,10 @@ def download_team_for_category(request, id):
     )
     teamy = Team.objects.filter(categories=id)
     w = csv.writer(response)
-    w.writerow(["nazov", "poriadie"])
+    w.writerow(["nazov", "poradie", "body"])
 
     for t in teamy:
-        w.writerow([t.team_name, 0])
+        w.writerow([t.team_name, 0, 0])
 
     return response
 
@@ -259,19 +259,34 @@ def diploms_for_category(request, id):
     if not category.results:
         messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
         return redirect("org-panel")
-    for rec in category.results:
-        print(rec["nazov"], ": ", rec["poradie"])
-        results[rec["nazov"]] = int(rec["poradie"])
+
+    # Check if it's a soccer category and has a final group
+    if category.is_soccer:
+        ordered_results = order_group_results(category)
+        if "Final Group" not in ordered_results:
+            messages.error(request, "Finálna skupina ešte nebola vygenerovaná.")
+            return redirect("org-panel")
+        # For soccer categories, use only final group results
+        print(ordered_results["Final Group"])
+        results = {team[0]: pos+1 for pos, team in enumerate(ordered_results["Final Group"])}
+        print(results)
+    else:
+        # For non-soccer categories, the existing logic is kept
+        for rec in category.results:
+            print(rec["nazov"], ": ", rec["poradie"])
+            results[rec["nazov"]] = int(rec["poradie"])
 
     return make_diplom(category=category, results=results)
 
-
+@user_passes_test(lambda user: user.is_staff)
 def make_diplom(category, results):
     event = Event.objects.filter(is_active=True).get()
     _teams = Team.objects.filter(categories=category)
+    print(_teams)
     teams = dict()
     for team in _teams:
-        teams[team] = results[team.team_name]
+        if team.team_name in results:
+            teams[team] = results[team.team_name]
     teams = dict(sorted(teams.items(), key=lambda item: item[1]))
     context = {
         "event": event,
@@ -292,3 +307,125 @@ def html_to_pdf(template_src, context_dict={}):
     if not pdf.err:
         return HttpResponse(result.getvalue(), content_type="application/pdf")
     return None
+
+
+def edit_results_page(request, id):
+    category = get_object_or_404(Category, id=id)
+    teams = Team.objects.filter(categories=id)
+
+    # Ak nie sú výsledky, vygenerujte kombinácie zápasov a uložte ich do category.results
+    if not category.results:
+        total_teams = len(teams)
+        max_teams = category.max_teams_per_group
+        total_groups = (total_teams + max_teams - 1) // max_teams  # Ceiling division to include incomplete group
+        if not category.results:
+            grouped_matches = {}
+            for group_number in range(1, total_groups + 1):
+                start_index = (group_number - 1) * max_teams
+                end_index = min(start_index + max_teams, total_teams)  # Ensure we don't go out of bounds
+                group_teams = teams[start_index:end_index]
+                match_combinations = list(combinations([team.team_name for team in group_teams], 2))
+                random.shuffle(match_combinations)
+                grouped_matches[f'Group {group_number}'] = {
+                    f'{match[0]}-{match[1]}': None for match in match_combinations
+                }
+            category.results = json.dumps(grouped_matches)
+            category.save()
+    if request.method == 'POST':
+        action = request.POST.get('action')
+        # Load the current results structure
+        grouped_results_dict = json.loads(category.results)
+
+        if action == 'generate_second_round':
+
+            for group, matches in grouped_results_dict.items():
+                second_round_matches = {f'{match}-2.kolo': "None" for match in matches}
+                grouped_results_dict[group].update(second_round_matches)
+        elif action == 'save':
+            # Iterate over each item in the POST data
+            for key, new_score in request.POST.items():
+                # Skip csrf and other non-match keys
+                if key.startswith('csrf') or not '-' in key:
+                    continue
+
+                # Find the right group and match to update
+                for group, matches in grouped_results_dict.items():
+                    if key in matches:
+                        # Update the match score
+                        grouped_results_dict[group][key] = new_score
+                        break  # Match found and updated, no need to check other groups
+        if action == 'generate_final_group':
+            ordered_groups = order_group_results(category)
+            final_group_teams = []
+            for group, teams in ordered_groups.items():
+                top_teams = [team[0] for team in teams[:category.advancing_teams_per_group]]
+                final_group_teams.extend(top_teams)
+            # Generate final group matches
+            final_group_matches = list(combinations(final_group_teams, 2))
+            final_group = {f'{match[0]}-{match[1]}-final': 'None' for match in final_group_matches}
+            # Add final group to results and save
+            grouped_results_dict['Final Group'] = final_group
+            category.results = json.dumps(grouped_results_dict)
+            category.save()
+
+        # Save the updated results back to the category object
+        category.results = json.dumps(grouped_results_dict)
+        category.save()
+        # Redirect to refresh and prevent form re-submission
+        return redirect('edit-results', id=id)
+    # Prevod reťazca na slovník pre zobrazenie aktuálnych výsledkov v šablóne
+    current_results = json.loads(category.results)
+    second_round_generated = any(
+        "-2.kolo" in match for group_matches in current_results.values() for match in group_matches)
+    final_group_generated = 'Final Group' in current_results
+    return render(request, 'edit_results_page.html', {
+        "category": category,
+        "current_results": current_results,
+        "second_round_generated": second_round_generated,
+        "final_group_generated": final_group_generated
+    })
+
+
+def order_group_results(category):
+    group_results = {}
+    result_dict = json.loads(category.results)
+    # Assuming result_dict is structured with group keys and match results
+    for group, matches in result_dict.items():
+        teams_stats = {}
+        for match_teams, match_result in matches.items():
+            # print(f"match_result: {match_result}")
+            team_a, team_b = match_teams.split('-')[0:2]
+            # Initialize or update team stats
+            for team in [team_a, team_b]:
+                if team not in teams_stats:
+                    teams_stats[team] = {'P': 0, 'S': [0, 0], 'W': 0, 'D': 0, 'L': 0, 'Pts': 0}
+            if match_result == None or match_result == 'None':
+                continue
+            score_a, score_b = map(int, match_result.split(':'))
+
+            # Update stats
+            teams_stats[team_a]['P'] += 1
+            teams_stats[team_b]['P'] += 1
+            teams_stats[team_a]['S'][0] += score_a
+            teams_stats[team_a]['S'][1] += score_b
+            teams_stats[team_b]['S'][0] += score_b
+            teams_stats[team_b]['S'][1] += score_a
+
+            # Win, draw, loss logic
+            if score_a > score_b:
+                teams_stats[team_a]['W'] += 1
+                teams_stats[team_b]['L'] += 1
+                teams_stats[team_a]['Pts'] += 3
+            elif score_a < score_b:
+                teams_stats[team_b]['W'] += 1
+                teams_stats[team_a]['L'] += 1
+                teams_stats[team_b]['Pts'] += 3
+            else:
+                teams_stats[team_a]['D'] += 1
+                teams_stats[team_b]['D'] += 1
+                teams_stats[team_a]['Pts'] += 1
+                teams_stats[team_b]['Pts'] += 1
+        # Sort teams by points, then goal difference, then goals scored
+        group_results[group] = sorted(teams_stats.items(),
+                                      key=lambda x: (-x[1]['Pts'], -(x[1]['S'][0] - x[1]['S'][1]), -x[1]['S'][0]))
+    return group_results

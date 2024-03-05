@@ -109,7 +109,7 @@ class TeamForm(forms.ModelForm):
 
     class Meta:
         model = Team
-        fields = ["team_name", "team_leader", "organization", "categories", "competitors"]
+        fields = ["team_name", "team_leader", "organization", "categories", "competitors", "country"]
 
     def __init__(self, *args, **kwargs):
         # Make user a keyword argument and pop it from kwargs
@@ -124,6 +124,7 @@ class TeamForm(forms.ModelForm):
             self.fields["organization"].label = "Škola/Organizácia"
             self.fields["team_name"].label = "Názov tímu"
             self.fields["categories"].label = "Kategórie"
+            self.fields["country"].label = "Krajina"
 
             # Set initial data for team_leader and competitors fields
 

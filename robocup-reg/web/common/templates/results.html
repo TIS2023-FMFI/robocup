@@ -20,7 +20,67 @@
             {% endfor %}
         </ul>
     </div>
+    {% if selected_category.is_soccer %}
     <div class="container mt-5">
+    <h2>Skupiny</h2>
+
+    <hr>
+
+    {% for group, teams in group_results.items %}
+            <h3>{{ group }}</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Pos.</th>
+                        <th>Team</th>
+                        <th>P</th>
+                        <th>S</th>
+                        <th>W</th>
+                        <th>D</th>
+                        <th>L</th>
+                        <th>Pts.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for team, stats in teams %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ team }}</td>
+                            <td>{{ stats.P }}</td>
+                            <td>{{ stats.S.0 }}:{{ stats.S.1 }}</td>
+                            <td>{{ stats.W }}</td>
+                            <td>{{ stats.D }}</td>
+                            <td>{{ stats.L }}</td>
+                            <td>{{ stats.Pts }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h4>Zápasy skupiny</h4>
+
+            {% for group_name, matches in result_dict.items %}
+            {% if group_name == group %}
+                <ul>
+                    {% for match, result in matches.items %}
+                        <li>
+                            {{ match }} -
+                            {% if result != 'None' and result != None %}
+                                {{ result }}
+                            {% else %}
+                                The match has not been played yet.
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+                <hr>
+            {% endif %}
+            {% endfor %}
+
+        {% endfor %}
+    </div>
+    {% else %}
+     <div class="container mt-5">
         {% if selected_category.list_of_results == "COMB" %}
             {% if num_of_columns == 2 %}
                 <table class="table">
@@ -253,7 +313,8 @@
                href="{% url 'detailed_results' selected_category.id %}"><strong>Stiahni detailné výsledky</strong></a>
         {% endif %}
     </div>
-</div>
+    {% endif %}
+
 <footer>
     <div>
         <p></p>
