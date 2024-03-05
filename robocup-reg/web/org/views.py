@@ -278,7 +278,7 @@ def diploms_for_category(request, id):
 
     return make_diplom(category=category, results=results)
 
-
+@user_passes_test(lambda user: user.is_staff)
 def make_diplom(category, results):
     event = Event.objects.filter(is_active=True).get()
     _teams = Team.objects.filter(categories=category)
