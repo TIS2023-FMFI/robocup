@@ -263,12 +263,12 @@ def diploms_for_category(request, id):
     # Check if it's a soccer category and has a final group
     if category.is_soccer:
         ordered_results = order_group_results(category)
-        if "Final Group" not in ordered_results:
+        if "Finále" not in ordered_results:
             messages.error(request, "Finálna skupina ešte nebola vygenerovaná.")
             return redirect("org-panel")
         # For soccer categories, use only final group results
-        print(ordered_results["Final Group"])
-        results = {team[0]: pos+1 for pos, team in enumerate(ordered_results["Final Group"])}
+        print(ordered_results["Finále"])
+        results = {team[0]: pos+1 for pos, team in enumerate(ordered_results["Finále"])}
         print(results)
     else:
         # For non-soccer categories, the existing logic is kept
@@ -326,7 +326,7 @@ def edit_results_page(request, id):
                 group_teams = teams[start_index:end_index]
                 match_combinations = list(combinations([team.team_name for team in group_teams], 2))
                 random.shuffle(match_combinations)
-                grouped_matches[f'Group {group_number}'] = {
+                grouped_matches[f'Skupina {group_number}'] = {
                     f'{match[0]}-{match[1]}': None for match in match_combinations
                 }
             category.results = json.dumps(grouped_matches)
@@ -364,7 +364,7 @@ def edit_results_page(request, id):
             final_group_matches = list(combinations(final_group_teams, 2))
             final_group = {f'{match[0]}-{match[1]}-final': 'None' for match in final_group_matches}
             # Add final group to results and save
-            grouped_results_dict['Final Group'] = final_group
+            grouped_results_dict['Finále'] = final_group
             category.results = json.dumps(grouped_results_dict)
             category.save()
 
@@ -377,7 +377,7 @@ def edit_results_page(request, id):
     current_results = json.loads(category.results)
     second_round_generated = any(
         "-2.kolo" in match for group_matches in current_results.values() for match in group_matches)
-    final_group_generated = 'Final Group' in current_results
+    final_group_generated = 'Finále' in current_results
     return render(request, 'edit_results_page.html', {
         "category": category,
         "current_results": current_results,
