@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Robocup TEAMS{% endblock %}
+{% block content %}
+<div class="container mt-3" id="teams-div">
+    <h2>Tímy</h2>
+    <form>
+        <table class="table">
+            <thead>
+                <tr class="table-primary">
+                    <th scope="col">Názov</th>
+                    <th scope="col">Organizácia</th>
+                    <th scope="col">Kategórie</th>
+                    <th scope="col">ZŠ/Všetci</th>
+                    <th scope="col">Krajina</th>
+                </tr>
+            </thead>
+            {% for team in teams %}
+                <thead>
+                    <tr>
+                        <th scope="col">{{ team.team_name }}</th>
+                        <th scope="col">{{ team.organization }}</th>
+                        <th scope="col">
+                            {% for cat in team.categories.all %}{{ cat }},{% endfor %}
+                        </th>
+                        <th scope="col">
+                            {% if team.category %}
+                                ZŠ
+                            {% else %}
+                                Všetci
+                            {% endif %}
+                        </th>
+                        <th scope="col">{{ team.country }}</th>
+                    </tr>
+                </thead>
+            {% endfor %}
+        </table>
+    </form>
+</div>
+{% endblock %}

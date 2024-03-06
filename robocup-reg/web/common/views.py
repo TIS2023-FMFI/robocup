@@ -182,6 +182,12 @@ def info(request):
     return render(request, "info.html", data)
 
 
+def teamslist(request):
+    teams = Team.objects.all()
+    data = {"teams": teams}
+    return render(request, "teamslist.html", data)
+
+
 def download_competitors(request):
     response = HttpResponse(
         content_type="text/csv",
