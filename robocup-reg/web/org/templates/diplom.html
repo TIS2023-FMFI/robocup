@@ -4,18 +4,71 @@
         {% load static %}
         <meta charset="UTF-8">
         <title>Diplom</title>
+<style>
+html, body {
+    width: 1280px;
+    height: 840px;
+    margin: 0;
+    padding: 0;
+    background-image: url('/static/ROBOCUP_DIPLOM.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.place {
+    position: absolute;
+    left: 330px; 
+    top: 305px; 
+    color: black;
+    font-size: 32px;
+    font-family: Arial, sans-serif;
+}
+
+.category {
+    position: absolute;
+    left: 510px; 
+    top: 305px; 
+    color: black;
+    font-size: 32px;
+    font-family: Arial, sans-serif;
+}
+
+.team {
+    position: absolute;
+    left: 330px; 
+    top: 395px; 
+    color: black;
+    font-size: 24px;	
+    font-family: Arial, sans-serif;
+}
+
+.organization {
+
+    position: absolute;
+    left: 330px; 
+    top: 458px; 
+    color: black;
+    font-size: 24px;
+    font-family: Arial, sans-serif;
+}
+
+.participants {
+    position: absolute;
+    left: 330px;  
+    color: black;
+    font-size: 24px;
+    font-family: Arial, sans-serif;
+}
+</style>
     </head>
     <body>
-        {% for team, res in teams.items %}
-            <div>
-                <h1>{{ team.team_name }}</h1>
-                <h1>{{ res }}. miesto</h1>
-                <h2>{{ team.competitors.all|join:", " }}</h2>
-		<h3>from {{ team.organization }}</h3>
-                <h2>in {{ category }}</h2>
-                <h2>at {{ event }}</h2>
-            </div>
-            <div style="page-break-after:always"></div>
-        {% endfor %}
+	<div class="place">{{ rank }}. miesto</div>
+	<div class="team">Tím {{ team.team_name }}</div>
+	<div class="category">{{ category }}</div>
+	<div class="organization">{{ team.organization }}</div>
+	<div class="participants" style="top: 585px;">{{ team.competitors.all|join:", " }}</div>
+	<!-- if they are more than 4, we need to split them automatically to two lines -->
+	<div class="participants" style="top: 550px;"></div>
     </body>
 </html>
