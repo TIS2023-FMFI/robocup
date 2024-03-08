@@ -252,8 +252,19 @@ def upload_category_results(request, id):
     category = Category.objects.filter(id=id).get()
     return render(request, "upload_category_results.html", {"form": form, "category": category})
 
+#def diploms_for_category(request, id):
+#    category = Category.objects.filter(id=id).get()
+#    results = dict()
+#    if not category.results:
+#        messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
+#        return redirect("org-panel")
+#    for rec in category.results:
+#        print(rec["nazov"], ": ", rec["poradie"])
+#        results[rec["nazov"]] = int(rec["poradie"])
+#
+#    return make_diplom(category=category, results=results)
 
-def diploms_for_category(request, id):
+def diploms_for_category(request, id, place, rank):
     category = Category.objects.filter(id=id).get()
     results = dict()
     if not category.results:
@@ -276,10 +287,10 @@ def diploms_for_category(request, id):
             print(rec["nazov"], ": ", rec["poradie"])
             results[rec["nazov"]] = int(rec["poradie"])
 
-    return make_diplom(category=category, results=results)
+    return make_diplom(category, results, request, place, rank)
 
-@user_passes_test(lambda user: user.is_staff)
-def make_diplom(category, results):
+#@user_passes_test(lambda user: user.is_staff)
+def make_diplom(category, results, request, place, rank):
     event = Event.objects.filter(is_active=True).get()
     _teams = Team.objects.filter(categories=category)
     print(_teams)
@@ -288,11 +299,23 @@ def make_diplom(category, results):
         if team.team_name in results:
             teams[team] = results[team.team_name]
     teams = dict(sorted(teams.items(), key=lambda item: item[1]))
+
+    for team, res in teams.items():
+        if res == place:
+            break
+
+    # Not zero indexed
+    place = place + 1
     context = {
         "event": event,
         "category": category,
         "teams": teams,
+        "place": place,
+        "team": team,
+        "rank": rank,
     }
+
+    return render(request, "diplom.html", context)
     pdf = html_to_pdf("diplom.html", context_dict=context)
 
     # rendering the template
@@ -303,7 +326,7 @@ def html_to_pdf(template_src, context_dict={}):
     template = get_template(template_src)
     html = template.render(context_dict)
     result = BytesIO()
-    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    pdf = pisa.pisaDocument(html, result)
     if not pdf.err:
         return HttpResponse(result.getvalue(), content_type="application/pdf")
     return None
