@@ -88,7 +88,7 @@ def results(request, id=1):
                                     ss_cat_res.append([ss_poradie, prvok["nazov"], prvok["body"]])
                                 else:
                                     ss_cat_res.append([ss_poradie, prvok["nazov"]])
-                                    ss_poradie += 1
+                                ss_poradie += 1
             else:
                 messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
         else:
@@ -117,7 +117,7 @@ def results(request, id=1):
                                     ss_cat_res.append([ss_poradie, prvok["nazov"], prvok["body"]])
                                 else:
                                     ss_cat_res.append([ss_poradie, prvok["nazov"]])
-                                    ss_poradie += 1
+                                ss_poradie += 1
             else:
                 messages.error(request, "Výsledky pre hľadanú kategóriu ešte neboli vyplnené.")
 
