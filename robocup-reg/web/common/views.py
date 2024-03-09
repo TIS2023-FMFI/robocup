@@ -3,7 +3,7 @@ import json
 
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
-from django.shortcuts import HttpResponse, render
+from django.shortcuts import HttpResponse, redirect, render
 
 from ..leader.models import Person, Team
 from ..org.models import Category, Event
@@ -257,4 +257,7 @@ def download_teams(request):
 
 
 def detailed_results(request, id):
-    return HttpResponse(Category.objects.filter(id=id).get().detailed_pdf, content_type="application/pdf")
+    if Category.objects.filter(id=id).get().detailed_pdf:
+        return HttpResponse(Category.objects.filter(id=id).get().detailed_pdf, content_type="application/pdf")
+    messages.error(request, "Detailné výsledky pre túto kategóriu neboli nahrané.")
+    return redirect("results", id=id)
