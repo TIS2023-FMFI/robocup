@@ -173,3 +173,8 @@ STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "static"
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
+
+# Set session cookie age to 3 hours
+SESSION_COOKIE_AGE = 3 * 60 * 60
+# Session expires when the user closes their browser
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
