@@ -275,11 +275,9 @@ def diploms_for_category(request, id, place, rank):
     if category.is_soccer:
         ordered_results = order_group_results(category)
         if "Finále" not in ordered_results:
-            messages.error(request, "Finálna skupina ešte nebola vygenerovaná.")
-            return redirect("org-panel")
-        # For soccer categories, use only final group results
-        print(ordered_results["Finále"])
-        results = {team[0]: pos+1 for pos, team in enumerate(ordered_results["Finále"])}
+            results = {team[0]: pos + 1 for pos, team in enumerate(ordered_results["Skupina 1"])}
+        else:
+            results = {team[0]: pos+1 for pos, team in enumerate(ordered_results["Finále"])}
         print(results)
     else:
         # For non-soccer categories, the existing logic is kept
