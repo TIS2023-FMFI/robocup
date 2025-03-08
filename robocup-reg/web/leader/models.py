@@ -31,6 +31,9 @@ class Person(models.Model):
     def __str__(self):
         return self.first_name + " " + self.last_name
 
+    def get_model_fields(self):
+        return self._meta.fields
+
 
 class Team(models.Model):
     id = models.AutoField(primary_key=True)
@@ -41,6 +44,7 @@ class Team(models.Model):
     competitors = models.ManyToManyField(Person)
     categories = models.ManyToManyField(org_models.Category)  # v ktorych kategoriach tim sutazi
     category = models.BooleanField(default=True)  # T - ZS, F - SS
+    country = models.CharField(max_length=100, default="Slovensko")
 
     class Meta:
         verbose_name = "Team"

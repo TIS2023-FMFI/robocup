@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.mail import EmailMessage
 from django.shortcuts import get_object_or_404, redirect, render
 
@@ -85,6 +85,37 @@ def team_edit(request, id):
         form.fields["competitors"].initial = initial_competitors
         form.fields["categories"].initial = initial_categories
     return render(request, f"{html}", {"form": form})
+
+
+@user_passes_test(lambda user: user.is_staff)
+def team_edit_org(request, id, uid):
+    print("org edittt")
+    instance = get_object_or_404(Team, id=id)
+    html = "team_assembly.html"
+    user = RobocupUser.objects.filter(id=uid).get()
+    if request.method == "POST":
+        form = TeamForm(request.POST, instance=instance, user=user)
+
+        if form.is_valid():
+            team = form.save()
+            for person in team.competitors.all():
+                if not person.primary_school:
+                    team.category = False
+                    team.save()
+                    break
+            messages.success(request, "Zmeny boli uložené.")
+            return redirect("check-in", id=uid)
+    else:
+        form = TeamForm(instance=instance, user=user)
+        initial_team_leader = instance.team_leader
+        initial_competitors = instance.competitors.all()
+        initial_categories = instance.categories.all()
+
+        form.fields["team_leader"].initial = initial_team_leader
+        form.fields["competitors"].initial = initial_competitors
+        form.fields["categories"].initial = initial_categories
+
+    return render(request, f"{html}", {"form": form, "id": id, "uid": uid})
 
 
 @login_required

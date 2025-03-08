@@ -32,7 +32,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env("DEBUG", default=False)
 
 ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "localhost", "robocup.skse.sk"]
 
@@ -155,11 +155,14 @@ EMAIL_HOST_PASSWORD = env("SMTP_PASS")
 EMAIL_PORT = env("SMTP_PORT")
 EMAIL_USE_TLS = env("SMTP_USETLS")
 
-DEFAULT_FROM_EMAIL = "robocup@thefilip.eu"
+DEFAULT_FROM_EMAIL = "robocup@dai.fmph.uniba.sk"
 
 CSRF_TRUSTED_ORIGINS = ["https://robocup.skse.sk", "http://robocup.skse.sk"]
 
 STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
@@ -170,3 +173,30 @@ STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "static"
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
+
+# Use cookies as session engine
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+# Set session cookie age to 6 hours
+SESSION_COOKIE_AGE = 6 * 60 * 60
+# Session expires when the user closes their browser
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'debug.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+

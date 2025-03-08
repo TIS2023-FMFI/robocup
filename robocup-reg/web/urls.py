@@ -25,20 +25,23 @@ urlpatterns = [
     path("", include("web.leader.urls")),
     path("", include("web.org.urls")),
     path("", include("web.administrator.urls")),
-    path("password_reset/", views.PasswordResetView.as_view(), name="password_reset"),
+    path("password_reset/", views.PasswordResetView.as_view(template_name='password_reset_form.html',
+            html_email_template_name="email_reset_template.html",
+            email_template_name='password_reset_email.html', 
+            subject_template_name="password_reset_subject.txt"), name="password_reset"),
     path(
         "password_reset/done/",
-        views.PasswordResetDoneView.as_view(),
+        views.PasswordResetDoneView.as_view(template_name='password_reset_done.html'),
         name="password_reset_done",
     ),
     path(
         "reset/<uidb64>/<token>/",
-        views.PasswordResetConfirmView.as_view(),
+        views.PasswordResetConfirmView.as_view(template_name='password_reset_confirm.html'),
         name="password_reset_confirm",
     ),
     path(
         "reset/done/",
-        views.PasswordResetCompleteView.as_view(),
+        views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'),
         name="password_reset_complete",
     ),
 ]
