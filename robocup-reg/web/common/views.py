@@ -135,7 +135,11 @@ def results(request, id=19):
                     # Initialize or update team stats
                     for team in [team_a, team_b]:
                         if team not in teams_stats:
-                            teams_stats[team] = {"P": 0, "S": [0, 0], "W": 0, "D": 0, "L": 0, "Pts": 0}
+                            for t in teams:
+                                if t.team_name == team:
+                                    country = t.country
+                            teams_stats[team] = {"country": country, "P": 0, "S": [0, 0], "W": 0, "D": 0, "L": 0, "Pts": 0}
+
 
                     if match_result is None or match_result == "None":
                         continue
@@ -168,10 +172,11 @@ def results(request, id=19):
                 group_results[group] = sorted(
                     teams_stats.items(), key=lambda x: (-x[1]["Pts"], -(x[1]["S"][0] - x[1]["S"][1]), -x[1]["S"][0])
                 )
-
+    team_info = [(team.team_name, team.country, team.organization) for team in teams]
     data = {
         "teams": teams,
         "categories": categories,
+        "team_info": team_info,
         "category_results": zoz,
         "selected_category": selected_category,
         "num_of_columns": num_of_columns,

@@ -284,6 +284,15 @@ def diploms_for_category(request, id, place, rank, deg=None):
         #print(ordered_results["Finále"])
         #results = {team[0]: pos+1 for pos, team in enumerate(ordered_results["Finále"])}
         #print(results)
+
+        ## another version, not sure it works:
+        #if "Finále" not in ordered_results:
+        #    results = {team[0]: pos + 1 for pos, team in enumerate(ordered_results["Skupina 1"])}
+        #else:
+        #    results = {team[0]: pos+1 for pos, team in enumerate(ordered_results["Finále"])}
+        #print(results)
+
+        #### is the print(results) missing here???
     else:
         # For non-soccer categories, the existing logic is kept
         for rec in category.results:
