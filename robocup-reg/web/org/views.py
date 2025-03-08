@@ -142,7 +142,7 @@ def copy_categories_from_last_event(request):
                 cat.save()
     return redirect("org-panel")
 
-
+@user_passes_test(lambda user: user.is_superuser)
 def create_staff_user(request):
     if request.method == "POST":
         form = StaffUserCreationForm(request.POST)
@@ -202,7 +202,7 @@ def download_team_for_category(request, id):
 
     return response
 
-
+@user_passes_test(lambda user: user.is_staff)
 def upload_category_results(request, id):
     if request.method == "POST":
         form = CSVImportForm(request.POST, request.FILES)
@@ -225,7 +225,6 @@ def upload_category_results(request, id):
         form = CSVImportForm()
     category = Category.objects.filter(id=id).get()
     return render(request, "upload_category_results.html", {"form": form, "category": category})
-
 
 def diploms_for_category(request, id):
     category = Category.objects.filter(id=id).get()
