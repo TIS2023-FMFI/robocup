@@ -166,7 +166,6 @@ def copy_categories_from_last_event(request):
                 cat.save()
     return redirect("org-panel")
 
-
 @user_passes_test(lambda user: user.is_superuser)
 def create_staff_user(request):
     if request.method == "POST":

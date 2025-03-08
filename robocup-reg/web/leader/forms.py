@@ -128,6 +128,8 @@ class TeamForm(forms.ModelForm):
 
             # Set initial data for team_leader and competitors fields
 
+            # Set initial data for team_leader and competitors fields
+
     def save(self, commit=True):
         instance = super(TeamForm, self).save(commit=False)
         instance.user = self.user  # Set the user field
