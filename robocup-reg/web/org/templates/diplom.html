@@ -18,8 +18,8 @@ html, body {
 
 .place {
     position: absolute;
-    left: 330px; 
-    top: 305px; 
+    left: 305px; 
+    top: 355px; 
     color: black;
     font-size: 32px;
     font-family: Arial, sans-serif;
@@ -27,8 +27,8 @@ html, body {
 
 .category {
     position: absolute;
-    left: 510px; 
-    top: 305px; 
+    left: 485px; 
+    top: 355px; 
     color: black;
     font-size: 32px;
     font-family: Arial, sans-serif;
@@ -36,8 +36,8 @@ html, body {
 
 .team {
     position: absolute;
-    left: 330px; 
-    top: 395px; 
+    left: 305px; 
+    top: 425px; 
     color: black;
     font-size: 24px;	
     font-family: Arial, sans-serif;
@@ -46,8 +46,8 @@ html, body {
 .organization {
 
     position: absolute;
-    left: 330px; 
-    top: 458px; 
+    left: 305px; 
+    top: 488px; 
     color: black;
     font-size: 24px;
     font-family: Arial, sans-serif;
@@ -55,7 +55,7 @@ html, body {
 
 .participants {
     position: absolute;
-    left: 330px;  
+    left: 305px;  
     color: black;
     font-size: 24px;
     font-family: Arial, sans-serif;
@@ -65,10 +65,16 @@ html, body {
     <body>
 	<div class="place">{{ rank }}. miesto</div>
 	<div class="team">Tím {{ team.team_name }}</div>
-	<div class="category">{{ category }}</div>
+	<div class="category">{{ category }} 
+	{% if deg == 1 %}
+	- ZŠ
+	{% elif deg == 2 %}
+	- SŠ
+	{% endif %}
+	</div>
 	<div class="organization">{{ team.organization }}</div>
-	<div class="participants" style="top: 585px;">{{ team.competitors.all|join:", " }}</div>
+	<div class="participants" style="top: 562px;">{{ team.competitors.all|join:", " }}</div>
 	<!-- if they are more than 4, we need to split them automatically to two lines -->
-	<div class="participants" style="top: 550px;"></div>
+	<div class="participants" style="top: 530px;"></div>
     </body>
 </html>

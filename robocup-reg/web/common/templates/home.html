@@ -8,7 +8,7 @@
             <br>
             <br>
         </span>
-        <b>Slovenská spoločnosť elektronikov v spolupráci s CVTI SR a SPŠE na Zochovej ulici v Bratislave Vás pozýva do 28. ročníka celoslovenskej súťaže v stavbe a programovaní robotov pre základné a stredné školy ROBOCUP 2024, ktorá sa koná 6. až 8. marca.</b>
+        <b>Slovenská spoločnosť elektronikov v spolupráci s CVTI SR a SPŠE na Zochovej ulici v Bratislave Vás pozýva do 29. ročníka celoslovenskej súťaže v stavbe a programovaní robotov pre základné a stredné školy ROBOCUP 2025, ktorá sa koná 26. až 28. februára.</b>
         <br>
         <br>
         Postup pri registrácii:
@@ -29,11 +29,14 @@
         <br>
         <br>
         <b>Dôležité informácie o súťaži:</b> <!--
-		<a href="https://skse.sk/sse-files/html/aktivity/ROBOCUP2024/PropozicieRoboCup2024.pdf">Propozície RoboCup 2024 (pdf)</a><br><br>
+		<a href="https://skse.sk/sse-files/html/aktivity/ROBOCUP2025/PropozicieRoboCup2025.pdf">Propozície RoboCup 2025 (pdf)</a><br><br>
 		-->
-        <a href="{% static 'Propozicie_RoboCup2024.pdf' %}">Propozície RoboCup 2024 (pdf)</a>
+        <a href="{% static 'Propozicie_RoboCup2025.pdf' %}">Propozície RoboCup 2025 (pdf)</a>
         <br>
         <br>
+        in English: <a href="{% static 'Propositions_RoboCup2025.pdf' %}">Propositions RoboCup 2025 (pdf)</a>
+        <br>
+	<br>
         Ďalšie aktuálne organizačné informácie: <a href="https://wiki.robotika.sk/robowiki/index.php?title=RoboCup_Junior_Slovensko">Wiki stránka RoboCup Junior Slovensko</a>
         {% if user.is_authenticated %}
             <div class="container-fluid p-4 my-5 bg-light " style="text-align: center">
@@ -52,6 +55,7 @@
             </div>
         </div>
     {% else %}
+       {% if open_event.registrations_fits_today %}
         <div class="container-fluid">
             <div class="container-fluid p-4 my-5 bg-light " style="text-align: center">
                 <p class="align-content-center">
@@ -62,8 +66,17 @@
                 </p>
             </div>
         </div>
+        {% else %}
+        <div class="container-fluid">
+            <div class="container-fluid p-4 my-5 bg-light " style="text-align: center">
+                <p class="align-content-center">
+                        <strong>V tejto chvíli nie je otvorená žiadna registrácia.</strong>
+		</p>
+	     </div>
+	</div>
+	{% endif %}
     {% endif %}
-    <span style="font-size: smaller;color: grey">Systém registrácie je výsledkom študentského projektu na Tvorbe informačných systémov, je v skúšobnej prevádzke a prípadné ťažkosti alebo nedostatky prosím hláste na adrese robocup
+    <span style="font-size: smaller;color: grey">Systém registrácie je výsledkom študentského projektu na Tvorbe informačných systémov, je vždy v skúšobnej prevádzke a prípadné ťažkosti alebo nedostatky prosím hláste na adrese robocup
         <img src=" {% static 'zavinac.png' %}" alt="@" title="@">
     dai.fmph.uniba.sk.</span>
     <br>

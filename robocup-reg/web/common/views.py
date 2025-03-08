@@ -16,10 +16,11 @@ def home(request):
         return render(request, "home.html", data)
     return render(request, "home.html")
 
-
-def results(request, id=1):
+# this id=19 is stupid, it should taka the first that is in DB, not a fixed id that will change every year :(((
+def results(request, id=19):
     teams = Team.objects.all()
     categories = Category.objects.filter(event__is_active=True)
+    # return render(request, "noresults.html")
     selected_category = categories.filter(id=id).get()
     result_dict = selected_category.results
 

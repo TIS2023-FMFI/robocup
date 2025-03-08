@@ -167,6 +167,7 @@ def copy_categories_from_last_event(request):
     return redirect("org-panel")
 
 
+@user_passes_test(lambda user: user.is_superuser)
 def create_staff_user(request):
     if request.method == "POST":
         form = StaffUserCreationForm(request.POST)
@@ -229,6 +230,7 @@ def download_team_for_category(request, id):
     return response
 
 
+@user_passes_test(lambda user: user.is_staff)
 def upload_category_results(request, id):
     if request.method == "POST":
         form = CSVImportForm(request.POST, request.FILES)
@@ -264,7 +266,7 @@ def upload_category_results(request, id):
 #
 #    return make_diplom(category=category, results=results)
 
-def diploms_for_category(request, id, place, rank):
+def diploms_for_category(request, id, place, rank, deg=None):
     category = Category.objects.filter(id=id).get()
     results = dict()
     if not category.results:
@@ -274,23 +276,24 @@ def diploms_for_category(request, id, place, rank):
     # Check if it's a soccer category and has a final group
     if category.is_soccer:
         ordered_results = order_group_results(category)
-        if "Finále" not in ordered_results:
-            messages.error(request, "Finálna skupina ešte nebola vygenerovaná.")
-            return redirect("org-panel")
-        # For soccer categories, use only final group results
-        print(ordered_results["Finále"])
-        results = {team[0]: pos+1 for pos, team in enumerate(ordered_results["Finále"])}
-        print(results)
+        results = {team[0]: pos+1 for pos, team in enumerate(ordered_results["Skupina 1"])}
+        # if "Finále" not in ordered_results:
+        #    messages.error(request, "Finálna skupina ešte nebola vygenerovaná.")
+        #    return redirect("org-panel")
+        ## For soccer categories, use only final group results
+        #print(ordered_results["Finále"])
+        #results = {team[0]: pos+1 for pos, team in enumerate(ordered_results["Finále"])}
+        #print(results)
     else:
         # For non-soccer categories, the existing logic is kept
         for rec in category.results:
             print(rec["nazov"], ": ", rec["poradie"])
             results[rec["nazov"]] = int(rec["poradie"])
 
-    return make_diplom(category, results, request, place, rank)
+    return make_diplom(category, results, request, place, rank, deg)
 
 #@user_passes_test(lambda user: user.is_staff)
-def make_diplom(category, results, request, place, rank):
+def make_diplom(category, results, request, place, rank, deg):
     event = Event.objects.filter(is_active=True).get()
     _teams = Team.objects.filter(categories=category)
     print(_teams)
@@ -313,6 +316,7 @@ def make_diplom(category, results, request, place, rank):
         "place": place,
         "team": team,
         "rank": rank,
+        "deg": deg,
     }
 
     return render(request, "diplom.html", context)
